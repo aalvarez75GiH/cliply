@@ -1,16 +1,16 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
 
-import { Text } from "../../infrastructure/typography/text.component";
-import { EN_ES_CTA_component } from "../calls_to_action/en_es.cta";
+import { Text } from "../../infrastructure/typography/text.component.js";
+import { EN_ES_CTA_component } from "../calls_to_action/en_es.cta.js";
 import {
   Container,
   Action_Container,
-} from "../global_components/containers/general_containers";
+} from "../global_components/containers/general_containers.js";
 import CopyPaste_icon from "../../../assets/my-icons/copy_paste.svg";
 import { theme } from "../../infrastructure/theme/index.js";
 
-export const Summary_Tile = ({ caption, onPress }) => {
+export const Recents_Stored_Messages_Tile = ({ caption, onPress }) => {
   return (
     <Container
       width="410px"

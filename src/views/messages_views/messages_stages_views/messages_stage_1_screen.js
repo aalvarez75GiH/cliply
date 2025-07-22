@@ -11,7 +11,7 @@ import {
 import { SafeArea } from "../../../components/global_components/safe-area.component";
 import { theme } from "../../../infrastructure/theme/index";
 import { Stage_Sub_Header } from "../../../components/headers/stage_message_sub_header";
-import { Summary_Tile } from "../../../components/messages_tiles/summary.tile";
+import { Recents_Stored_Messages_Tile } from "../../../components/messages_tiles/recents_stored_messages.tile";
 import { stage_1_messages } from "../../../infrastructure/data.dummy";
 import { Spacer } from "../../../components/global_components/optimized.spacer.component";
 
@@ -21,7 +21,7 @@ export default function Stage_1_Screen({ navigation }) {
 
     return (
       <Spacer position="bottom" size="medium">
-        <Summary_Tile caption={summary_en} />
+        <Recents_Stored_Messages_Tile caption={summary_en} />
       </Spacer>
     );
   };

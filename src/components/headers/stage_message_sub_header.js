@@ -37,15 +37,6 @@ export const Stage_Sub_Header = ({ number, label }) => {
       >
         <Text variant="stages_ctas_white">{label}</Text>
       </Container>
-      {/* <TitleContainer
-        width="60%"
-        height="10%"
-        color="red"
-        justify="center"
-        align="center"
-      >
-        <Text variant="stages_ctas_white">{label}</Text>
-      </TitleContainer> */}
     </Container>
   );
 };

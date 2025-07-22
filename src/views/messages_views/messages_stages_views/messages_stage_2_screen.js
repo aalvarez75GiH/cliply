@@ -1,31 +1,56 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 
-import { SafeArea } from "../../../components/global_components/safe-area.component";
-import { theme } from "../../../infrastructure/theme/index";
 import { ExitHeader } from "../../../components/headers/exit_header.component";
 import {
   Container,
   Flex_Container,
   Scrollabe_MainContent,
+  MainContent,
 } from "../../../components/global_components/containers/general_containers";
+import { SafeArea } from "../../../components/global_components/safe-area.component";
+import { theme } from "../../../infrastructure/theme/index";
+import { Stage_Sub_Header } from "../../../components/headers/stage_message_sub_header";
+import { Recents_Stored_Messages_Tile } from "../../../components/messages_tiles/recents_stored_messages.tile";
+import { stage_2_messages } from "../../../infrastructure/data.dummy";
+import { Spacer } from "../../../components/global_components/optimized.spacer.component";
 
 export default function Stage_2_Screen({ navigation }) {
+  const renderItem = ({ item }) => {
+    const { summary_en } = item;
+
+    return (
+      <Spacer position="bottom" size="medium">
+        <Recents_Stored_Messages_Tile caption={summary_en} />
+      </Spacer>
+    );
+  };
+
   return (
     <SafeArea background_color="#FFFFFF">
-      <Flex_Container color={theme.colors.ui.secondary}>
+      <Flex_Container color={"red"}>
         <ExitHeader navigation={navigation} />
-        <Container color={theme.colors.bg.elements_bg} height="99%">
-          <Scrollabe_MainContent
-            color={theme.colors.bg.screens_bg}
-            width={"100%"}
-            height={"89%"}
-            align="center"
-            justify="flex-start"
-          ></Scrollabe_MainContent>
-        </Container>
+        <Stage_Sub_Header number="2" label="Arriving to location" />
+        <MainContent
+          color={theme.colors.bg.screens_bg}
+          width={"100%"}
+          height={"85%"}
+          align="center"
+          justify="flex-start"
+        >
+          {/* <Summary_Tile caption="En route, delayed by traffic." /> */}
+          <FlatList
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            data={stage_2_messages}
+            renderItem={renderItem}
+            keyExtractor={(item, id) => {
+              return item.id;
+            }}
+            // itemSeparatorComponent={() => <Container style={{ height: 10 }} />} // Adds 5px vertical spacing
+          />
+        </MainContent>
       </Flex_Container>
-      {/* Main content goes here */}
     </SafeArea>
   );
 }
