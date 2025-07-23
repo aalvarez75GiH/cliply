@@ -16,7 +16,15 @@ import {
   Recents_Stored_Message_Footer,
 } from "./recents_stored_messages.elements.js";
 
-export const Recents_Stored_Messages_Tile = ({ item, action, isSelected }) => {
+export const Recents_Stored_Messages_Tile = ({
+  item,
+  action,
+  isSelected,
+  uncopy_action,
+  language,
+  changeLanguage,
+  languageSelected,
+}) => {
   const { summary_en, summary_es, message_en, message_es, id } = item;
   console.log("IS SELECTED:", isSelected);
   return (
@@ -35,18 +43,61 @@ export const Recents_Stored_Messages_Tile = ({ item, action, isSelected }) => {
           elevation: 5, // Android shadow
         }}
       >
-        {!isSelected && (
+        {/* ****************************************** */}
+
+        {/* {languageSelected && language === "EN" && (
+          <Recents_Stored_Messages_Summary_Caption
+            summary_caption={summary_en}
+          />
+        )} */}
+        {/* {!languageSelected && language === "EN" && (
           <Recents_Stored_Messages_Summary_Caption
             summary_caption={summary_en}
           />
         )}
-        {!isSelected && (
-          <Recents_Stored_Messages_Summary_Footer action={action} />
+        {languageSelected && language === "ES" && (
+          <Recents_Stored_Messages_Summary_Caption
+            summary_caption={summary_es}
+          />
         )}
-        {isSelected && (
+        {languageSelected && language === "ES" && (
+          <Recents_Stored_Messages_Summary_Caption
+            summary_caption={summary_es}
+          />
+        )} */}
+
+        {/* ****************** SUMMARY ************************ */}
+        {!isSelected && language === "EN" && (
+          <Recents_Stored_Messages_Summary_Caption
+            summary_caption={summary_en}
+          />
+        )}
+
+        {!isSelected && language === "ES" && (
+          <Recents_Stored_Messages_Summary_Caption
+            summary_caption={summary_es}
+          />
+        )}
+
+        {!isSelected && (
+          <Recents_Stored_Messages_Summary_Footer
+            action={action}
+            changeLanguage={changeLanguage}
+            language={language}
+          />
+        )}
+        {/* ***************** WHOLE MESSAGE ************************* */}
+        {isSelected && language === "EN" && (
           <Recents_Stored_Message_Caption message_caption={message_en} />
         )}
-        {isSelected && <Recents_Stored_Message_Footer />}
+        {isSelected && language === "ES" && (
+          <Recents_Stored_Message_Caption message_caption={message_es} />
+        )}
+
+        {isSelected && (
+          <Recents_Stored_Message_Footer uncopy_action={uncopy_action} />
+        )}
+        {/* ****************************************** */}
       </Container>
     </>
   );

@@ -35,7 +35,11 @@ export const Recents_Stored_Messages_Summary_Caption = ({
     </Container>
   );
 };
-export const Recents_Stored_Messages_Summary_Footer = ({ action }) => {
+export const Recents_Stored_Messages_Summary_Footer = ({
+  action,
+  changeLanguage,
+  language,
+}) => {
   return (
     <Container
       width="100%"
@@ -54,8 +58,8 @@ export const Recents_Stored_Messages_Summary_Footer = ({ action }) => {
         color={theme.colors.bg.elements_bg}
       >
         <EN_ES_CTA_component
-          language="EN"
-          action={action}
+          language={language === "EN" ? "ES" : "EN"}
+          action={changeLanguage}
           //   isSelected={isSelected}
         />
       </Container>
@@ -118,7 +122,7 @@ export const Recents_Stored_Message_Caption = ({ message_caption }) => {
     </Container>
   );
 };
-export const Recents_Stored_Message_Footer = () => {
+export const Recents_Stored_Message_Footer = ({ uncopy_action }) => {
   return (
     <Container
       width="100%"
@@ -135,23 +139,18 @@ export const Recents_Stored_Message_Footer = () => {
         align="flex-end"
         justify="flex-end"
         direction="row"
-        color={"blue"}
-        // color={theme.colors.ui.success}
+        // color={"blue"}
+        color={theme.colors.ui.success}
       >
         <Action_Container
           width="100%"
           height="100%"
-          onPress={null}
+          onPress={uncopy_action}
           justify="center"
           align="center"
           color={theme.colors.ui.success}
         >
           <Text variant="stages_ctas_white">Uncopy</Text>
-          {/* <CopyPaste_icon
-            width="40px"
-            height="40px"
-            fill={theme.colors.text.secondary}
-          /> */}
         </Action_Container>
       </Container>
     </Container>

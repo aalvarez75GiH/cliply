@@ -157,12 +157,22 @@ export const stage_4_messages = [
       "Hola. Este es tu conductor aquí. Prepárate, ¿ok? Hay mucho tráfico y el estacionamiento podría ser muy complicado",
     used: 0,
   },
+  {
+    id: "MSG_5",
+    summary_en: "Running late due to multiple orders",
+    summary_es: "Llegando tarde debido a múltiples órdenes",
+    message_en:
+      "Hi. This is your driver here. I am working in multiple orders at the same time, so i could be late, i am gonna try to be there soon ok?",
+    message_es:
+      "Hola. Este es tu conductor aquí. Estoy trabajando en múltiples órdenes al mismo tiempo, así que podría llegar tarde, voy a intentar estar allí pronto, ¿ok?",
+    used: 0,
+  },
 ];
 
 export const stage_5_messages = [
   {
     id: "MSG_1",
-    summary_en: "“GPS issue—need help finding your location”",
+    summary_en: "GPS issue—need help finding your location",
     summary_es: "Problema con GPS, necesito ayuda para encontrar tu ubicación",
     message_en:
       "Sorry, GPS is a little bit crazy right now and i can’t find your place. Can you elaborate more about where you live?",
@@ -188,6 +198,16 @@ export const stage_5_messages = [
       "Hi. This is your driver here. be ready ok? There is too much traffic and parking could be very tricky",
     message_es:
       "Hola. Este es tu conductor aquí. Prepárate, ¿ok? Hay mucho tráfico y el estacionamiento podría ser muy complicado",
+    used: 0,
+  },
+  {
+    id: "MSG_4",
+    summary_en: "Very close, be ready for handoff",
+    summary_es: "Muy cerca, listo para entrega",
+    message_en:
+      "Hi. I am on my way but actually i am very close, be ready just in case you need the food in your hands, ok?",
+    message_es:
+      "Hola. Estoy en camino, pero de hecho estoy muy cerca. Prepárate por si necesitas tener la comida en tus manos, ¿ok?",
     used: 0,
   },
 ];

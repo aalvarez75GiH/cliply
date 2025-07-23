@@ -17,19 +17,51 @@ import { Spacer } from "../../../components/global_components/optimized.spacer.c
 export default function Stage_3_Screen({ navigation }) {
   const [copiedText, setCopiedText] = useState("");
   const [selectedItemId, setSelectedItemId] = useState(null);
-
+  const [language, setLanguage] = useState("EN");
+  const [languageSelected, setLanguageSelected] = useState(null);
   // *********************************************************
-  const action = async (item) => {
+  const copy_message_action = async (item) => {
     const { summary_en, id, summary_es, message_en, message_es } = item;
     console.log("MESSAGE ID:", id);
     console.log(`SUMMARY EN!:, ${summary_en}`);
     console.log(`SUMMARY ES!:, ${summary_es}`);
     console.log(`MESSAGE EN!:, ${message_en}`);
     console.log(`MESSAGE ES!:, ${message_es}`);
-    await Clipboard.setStringAsync(message_en);
+    await Clipboard.setStringAsync(language === "EN" ? message_en : message_es);
     console.log(`Copied to clipboard: ${message_en}`);
     // setCopiedText(summary_en);
     setSelectedItemId(id);
+  };
+  const uncopy_message_action = async (item) => {
+    const { summary_en, id, summary_es, message_en, message_es } = item;
+    console.log("MESSAGE ID:", id);
+    console.log(`SUMMARY EN!:, ${summary_en}`);
+    console.log(`SUMMARY ES!:, ${summary_es}`);
+    console.log(`MESSAGE EN!:, ${message_en}`);
+    console.log(`MESSAGE ES!:, ${message_es}`);
+    await Clipboard.setStringAsync("");
+    console.log(`Copied to clipboard: ${message_en}`);
+    // setCopiedText(summary_en);
+    setSelectedItemId(null);
+  };
+
+  const changeLanguage = (item) => {
+    const { summary_en, id, summary_es, message_en, message_es } = item;
+    console.log("MESSAGE ID:", id);
+    console.log(`SUMMARY EN!:, ${summary_en}`);
+    console.log(`SUMMARY ES!:, ${summary_es}`);
+    console.log(`MESSAGE EN!:, ${message_en}`);
+    console.log(`MESSAGE ES!:, ${message_es}`);
+
+    if (language === "EN") {
+      setLanguage("ES");
+      setLanguageSelected(id);
+    }
+    if (language === "ES") {
+      setLanguage("EN");
+      setLanguageSelected(id);
+    }
+    console.log("Language changed to:", language);
   };
 
   const renderItem = ({ item }) => {
@@ -37,12 +69,17 @@ export default function Stage_3_Screen({ navigation }) {
       <Spacer position="bottom" size="medium">
         <Recents_Stored_Messages_Tile
           item={item}
-          action={() => action(item)}
+          action={() => copy_message_action(item)}
           isSelected={selectedItemId === item.id}
+          uncopy_action={() => uncopy_message_action(item)}
+          language={language}
+          changeLanguage={() => changeLanguage(item)}
+          languageSelected={languageSelected === item.id}
         />
       </Spacer>
     );
   };
+
   return (
     <SafeArea background_color="#FFFFFF">
       <Flex_Container color={"red"}>
