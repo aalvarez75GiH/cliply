@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import * as Clipboard from "expo-clipboard";
 import { FlatList } from "react-native-gesture-handler";
 
 import { ExitHeader } from "../../../components/headers/exit_header.component";
 import {
-  Container,
   Flex_Container,
-  Scrollabe_MainContent,
   MainContent,
 } from "../../../components/global_components/containers/general_containers";
 import { SafeArea } from "../../../components/global_components/safe-area.component";
@@ -16,16 +15,34 @@ import { stage_5_messages } from "../../../infrastructure/data.dummy";
 import { Spacer } from "../../../components/global_components/optimized.spacer.component";
 
 export default function Stage_5_Screen({ navigation }) {
-  const renderItem = ({ item }) => {
-    const { summary_en } = item;
+  const [copiedText, setCopiedText] = useState("");
+  const [selectedItemId, setSelectedItemId] = useState(null);
 
+  // *********************************************************
+  const action = async (item) => {
+    const { summary_en, id, summary_es, message_en, message_es } = item;
+    console.log("MESSAGE ID:", id);
+    console.log(`SUMMARY EN!:, ${summary_en}`);
+    console.log(`SUMMARY ES!:, ${summary_es}`);
+    console.log(`MESSAGE EN!:, ${message_en}`);
+    console.log(`MESSAGE ES!:, ${message_es}`);
+    await Clipboard.setStringAsync(message_en);
+    console.log(`Copied to clipboard: ${message_en}`);
+    // setCopiedText(summary_en);
+    setSelectedItemId(id);
+  };
+
+  const renderItem = ({ item }) => {
     return (
       <Spacer position="bottom" size="medium">
-        <Recents_Stored_Messages_Tile caption={summary_en} />
+        <Recents_Stored_Messages_Tile
+          item={item}
+          action={() => action(item)}
+          isSelected={selectedItemId === item.id}
+        />
       </Spacer>
     );
   };
-
   return (
     <SafeArea background_color="#FFFFFF">
       <Flex_Container color={"red"}>

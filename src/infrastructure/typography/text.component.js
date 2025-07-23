@@ -66,11 +66,11 @@ const semi_rounded_ctas_white = (theme) => `
     font-size: ${theme.fontSizes.semi_rounded_ctas};
     font-family: ${theme.fonts.bold};
     color: ${theme.colors.text.secondary};
-`;
+    `;
 const semi_rounded_ctas_black = (theme) => `
-font-size: ${theme.fontSizes.semi_rounded_ctas};
-font-family: ${theme.fonts.bold};
-color: ${theme.colors.text.primary};
+    font-size: ${theme.fontSizes.semi_rounded_ctas};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.primary};
 `;
 const en_es_ctas = (theme) => `
     font-size: ${theme.fontSizes.en_es_ctas};
@@ -85,11 +85,12 @@ const underlined_small_caption = (theme) => `
     font-size: ${theme.fontSizes.bottom_tab_bar};
     font-family: ${theme.fonts.regular};
     font-style: underline;
-`;
+    `;
 const copied_message_tile_caption = (theme) => `
-font-size: ${theme.fontSizes.copied_message_tile};
+    font-size: ${theme.fontSizes.copied_message_tile};
     font-family: ${theme.fonts.bold};
     text-align: center;
+    color: ${theme.colors.text.secondary};
     `;
 
 const variants = {

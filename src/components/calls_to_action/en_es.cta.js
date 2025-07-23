@@ -17,6 +17,7 @@ export const EN_ES_CTA_component = ({ language, action }) => {
       justify="center"
       align="center"
       color={theme.colors.bg.elements_bg}
+      onPress={action}
     >
       <Container
         width={"100%"}
