@@ -39,6 +39,17 @@ export const stage_1_messages = [
       " Hola, tu conductor aquí. Solo un recordatorio, puedo llevar solo a 4 personas, ¿ok? Si son más de 4, siéntete libre de cancelar y solicitar un carro XL",
     used: 0,
   },
+  {
+    id: "MSG_5",
+    summary_en: "Pet allowed—please ensure clean paws.",
+    summary_es:
+      "Mascota permitida, por favor asegúrate de que sus patas estén limpias.",
+    message_en:
+      "Hi, your driver here. I understand you are carrying a pet. Be sure its paws are clean ok?",
+    message_es:
+      " Hola, tu conductor aquí. Entiendo que llevas una mascota. ¿Asegúrate de que sus patas estén limpias, ok?",
+    used: 0,
+  },
 ];
 export const stage_2_messages = [
   {
