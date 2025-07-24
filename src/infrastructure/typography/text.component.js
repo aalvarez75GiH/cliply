@@ -50,12 +50,12 @@ const stages_ctas_black = (theme) => `
     color: ${theme.colors.text.primary};
 `;
 const stages_ctas_white = (theme) => `
-    font-size: ${theme.fontSizes.stages_ctas};
-    font-family: ${theme.fonts.bold};
-    color: ${theme.colors.text.secondary};
+font-size: ${theme.fontSizes.stages_ctas};
+font-family: ${theme.fonts.bold};
+color: ${theme.colors.text.secondary};
 `;
 const stages_headers = (theme) => `
-    font-size: ${theme.fontSizes.stages_headers};
+font-size: ${theme.fontSizes.stages_headers};
     font-family: ${theme.fonts.bold};
 `;
 const text_inputs = (theme) => `
@@ -93,6 +93,12 @@ const copied_message_tile_caption = (theme) => `
     color: ${theme.colors.text.secondary};
     `;
 
+const ES_EN_ctas_black = (theme) => `
+        font-size: ${theme.fontSizes.en_es_cta};
+        font-family: ${theme.fonts.bold};
+        color: ${theme.colors.text.primary};
+    `;
+
 const variants = {
   summary_tile_caption,
   logo_caption,
@@ -112,6 +118,7 @@ const variants = {
   en_es_ctas,
   bottom_tab_bar_caption,
   underlined_small_caption,
+  ES_EN_ctas_black,
 };
 
 export const Text = styled.Text`

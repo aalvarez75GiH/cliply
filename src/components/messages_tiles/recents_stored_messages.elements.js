@@ -98,6 +98,8 @@ export const Recents_Stored_Messages_Summary_Footer = ({
 };
 // ******************* WHOLE MESSAGE TILE *******************
 export const Recents_Stored_Message_Caption = ({ message_caption }) => {
+  console.log("MESSAGE CAPTION AT FUNCTION:", message_caption);
+
   return (
     <Container
       width="100%"

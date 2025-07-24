@@ -31,11 +31,11 @@ export default function Stage_2_Screen({ navigation }) {
 
   const copy_message_action = async (item) => {
     const { summary_en, id, summary_es, message_en, message_es } = item;
-    console.log("MESSAGE ID:", id);
-    console.log(`SUMMARY EN!:, ${summary_en}`);
-    console.log(`SUMMARY ES!:, ${summary_es}`);
-    console.log(`MESSAGE EN!:, ${message_en}`);
-    console.log(`MESSAGE ES!:, ${message_es}`);
+    // console.log("MESSAGE ID:", id);
+    // console.log(`SUMMARY EN!:, ${summary_en}`);
+    // console.log(`SUMMARY ES!:, ${summary_es}`);
+    // console.log(`MESSAGE EN!:, ${message_en}`);
+    // console.log(`MESSAGE ES!:, ${message_es}`);
     await Clipboard.setStringAsync(language === "EN" ? message_en : message_es);
     console.log(`Copied to clipboard: ${message_en}`);
     // setCopiedText(summary_en);
@@ -44,11 +44,11 @@ export default function Stage_2_Screen({ navigation }) {
 
   const uncopy_message_action = async (item) => {
     const { summary_en, id, summary_es, message_en, message_es } = item;
-    console.log("MESSAGE ID:", id);
-    console.log(`SUMMARY EN!:, ${summary_en}`);
-    console.log(`SUMMARY ES!:, ${summary_es}`);
-    console.log(`MESSAGE EN!:, ${message_en}`);
-    console.log(`MESSAGE ES!:, ${message_es}`);
+    // console.log("MESSAGE ID:", id);
+    // console.log(`SUMMARY EN!:, ${summary_en}`);
+    // console.log(`SUMMARY ES!:, ${summary_es}`);
+    // console.log(`MESSAGE EN!:, ${message_en}`);
+    // console.log(`MESSAGE ES!:, ${message_es}`);
     await Clipboard.setStringAsync("");
     console.log(`Copied to clipboard: ${message_en}`);
     // setCopiedText(summary_en);
@@ -57,20 +57,14 @@ export default function Stage_2_Screen({ navigation }) {
 
   const changeLanguage = (item) => {
     const { summary_en, id, summary_es, message_en, message_es } = item;
-    console.log("MESSAGE ID:", id);
-    console.log(`SUMMARY EN!:, ${summary_en}`);
-    console.log(`SUMMARY ES!:, ${summary_es}`);
-    console.log(`MESSAGE EN!:, ${message_en}`);
-    console.log(`MESSAGE ES!:, ${message_es}`);
+    // console.log("MESSAGE ID:", id);
+    // console.log(`SUMMARY EN!:, ${summary_en}`);
+    // console.log(`SUMMARY ES!:, ${summary_es}`);
+    // console.log(`MESSAGE EN!:, ${message_en}`);
+    // console.log(`MESSAGE ES!:, ${message_es}`);
+    setLanguage((prevLanguage) => (prevLanguage === "EN" ? "ES" : "EN"));
+    setLanguageSelected(id);
 
-    if (language === "EN") {
-      setLanguage("ES");
-      setLanguageSelected(id);
-    }
-    if (language === "ES") {
-      setLanguage("EN");
-      setLanguageSelected(id);
-    }
     console.log("Language changed to:", language);
   };
   const renderItem = ({ item }) => {

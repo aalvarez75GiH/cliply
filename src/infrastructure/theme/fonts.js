@@ -37,6 +37,7 @@ export const fontSizes = {
   copied_message_tile: "18px",
   stages_ctas: "16px",
   en_es_cta: "16px",
+  en_es_cta: "14px",
   semi_rounded_ctas: "14px",
   bottom_tab_bar: "12px",
 };
