@@ -37,7 +37,8 @@ export const Recents_Stored_Messages_Tile = ({
         height="210px"
         align="center"
         justify="flex-start"
-        color={theme.colors.bg.elements_bg}
+        // color={theme.colors.bg.elements_bg}
+        color={"red"}
         style={{
           shadowColor: "#000", // iOS shadow color
           shadowOffset: { width: 0, height: 2 }, // iOS shadow offset
@@ -64,7 +65,10 @@ export const Recents_Stored_Messages_Tile = ({
             )}
 
             {isSelected && (
-              <Recents_Stored_Message_Caption message_caption={message_en} />
+              <>
+                {console.log("message_en:", message_en)}
+                <Recents_Stored_Message_Caption message_caption={message_en} />
+              </>
             )}
 
             {isSelected && (
@@ -102,7 +106,10 @@ export const Recents_Stored_Messages_Tile = ({
             )}
 
             {isSelected && (
-              <Recents_Stored_Message_Caption summary_caption={message_es} />
+              <>
+                {console.log("message_es:", message_es)}
+                <Recents_Stored_Message_Caption summary_caption={message_es} />
+              </>
             )}
 
             {isSelected && (

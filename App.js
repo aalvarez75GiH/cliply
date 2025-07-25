@@ -5,6 +5,8 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { Navigation } from "./src/infrastructure/navigation";
 import { theme } from "./src/infrastructure/theme";
+import { MessagesContextProvider } from "./src/infrastructure/services/messages/messages.context";
+
 // ***************************************************
 
 import {
@@ -29,7 +31,9 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <Navigation />
+        <MessagesContextProvider>
+          <Navigation />
+        </MessagesContextProvider>
       </GestureHandlerRootView>
     </ThemeProvider>
   );

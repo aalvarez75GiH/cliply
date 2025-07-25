@@ -21,6 +21,7 @@ export const Recents_Stored_Messages_Summary_Caption = ({
       justify="center"
       direction="row"
       color={theme.colors.bg.elements_bg}
+      //color={"red"}
     >
       <Container
         width="95%"
@@ -117,7 +118,7 @@ export const Recents_Stored_Message_Caption = ({ message_caption }) => {
         justify="center"
         direction="row"
         color={theme.colors.ui.success}
-        // color={"red"}
+        //color={"red"}
       >
         <Text variant="copied_message_tile_caption">"{message_caption}"</Text>
       </Container>
