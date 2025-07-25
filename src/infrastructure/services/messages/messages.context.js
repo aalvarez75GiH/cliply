@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
 
 import { Spacer } from "../../../components/global_components/optimized.spacer.component";
 import { Stored_Messages_Tile } from "../../../components/messages_tiles/stored_copied_message.tile";
@@ -6,10 +6,11 @@ import { Stored_Messages_Tile } from "../../../components/messages_tiles/stored_
 export const MessagesContext = createContext();
 
 export const MessagesContextProvider = ({ children }) => {
+  const [globalLanguage, setGlobalLanguage] = useState("EN");
   const renderItem = ({ item }) => {
     return (
       <Spacer position="bottom" size="medium">
-        <Stored_Messages_Tile item={item} />
+        <Stored_Messages_Tile item={item} globalLanguage={globalLanguage} />
       </Spacer>
     );
   };
@@ -18,6 +19,7 @@ export const MessagesContextProvider = ({ children }) => {
     <MessagesContext.Provider
       value={{
         renderItem,
+        globalLanguage,
       }}
     >
       {children}

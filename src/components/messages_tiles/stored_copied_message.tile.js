@@ -10,28 +10,31 @@ import {
 import CopyPaste_icon from "../../../assets/my-icons/copy_paste.svg";
 import { theme } from "../../infrastructure/theme/index.js";
 
-export const Stored_Messages_Tile = ({ item }) => {
+export const Stored_Messages_Tile = ({ item, globalLanguage }) => {
   //   *******************************************************
   const [language, setLanguage] = useState("EN");
   const { summary_en, summary_es, message_en, message_es } = item;
   const [isSelected, setIsSelected] = useState(null);
 
-  const toggleLanguage = () => {
+  const toggleLanguage = async () => {
     setLanguage((prevLanguage) => (prevLanguage === "EN" ? "ES" : "EN"));
+    const { message_en, message_es, id } = item;
+    await Clipboard.setStringAsync(language === "EN" ? message_es : message_en);
+    setIsSelected(id);
   };
 
   const copy_message_action = async (item) => {
-    const { summary_en, summary_es, message_en, message_es, id } = item;
+    const { message_en, message_es, id } = item;
 
     await Clipboard.setStringAsync(language === "EN" ? message_en : message_es);
     console.log(`Copied to clipboard: ${message_en}`);
-    setGlobalLanguage((prevLanguage) => (prevLanguage === "EN" ? "ES" : "EN"));
     setIsSelected(id);
   };
 
   const uncopy_message_action = async (item) => {
-    await Clipboard.setStringAsync("");
+    setLanguage(globalLanguage === "EN" ? "EN" : "ES");
     setIsSelected(null);
+    await Clipboard.setStringAsync("");
   };
 
   //   *******************************************************
@@ -83,7 +86,6 @@ export const Stored_Messages_Tile = ({ item }) => {
                     : "summary_tile_caption"
                 }
               >
-                {/* {summary_en} */}
                 {!isSelected ? summary_es : message_es}
               </Text>
             )}
@@ -95,7 +97,6 @@ export const Stored_Messages_Tile = ({ item }) => {
                     : "summary_tile_caption"
                 }
               >
-                {/* {summary_en} */}
                 {!isSelected ? summary_en : message_en}
               </Text>
             )}
