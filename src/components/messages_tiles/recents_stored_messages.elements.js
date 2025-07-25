@@ -125,6 +125,7 @@ export const Recents_Stored_Message_Caption = ({ message_caption }) => {
     </Container>
   );
 };
+
 export const Recents_Stored_Message_Footer = ({ uncopy_action }) => {
   return (
     <Container

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
 
 import { Text } from "../../infrastructure/typography/text.component.js";
@@ -21,15 +21,30 @@ export const Recents_Stored_Messages_Tile = ({
   action,
   isSelected,
   uncopy_action,
-  language,
+  // language,
   changeLanguage,
-  languageSelected,
+  // languageSelected,
 }) => {
+  const [language, setLanguage] = useState("EN");
+
+  const toggleLanguage = () => {
+    setLanguage((prevLanguage) => (prevLanguage === "EN" ? "ES" : "EN"));
+  };
+
+  const copy_message_action = async (item) => {
+    const { id, message_en, message_es } = item;
+
+    await Clipboard.setStringAsync(language === "EN" ? message_en : message_es);
+    console.log(`Copied to clipboard: ${message_en}`);
+    setSelectedItemId(id);
+  };
+
   const { summary_en, summary_es, message_en, message_es, id } = item;
   console.log("IS SELECTED:", isSelected);
-  console.log("LANGUAGE SELECTED:", languageSelected);
+  // console.log("LANGUAGE SELECTED:", languageSelected);
   // console.log("MESSAGE ES:", message_es);
   console.log("LANGUAGE:", language);
+
   return (
     <>
       <Container
@@ -58,15 +73,14 @@ export const Recents_Stored_Messages_Tile = ({
 
             {!isSelected && (
               <Recents_Stored_Messages_Summary_Footer
-                action={action}
-                changeLanguage={changeLanguage}
+                action={copy_message_action}
+                changeLanguage={toggleLanguage}
                 language={language}
               />
             )}
 
             {isSelected && (
               <>
-                {console.log("message_en:", message_en)}
                 <Recents_Stored_Message_Caption message_caption={message_en} />
               </>
             )}
@@ -78,38 +92,22 @@ export const Recents_Stored_Messages_Tile = ({
         )}
         {language === "ES" && (
           <>
-            {!isSelected && languageSelected && language === "ES" && (
+            {!isSelected && (
               <Recents_Stored_Messages_Summary_Caption
                 summary_caption={summary_es}
               />
             )}
 
-            {!isSelected && languageSelected && language === "ES" && (
+            {!isSelected && (
               <Recents_Stored_Messages_Summary_Footer
-                action={action}
-                changeLanguage={changeLanguage}
-                language={language}
-              />
-            )}
-            {!isSelected && !languageSelected && language === "ES" && (
-              <Recents_Stored_Messages_Summary_Caption
-                summary_caption={summary_en}
-              />
-            )}
-
-            {!isSelected && language === "ES" && (
-              <Recents_Stored_Messages_Summary_Footer
-                action={action}
-                changeLanguage={changeLanguage}
+                action={copy_message_action}
+                changeLanguage={toggleLanguage}
                 language={language}
               />
             )}
 
             {isSelected && (
-              <>
-                {console.log("message_es:", message_es)}
-                <Recents_Stored_Message_Caption summary_caption={message_es} />
-              </>
+              <Recents_Stored_Message_Caption summary_caption={message_es} />
             )}
 
             {isSelected && (

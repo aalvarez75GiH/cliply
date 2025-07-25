@@ -9,14 +9,15 @@ import {
   Container,
 } from "../global_components/containers/general_containers";
 
-export const EN_ES_CTA_component = ({ language, action }) => {
+export const EN_ES_CTA_component = ({ language, action, isSelected }) => {
   return (
     <Action_Container
       width={"35%"}
       height={"100%"}
       justify="center"
       align="center"
-      color={theme.colors.bg.elements_bg}
+      color={isSelected ? theme.colors.ui.success : theme.colors.bg.elements_bg}
+      // color={theme.colors.bg.elements_bg}
       // color={"red"}
       onPress={action}
     >
