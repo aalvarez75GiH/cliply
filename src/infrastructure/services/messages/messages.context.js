@@ -7,10 +7,16 @@ export const MessagesContext = createContext();
 
 export const MessagesContextProvider = ({ children }) => {
   const [globalLanguage, setGlobalLanguage] = useState("EN");
+  const [isLoading, setIsLoading] = useState(false);
+
   const renderItem = ({ item }) => {
     return (
       <Spacer position="bottom" size="medium">
-        <Stored_Messages_Tile item={item} globalLanguage={globalLanguage} />
+        <Stored_Messages_Tile
+          item={item}
+          globalLanguage={globalLanguage}
+          setIsLoading={setIsLoading}
+        />
       </Spacer>
     );
   };
@@ -20,6 +26,8 @@ export const MessagesContextProvider = ({ children }) => {
       value={{
         renderItem,
         globalLanguage,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}

@@ -10,7 +10,11 @@ import {
 import CopyPaste_icon from "../../../assets/my-icons/copy_paste.svg";
 import { theme } from "../../infrastructure/theme/index.js";
 
-export const Stored_Messages_Tile = ({ item, globalLanguage }) => {
+export const Stored_Messages_Tile = ({
+  item,
+  globalLanguage,
+  setIsLoading,
+}) => {
   //   *******************************************************
   const [language, setLanguage] = useState("EN");
   const { summary_en, summary_es, message_en, message_es } = item;
@@ -25,10 +29,15 @@ export const Stored_Messages_Tile = ({ item, globalLanguage }) => {
 
   const copy_message_action = async (item) => {
     const { message_en, message_es, id } = item;
-
-    await Clipboard.setStringAsync(language === "EN" ? message_en : message_es);
-    console.log(`Copied to clipboard: ${message_en}`);
-    setIsSelected(id);
+    setIsLoading(true);
+    setTimeout(async () => {
+      await Clipboard.setStringAsync(
+        language === "EN" ? message_en : message_es
+      );
+      console.log(`Copied to clipboard: ${message_en}`);
+      setIsSelected(id);
+      setIsLoading(false);
+    }, 2000);
   };
 
   const uncopy_message_action = async (item) => {
