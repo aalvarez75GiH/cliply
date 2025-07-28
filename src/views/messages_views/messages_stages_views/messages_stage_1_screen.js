@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { FlatList } from "react-native-gesture-handler";
-import { ActivityIndicator } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { StatusBar } from "react-native";
 
 import { ExitHeader } from "../../../components/headers/exit_header.component";
 import {
@@ -14,15 +15,7 @@ import { stage_1_messages } from "../../../infrastructure/data.dummy";
 import { MessagesContext } from "../../../infrastructure/services/messages/messages.context";
 
 export default function Stage_1_Screen({ navigation }) {
-  const { renderItem, isLoading } = useContext(MessagesContext);
-
-  if (isLoading) {
-    return (
-      <SafeArea background_color="#FFFFFF" height="100%">
-        <ActivityIndicator size="large" color="#0000ff" />
-      </SafeArea>
-    );
-  }
+  const { renderItem } = useContext(MessagesContext);
 
   return (
     <SafeArea background_color="#FFFFFF">

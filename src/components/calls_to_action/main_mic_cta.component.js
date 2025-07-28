@@ -7,7 +7,7 @@ import {
   Container,
 } from "../../../src/components/global_components/containers/general_containers.js";
 
-export const Main_mic_CTA_component = () => {
+export const Main_mic_CTA_component = ({ action }) => {
   return (
     <Container
       width="65%"
@@ -21,6 +21,7 @@ export const Main_mic_CTA_component = () => {
         color={theme.colors.ui.ctas_bg_dark}
         border_radius="100px"
         margin_bottom="20px"
+        onPress={action}
       >
         <Main_mic_icon width="60px" height="60px" fill="#FFFFFF" />
       </Action_Container>

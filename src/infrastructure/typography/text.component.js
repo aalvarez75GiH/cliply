@@ -18,8 +18,15 @@ const logo_caption = (theme) => `
     font-family: ${theme.fonts.bold};
 `;
 const transcripted_message_caption = (theme) => `
-font-size: ${theme.fontSizes.transcripted_message_tile};
+font-size: ${theme.fontSizes.copied_message_tile};
     font-family: ${theme.fonts.bold};
+    text-align: center;
+    `;
+const transcripted_message_copied_caption = (theme) => `
+font-size: ${theme.fontSizes.copied_message_tile};
+    font-family: ${theme.fonts.bold};
+    text-align: center;
+    color: ${theme.colors.text.secondary};
     `;
 const middle_screens_caption = (theme) => `
     font-size: ${theme.fontSizes.middle_screens_caption};
@@ -86,6 +93,11 @@ const underlined_small_caption = (theme) => `
     font-family: ${theme.fonts.regular};
     font-style: underline;
     `;
+const underlined_small_caption_black = (theme) => `
+    font-size: ${theme.fontSizes.bottom_tab_bar};
+    font-family: ${theme.fonts.regular};
+    color: ${theme.colors.text.secondary};
+    `;
 const copied_message_tile_caption = (theme) => `
     font-size: ${theme.fontSizes.copied_message_tile};
     font-family: ${theme.fonts.bold};
@@ -119,6 +131,8 @@ const variants = {
   bottom_tab_bar_caption,
   underlined_small_caption,
   ES_EN_ctas_black,
+  transcripted_message_copied_caption,
+  underlined_small_caption_black,
 };
 
 export const Text = styled.Text`
