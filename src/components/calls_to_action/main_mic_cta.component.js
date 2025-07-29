@@ -13,17 +13,17 @@ export const Main_mic_CTA_component = ({ action }) => {
       width="65%"
       height="40%"
       color={theme.colors.bg.screens_bg}
-      style={{ position: "absolute", top: "20%" }}
+      style={{ position: "absolute", top: "25%" }}
     >
       <Action_Container
-        width="120px"
-        height="120px"
+        width="90px"
+        height="90px"
         color={theme.colors.ui.ctas_bg_dark}
         border_radius="100px"
         margin_bottom="20px"
         onPress={action}
       >
-        <Main_mic_icon width="60px" height="60px" fill="#FFFFFF" />
+        <Main_mic_icon width="40px" height="40px" fill="#FFFFFF" />
       </Action_Container>
       <Text variant="middle_screens_caption">Tap here & leave a</Text>
       <Text variant="middle_screens_caption">voice message</Text>

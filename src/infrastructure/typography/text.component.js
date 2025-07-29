@@ -95,8 +95,8 @@ const underlined_small_caption = (theme) => `
     `;
 const underlined_small_caption_black = (theme) => `
     font-size: ${theme.fontSizes.bottom_tab_bar};
-    font-family: ${theme.fonts.regular};
-    color: ${theme.colors.text.secondary};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.primary};
     `;
 const copied_message_tile_caption = (theme) => `
     font-size: ${theme.fontSizes.copied_message_tile};

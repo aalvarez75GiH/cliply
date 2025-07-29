@@ -24,6 +24,7 @@ export const Container = styled(View)`
 export const Flex_Container = styled(View)`
   flex: 1;
   align-items: ${(props) => props.align || "center"};
+  justify-content: ${(props) => props.justify || "center"};
   background-color: ${(props) => props.color || "#FADADD"};
 `;
 

@@ -37,6 +37,7 @@ export const Transcripted_Messages_Tile = ({
     setIsLoading(true);
     setCopiedMessage(true);
     setTimeout(async () => {
+      //   console.log("Copying message...");
       await Clipboard.setStringAsync(
         language === "EN" ? message_en : message_es
       );
@@ -61,24 +62,30 @@ export const Transcripted_Messages_Tile = ({
       {isLoading && (
         <Container
           //   style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
-          width="410px"
-          height="280px"
+          width="100%"
+          height="45%"
+          //   width="410px"
+          //   height="280px"
           color={"#FFFFFF"}
           //   color={"#FAD"}
           justify="center"
           align="center"
+          style={{
+            position: "absolute",
+            top: 90,
+            bottom: 20,
+          }}
         >
           <ActivityIndicator size="small" color="#000000" />
         </Container>
       )}
       {!isLoading && (
         <Container
-          width="400px"
-          height="280px"
+          width="100%"
+          height="45%"
           align="center"
-          justify="flex-start"
+          justify="center"
           color={theme.colors.bg.elements_bg}
-          //   color={"red"}
           style={{
             shadowColor: "#000", // iOS shadow color
             shadowOffset: { width: 0, height: 2 }, // iOS shadow offset
@@ -89,7 +96,6 @@ export const Transcripted_Messages_Tile = ({
             top: 90,
             bottom: 20,
           }}
-          //   style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
         >
           <Container
             width="100%"
@@ -102,7 +108,6 @@ export const Transcripted_Messages_Tile = ({
                 ? theme.colors.ui.success
                 : theme.colors.bg.elements_bg
             }
-            //   color={"red"}
           >
             <Container
               width="95%"
@@ -110,7 +115,6 @@ export const Transcripted_Messages_Tile = ({
               align="center"
               justify="center"
               direction="row"
-              //   color={theme.colors.bg.elements_bg}
               color={
                 copiedMessage
                   ? theme.colors.ui.success
@@ -125,11 +129,10 @@ export const Transcripted_Messages_Tile = ({
                 }
               >
                 {language === "ES" ? message_es : message_en}
-                {/* {transcripted_message} */}
               </Text>
             </Container>
           </Container>
-          {/* ********************************* */}
+          {/* ***************** FOOTER 1 *********** */}
           {!copiedMessage && (
             <Container
               width="100%"
@@ -185,6 +188,7 @@ export const Transcripted_Messages_Tile = ({
               </Container>
             </Container>
           )}
+          {/* ***************** FOOTER 2 *********** */}
           {copiedMessage && (
             <Container
               width="100%"
