@@ -81,7 +81,7 @@ export const Transcripted_Messages_Tile = ({
       )}
       {!isLoading && (
         <Container
-          width="100%"
+          width="95%"
           height="45%"
           align="center"
           justify="center"
@@ -109,8 +109,9 @@ export const Transcripted_Messages_Tile = ({
                 : theme.colors.bg.elements_bg
             }
           >
+            {/* ***************** MESSAGE CONTENT  *********** */}
             <Container
-              width="95%"
+              width="90%"
               height="90%"
               align="center"
               justify="center"

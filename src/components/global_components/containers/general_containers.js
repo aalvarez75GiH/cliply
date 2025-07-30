@@ -53,6 +53,8 @@ export const Scrollabe_MainContent = styled(ScrollView).attrs((props) => ({
 export const MainContent = styled(View)`
   width: ${(props) => props.width || "100%"};
   height: ${(props) => props.height || "89%"};
+  justify-content: ${(props) => props.justify || "center"};
+  align-items: ${(props) => props.align || "center"};
   /* background-color: ${theme.colors.bg.screens_bg}; */
   background-color: ${(props) => props.color || theme.colors.bg.screens_bg};
   /* background-color: blue; */

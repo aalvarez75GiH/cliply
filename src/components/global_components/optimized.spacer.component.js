@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { useTheme } from "styled-components/native";
+import { theme } from "../../infrastructure/theme";
 
 const sizeVariant = {
   xs: 0.5,
@@ -15,6 +16,12 @@ const positionVariant = {
   left: "marginLeft",
   right: "marginRight",
   bottom: "marginBottom",
+};
+
+const colorVariant = {
+  primary: theme.colors.bg.elements_bg,
+  secondary: theme.colors.bg.screens_bg,
+  success: theme.colors.ui.success,
 };
 
 const getVariant = (position, size, theme) => {

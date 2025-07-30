@@ -13,22 +13,25 @@ import { theme } from "../../../infrastructure/theme/index";
 import { Stage_Sub_Header } from "../../../components/headers/stage_message_sub_header";
 import { stage_1_messages } from "../../../infrastructure/data.dummy";
 import { MessagesContext } from "../../../infrastructure/services/messages/messages.context";
+import { Spacer } from "../../../components/global_components/optimized.spacer.component";
 
 export default function Stage_1_Screen({ navigation }) {
   const { renderItem } = useContext(MessagesContext);
 
   return (
     <SafeArea background_color="#FFFFFF">
-      <Flex_Container color={"red"}>
+      <Flex_Container color={theme.colors.bg.screens_bg}>
         <ExitHeader navigation={navigation} />
         <Stage_Sub_Header number="1" label="On my way to location" />
         <MainContent
           color={theme.colors.bg.screens_bg}
+          // color={"red"}
           width={"100%"}
           height={"85%"}
           align="center"
-          justify="flex-start"
+          justify="center"
         >
+          <Spacer position="top" size="large" />
           <FlatList
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
@@ -38,6 +41,7 @@ export default function Stage_1_Screen({ navigation }) {
               return item.id;
             }}
           />
+          <Spacer position="top" size="large" />
         </MainContent>
       </Flex_Container>
     </SafeArea>

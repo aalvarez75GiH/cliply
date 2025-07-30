@@ -13,7 +13,7 @@ export const Main_mic_CTA_component = ({ action }) => {
       width="65%"
       height="40%"
       color={theme.colors.bg.screens_bg}
-      style={{ position: "absolute", top: "25%" }}
+      // style={{ position: "absolute", top: "25%" }}
     >
       <Action_Container
         width="90px"
@@ -22,6 +22,13 @@ export const Main_mic_CTA_component = ({ action }) => {
         border_radius="100px"
         margin_bottom="20px"
         onPress={action}
+        style={{
+          shadowColor: "#000", // iOS shadow color
+          shadowOffset: { width: 2, height: 2 }, // iOS shadow offset
+          shadowOpacity: 0.25, // iOS shadow opacity
+          shadowRadius: 3.84, // iOS shadow radius
+          elevation: 5, // Android shadow
+        }}
       >
         <Main_mic_icon width="40px" height="40px" fill="#FFFFFF" />
       </Action_Container>

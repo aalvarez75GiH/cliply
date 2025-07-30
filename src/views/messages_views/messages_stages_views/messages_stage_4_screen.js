@@ -11,6 +11,7 @@ import { theme } from "../../../infrastructure/theme/index";
 import { Stage_Sub_Header } from "../../../components/headers/stage_message_sub_header";
 import { stage_4_messages } from "../../../infrastructure/data.dummy";
 import { MessagesContext } from "../../../infrastructure/services/messages/messages.context";
+import { Spacer } from "../../../components/global_components/optimized.spacer.component";
 
 export default function Stage_4_Screen({ navigation }) {
   const { renderItem } = useContext(MessagesContext);
@@ -27,6 +28,7 @@ export default function Stage_4_Screen({ navigation }) {
           align="center"
           justify="flex-start"
         >
+          <Spacer position="top" size="large" />
           <FlatList
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
@@ -36,6 +38,7 @@ export default function Stage_4_Screen({ navigation }) {
               return item.id;
             }}
           />
+          <Spacer position="top" size="large" />
         </MainContent>
       </Flex_Container>
     </SafeArea>
