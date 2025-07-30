@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as Clipboard from "expo-clipboard";
-import { ActivityIndicator } from "react-native";
+import { ActivityIndicator, Platform } from "react-native";
 
 import { Text } from "../../infrastructure/typography/text.component.js";
 import { EN_ES_CTA_component } from "../calls_to_action/en_es.cta.js";
@@ -65,7 +65,8 @@ export const Stored_Messages_Tile = ({
       {isLoading && (
         <Container
           // style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
-          width="410px"
+          //   width="410px"
+          width={Platform.OS === "ios" ? "410px" : "100%"}
           height="210px"
           color={"#FFFFFF"}
           justify="center"
@@ -76,7 +77,7 @@ export const Stored_Messages_Tile = ({
       )}
       {!isLoading && (
         <Container
-          width="410px"
+          width={Platform.OS === "ios" ? "410px" : "100%"}
           height="210px"
           align="center"
           justify="flex-start"
@@ -103,6 +104,7 @@ export const Stored_Messages_Tile = ({
           >
             <Container
               width="95%"
+              //   width={Platform.OS === "ios" ? "95%" : "95%"}
               height="90%"
               align="center"
               justify="center"
@@ -138,10 +140,12 @@ export const Stored_Messages_Tile = ({
               )}
             </Container>
           </Container>
-          {/* ********************************* */}
+          {/* ***************** FOOTER 1 ************************** */}
           {!isSelected && (
             <Container
-              width="100%"
+              //   width="100%"
+              width={Platform.OS === "ios" ? "410px" : "100%"}
+              // width="100%"
               height="30%"
               align="center"
               justify="center"
@@ -219,9 +223,11 @@ export const Stored_Messages_Tile = ({
               </Container>
             </Container>
           )}
+          {/* ***************** FOOTER 2 ************************** */}
           {isSelected && (
             <Container
               width="100%"
+              //   width={Platform.OS === "ios" ? "100%" : "100%"}
               height="30%"
               align="center"
               justify="flex-end"

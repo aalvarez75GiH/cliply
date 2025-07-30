@@ -4,6 +4,7 @@ import * as FileSystem from "expo-file-system";
 import { Buffer } from "buffer";
 
 import { post_a_voice_message_Request } from "./home.requests.js";
+import { recent_messages } from "../../data.dummy.js";
 
 export const HomeContext = createContext();
 
@@ -53,6 +54,14 @@ export const HomeContextProvider = ({ children }) => {
       const audioBuffer = Buffer.from(audioBase64, "base64");
 
       const response = await post_a_voice_message_Request(audioBuffer);
+      const recent_message_to_add = {
+        summary_en: response.data.summary.en,
+        summary_es: response.data.summary.es,
+        message_en: response.data.transcription.en,
+        message_es: response.data.transcription.es,
+        used: 0,
+      };
+      recent_messages.push(recent_message_to_add);
 
       console.log("RESPONSE:", JSON.stringify(response.data, null, 2));
       if (response.data) {

@@ -7,7 +7,7 @@ import {
   Container,
 } from "../../../src/components/global_components/containers/general_containers";
 
-export const Rounded_Ctas_Belt = ({ action }) => {
+export const Rounded_Ctas_Belt = ({ action_1 }) => {
   return (
     <Container
       width={"100%"}
@@ -23,7 +23,7 @@ export const Rounded_Ctas_Belt = ({ action }) => {
         height={"50%"}
         color={theme.colors.ui.primary}
         border_radius={"25px"}
-        onPress={action}
+        onPress={action_1}
       >
         <Text variant="semi_rounded_ctas_white">Recents</Text>
       </Action_Container>
@@ -32,7 +32,7 @@ export const Rounded_Ctas_Belt = ({ action }) => {
         height={"50%"}
         color={theme.colors.ui.primary}
         border_radius={"25px"}
-        onPress={action}
+        onPress={null}
       >
         <Text variant="semi_rounded_ctas_white">Top 5</Text>
       </Action_Container>
@@ -41,7 +41,7 @@ export const Rounded_Ctas_Belt = ({ action }) => {
         height={"50%"}
         color={theme.colors.ui.primary}
         border_radius={"25px"}
-        onPress={action}
+        onPress={null}
       >
         <Text variant="semi_rounded_ctas_white">Stats</Text>
       </Action_Container>

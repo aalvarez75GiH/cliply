@@ -7,6 +7,7 @@ import {
   Container,
   Action_Container,
 } from "../global_components/containers/general_containers.js";
+import { Squared_action_CTA_component } from "../calls_to_action/squared_action.cta.js";
 
 export const Home_process_area_2 = ({ action }) => {
   return (
@@ -32,19 +33,7 @@ export const Home_process_area_2 = ({ action }) => {
           <Spacer position="left" size="large" />
           <Text variant="middle_screens_caption">Listening...</Text>
         </Container>
-        <Action_Container
-          width={"100%"}
-          height={"12%"}
-          justify="center"
-          align="center"
-          direction="row"
-          // color={theme.colors.bg.screens_bg}
-          color={theme.colors.ui.primary}
-          // onPress={() => setRecordingStatus("idle")}
-          onPress={action}
-        >
-          <Text variant="transcripted_message_copied_caption">Transcribe</Text>
-        </Action_Container>
+        <Squared_action_CTA_component action={action} />
       </Container>
     </>
   );

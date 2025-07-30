@@ -222,3 +222,25 @@ export const transcripted_message = [
     used: 0,
   },
 ];
+
+export const recent_messages = [];
+// export const recent_messages = [
+//   {
+//     summary_en: "GPS issue—need help finding your location",
+//     summary_es: "Problema con GPS, necesito ayuda para encontrar tu ubicación",
+//     message_en:
+//       "Sorry, GPS is a little bit crazy right now and i can’t find your place. Can you elaborate more about where you live?",
+//     message_es:
+//       "Lo siento, el GPS está un poco loco en este momento y no puedo encontrar tu lugar. ¿Puedes darme más detalles sobre dónde vives?",
+//     used: 1,
+//   },
+//   {
+//     summary_en: "GPS issue—need help finding your location",
+//     summary_es: "Problema con GPS, necesito ayuda para encontrar tu ubicación",
+//     message_en:
+//       "Sorry, GPS is a little bit crazy right now and i can’t find your place. Can you elaborate more about where you live?",
+//     message_es:
+//       "Lo siento, el GPS está un poco loco en este momento y no puedo encontrar tu lugar. ¿Puedes darme más detalles sobre dónde vives?",
+//     used: 0,
+//   },
+// ];

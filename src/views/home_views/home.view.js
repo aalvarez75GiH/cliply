@@ -19,7 +19,7 @@ const transcriptedMessage = transcripted_message[0];
 const { message_en, message_es, original_message } = transcriptedMessage;
 // *************************************************************************
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const {
     startRecording,
     recordingStatus,
@@ -38,7 +38,9 @@ export default function HomeScreen() {
         align="center"
       >
         <HomeHeader />
-        <Rounded_Ctas_Belt />
+        <Rounded_Ctas_Belt
+          action_1={() => navigation.navigate("Recents_View")}
+        />
         {recordingStatus !== "listening" &&
           recordingStatus !== "transcribing" &&
           !response && <Home_process_area_1 action={startRecording} />}

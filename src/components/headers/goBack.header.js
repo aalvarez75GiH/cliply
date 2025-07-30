@@ -1,6 +1,7 @@
 import React from "react";
 
 import ExitIcon from "../../../assets/my-icons/exit_icon.svg";
+import ArrowBackIcon from "../../../assets/my-icons/arrow_back_icon.svg";
 import { Text } from "../../infrastructure/typography/text.component.js";
 
 import {
@@ -9,7 +10,7 @@ import {
 } from "../global_components/containers/general_containers.js";
 import { theme } from "../../infrastructure/theme/index.js";
 
-export const ExitHeader = ({ navigation, label = "" }) => {
+export const Go_Back_Header = ({ action, label = "" }) => {
   return (
     <Container
       width="100%"
@@ -19,6 +20,14 @@ export const ExitHeader = ({ navigation, label = "" }) => {
       justify="center"
       color={theme.colors.bg.elements_bg}
     >
+      <Action_Container
+        width="20%"
+        height="100%"
+        color={theme.colors.bg.elements_bg}
+        onPress={action}
+      >
+        <ArrowBackIcon width={35} height={35} fill={"#000000"} />
+      </Action_Container>
       <Container
         width="80%"
         height="100%"
@@ -29,14 +38,6 @@ export const ExitHeader = ({ navigation, label = "" }) => {
       >
         <Text variant="logo_caption">{label}</Text>
       </Container>
-      <Action_Container
-        width="20%"
-        height="100%"
-        color={theme.colors.bg.elements_bg}
-        onPress={() => navigation.goBack()}
-      >
-        <ExitIcon width={25} height={25} fill={"#000000"} />
-      </Action_Container>
     </Container>
   );
 };
