@@ -11,6 +11,7 @@ import {
 import { ExitHeader } from "../../components/headers/exit_header.component";
 import { SafeArea } from "../../components/global_components/safe-area.component.js";
 import { theme } from "../../infrastructure/theme/index.js";
+import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
 
 export default function MessagesScreen({ navigation }) {
   const routing = (caption) => {
@@ -44,8 +45,8 @@ export default function MessagesScreen({ navigation }) {
   return (
     <SafeArea background_color="#FFFFFF">
       <Flex_Container color={theme.colors.ui.secondary}>
-        <ExitHeader navigation={navigation} label="Messages by stage" />
         <Container color={theme.colors.bg.elements_bg} height="99%">
+          <ExitHeader navigation={navigation} label="Messages by stage" />
           <Scrollabe_MainContent
             color={theme.colors.bg.screens_bg}
             width={"100%"}
@@ -53,13 +54,8 @@ export default function MessagesScreen({ navigation }) {
             align="center"
             justify="flex-start"
           >
-            <Container
-              color={theme.colors.bg.screens_bg}
-              width={"90%"}
-              height={"5%"}
-              align="center"
-              justify="flex-start"
-            ></Container>
+            <Spacer size="large" position="top" />
+            <Spacer size="large" position="top" />
             {/* *************************STAGE 1***************** */}
             <Container
               width={"90%"}
@@ -75,13 +71,8 @@ export default function MessagesScreen({ navigation }) {
                 action={() => routing("stage_1")}
               />
             </Container>
-            <Container
-              color={theme.colors.bg.screens_bg}
-              width={"90%"}
-              height={"2%"}
-              align="center"
-              justify="flex-start"
-            ></Container>
+
+            <Spacer size="large" position="bottom" />
             {/* *************************STAGE 2***************** */}
             <Container
               width={"90%"}
@@ -97,13 +88,9 @@ export default function MessagesScreen({ navigation }) {
                 action={() => routing("stage_2")}
               />
             </Container>
-            <Container
-              color={theme.colors.bg.screens_bg}
-              width={"90%"}
-              height={"2%"}
-              align="center"
-              justify="flex-start"
-            ></Container>
+            <Spacer size="large" position="bottom" />
+            <Spacer size="large" position="bottom" />
+
             {/* *************************STAGE 3***************** */}
             <Container
               width={"90%"}
@@ -117,13 +104,9 @@ export default function MessagesScreen({ navigation }) {
                 action={() => routing("stage_3")}
               />
             </Container>
-            <Container
-              color={theme.colors.bg.screens_bg}
-              width={"90%"}
-              height={"2%"}
-              align="center"
-              justify="flex-start"
-            ></Container>
+
+            <Spacer size="large" position="bottom" />
+            <Spacer size="large" position="bottom" />
             {/* *************************STAGE 4***************** */}
             <Container
               width={"90%"}
@@ -139,13 +122,8 @@ export default function MessagesScreen({ navigation }) {
                 action={() => routing("stage_4")}
               />
             </Container>
-            <Container
-              color={theme.colors.bg.screens_bg}
-              width={"90%"}
-              height={"2%"}
-              align="center"
-              justify="flex-start"
-            ></Container>
+            <Spacer size="large" position="bottom" />
+
             {/* *************************STAGE 5***************** */}
             <Container
               width={"90%"}

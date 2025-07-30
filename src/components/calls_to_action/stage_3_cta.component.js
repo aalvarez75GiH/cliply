@@ -15,7 +15,7 @@ export const Stage_3_CTA_component = ({ number, action }) => {
   return (
     <Action_Container
       width={"95%"}
-      height={"85%"}
+      height={"90%"}
       justify="center"
       align="flex-start"
       color={theme.colors.ui.primary}

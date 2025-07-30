@@ -10,6 +10,7 @@ import { Home_process_area_4 } from "../../components/home_process_areas/home_pr
 import { SafeArea } from "../../components/global_components/safe-area.component.js";
 import { theme } from "../../infrastructure/theme/index.js";
 import { HomeContext } from "../../infrastructure/services/home/home.context";
+import { Container } from "../../components/global_components/containers/general_containers.js";
 
 // ********************** FOR TESTING WITH DUMMY DATA **********************
 import { transcripted_message } from "../../infrastructure/data.dummy.js";
@@ -28,26 +29,34 @@ export default function HomeScreen() {
   } = useContext(HomeContext);
 
   return (
-    <SafeArea background_color={theme.colors.bg.screens_bg}>
-      <HomeHeader />
-      <Rounded_Ctas_Belt />
-      {recordingStatus !== "listening" &&
-        recordingStatus !== "transcribing" &&
-        !response && <Home_process_area_1 action={startRecording} />}
-      {recordingStatus === "listening" && (
-        <Home_process_area_2 action={stopAndTranscribe} />
-      )}
-      {recordingStatus === "transcribing" && (
-        <Home_process_area_3 action={null} />
-      )}
-      {response && recordingStatus === "idle" && (
-        <Home_process_area_4
-          message_en={response.transcription.en}
-          message_es={response.transcription.es}
-          original_message={response.original_text}
-          action={() => setResponse(null)}
-        />
-      )}
+    <SafeArea background_color={theme.colors.bg.elements_bg}>
+      <Container
+        width="100%"
+        height={"100%"}
+        color={theme.colors.bg.screens_bg}
+        justify="center"
+        align="center"
+      >
+        <HomeHeader />
+        <Rounded_Ctas_Belt />
+        {recordingStatus !== "listening" &&
+          recordingStatus !== "transcribing" &&
+          !response && <Home_process_area_1 action={startRecording} />}
+        {recordingStatus === "listening" && (
+          <Home_process_area_2 action={stopAndTranscribe} />
+        )}
+        {recordingStatus === "transcribing" && (
+          <Home_process_area_3 action={null} />
+        )}
+        {response && recordingStatus === "idle" && (
+          <Home_process_area_4
+            message_en={response.transcription.en}
+            message_es={response.transcription.es}
+            original_message={response.original_text}
+            action={() => setResponse(null)}
+          />
+        )}
+      </Container>
     </SafeArea>
   );
 }

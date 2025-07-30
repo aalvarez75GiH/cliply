@@ -17,6 +17,7 @@ export const ExitHeader = ({ navigation, label = "" }) => {
       height="8%"
       align="flex-start"
       direction="row"
+      justify="center"
       color={theme.colors.bg.elements_bg}
     >
       <Container
