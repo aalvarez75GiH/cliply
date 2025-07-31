@@ -53,7 +53,7 @@ export const stage_1_messages = [
 ];
 export const stage_2_messages = [
   {
-    id: "MSG_1",
+    id: "MSG_6",
     summary_en: "May message you with order updates.",
     summary_es: "Podria enviarte mensajes con actualizaciones de tu orden.",
     message_en:
@@ -63,7 +63,7 @@ export const stage_2_messages = [
     used: 0,
   },
   {
-    id: "MSG_2",
+    id: "MSG_7",
     summary_en: "Keep food sealed—no open containers in car.",
     summary_es:
       "Mantén la comida sellada, no contenedores abiertos en el carro.",
@@ -77,7 +77,7 @@ export const stage_2_messages = [
 
 export const stage_3_messages = [
   {
-    id: "MSG_1",
+    id: "MSG_8",
     summary_en: "May message you with order updates.",
     summary_es: "Podria enviarte mensajes con actualizaciones de tu orden.",
     message_en:
@@ -87,7 +87,7 @@ export const stage_3_messages = [
     used: 0,
   },
   {
-    id: "MSG_2",
+    id: "MSG_9",
     summary_en: "Item unavailable—please confirm substitute.",
     summary_es: "Artículo no disponible, por favor confirma el sustituto.",
     message_en:
@@ -97,7 +97,7 @@ export const stage_3_messages = [
     used: 0,
   },
   {
-    id: "MSG_3",
+    id: "MSG_10",
     summary_en: "Waiting on your response to substitutions.",
     summary_es: "Esperando tu respuesta sobre sustituciones.",
     message_en:
@@ -107,7 +107,7 @@ export const stage_3_messages = [
     used: 0,
   },
   {
-    id: "MSG_4",
+    id: "MSG_11",
     summary_en: "Restaurant issue with order—will update soon.",
     summary_es: "Problema con el pedido del restaurante, actualizaré pronto.",
     message_en:
@@ -120,7 +120,7 @@ export const stage_3_messages = [
 
 export const stage_4_messages = [
   {
-    id: "MSG_1",
+    id: "MSG_12",
     summary_en: "En route, delayed by traffic.",
     summary_es: "En camino, retrasado por el tráfico.",
     message_en: "On my way, too much traffic",
@@ -128,7 +128,7 @@ export const stage_4_messages = [
     used: 0,
   },
   {
-    id: "MSG_2",
+    id: "MSG_13",
     summary_en: "Checking if building access is allowed late.",
     summary_es: "Comprobando si se permite el acceso al edificio tarde.",
     message_en:
@@ -138,7 +138,7 @@ export const stage_4_messages = [
     used: 0,
   },
   {
-    id: "MSG_3",
+    id: "MSG_14",
     summary_en: "Missed message about extras—already en route.",
     summary_es: "Mensaje no visto sobre extras, ya en camino.",
     message_en:
@@ -148,7 +148,7 @@ export const stage_4_messages = [
     used: 0,
   },
   {
-    id: "MSG_4",
+    id: "MSG_15",
     summary_en: "Be ready—traffic and parking are difficult.",
     summary_es: "Prepárate, el tráfico y el estacionamiento son difíciles.",
     message_en:
@@ -158,7 +158,7 @@ export const stage_4_messages = [
     used: 0,
   },
   {
-    id: "MSG_5",
+    id: "MSG_16",
     summary_en: "Running late due to multiple orders",
     summary_es: "Llegando tarde debido a múltiples órdenes",
     message_en:
@@ -171,7 +171,7 @@ export const stage_4_messages = [
 
 export const stage_5_messages = [
   {
-    id: "MSG_1",
+    id: "MSG_17",
     summary_en: "GPS issue—need help finding your location",
     summary_es: "Problema con GPS, necesito ayuda para encontrar tu ubicación",
     message_en:
@@ -181,7 +181,7 @@ export const stage_5_messages = [
     used: 0,
   },
   {
-    id: "MSG_2",
+    id: "MSG_18",
     summary_en: "Checking if building access is allowed late.",
     summary_es: "Comprobando si se permite el acceso al edificio tarde.",
     message_en:
@@ -191,7 +191,7 @@ export const stage_5_messages = [
     used: 0,
   },
   {
-    id: "MSG_3",
+    id: "MSG_19",
     summary_en: "Be ready—traffic and parking are difficult.",
     summary_es: "Prepárate, el tráfico y el estacionamiento son difíciles.",
     message_en:
@@ -201,7 +201,7 @@ export const stage_5_messages = [
     used: 0,
   },
   {
-    id: "MSG_4",
+    id: "MSG_20",
     summary_en: "Very close, be ready for handoff",
     summary_es: "Muy cerca, listo para entrega",
     message_en:
@@ -211,36 +211,5 @@ export const stage_5_messages = [
     used: 0,
   },
 ];
-export const transcripted_message = [
-  {
-    summary_en: "GPS issue—need help finding your location",
-    summary_es: "Problema con GPS, necesito ayuda para encontrar tu ubicación",
-    message_en:
-      "Sorry, GPS is a little bit crazy right now and i can’t find your place. Can you elaborate more about where you live?",
-    message_es:
-      "Lo siento, el GPS está un poco loco en este momento y no puedo encontrar tu lugar. ¿Puedes darme más detalles sobre dónde vives?",
-    used: 0,
-  },
-];
 
 export const recent_messages = [];
-// export const recent_messages = [
-//   {
-//     summary_en: "GPS issue—need help finding your location",
-//     summary_es: "Problema con GPS, necesito ayuda para encontrar tu ubicación",
-//     message_en:
-//       "Sorry, GPS is a little bit crazy right now and i can’t find your place. Can you elaborate more about where you live?",
-//     message_es:
-//       "Lo siento, el GPS está un poco loco en este momento y no puedo encontrar tu lugar. ¿Puedes darme más detalles sobre dónde vives?",
-//     used: 1,
-//   },
-//   {
-//     summary_en: "GPS issue—need help finding your location",
-//     summary_es: "Problema con GPS, necesito ayuda para encontrar tu ubicación",
-//     message_en:
-//       "Sorry, GPS is a little bit crazy right now and i can’t find your place. Can you elaborate more about where you live?",
-//     message_es:
-//       "Lo siento, el GPS está un poco loco en este momento y no puedo encontrar tu lugar. ¿Puedes darme más detalles sobre dónde vives?",
-//     used: 0,
-//   },
-// ];

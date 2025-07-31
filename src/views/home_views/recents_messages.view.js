@@ -15,14 +15,7 @@ import { SafeArea } from "../../components/global_components/safe-area.component
 import { theme } from "../../infrastructure/theme/index.js";
 import { HomeContext } from "../../infrastructure/services/home/home.context";
 import { Container } from "../../components/global_components/containers/general_containers.js";
-
-// ********************** FOR TESTING WITH DUMMY DATA **********************
-import { transcripted_message } from "../../infrastructure/data.dummy.js";
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
-
-const transcriptedMessage = transcripted_message[0];
-const { message_en, message_es, original_message } = transcriptedMessage;
-// *************************************************************************
 
 export default function RecentMessagesScreen({ navigation }) {
   const { renderItem } = useContext(MessagesContext);
