@@ -28,13 +28,10 @@ export default function RecentMessagesScreen({ navigation }) {
   const { renderItem } = useContext(MessagesContext);
   const array = recent_messages;
 
-  const goingBack = () => {
-    navigation.goBack();
-  };
   return (
     <SafeArea background_color={theme.colors.bg.elements_bg}>
       <Flex_Container color={theme.colors.bg.screens_bg}>
-        <Go_Back_Header action={goingBack} />
+        <Go_Back_Header action={() => navigation.goBack()} />
         <MainContent
           color={theme.colors.bg.screens_bg}
           //color={"red"}

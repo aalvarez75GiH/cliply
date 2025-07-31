@@ -46,7 +46,7 @@ export default function MessagesScreen({ navigation }) {
     <SafeArea background_color="#FFFFFF">
       <Flex_Container color={theme.colors.ui.secondary}>
         <Container color={theme.colors.bg.elements_bg} height="99%">
-          <ExitHeader navigation={navigation} label="Messages by stage" />
+          <ExitHeader label="Messages by stage" />
           <Scrollabe_MainContent
             color={theme.colors.bg.screens_bg}
             width={"100%"}

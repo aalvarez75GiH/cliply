@@ -6,11 +6,16 @@ import { Action_Container } from "../global_components/containers/general_contai
 import Arrow_next_icon from "../../../assets/my-icons/arrow_next_icon.svg";
 import { Spacer } from "../global_components/optimized.spacer.component";
 
-export const Squared_action_CTA_component = ({ action }) => {
+export const Squared_action_CTA_component = ({
+  width = "100%",
+  height = "12%",
+  action,
+  label = "Transcribe",
+}) => {
   return (
     <Action_Container
-      width={"100%"}
-      height={"12%"}
+      width={width}
+      height={height}
       justify="center"
       align="center"
       direction="row"
@@ -22,7 +27,7 @@ export const Squared_action_CTA_component = ({ action }) => {
       <Spacer position="left" size="large" />
       <Spacer position="left" size="large" />
       <Spacer position="left" size="medium" />
-      <Text variant="transcripted_message_copied_caption">Transcribe</Text>
+      <Text variant="transcripted_message_copied_caption">{label}</Text>
       <Spacer position="left" size="large" />
       <Arrow_next_icon
         width={20}

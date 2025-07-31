@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import ExitIcon from "../../../assets/my-icons/exit_icon.svg";
 import { Text } from "../../infrastructure/typography/text.component.js";
@@ -9,7 +10,8 @@ import {
 } from "../global_components/containers/general_containers.js";
 import { theme } from "../../infrastructure/theme/index.js";
 
-export const ExitHeader = ({ navigation, label = "" }) => {
+export const ExitHeader = ({ label = "" }) => {
+  const navigation = useNavigation();
   return (
     <Container
       width="100%"
