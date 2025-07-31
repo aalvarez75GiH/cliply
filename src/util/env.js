@@ -13,4 +13,6 @@
 export const environment = {
   transcriptionEndPoint:
     "https://us-central1-cliplybe.cloudfunctions.net/transcriptionsEndPoint",
+  typeMessageEndPoint:
+    "https://us-central1-cliplybe.cloudfunctions.net/typeMessageEndPoint",
 };

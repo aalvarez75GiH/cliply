@@ -6,8 +6,8 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Navigation } from "./src/infrastructure/navigation";
 import { theme } from "./src/infrastructure/theme";
 import { MessagesContextProvider } from "./src/infrastructure/services/messages/messages.context";
-import { HomeContext } from "./src/infrastructure/services/home/home.context";
 import { HomeContextProvider } from "./src/infrastructure/services/home/home.context";
+import { Type_Message_ContextProvider } from "./src/infrastructure/services/type_message/type_message.context";
 // ***************************************************
 
 import {
@@ -34,7 +34,9 @@ export default function App() {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <HomeContextProvider>
           <MessagesContextProvider>
-            <Navigation />
+            <Type_Message_ContextProvider>
+              <Navigation />
+            </Type_Message_ContextProvider>
           </MessagesContextProvider>
         </HomeContextProvider>
       </GestureHandlerRootView>
