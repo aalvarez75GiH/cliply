@@ -38,7 +38,7 @@ export default function Stage_1_Screen({ navigation }) {
             data={stage_1_messages}
             renderItem={renderItem}
             keyExtractor={(item, id) => {
-              return item.id;
+              return item.message_id;
             }}
           />
           <Spacer position="top" size="large" />

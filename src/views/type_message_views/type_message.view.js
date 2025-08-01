@@ -30,7 +30,11 @@ export default function Type_Message_View({ navigation }) {
     setResponse,
     messageTranslated,
   } = useContext(TypeMessageContext);
-  const { message_en, message_es, original_message } = messageTranslated;
+  const { message_en, message_es, original_message, language_detected } =
+    messageTranslated;
+  console.log("MESAAGE EN AT TYPE MESSAGE VIEW:", message_en);
+  console.log("MESAAGE ES AT TYPE MESSAGE VIEW:", message_es);
+  console.log("ORIGINAL MESSAGE AT TYPE MESSAGE VIEW:", original_message);
   const inputRef = useRef(null);
 
   useFocusEffect(
@@ -115,6 +119,7 @@ export default function Type_Message_View({ navigation }) {
               message_en={message_en}
               message_es={message_es}
               original_message={original_message}
+              language_detected={language_detected}
             />
             <Container
               width={"100%"}
@@ -129,7 +134,10 @@ export default function Type_Message_View({ navigation }) {
               }}
               color={theme.colors.bg.screens_bg}
             >
-              <SemiRounded_Clear_CTA action={() => setResponse(null)} />
+              <SemiRounded_Clear_CTA
+                action={() => navigation.navigate("home")}
+              />
+              {/* <SemiRounded_Clear_CTA action={() => setResponse(null)} /> */}
             </Container>
           </Container>
         )}

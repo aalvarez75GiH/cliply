@@ -58,7 +58,7 @@ export default function RecentMessagesScreen({ navigation }) {
             data={recent_messages}
             renderItem={renderItem}
             keyExtractor={(item, id) => {
-              return item.used;
+              return item.message_id;
             }}
           />
         </MainContent>

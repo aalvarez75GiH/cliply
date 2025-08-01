@@ -15,23 +15,31 @@ export const Transcripted_Messages_Tile = ({
   message_en,
   message_es,
   original_message,
+  language_detected,
 }) => {
+  console.log("MESAAGE EN:", message_en);
+  console.log("MESAAGE ES:", message_es);
   //   *******************************************************
   const [language, setLanguage] = useState("EN");
+  const [languageIsToggled, setLanguageIsToggled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [copiedMessage, setCopiedMessage] = useState(false);
   //   const { message_en, message_es } = transcripted_message;
 
   const toggleLanguage = async () => {
     setIsLoading(true);
+    setLanguageIsToggled(!languageIsToggled);
     setTimeout(async () => {
       setLanguage((prevLanguage) => (prevLanguage === "EN" ? "ES" : "EN"));
+      //   setLanguage(!language);
       await Clipboard.setStringAsync(
         language === "EN" ? message_es : message_en
       );
       setIsLoading(false);
     }, 300);
   };
+
+  console.log("language is toggled: ", languageIsToggled);
 
   const copy_message_action = async () => {
     setIsLoading(true);
@@ -51,9 +59,13 @@ export const Transcripted_Messages_Tile = ({
     setIsLoading(true);
     setTimeout(async () => {
       await Clipboard.setStringAsync("");
+      setLanguage(language_detected);
       setIsLoading(false);
     }, 300);
   };
+
+  console.log("LEGUANGE DETECTED: ", language_detected);
+  console.log("LEGUANGE LOCAL: ", language);
 
   //   *******************************************************
 
@@ -110,28 +122,90 @@ export const Transcripted_Messages_Tile = ({
             }
           >
             {/* ***************** MESSAGE CONTENT  *********** */}
-            <Container
-              width="90%"
-              height="90%"
-              align="center"
-              justify="center"
-              direction="row"
-              color={
-                copiedMessage
-                  ? theme.colors.ui.success
-                  : theme.colors.bg.elements_bg
-              }
-            >
-              <Text
-                variant={
+            {
+              <Container
+                width="90%"
+                height="90%"
+                align="center"
+                justify="center"
+                direction="row"
+                color={
                   copiedMessage
-                    ? "transcripted_message_copied_caption"
-                    : "transcripted_message_caption"
+                    ? theme.colors.ui.success
+                    : theme.colors.bg.elements_bg
                 }
               >
-                {language === "ES" ? message_es : message_en}
-              </Text>
-            </Container>
+                <Text
+                  variant={
+                    copiedMessage
+                      ? "transcripted_message_copied_caption"
+                      : "transcripted_message_caption"
+                  }
+                >
+                  {language_detected === "ES" && language === "EN"
+                    ? message_en
+                    : null}
+                  {language_detected === "EN" && language === "EN"
+                    ? message_en
+                    : null}
+                  {language_detected === "ES" && language === "ES"
+                    ? message_es
+                    : null}
+                  {language_detected === "EN" && language === "ES"
+                    ? message_es
+                    : null}
+                </Text>
+              </Container>
+            }
+            {/* {languageIsToggled && (
+              <Container
+                width="90%"
+                height="90%"
+                align="center"
+                justify="center"
+                direction="row"
+                color={
+                  copiedMessage
+                    ? theme.colors.ui.success
+                    : theme.colors.bg.elements_bg
+                }
+              >
+                <Text
+                  variant={
+                    copiedMessage
+                      ? "transcripted_message_copied_caption"
+                      : "transcripted_message_caption"
+                  }
+                >
+                  {language === "ES" ? message_es : null}
+                  {language === "EN" ? message_en : null}
+                </Text>
+              </Container>
+            )}
+            {!languageIsToggled && (
+              <Container
+                width="90%"
+                height="90%"
+                align="center"
+                justify="center"
+                direction="row"
+                color={
+                  copiedMessage
+                    ? theme.colors.ui.success
+                    : theme.colors.bg.elements_bg
+                }
+              >
+                <Text
+                  variant={
+                    copiedMessage
+                      ? "transcripted_message_copied_caption"
+                      : "transcripted_message_caption"
+                  }
+                >
+                  {original_message}
+                </Text>
+              </Container>
+            )} */}
           </Container>
           {/* ***************** FOOTER 1 *********** */}
           {!copiedMessage && (
@@ -227,3 +301,30 @@ export const Transcripted_Messages_Tile = ({
     </>
   );
 };
+
+// {
+//   <Container
+//     width="90%"
+//     height="90%"
+//     align="center"
+//     justify="center"
+//     direction="row"
+//     color={
+//       copiedMessage ? theme.colors.ui.success : theme.colors.bg.elements_bg
+//     }
+//   >
+//     <Text
+//       variant={
+//         copiedMessage
+//           ? "transcripted_message_copied_caption"
+//           : "transcripted_message_caption"
+//       }
+//     >
+//       {language_detected === "ES" && language === "EN" ? message_en : null}
+//       {language_detected === "EN" && language === "EN" ? message_en : null}
+//       {language_detected === "ES" && language === "ES" ? message_es : null}
+//       {language_detected === "EN" && language === "ES" ? message_es : null}
+
+//     </Text>
+//   </Container>;
+// }

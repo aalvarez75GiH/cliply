@@ -20,6 +20,8 @@ export default function HomeScreen({ navigation }) {
     stopAndTranscribe,
     setResponse,
   } = useContext(HomeContext);
+  // const { message_en, message_es, original_message, language_detected } =
+  //   response;
 
   return (
     <SafeArea background_color={theme.colors.bg.elements_bg}>
@@ -45,9 +47,10 @@ export default function HomeScreen({ navigation }) {
         )}
         {response && recordingStatus === "idle" && (
           <Home_process_area_4
-            message_en={response.transcription.en}
-            message_es={response.transcription.es}
-            original_message={response.original_text}
+            message_en={response.message_en}
+            message_es={response.message_es}
+            original_message={response.original_message}
+            language_detected={response.language_detected}
             action={() => setResponse(null)}
           />
         )}

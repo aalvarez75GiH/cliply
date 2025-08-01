@@ -14,6 +14,7 @@ export const Home_process_area_4 = ({
   message_es,
   original_message,
   action,
+  language_detected,
 }) => {
   return (
     <>
@@ -29,6 +30,7 @@ export const Home_process_area_4 = ({
           message_en={message_en}
           message_es={message_es}
           original_message={original_message}
+          language_detected={language_detected}
         />
         <Container
           width={"100%"}
