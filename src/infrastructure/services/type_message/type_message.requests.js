@@ -4,7 +4,7 @@ import { environment } from "../../../util/env";
 export const post_a_typed_message_Request = async (text_to_operate_encoded) => {
   const { typeMessageEndPoint } = environment;
   //const { categoryListEndPoint } = environment;
-  console.log("TEXT ENCODED:", text_to_operate_encoded);
+  console.log("TEXT ENCODED AT REQUEST:", text_to_operate_encoded);
 
   return await axios
     .post(

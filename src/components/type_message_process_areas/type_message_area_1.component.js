@@ -10,9 +10,8 @@ import { Main_mic_CTA_component } from "../calls_to_action/main_mic_cta.componen
 import { theme } from "../../infrastructure/theme/index.js";
 import { Text } from "../../infrastructure/typography/text.component.js";
 import { Spacer } from "../global_components/optimized.spacer.component.js";
-// import { Squared_action_CTA_component } from "../calls_to_action/squared_action.cta.js";
 
-export const Type_message_process_area_1 = ({ action }) => {
+export const Type_message_process_area_1 = () => {
   return (
     <>
       <Container
@@ -36,7 +35,6 @@ export const Type_message_process_area_1 = ({ action }) => {
           <Spacer position="left" size="large" />
           <Text variant="middle_screens_caption">Translating...</Text>
         </Container>
-        {/* <Squared_action_CTA_component action={action} /> */}
       </Container>
     </>
   );
