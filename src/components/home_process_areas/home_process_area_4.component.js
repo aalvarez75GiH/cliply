@@ -12,7 +12,6 @@ import { SemiRounded_Clear_CTA } from "../calls_to_action/semi_rounded_clear.cta
 export const Home_process_area_4 = ({
   message_en,
   message_es,
-  original_message,
   action,
   language_detected,
 }) => {
@@ -29,7 +28,6 @@ export const Home_process_area_4 = ({
         <Transcripted_Messages_Tile
           message_en={message_en}
           message_es={message_es}
-          original_message={original_message}
           language_detected={language_detected}
         />
         <Container

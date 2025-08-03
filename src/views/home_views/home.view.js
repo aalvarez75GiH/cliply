@@ -49,7 +49,6 @@ export default function HomeScreen({ navigation }) {
           <Home_process_area_4
             message_en={response.message_en}
             message_es={response.message_es}
-            original_message={response.original_message}
             language_detected={response.language_detected}
             action={() => setResponse(null)}
           />

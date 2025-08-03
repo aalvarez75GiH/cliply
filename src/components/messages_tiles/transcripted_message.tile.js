@@ -14,21 +14,22 @@ import { theme } from "../../infrastructure/theme/index.js";
 export const Transcripted_Messages_Tile = ({
   message_en,
   message_es,
-  original_message,
   language_detected,
 }) => {
   console.log("MESAAGE EN:", message_en);
   console.log("MESAAGE ES:", message_es);
   //   *******************************************************
-  const [language, setLanguage] = useState("EN");
-  const [languageIsToggled, setLanguageIsToggled] = useState(false);
+  const [language, setLanguage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [copiedMessage, setCopiedMessage] = useState(false);
-  //   const { message_en, message_es } = transcripted_message;
+
+  useState(() => {
+    setLanguage(language_detected);
+  }, []);
 
   const toggleLanguage = async () => {
     setIsLoading(true);
-    setLanguageIsToggled(!languageIsToggled);
+    // setLanguageIsToggled(!languageIsToggled);
     setTimeout(async () => {
       setLanguage((prevLanguage) => (prevLanguage === "EN" ? "ES" : "EN"));
       //   setLanguage(!language);
@@ -38,8 +39,6 @@ export const Transcripted_Messages_Tile = ({
       setIsLoading(false);
     }, 300);
   };
-
-  console.log("language is toggled: ", languageIsToggled);
 
   const copy_message_action = async () => {
     setIsLoading(true);
@@ -73,11 +72,8 @@ export const Transcripted_Messages_Tile = ({
     <>
       {isLoading && (
         <Container
-          //   style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
           width="100%"
           height="45%"
-          //   width="410px"
-          //   height="280px"
           color={"#FFFFFF"}
           //   color={"#FAD"}
           justify="center"
@@ -142,70 +138,11 @@ export const Transcripted_Messages_Tile = ({
                       : "transcripted_message_caption"
                   }
                 >
-                  {language_detected === "ES" && language === "EN"
-                    ? message_en
-                    : null}
-                  {language_detected === "EN" && language === "EN"
-                    ? message_en
-                    : null}
-                  {language_detected === "ES" && language === "ES"
-                    ? message_es
-                    : null}
-                  {language_detected === "EN" && language === "ES"
-                    ? message_es
-                    : null}
-                </Text>
-              </Container>
-            }
-            {/* {languageIsToggled && (
-              <Container
-                width="90%"
-                height="90%"
-                align="center"
-                justify="center"
-                direction="row"
-                color={
-                  copiedMessage
-                    ? theme.colors.ui.success
-                    : theme.colors.bg.elements_bg
-                }
-              >
-                <Text
-                  variant={
-                    copiedMessage
-                      ? "transcripted_message_copied_caption"
-                      : "transcripted_message_caption"
-                  }
-                >
                   {language === "ES" ? message_es : null}
                   {language === "EN" ? message_en : null}
                 </Text>
               </Container>
-            )}
-            {!languageIsToggled && (
-              <Container
-                width="90%"
-                height="90%"
-                align="center"
-                justify="center"
-                direction="row"
-                color={
-                  copiedMessage
-                    ? theme.colors.ui.success
-                    : theme.colors.bg.elements_bg
-                }
-              >
-                <Text
-                  variant={
-                    copiedMessage
-                      ? "transcripted_message_copied_caption"
-                      : "transcripted_message_caption"
-                  }
-                >
-                  {original_message}
-                </Text>
-              </Container>
-            )} */}
+            }
           </Container>
           {/* ***************** FOOTER 1 *********** */}
           {!copiedMessage && (
@@ -226,6 +163,7 @@ export const Transcripted_Messages_Tile = ({
                 color={theme.colors.bg.elements_bg}
               >
                 <EN_ES_CTA_component
+                  //   language={language === "EN" ? "ES" : "EN"}
                   language={language === "EN" ? "ES" : "EN"}
                   action={toggleLanguage}
                   // isSelected={isSelected}
@@ -301,30 +239,3 @@ export const Transcripted_Messages_Tile = ({
     </>
   );
 };
-
-// {
-//   <Container
-//     width="90%"
-//     height="90%"
-//     align="center"
-//     justify="center"
-//     direction="row"
-//     color={
-//       copiedMessage ? theme.colors.ui.success : theme.colors.bg.elements_bg
-//     }
-//   >
-//     <Text
-//       variant={
-//         copiedMessage
-//           ? "transcripted_message_copied_caption"
-//           : "transcripted_message_caption"
-//       }
-//     >
-//       {language_detected === "ES" && language === "EN" ? message_en : null}
-//       {language_detected === "EN" && language === "EN" ? message_en : null}
-//       {language_detected === "ES" && language === "ES" ? message_es : null}
-//       {language_detected === "EN" && language === "ES" ? message_es : null}
-
-//     </Text>
-//   </Container>;
-// }
