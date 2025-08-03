@@ -18,7 +18,7 @@ import { Container } from "../../components/global_components/containers/general
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
 
 export default function RecentMessagesScreen({ navigation }) {
-  const { renderItem } = useContext(MessagesContext);
+  const { renderRecentsMessagesTile } = useContext(MessagesContext);
   const array = recent_messages;
 
   return (
@@ -56,7 +56,7 @@ export default function RecentMessagesScreen({ navigation }) {
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
             data={recent_messages}
-            renderItem={renderItem}
+            renderItem={renderRecentsMessagesTile}
             keyExtractor={(item, id) => {
               return item.message_id;
             }}

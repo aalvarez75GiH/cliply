@@ -1,16 +1,32 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useContext } from "react";
 
 import { Spacer } from "../../../components/global_components/optimized.spacer.component";
-import { Stored_Messages_Tile } from "../../../components/messages_tiles/stored_message.tile";
+import { Recents_Messages_Tile } from "../../../components/messages_tiles/recents_messages.tile";
+import { Stored_Messages_Tile } from "../../../components/messages_tiles/stored_messages.tile";
 
+import { GlobalContext } from "../global/global.context";
 export const MessagesContext = createContext();
 
 export const MessagesContextProvider = ({ children }) => {
-  const [globalLanguage, setGlobalLanguage] = useState("EN");
   const [isLoading, setIsLoading] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
+  const { globalLanguage } = useContext(GlobalContext);
 
-  const renderItem = ({ item }) => {
+  const renderRecentsMessagesTile = ({ item }) => {
+    return (
+      <Spacer position="bottom" size="medium">
+        <Recents_Messages_Tile
+          item={item}
+          globalLanguage={globalLanguage}
+          setIsLoading={setIsLoading}
+          selectedItemId={selectedItemId}
+          onSelect={setSelectedItemId}
+          isLoading={isLoading}
+        />
+      </Spacer>
+    );
+  };
+  const renderStoredMessagesTile = ({ item }) => {
     return (
       <Spacer position="bottom" size="medium">
         <Stored_Messages_Tile
@@ -28,10 +44,11 @@ export const MessagesContextProvider = ({ children }) => {
   return (
     <MessagesContext.Provider
       value={{
-        renderItem,
         globalLanguage,
         isLoading,
         setIsLoading,
+        renderRecentsMessagesTile,
+        renderStoredMessagesTile,
       }}
     >
       {children}

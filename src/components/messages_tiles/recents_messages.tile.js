@@ -11,23 +11,16 @@ import {
 import CopyPaste_icon from "../../../assets/my-icons/copy_paste.svg";
 import { theme } from "../../infrastructure/theme/index.js";
 
-export const Stored_Messages_Tile = ({
+export const Recents_Messages_Tile = ({
   item,
   globalLanguage,
   selectedItemId,
   onSelect,
 }) => {
   //   *******************************************************
-  const [language, setLanguage] = useState("EN");
+  const [language, setLanguage] = useState(globalLanguage);
   const [isLoading, setIsLoading] = useState(false);
-  const {
-    summary_en,
-    summary_es,
-    message_en,
-    message_es,
-    message_id,
-    language_detected,
-  } = item;
+  const { summary_en, summary_es, message_en, message_es, message_id } = item;
   console.log("ITEM:", JSON.stringify(item, null, 2));
 
   const toggleLanguage = async () => {
@@ -110,7 +103,7 @@ export const Stored_Messages_Tile = ({
             }
             //   color={"red"}
           >
-            <Container
+            <Action_Container
               width="95%"
               //   width={Platform.OS === "ios" ? "95%" : "95%"}
               height="90%"
@@ -122,7 +115,9 @@ export const Stored_Messages_Tile = ({
                   ? theme.colors.ui.success
                   : theme.colors.bg.elements_bg
               }
-              // color={theme.colors.bg.elements_bg}
+              onPress={() =>
+                console.log("IT SHOULD BE SELECTED TO CATEGORIZE IT...")
+              }
             >
               {language === "ES" && (
                 <Text
@@ -146,7 +141,7 @@ export const Stored_Messages_Tile = ({
                   {!isSelected ? summary_en : message_en}
                 </Text>
               )}
-            </Container>
+            </Action_Container>
           </Container>
           {/* ***************** FOOTER 1 ************************** */}
           {!isSelected && (

@@ -16,7 +16,7 @@ import { MessagesContext } from "../../../infrastructure/services/messages/messa
 import { Spacer } from "../../../components/global_components/optimized.spacer.component";
 
 export default function Stage_1_Screen({ navigation }) {
-  const { renderItem } = useContext(MessagesContext);
+  const { renderItem, renderStoredMessagesTile } = useContext(MessagesContext);
 
   return (
     <SafeArea background_color="#FFFFFF">
@@ -36,7 +36,7 @@ export default function Stage_1_Screen({ navigation }) {
             showsHorizontalScrollIndicator={false}
             showsVerticalScrollIndicator={false}
             data={stage_1_messages}
-            renderItem={renderItem}
+            renderItem={renderStoredMessagesTile}
             keyExtractor={(item, id) => {
               return item.message_id;
             }}

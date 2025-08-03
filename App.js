@@ -8,6 +8,7 @@ import { theme } from "./src/infrastructure/theme";
 import { MessagesContextProvider } from "./src/infrastructure/services/messages/messages.context";
 import { HomeContextProvider } from "./src/infrastructure/services/home/home.context";
 import { Type_Message_ContextProvider } from "./src/infrastructure/services/type_message/type_message.context";
+import { GlobalContextProvider } from "./src/infrastructure/services/global/global.context";
 // ***************************************************
 
 import {
@@ -32,13 +33,15 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <HomeContextProvider>
-          <MessagesContextProvider>
-            <Type_Message_ContextProvider>
-              <Navigation />
-            </Type_Message_ContextProvider>
-          </MessagesContextProvider>
-        </HomeContextProvider>
+        <GlobalContextProvider>
+          <HomeContextProvider>
+            <MessagesContextProvider>
+              <Type_Message_ContextProvider>
+                <Navigation />
+              </Type_Message_ContextProvider>
+            </MessagesContextProvider>
+          </HomeContextProvider>
+        </GlobalContextProvider>
       </GestureHandlerRootView>
     </ThemeProvider>
   );
