@@ -26,6 +26,7 @@ export const fontWeights = {
 
 export const fontSizes = {
   summary_tile_text: "28px",
+  menu_sub_title_text: "26px",
   transcripted_message_tile: "24px",
   headers: "24px",
   logo: "20px",
@@ -35,9 +36,10 @@ export const fontSizes = {
   stages_headers: "18px",
   text_inputs: "18px",
   copied_message_tile: "18px",
+  semi_rounded_ctas: "16px",
   stages_ctas: "16px",
   en_es_cta: "16px",
   en_es_cta: "14px",
-  semi_rounded_ctas: "14px",
   bottom_tab_bar: "12px",
+  menu_tiles_caption: "14px",
 };

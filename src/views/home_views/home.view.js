@@ -32,7 +32,7 @@ export default function HomeScreen({ navigation }) {
         justify="center"
         align="center"
       >
-        <HomeHeader />
+        <HomeHeader action={() => navigation.navigate("Menu_View")} />
         <Rounded_Ctas_Belt
           action_1={() => navigation.navigate("Recents_View")}
         />

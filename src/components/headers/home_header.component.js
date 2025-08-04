@@ -8,7 +8,7 @@ import {
 } from "../global_components/containers/general_containers.js";
 import { theme } from "../../infrastructure/theme/index.js";
 
-export const HomeHeader = () => {
+export const HomeHeader = ({ action }) => {
   return (
     <Container
       width="100%"
@@ -24,6 +24,7 @@ export const HomeHeader = () => {
         align="center"
         justify="center"
         color={theme.colors.bg.elements_bg}
+        onPress={action}
       >
         <MenuIcon width={40} height={40} fill={"#000000"} />
       </Action_Container>

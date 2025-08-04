@@ -17,6 +17,10 @@ const logo_caption = (theme) => `
     font-size: ${"20px"};
     font-family: ${theme.fonts.bold};
 `;
+const menu_tiles_caption = (theme) => `
+    font-size: ${"18px"};
+    font-family: ${theme.fonts.bold};
+`;
 const transcripted_message_caption = (theme) => `
 font-size: ${theme.fontSizes.copied_message_tile};
     font-family: ${theme.fonts.bold};
@@ -110,6 +114,16 @@ const ES_EN_ctas_black = (theme) => `
         font-family: ${theme.fonts.bold};
         color: ${theme.colors.text.primary};
     `;
+const menu_sub_title_text = (theme) => `
+        font-size: ${theme.fontSizes.menu_sub_title_text};
+        font-family: ${theme.fonts.bold};
+        color: ${theme.colors.text.primary};
+    `;
+const menu_sub_title_text_2 = (theme) => `
+        font-size: ${"24px"};
+        font-family: ${theme.fonts.bold};
+        color: ${theme.colors.text.primary};
+    `;
 
 const variants = {
   summary_tile_caption,
@@ -133,6 +147,9 @@ const variants = {
   ES_EN_ctas_black,
   transcripted_message_copied_caption,
   underlined_small_caption_black,
+  menu_tiles_caption,
+  menu_sub_title_text,
+  menu_sub_title_text_2,
 };
 
 export const Text = styled.Text`
