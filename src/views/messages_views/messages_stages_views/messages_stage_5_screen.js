@@ -12,6 +12,8 @@ import { Stage_Sub_Header } from "../../../components/headers/stage_message_sub_
 import { stage_5_messages } from "../../../infrastructure/data.dummy";
 import { MessagesContext } from "../../../infrastructure/services/messages/messages.context";
 import { Spacer } from "../../../components/global_components/optimized.spacer.component";
+import { Container } from "../../../components/global_components/containers/general_containers";
+import { Text } from "../../../infrastructure/typography/text.component";
 
 export default function Stage_5_Screen({ navigation }) {
   const { renderStoredMessagesTile } = useContext(MessagesContext);
@@ -29,15 +31,30 @@ export default function Stage_5_Screen({ navigation }) {
           justify="flex-start"
         >
           <Spacer position="top" size="large" />
-          <FlatList
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            data={stage_5_messages}
-            renderItem={renderStoredMessagesTile}
-            keyExtractor={(item, id) => {
-              return item.message_id;
-            }}
-          />
+          {stage_5_messages.length === 0 && (
+            <Container
+              width="100%"
+              height="100%"
+              justify="center"
+              align="center"
+              color={theme.colors.bg.screens_bg}
+            >
+              <Text variant="middle_screens_caption" style={{ fontSize: 28 }}>
+                No Stage 5 Messages!!
+              </Text>
+            </Container>
+          )}
+          {stage_5_messages.length > 0 && (
+            <FlatList
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              data={stage_5_messages}
+              renderItem={renderStoredMessagesTile}
+              keyExtractor={(item, id) => {
+                return item.message_id;
+              }}
+            />
+          )}
           <Spacer position="top" size="large" />
         </MainContent>
       </Flex_Container>

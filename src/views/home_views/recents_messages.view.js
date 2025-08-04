@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Text } from "react-native";
+// import { Text } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
 import { HomeHeader } from "../../components/headers/home_header.component.js";
@@ -16,6 +16,7 @@ import { theme } from "../../infrastructure/theme/index.js";
 import { HomeContext } from "../../infrastructure/services/home/home.context";
 import { Container } from "../../components/global_components/containers/general_containers.js";
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
+import { Text } from "../../infrastructure/typography/text.component.js";
 
 export default function RecentMessagesScreen({ navigation }) {
   const { renderRecentsMessagesTile } = useContext(MessagesContext);
@@ -42,13 +43,8 @@ export default function RecentMessagesScreen({ navigation }) {
               align="center"
               color={theme.colors.bg.screens_bg}
             >
-              <Text
-                variant="middle_screens_caption"
-                style={{
-                  color: "#000000",
-                }}
-              >
-                There are no Recents Messages
+              <Text variant="middle_screens_caption" style={{ fontSize: 28 }}>
+                No recent Messages!!
               </Text>
             </Container>
           )}

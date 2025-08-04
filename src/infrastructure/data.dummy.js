@@ -8,6 +8,8 @@ export const stage_1_messages = [
     used: 0,
     language_detected: "EN",
     original_message: "On my way, too much traffic",
+    stages: ["stage_1", "stage_2"],
+    user_id: "USER_0001",
   },
   {
     message_id: "MSG_2",
