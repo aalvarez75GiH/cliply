@@ -108,6 +108,12 @@ const copied_message_tile_caption = (theme) => `
     text-align: center;
     color: ${theme.colors.text.secondary};
     `;
+const message_tile_caption = (theme) => `
+    font-size: ${"18px"};
+    font-family: ${theme.fonts.bold};
+    text-align: center;
+    color: ${theme.colors.text.primary};
+    `;
 
 const ES_EN_ctas_black = (theme) => `
         font-size: ${theme.fontSizes.en_es_cta};
@@ -150,6 +156,7 @@ const variants = {
   menu_tiles_caption,
   menu_sub_title_text,
   menu_sub_title_text_2,
+  message_tile_caption,
 };
 
 export const Text = styled.Text`
