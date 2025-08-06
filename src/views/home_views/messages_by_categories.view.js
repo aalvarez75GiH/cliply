@@ -8,8 +8,6 @@ import {
 } from "../../components/global_components/containers/general_containers";
 import { SafeArea } from "../../components/global_components/safe-area.component";
 import { theme } from "../../infrastructure/theme/index";
-import { Stage_Sub_Header } from "../../components/headers/stage_message_sub_header";
-import { stage_1_messages } from "../../infrastructure/data.dummy";
 import { MessagesContext } from "../../infrastructure/services/messages/messages.context";
 import { Spacer } from "../../components/global_components/optimized.spacer.component";
 import { Container } from "../../components/global_components/containers/general_containers";
@@ -36,7 +34,7 @@ export default function Message_by_Categories_Screen({ navigation, route }) {
   const { category } = route.params;
   console.log("CATEGORY COMING:", category);
 
-  const [dataTorender, setDataToRender] = useState([]);
+  const [dataToRender, setDataToRender] = useState([]);
   const [headers_caption, set_Headers_Caption] = useState("");
   //   useEffect(() => {
   //     if (typeof setting_data_and_captions_to_messages === "function") {
@@ -46,7 +44,7 @@ export default function Message_by_Categories_Screen({ navigation, route }) {
   //     }
   //   }, []);
 
-  console.log("DATA TO RENDER:", dataTorender);
+  console.log("DATA TO RENDER:", dataToRender);
 
   useEffect(() => {
     switch (category) {
@@ -119,7 +117,7 @@ export default function Message_by_Categories_Screen({ navigation, route }) {
               color={theme.colors.bg.screens_bg}
             >
               <Text variant="middle_screens_caption" style={{ fontSize: 28 }}>
-                No Stage 1 Messages!!
+                No Messages!!
               </Text>
             </Container>
           )}
@@ -127,21 +125,12 @@ export default function Message_by_Categories_Screen({ navigation, route }) {
             <FlatList
               showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}
-              data={dataTorender}
+              data={dataToRender}
               renderItem={renderStoredMessagesTile}
               keyExtractor={(item, id) => {
                 return item.message_id;
               }}
             />
-            // <FlatList
-            //   showsHorizontalScrollIndicator={false}
-            //   showsVerticalScrollIndicator={false}
-            //   data={issues_at_store}
-            //   renderItem={renderStoredMessagesTile}
-            //   keyExtractor={(item, id) => {
-            //     return item.message_id;
-            //   }}
-            // />
           )}
           <Spacer position="top" size="large" />
         </MainContent>

@@ -18,7 +18,7 @@ import { Container } from "../../../components/global_components/containers/gene
 import { Text } from "../../../infrastructure/typography/text.component";
 
 export default function Stage_1_Screen({ navigation }) {
-  const { renderItem, renderStoredMessagesTile } = useContext(MessagesContext);
+  const { renderStoredMessagesTile } = useContext(MessagesContext);
 
   return (
     <SafeArea background_color="#FFFFFF">

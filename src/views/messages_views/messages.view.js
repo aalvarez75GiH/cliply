@@ -1,19 +1,22 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import { Stage_3_CTA_component } from "../../components/calls_to_action/stage_3_cta.component.js";
 import { Stages_CTA_component } from "../../components/calls_to_action/stages_cta.component.js";
 import {
   Container,
   Flex_Container,
-  Scrollabe_MainContent,
+  Scrollable_MainContent,
 } from "../../components/global_components/containers/general_containers.js";
 
 import { ExitHeader } from "../../components/headers/exit_header.component";
 import { SafeArea } from "../../components/global_components/safe-area.component.js";
 import { theme } from "../../infrastructure/theme/index.js";
-import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
+import { Spacer } from "../../components/global_components/optimized.spacer.component";
 
-export default function MessagesScreen({ navigation }) {
+export default function MessagesScreen() {
+  const navigation = useNavigation();
+
   const routing = (caption) => {
     switch (caption) {
       case "stage_1":
@@ -47,7 +50,7 @@ export default function MessagesScreen({ navigation }) {
       <Flex_Container color={theme.colors.ui.secondary}>
         <Container color={theme.colors.bg.elements_bg} height="99%">
           <ExitHeader label="Messages by stage" />
-          <Scrollabe_MainContent
+          <Scrollable_MainContent
             color={theme.colors.bg.screens_bg}
             width={"100%"}
             height={"89%"}
@@ -139,7 +142,7 @@ export default function MessagesScreen({ navigation }) {
                 action={() => routing("stage_5")}
               />
             </Container>
-          </Scrollabe_MainContent>
+          </Scrollable_MainContent>
         </Container>
       </Flex_Container>
       {/* Main content goes here */}
