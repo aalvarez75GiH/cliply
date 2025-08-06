@@ -25,6 +25,8 @@ export const Voice_transcription_Area = ({
         action2={action2}
         action3={action3}
         recordingStatus={recordingStatus}
+        caption_line_1="Create a new message using"
+        caption_line_2="your voice"
       />
     </Container>
   );

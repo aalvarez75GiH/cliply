@@ -37,7 +37,7 @@ export const HomeContextProvider = ({ children }) => {
     }
   };
 
-  const stopAndTranscribe = async () => {
+  const startTranscription = async () => {
     try {
       setRecordingStatus("transcribing");
       //   setRecordingStatus("idle");
@@ -87,6 +87,17 @@ export const HomeContextProvider = ({ children }) => {
     }
   };
 
+  const stopRecording = async () => {
+    try {
+      if (recordingRef.current) {
+        await recordingRef.current.stopAndUnloadAsync();
+        setRecordingStatus("idle");
+      }
+    } catch (err) {
+      console.error("Failed to stop recording:", err);
+    }
+  };
+
   // This context is currently empty, but can be expanded in the future
   return (
     <HomeContext.Provider
@@ -95,9 +106,10 @@ export const HomeContextProvider = ({ children }) => {
         recordingStatus,
         setRecordingStatus,
         recordingRef,
-        stopAndTranscribe,
+        startTranscription,
         setResponse,
         response,
+        stopRecording,
       }}
     >
       {children}

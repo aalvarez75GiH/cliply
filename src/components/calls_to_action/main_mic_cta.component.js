@@ -16,20 +16,18 @@ export const Main_mic_CTA_component = ({
   action2,
   action3,
   recordingStatus,
+  caption_line_1,
+  caption_line_2,
 }) => {
   return (
     <Container
       width="95%"
       height="60%"
       color={theme.colors.bg.screens_bg}
-      // color={"#000000"}
       direction="row"
       align="center"
-      // justify="flex-end"
       justify={recordingStatus ? "center" : "flex-start"}
-      // justify={recordingStatus ? "space-between" : "flex-start"}
       border_radius="100px"
-      // style={{ position: "absolute", top: "25%" }}
     >
       {recordingStatus === "idle" && (
         <>
@@ -55,26 +53,58 @@ export const Main_mic_CTA_component = ({
             height="90%"
             color={theme.colors.bg.screens_bg}
             // color="#FAD"
-            direction="row"
+            direction="column"
             align="center"
-            justify="flex-start"
+            justify="center"
             // border_radius="100px"
             style={{
               borderTopRightRadius: 100,
               borderBottomRightRadius: 100,
             }}
           >
-            <Spacer position="left" size="large" />
-            <Text
-              variant="message_tile_caption"
-              style={{
-                alignSelf: "center",
-                justifySelf: "flex-start",
-                textAlign: "left",
-              }}
+            <Container
+              width="92%"
+              height="42%"
+              color={theme.colors.bg.screens_bg}
+              // color={"green"}
+              justify="center"
+              align="flex-start"
+              border_radius="10px"
             >
-              Tap here & create a new message using your voice
-            </Text>
+              {/* <Spacer position="left" size="medium"> */}
+              <Text
+                variant="dm_sans_bold_16"
+                // style={{
+                //   alignSelf: "flex-start",
+                //   textAlign: "flex-start",
+                // }}
+              >
+                {caption_line_1}
+              </Text>
+              {/* </Spacer> */}
+            </Container>
+            <Container
+              width="92%"
+              height="42%"
+              color={theme.colors.bg.screens_bg}
+              // color={"blue"}
+              justify="center"
+              align="flex-start"
+              border_radius="10px"
+            >
+              {/* <Spacer position="left" size="medium"> */}
+              <Text
+                variant="dm_sans_bold_16"
+                // style={{
+                //   alignSelf: "flex-start",
+                //   textAlign: "flex-start",
+                // }}
+              >
+                {caption_line_2}
+                {/* Tap here & create a new msg using your voice */}
+              </Text>
+              {/* </Spacer> */}
+            </Container>
           </Container>
         </>
       )}
@@ -143,6 +173,7 @@ export const Main_mic_CTA_component = ({
             </Text>
           </Container>
           <Circular_Icon_CTA
+            recordingStatus={recordingStatus}
             action={action3}
             Icon={RightArrow}
             width="20px"

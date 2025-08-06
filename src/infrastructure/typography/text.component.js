@@ -130,6 +130,17 @@ const menu_sub_title_text_2 = (theme) => `
         font-family: ${theme.fonts.bold};
         color: ${theme.colors.text.primary};
     `;
+// ****************************************************************************
+const dm_sans_bold_18 = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_bold_18};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.primary};
+    `;
+const dm_sans_bold_16 = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_bold_16};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.primary};
+    `;
 
 const variants = {
   summary_tile_caption,
@@ -157,6 +168,8 @@ const variants = {
   menu_sub_title_text,
   menu_sub_title_text_2,
   message_tile_caption,
+  dm_sans_bold_18,
+  dm_sans_bold_16,
 };
 
 export const Text = styled.Text`

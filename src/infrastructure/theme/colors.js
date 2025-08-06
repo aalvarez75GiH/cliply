@@ -30,4 +30,9 @@ export const colors = {
     primary: "#FFFFFF",
     secondary: "#DEDEDE",
   },
+  ctas: {
+    primary: "#000000",
+    secondary: "#FFFFFF",
+    tertiary: "#F5F4F4",
+  },
 };

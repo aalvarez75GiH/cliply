@@ -11,10 +11,10 @@ import { SafeArea } from "../../components/global_components/safe-area.component
 import { theme } from "../../infrastructure/theme/index.js";
 import { HomeContext } from "../../infrastructure/services/home/home.context";
 import { Container } from "../../components/global_components/containers/general_containers.js";
-import { Main_mic_CTA_component } from "../../components/calls_to_action/main_mic_cta.component.js";
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
 import { Voice_transcription_Area } from "./home operations views/voice_transcription.area.js";
 import { Loading_Spinner_area } from "./home operations views/loading_spinner.area.js";
+import { Categories_Area } from "./home operations views/messages_categories.area.js";
 
 export default function Redesigned_Home_Screen({ navigation }) {
   // const [recordingStatus, setRecordingStatus] = useState("idle");
@@ -23,17 +23,13 @@ export default function Redesigned_Home_Screen({ navigation }) {
     startRecording,
     recordingStatus,
     response,
-    stopAndTranscribe,
+    startTranscription,
     setResponse,
+    stopRecording,
   } = useContext(HomeContext);
   // const { message_en, message_es, original_message, language_detected } =
   //   response;
-  const activate_recording = () => {
-    setRecordingStatus("listening");
-  };
-  const deActivate_recording = () => {
-    setRecordingStatus("idle");
-  };
+
   return (
     <SafeArea background_color={theme.colors.bg.screens_bg}>
       <Container
@@ -50,40 +46,19 @@ export default function Redesigned_Home_Screen({ navigation }) {
         <Spacer position="top" size="small" />
         {!response && (
           <Voice_transcription_Area
-            // action1={() => setRecordingStatus("listening")}
             action1={startRecording}
-            // action2={() => setRecordingStatus("idle")}
-            action2={() => null}
-            // action3={() => setRecordingStatus("transcribing")}
-            action3={stopAndTranscribe}
+            action2={stopRecording}
+            action3={startTranscription}
             recordingStatus={recordingStatus}
           />
         )}
 
         <Spacer position="top" size="small" />
 
-        {recordingStatus === "idle" && !response && (
-          <Container
-            width="100%"
-            height={"67%"}
-            color={theme.colors.bg.screens_bg}
-            justify="center"
-            align="center"
-          ></Container>
-        )}
-        {recordingStatus === "listening" && !response && (
-          <Container
-            width="100%"
-            height={"67%"}
-            //color={theme.colors.bg.screens_bg}
-            color={"lightblue"}
-            justify="center"
-            align="center"
-          >
-            <Loading_Spinner_area />
-          </Container>
-        )}
-        {recordingStatus === "transcribing" && !response && (
+        {recordingStatus === "idle" && !response && <Categories_Area />}
+
+        {(recordingStatus === "listening" ||
+          (recordingStatus === "transcribing" && !response)) && (
           <Container
             width="100%"
             height={"67%"}
