@@ -15,12 +15,10 @@ export const Voice_transcription_Area = ({
       width="100%"
       height={"15%"}
       color={theme.colors.bg.elements_bg}
-      //   color={"red"}
       justify="center"
       align="center"
     >
       <Main_mic_CTA_component
-        // action={() => setTranscribing(!transcribing)}
         action1={action1}
         action2={action2}
         action3={action3}

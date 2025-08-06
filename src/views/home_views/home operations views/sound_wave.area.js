@@ -1,11 +1,11 @@
 import React from "react";
-import { ActivityIndicator } from "react-native";
+import LottieView from "lottie-react-native";
 
 import { theme } from "../../../infrastructure/theme";
 import { Spacer } from "../../../components/global_components/optimized.spacer.component";
 import { Container } from "../../../components/global_components/containers/general_containers.js";
 
-export const Loading_Spinner_area = () => {
+export const Sound_Wave_area = () => {
   return (
     <>
       <Container
@@ -25,7 +25,12 @@ export const Loading_Spinner_area = () => {
           //   color={"red"}
           direction="row"
         >
-          <ActivityIndicator size="small" color="#000000" />
+          <LottieView
+            source={require("../../../../assets/animations/Sound_Waves_B2B2B2.json")}
+            autoPlay
+            loop
+            style={{ width: 100, height: 100 }}
+          />
           <Spacer position="left" size="large" />
         </Container>
       </Container>

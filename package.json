@@ -38,7 +38,8 @@
     "react-native-svg-transformer": "^1.5.1",
     "styled-components": "^6.1.19",
     "uuid": "^11.1.0",
-    "uuidv4": "^6.2.13"
+    "uuidv4": "^6.2.13",
+    "lottie-react-native": "7.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

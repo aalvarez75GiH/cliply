@@ -1,11 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 import { HomeHeader } from "../../components/headers/home_header.component.js";
 import { Rounded_Ctas_Belt } from "../../components/belts/rounded_ctas_belt.component.js";
-import { Home_process_area_1 } from "../../components/home_process_areas/home_process_area_1.component.js";
-import { Home_process_area_2 } from "../../components/home_process_areas/home_process_area_2.component.js";
-import { Home_process_area_3 } from "../../components/home_process_areas/home_process_area_3.component.js";
 import { Home_process_area_4 } from "../../components/home_process_areas/home_process_area_4.component.js";
+import { Sound_Wave_area } from "../../views/home_views/home operations views/sound_wave.area.js";
 
 import { SafeArea } from "../../components/global_components/safe-area.component.js";
 import { theme } from "../../infrastructure/theme/index.js";
@@ -17,8 +15,6 @@ import { Loading_Spinner_area } from "./home operations views/loading_spinner.ar
 import { Categories_Area } from "./home operations views/messages_categories.area.js";
 
 export default function Redesigned_Home_Screen({ navigation }) {
-  // const [recordingStatus, setRecordingStatus] = useState("idle");
-
   const {
     startRecording,
     recordingStatus,
@@ -27,8 +23,6 @@ export default function Redesigned_Home_Screen({ navigation }) {
     setResponse,
     stopRecording,
   } = useContext(HomeContext);
-  // const { message_en, message_es, original_message, language_detected } =
-  //   response;
 
   return (
     <SafeArea background_color={theme.colors.bg.screens_bg}>
@@ -57,8 +51,19 @@ export default function Redesigned_Home_Screen({ navigation }) {
 
         {recordingStatus === "idle" && !response && <Categories_Area />}
 
-        {(recordingStatus === "listening" ||
-          (recordingStatus === "transcribing" && !response)) && (
+        {recordingStatus === "listening" && !response && (
+          <Container
+            width="100%"
+            height={"67%"}
+            //color={theme.colors.bg.screens_bg}
+            color={"lightblue"}
+            justify="center"
+            align="center"
+          >
+            <Sound_Wave_area />
+          </Container>
+        )}
+        {recordingStatus === "transcribing" && !response && (
           <Container
             width="100%"
             height={"67%"}
