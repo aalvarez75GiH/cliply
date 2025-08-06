@@ -21,11 +21,9 @@ export const Container = styled(View)`
   ${baseStyles};
 `;
 
-export const Flex_Container = styled(View)`
-  flex: 1;
-  align-items: ${(props) => props.align || "center"};
-  justify-content: ${(props) => props.justify || "center"};
-  background-color: ${(props) => props.color || "#FADADD"};
+export const Flexible_Container = styled(View)`
+  ${baseStyles};
+  flex: ${(props) => props.flex || 1};
 `;
 
 export const Action_Container = styled(TouchableOpacity)`
@@ -37,7 +35,7 @@ export const Action_Flex_Container = styled(TouchableOpacity)`
   flex: ${(props) => props.flex || 1};
 `;
 
-export const Scrollabe_MainContent = styled(ScrollView).attrs((props) => ({
+export const Scrollable_MainContent = styled(ScrollView).attrs((props) => ({
   contentContainerStyle: {
     justifyContent: props.justify || "center",
     alignItems: props.align || "center",
@@ -46,16 +44,33 @@ export const Scrollabe_MainContent = styled(ScrollView).attrs((props) => ({
 }))`
   width: ${(props) => props.width || "100%"};
   height: ${(props) => props.height || "89%"};
-  /* background-color: ${theme.colors.bg.screens_bg}; */
-  background-color: ${(props) => props.color || theme.colors.bg.screens_bg};
-  /* background-color: blue; */
+  background-color: ${(props) => props.color || "blue"};
 `;
+
 export const MainContent = styled(View)`
   width: ${(props) => props.width || "100%"};
   height: ${(props) => props.height || "89%"};
   justify-content: ${(props) => props.justify || "center"};
   align-items: ${(props) => props.align || "center"};
-  /* background-color: ${theme.colors.bg.screens_bg}; */
-  background-color: ${(props) => props.color || theme.colors.bg.screens_bg};
-  /* background-color: blue; */
+  background-color: ${(props) => props.color};
+`;
+
+export const Scrollable_Container = styled(ScrollView).attrs((props) => ({
+  contentContainerStyle: {
+    justifyContent: props.justify || "center",
+    alignItems: props.align || "center",
+    flexGrow: 1,
+  },
+}))`
+  flex: 1;
+  width: ${(props) => props.width || "100%"};
+  /* height: ${(props) => props.height || "89%"}; */
+  background-color: ${(props) => props.color || "white"};
+`;
+
+export const Flex_Container = styled(View)`
+  flex: 1;
+  align-items: ${(props) => props.align || "center"};
+  justify-content: ${(props) => props.justify || "center"};
+  background-color: ${(props) => props.color || "#FADADD"};
 `;

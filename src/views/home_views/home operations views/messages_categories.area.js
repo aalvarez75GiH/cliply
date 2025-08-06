@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import { theme } from "../../../infrastructure/theme";
 import { Container } from "../../../components/global_components/containers/general_containers";
@@ -13,16 +14,19 @@ import LongDistanceIcon from "../../../../assets/my_colored_icons/long_distance_
 import LocationIcon from "../../../../assets/my_colored_icons/finding_color_icon.svg";
 import DinnersLocIcon from "../../../../assets/my_colored_icons/dinner_location_icon.svg";
 import MultipleOrdersIcon from "../../../../assets/my_colored_icons/multiple_color_icon.svg";
+import { Scrollable_Container } from "../../../components/global_components/containers/general_containers";
+import { Flex_Container } from "../../../components/global_components/containers/general_containers";
 
 export const Categories_Area = () => {
+  const navigation = useNavigation();
   return (
-    <Container
+    <Flex_Container
       width="100%"
       height={"67%"}
       justify="center"
-      //   color={theme.colors.bg.screens_bg}
-      color={"lightblue"}
+      //   color={"lightblue"}
       align="center"
+      color={theme.colors.bg.screens_bg}
     >
       <Container
         width="100%"
@@ -38,9 +42,9 @@ export const Categories_Area = () => {
           <Text variant="dm_sans_bold_18">Find messages by...</Text>
         </Spacer>
       </Container>
-      <Container
+      <Scrollable_Container
         width="100%"
-        height={"85%"}
+        // height={"85%"}
         justify="flex-start"
         color={theme.colors.bg.elements_bg}
         // color={"blue"}
@@ -62,7 +66,11 @@ export const Categories_Area = () => {
             caption2={"store"}
             width="40px"
             height="40px"
-            action={null}
+            action={() =>
+              navigation.navigate("Messages_by_categories_View", {
+                category: "issues_at_store",
+              })
+            }
           />
           <Category_CTA_component
             Icon={TrafficIcon}
@@ -70,7 +78,11 @@ export const Categories_Area = () => {
             height="60px"
             caption1={"Traffic &"}
             caption2={"delays"}
-            action={null}
+            action={() =>
+              navigation.navigate("Messages_by_categories_View", {
+                category: "traffic_and_delays",
+              })
+            }
           />
         </Container>
         <Spacer position="top" size="small" />
@@ -89,7 +101,12 @@ export const Categories_Area = () => {
             caption2={"restaurant"}
             width="40px"
             height="40px"
-            action={null}
+            action={() =>
+              navigation.navigate("Messages_by_categories_View", {
+                category: "issues_at_restaurant",
+              })
+            }
+            // action={null}
           />
           <Category_CTA_component
             Icon={CarIntegrity}
@@ -97,7 +114,11 @@ export const Categories_Area = () => {
             height="45px"
             caption1={"Car"}
             caption2={"integrity"}
-            action={null}
+            action={() =>
+              navigation.navigate("Messages_by_categories_View", {
+                category: "car_integrity",
+              })
+            }
           />
         </Container>
         <Spacer position="top" size="small" />
@@ -116,7 +137,11 @@ export const Categories_Area = () => {
             caption2={"distances"}
             width="40px"
             height="40px"
-            action={null}
+            action={() =>
+              navigation.navigate("Messages_by_categories_View", {
+                category: "long_distances",
+              })
+            }
           />
           <Category_CTA_component
             Icon={LocationIcon}
@@ -124,7 +149,11 @@ export const Categories_Area = () => {
             height="40px"
             caption1={"Passenger"}
             caption2={"location"}
-            action={null}
+            action={() =>
+              navigation.navigate("Messages_by_categories_View", {
+                category: "passenger_location",
+              })
+            }
           />
         </Container>
         {/* ******************************************* */}
@@ -139,11 +168,15 @@ export const Categories_Area = () => {
         >
           <Category_CTA_component
             Icon={DinnersLocIcon}
-            caption1={"Issues at"}
-            caption2={"store"}
+            caption1={"Dinner's"}
+            caption2={"location"}
             width="40px"
             height="40px"
-            action={null}
+            action={() =>
+              navigation.navigate("Messages_by_categories_View", {
+                category: "dinners_location",
+              })
+            }
           />
           <Category_CTA_component
             Icon={MultipleOrdersIcon}
@@ -151,10 +184,14 @@ export const Categories_Area = () => {
             height="40px"
             caption1={"Multiple"}
             caption2={"orders/rides"}
-            action={null}
+            action={() =>
+              navigation.navigate("Messages_by_categories_View", {
+                category: "multiple_orders",
+              })
+            }
           />
         </Container>
-      </Container>
-    </Container>
+      </Scrollable_Container>
+    </Flex_Container>
   );
 };

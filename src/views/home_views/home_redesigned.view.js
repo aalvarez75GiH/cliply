@@ -55,7 +55,6 @@ export default function Redesigned_Home_Screen({ navigation }) {
           <Container
             width="100%"
             height={"67%"}
-            //color={theme.colors.bg.screens_bg}
             color={"lightblue"}
             justify="center"
             align="center"
@@ -67,7 +66,6 @@ export default function Redesigned_Home_Screen({ navigation }) {
           <Container
             width="100%"
             height={"67%"}
-            //color={theme.colors.bg.screens_bg}
             color={"lightblue"}
             justify="center"
             align="center"
