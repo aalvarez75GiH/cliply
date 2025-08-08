@@ -23,7 +23,6 @@ export const HomeContextProvider = ({ children }) => {
   const [recording, setRecording] = useState(null);
   const [response, setResponse] = useState(null);
   const [userData, setUserData] = useState(null);
-  const [issues_at_store_messages, set_Issues_At_Store_Messages] = useState([]);
 
   const { userToDB } = useContext(GlobalContext);
   const { user_id } = userToDB || {}; // Ensure userToDB is not undefined or null
@@ -33,12 +32,12 @@ export const HomeContextProvider = ({ children }) => {
     const gettingUserData = async () => {
       try {
         const user_data = await get_User_Data_Request(user_id);
-        console.log(
-          "USER DATA AT HOME CONTEXT:",
-          JSON.stringify(user_data.data, null, 2)
-        );
+        // console.log(
+        //   "USER DATA AT HOME CONTEXT:",
+        //   JSON.stringify(user_data.data, null, 2)
+        // );
         setUserData(user_data.data);
-        console.log("USER DATA AT STATE:", JSON.stringify(userData, null, 2));
+        // console.log("USER DATA AT STATE:", JSON.stringify(userData, null, 2));
       } catch (error) {
         console.error(
           "ERROR GETTING USER DATA AT HOME CONTEXT:",

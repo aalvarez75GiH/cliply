@@ -5,7 +5,6 @@ export const GlobalContext = createContext();
 // *************** Firebase SDK ***************************
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { createdAt } from "expo-updates";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,6 +21,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth();
 // export const db = app.firestore();
 
 export const GlobalContextProvider = ({ children }) => {
@@ -29,24 +29,22 @@ export const GlobalContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userToDB, setUserToDB] = useState(null);
-  const [user_data, setUser_Data] = useState(null);
 
   useEffect(() => {
     setUserToDB(user);
-    const auth = getAuth();
-    // signInWithEmailAndPassword(auth, "arnoldo@gmail.com", "123456")
-    //   .then((data_user) => {
-    //     // console.log(JSON.stringify(data_user, 0, 2));
-    //     console.log("USER UID:", data_user.user.uid);
-    //     console.log("USER EMAIL:", data_user.user.email);
-    //     console.log("USER AUTHENTICATED WITH FIREBASE...");
-    //     setIsAuthenticated(true);
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //     setIsAuthenticated(false);
-    //   });
-  }, []);
+    signInWithEmailAndPassword(auth, "arnoldo.alvarez75@yahoo.com", "123456")
+      .then((data_user) => {
+        // console.log(JSON.stringify(data_user, 0, 2));
+        console.log("USER UID FROM GOOGLE:", data_user.user.uid);
+        console.log("USER EMAIL FROM GOOGLE:", data_user.user.email);
+        console.log("USER AUTHENTICATED WITH FIREBASE...");
+        setIsAuthenticated(true);
+      })
+      .catch((e) => {
+        console.error("Authentication failed:", e.message);
+        setIsAuthenticated(false);
+      });
+  }, [user]);
 
   const togglingGlobalLanguage = () => {
     setIsLoading(true);
@@ -61,7 +59,7 @@ export const GlobalContextProvider = ({ children }) => {
   const user = {
     first_name: "Arnoldo",
     last_name: "Alvarez",
-    email: "arnoldo@gmail.com",
+    email: "arnoldo.alvarez75@yahoo.com",
     display_name: "Arnoldo",
     isFirstTime: true,
     role: "user",
@@ -81,10 +79,11 @@ export const GlobalContextProvider = ({ children }) => {
         isLoading,
         app,
         userToDB,
+        isAuthenticated,
         // db,
       }}
     >
-      {children}
+      {isAuthenticated ? children : null}
     </GlobalContext.Provider>
   );
 };
