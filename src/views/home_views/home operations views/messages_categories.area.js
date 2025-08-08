@@ -69,6 +69,7 @@ export const Categories_Area = () => {
             action={() =>
               navigation.navigate("Messages_by_categories_View", {
                 category: "issues_at_store",
+                caption: "Issues at store",
               })
             }
           />
@@ -81,6 +82,7 @@ export const Categories_Area = () => {
             action={() =>
               navigation.navigate("Messages_by_categories_View", {
                 category: "traffic_and_delays",
+                caption: "Traffic & delays",
               })
             }
           />
@@ -104,6 +106,7 @@ export const Categories_Area = () => {
             action={() =>
               navigation.navigate("Messages_by_categories_View", {
                 category: "issues_at_restaurant",
+                caption: "Issues at restaurant",
               })
             }
             // action={null}
@@ -117,6 +120,7 @@ export const Categories_Area = () => {
             action={() =>
               navigation.navigate("Messages_by_categories_View", {
                 category: "car_integrity",
+                caption: "Car integrity",
               })
             }
           />
@@ -140,6 +144,7 @@ export const Categories_Area = () => {
             action={() =>
               navigation.navigate("Messages_by_categories_View", {
                 category: "long_distances",
+                caption: "Long distances",
               })
             }
           />
@@ -152,6 +157,7 @@ export const Categories_Area = () => {
             action={() =>
               navigation.navigate("Messages_by_categories_View", {
                 category: "passenger_location",
+                caption: "Passenger location",
               })
             }
           />
@@ -175,6 +181,7 @@ export const Categories_Area = () => {
             action={() =>
               navigation.navigate("Messages_by_categories_View", {
                 category: "dinners_location",
+                caption: "Dinner's location",
               })
             }
           />
@@ -187,6 +194,7 @@ export const Categories_Area = () => {
             action={() =>
               navigation.navigate("Messages_by_categories_View", {
                 category: "multiple_orders",
+                caption: "Multiple orders/rides",
               })
             }
           />

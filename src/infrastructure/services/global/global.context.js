@@ -5,6 +5,7 @@ export const GlobalContext = createContext();
 // *************** Firebase SDK ***************************
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { createdAt } from "expo-updates";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -28,22 +29,23 @@ export const GlobalContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userToDB, setUserToDB] = useState(null);
+  const [user_data, setUser_Data] = useState(null);
 
   useEffect(() => {
     setUserToDB(user);
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, "arnoldo@yahoo.com", "123456")
-      .then((data_user) => {
-        // console.log(JSON.stringify(data_user, 0, 2));
-        console.log("USER UID:", data_user.user.uid);
-        console.log("USER EMAIL:", data_user.user.email);
-        console.log("USER AUTHENTICATED WITH FIREBASE...");
-        setIsAuthenticated(true);
-      })
-      .catch((e) => {
-        console.log(e);
-        setIsAuthenticated(false);
-      });
+    // signInWithEmailAndPassword(auth, "arnoldo@gmail.com", "123456")
+    //   .then((data_user) => {
+    //     // console.log(JSON.stringify(data_user, 0, 2));
+    //     console.log("USER UID:", data_user.user.uid);
+    //     console.log("USER EMAIL:", data_user.user.email);
+    //     console.log("USER AUTHENTICATED WITH FIREBASE...");
+    //     setIsAuthenticated(true);
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //     setIsAuthenticated(false);
+    //   });
   }, []);
 
   const togglingGlobalLanguage = () => {
@@ -59,12 +61,15 @@ export const GlobalContextProvider = ({ children }) => {
   const user = {
     first_name: "Arnoldo",
     last_name: "Alvarez",
-    email: "arnoldo@yahoo.com",
-    isFirstTime: false,
+    email: "arnoldo@gmail.com",
+    display_name: "Arnoldo",
+    isFirstTime: true,
     role: "user",
     uid: "onQniDL2rsSCzspat9HS8BRBbIG2",
-    creation_date: "2025-08-31T17:23:42.556Z",
-    user_id: "34c110af-5d1e-41ee-948f-ca366ae3c53b",
+    updatedAt: "2025-08-31T17:23:42.556Z",
+    createdAt: "2025-08-31T17:23:42.556Z",
+    user_id: "3cfccb6c-b4d7-4582-b183-940606a9469f",
+    phone_number: "(706)612.46.02",
   };
   // This context is currently empty, but can be expanded in the future
   return (
@@ -75,6 +80,7 @@ export const GlobalContextProvider = ({ children }) => {
         togglingGlobalLanguage,
         isLoading,
         app,
+        userToDB,
         // db,
       }}
     >
