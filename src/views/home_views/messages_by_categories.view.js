@@ -8,15 +8,15 @@ import {
 } from "../../components/global_components/containers/general_containers";
 import { SafeArea } from "../../components/global_components/safe-area.component";
 import { theme } from "../../infrastructure/theme/index";
-import { MessagesContext } from "../../infrastructure/services/messages/messages.context";
 import { Spacer } from "../../components/global_components/optimized.spacer.component";
 import { Container } from "../../components/global_components/containers/general_containers";
 import { Text } from "../../infrastructure/typography/text.component";
-
 import { Categories_Messages_Sub_Header } from "../../components/headers/categories_messages_sub.header";
-import { HomeContext } from "../../infrastructure/services/home/home.context";
 
-export default function Message_by_Categories_Screen({ navigation, route }) {
+import { HomeContext } from "../../infrastructure/services/home/home.context";
+import { MessagesContext } from "../../infrastructure/services/messages/messages.context";
+
+export default function Messages_by_Categories_Screen({ navigation, route }) {
   const { renderStoredMessagesTile } = useContext(MessagesContext);
   const { category, caption } = route.params;
   console.log("CATEGORY COMING:", category);

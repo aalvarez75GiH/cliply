@@ -1,7 +1,8 @@
 // ************* Development Environment
 // export const environment = {
 //   transcriptionEndPoint:
-//     "http://127.0.0.1:5001/cliplybe/us-central1/transcriptionsEndPoint/",
+//     "http://10.0.2.2.:5001/cliplybe/us-central1/transcriptionsEndPoint",
+//   usersEndPoint: "http://10.0.2.2:5001/cliplybe/us-central1/usersEndPoint",
 // };
 
 // ************* Production Environment

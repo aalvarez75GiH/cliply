@@ -12,7 +12,7 @@ export const MessagesContextProvider = ({ children }) => {
   const [selectedItemId, setSelectedItemId] = useState(null);
   const { globalLanguage } = useContext(GlobalContext);
 
-  const renderRecentsMessagesTile = ({ item }) => {
+  const renderRecentMessagesTile = ({ item }) => {
     return (
       <Spacer position="bottom" size="medium">
         <Recents_Messages_Tile
@@ -48,7 +48,7 @@ export const MessagesContextProvider = ({ children }) => {
         globalLanguage,
         isLoading,
         setIsLoading,
-        renderRecentsMessagesTile,
+        renderRecentMessagesTile,
         renderStoredMessagesTile,
         // setting_data_and_captions_to_messages,
         // dataTorender,

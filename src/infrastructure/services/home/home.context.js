@@ -29,26 +29,19 @@ export const HomeContextProvider = ({ children }) => {
   console.log("USER ID AT HOME CONTEXT:", user_id);
 
   useEffect(() => {
-    const gettingUserData = async () => {
-      try {
-        const user_data = await get_User_Data_Request(user_id);
-        // console.log(
-        //   "USER DATA AT HOME CONTEXT:",
-        //   JSON.stringify(user_data.data, null, 2)
-        // );
-        setUserData(user_data.data);
-        // console.log("USER DATA AT STATE:", JSON.stringify(userData, null, 2));
-      } catch (error) {
-        console.error(
-          "ERROR GETTING USER DATA AT HOME CONTEXT:",
-          error.message
-        );
-      }
-    };
-    gettingUserData();
+    gettingUserData(user_id);
   }, []);
-  const recordingRef = useRef(null);
 
+  const gettingUserData = async (user_id) => {
+    try {
+      const user_data = await get_User_Data_Request(user_id);
+      setUserData(user_data.data);
+    } catch (error) {
+      console.error("ERROR GETTING USER DATA AT HOME CONTEXT:", error.message);
+    }
+  };
+
+  const recordingRef = useRef(null);
   console.log("USER DATA AT STATE:", JSON.stringify(userData, null, 2));
 
   const startRecording = async () => {
@@ -89,31 +82,18 @@ export const HomeContextProvider = ({ children }) => {
       });
       const audioBuffer = Buffer.from(audioBase64, "base64");
 
-      const response = await post_a_voice_message_Request(audioBuffer);
-      console.log("RESPONSE:", JSON.stringify(response.data, null, 2));
+      console.log("USER ID BEFORE  TRANSCRIPTION REQUEST:", user_id);
+      const response = await post_a_voice_message_Request(audioBuffer, user_id);
 
-      //   ********* ADDING TO RECENT MESSAGES ARRAY *********
-      const recent_message_to_add = {
-        original_message: response.data.original_message,
-        summary_en: response.data.summary_en,
-        summary_es: response.data.summary_es,
-        message_en: response.data.message_en,
-        message_es: response.data.message_es,
-        used: 0,
-        language_detected: response.data.language_detected,
-        message_id: uuidv4(),
-      };
       console.log(
-        "RECENT MESSAGE TO ADD:",
-        JSON.stringify(recent_message_to_add, null, 2)
+        "RESPONSE AT START TRANSCRIPTION FUNCTION:",
+        JSON.stringify(response.data, null, 2)
       );
-      recent_messages.push(recent_message_to_add);
-      console.log("ARRAY:", JSON.stringify(recent_messages, null, 2));
-      //   ***************************************************
 
       if (response.data) {
         setResponse(response.data);
         setRecordingStatus("idle");
+        gettingUserData(user_id);
       }
     } catch (err) {
       console.error("Transcription failed:", err.message);
