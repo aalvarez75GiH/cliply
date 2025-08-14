@@ -46,7 +46,7 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
           // color={"blue"}
           align="center"
         >
-          {/* <Spacer position="top" size="small" /> */}
+          <Spacer position="top" size="small" />
           {/* ******************************************* */}
           <Container
             width="100%"
@@ -76,14 +76,18 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
                 width="70px"
                 height="70px"
                 action={() =>
-                  navigation.navigate("Messages_by_categories_View", {
-                    category: "issues_at_store",
-                    caption: "Issues at store",
+                  navigation.navigate("Clips_by_Operations_And_Status_View", {
+                    operation: "food_delivery",
+                    status_name: "Heading to pickup/shop",
+                    caption: "Heading to pickup/shop",
+                    // category: "issues_at_store",
+                    // caption: "Issues at store",
                   })
                 }
               />
             </Spacer>
           </Container>
+          <Spacer position="top" size="small" />
           <Spacer position="top" size="small" />
           <Spacer position="top" size="small" />
           <Spacer position="top" size="small" />
@@ -101,20 +105,24 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
             <Spacer position="right" size="extraLarge">
               <Status_CTA_component
                 Icon={ShopIcon}
-                caption1={"Heading to"}
-                caption2={"pickup/shop"}
+                caption1={"Picking up"}
+                caption2={"Shopping"}
                 width="45px"
                 height="45px"
                 action={() =>
-                  navigation.navigate("Messages_by_categories_View", {
-                    category: "issues_at_store",
-                    caption: "Issues at store",
+                  navigation.navigate("Clips_by_Operations_And_Status_View", {
+                    operation: "food_delivery",
+                    status_name: "Picking up / Shopping",
+                    caption: "Picking up / Shopping",
+                    // category: "issues_at_store",
+                    // caption: "Issues at store",
                   })
                 }
                 icon_bg_color={theme.colors.ui.primary}
               />
             </Spacer>
           </Container>
+          <Spacer position="top" size="small" />
           <Spacer position="top" size="small" />
           <Spacer position="top" size="small" />
           <Spacer position="top" size="small" />
@@ -133,18 +141,22 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
               <Status_CTA_component
                 Icon={DropOffIcon}
                 caption1={"Heading to"}
-                caption2={"pickup/shop"}
+                caption2={"dropp off"}
                 width="70px"
                 height="70px"
                 action={() =>
-                  navigation.navigate("Messages_by_categories_View", {
-                    category: "issues_at_store",
-                    caption: "Issues at store",
+                  navigation.navigate("Clips_by_Operations_And_Status_View", {
+                    operation: "food_delivery",
+                    status_name: "Heading to drop off",
+                    caption: "Heading to drop off",
+                    // category: "issues_at_store",
+                    // caption: "Issues at store",
                   })
                 }
               />
             </Spacer>
           </Container>
+          <Spacer position="top" size="small" />
           <Spacer position="top" size="small" />
           <Spacer position="top" size="small" />
           <Spacer position="top" size="small" />
@@ -185,14 +197,18 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
                 width="70px"
                 height="70px"
                 action={() =>
-                  navigation.navigate("Messages_by_categories_View", {
-                    category: "issues_at_store",
-                    caption: "Issues at store",
+                  navigation.navigate("Clips_by_Operations_And_Status_View", {
+                    operation: "ride_share",
+                    status_name: "Heading to Passenger",
+                    caption: "Heading to Passenger",
+                    // category: "issues_at_store",
+                    // caption: "Issues at store",
                   })
                 }
               />
             </Spacer>
           </Container>
+          <Spacer position="top" size="small" />
           <Spacer position="top" size="small" />
           <Spacer position="top" size="small" />
           <Spacer position="top" size="small" />
@@ -215,15 +231,19 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
                 width="50px"
                 height="50px"
                 action={() =>
-                  navigation.navigate("Messages_by_categories_View", {
-                    category: "issues_at_store",
-                    caption: "Issues at store",
+                  navigation.navigate("Clips_by_Operations_And_Status_View", {
+                    operation: "ride_share",
+                    status_name: "Close to Passenger",
+                    caption: "Close to Passenger",
+                    // category: "issues_at_store",
+                    // caption: "Issues at store",
                   })
                 }
                 icon_bg_color={theme.colors.ui.primary}
               />
             </Spacer>
           </Container>
+          <Spacer position="top" size="small" />
           <Spacer position="top" size="small" />
           <Spacer position="top" size="small" />
           <Spacer position="top" size="small" />
@@ -241,14 +261,17 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
             <Spacer position="left" size="extraLarge">
               <Status_CTA_component
                 Icon={locationIcon}
-                caption1={"At pickup"}
+                caption1={"At passenger`s"}
                 caption2={"location"}
                 width="45px"
                 height="45px"
                 action={() =>
-                  navigation.navigate("Messages_by_categories_View", {
-                    category: "issues_at_store",
-                    caption: "Issues at store",
+                  navigation.navigate("Clips_by_Operations_And_Status_View", {
+                    operation: "ride_share",
+                    status_name: "At Passengers location",
+                    caption: "At Passengers location",
+                    // category: "issues_at_store",
+                    // caption: "Issues at store",
                   })
                 }
                 color="red"

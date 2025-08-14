@@ -10,6 +10,7 @@ import { Text_Clips_Navigator } from "./text_clips.navigator";
 import KeyBoardIcon from "../../../assets/my-icons/keyboard.svg";
 import MessagesIcon from "../../../assets/my-icons/Messages_icon.svg";
 import MicIcon from "../../../assets/my-icons/micIcon.svg";
+import ClipsIcon from "../../../assets/my-icons/categories_icon.svg";
 
 import { theme } from "../theme";
 
@@ -78,20 +79,21 @@ export const AppNavigator = () => {
         component={Text_Clips_Navigator}
         listeners={tabBarListeners}
         options={{
-          title: "Home",
+          title: "Text clips",
           tabBarIcon: ({ color }) => (
-            <MicIcon width={30} height={30} fill={color} />
+            <MessagesIcon width={30} height={30} fill={color} />
           ),
         }}
       />
       <Tab.Screen
         name="Messages"
-        component={Messages_Navigator}
+        // component={Messages_Navigator}
+        component={HomeNavigator}
         listeners={tabBarListeners}
         options={{
-          title: "Messages",
+          title: "Voice & Recents",
           tabBarIcon: ({ color }) => (
-            <MessagesIcon width={35} height={35} fill={color} />
+            <MicIcon width={25} height={25} fill={color} />
           ),
         }}
       />
@@ -102,7 +104,7 @@ export const AppNavigator = () => {
         options={{
           title: "Type",
           tabBarIcon: ({ color }) => (
-            <KeyBoardIcon width={30} height={30} fill={color} />
+            <KeyBoardIcon width={25} height={25} fill={color} />
           ),
         }}
       />
