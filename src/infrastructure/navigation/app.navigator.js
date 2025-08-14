@@ -5,6 +5,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { HomeNavigator } from "./home.navigator";
 import { Messages_Navigator } from "./messages.navigator";
 import { Type_Message_Navigator } from "./type_message.navigator";
+import { Text_Clips_Navigator } from "./text_clips.navigator";
 
 import KeyBoardIcon from "../../../assets/my-icons/keyboard.svg";
 import MessagesIcon from "../../../assets/my-icons/Messages_icon.svg";
@@ -74,7 +75,7 @@ export const AppNavigator = () => {
     >
       <Tab.Screen
         name="Home"
-        component={HomeNavigator}
+        component={Text_Clips_Navigator}
         listeners={tabBarListeners}
         options={{
           title: "Home",
