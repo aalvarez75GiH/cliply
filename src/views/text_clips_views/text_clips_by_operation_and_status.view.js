@@ -20,7 +20,7 @@ import {
 import { HomeContext } from "../../infrastructure/services/home/home.context";
 import { MessagesContext } from "../../infrastructure/services/messages/messages.context";
 
-export default function Clips_by_Operations_And_Status_View({
+export default function Text_Clips_by_Operations_And_Status_View({
   navigation,
   route,
 }) {

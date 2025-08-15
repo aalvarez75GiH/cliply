@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { HomeNavigator } from "./home.navigator";
+import { Voice_and_recent_navigator } from "./voice_recent.navigator";
 import { Messages_Navigator } from "./messages.navigator";
 import { Type_Message_Navigator } from "./type_message.navigator";
 import { Text_Clips_Navigator } from "./text_clips.navigator";
@@ -10,9 +11,6 @@ import { Text_Clips_Navigator } from "./text_clips.navigator";
 import KeyBoardIcon from "../../../assets/my-icons/keyboard.svg";
 import MessagesIcon from "../../../assets/my-icons/Messages_icon.svg";
 import MicIcon from "../../../assets/my-icons/micIcon.svg";
-import ClipsIcon from "../../../assets/my-icons/categories_icon.svg";
-
-import { theme } from "../theme";
 
 const Tab = createBottomTabNavigator();
 
@@ -88,7 +86,7 @@ export const AppNavigator = () => {
       <Tab.Screen
         name="Messages"
         // component={Messages_Navigator}
-        component={HomeNavigator}
+        component={Voice_and_recent_navigator}
         listeners={tabBarListeners}
         options={{
           title: "Voice & Recents",

@@ -21,20 +21,21 @@ export const Main_mic_CTA_component = ({
   return (
     <Container
       width="95%"
-      height="60%"
+      height="85%"
       color={theme.colors.bg.screens_bg}
       direction="row"
       align="center"
       justify={recordingStatus ? "center" : "flex-start"}
-      border_radius="100px"
+      border_radius={recordingStatus === "idle" ? "20px" : "70px"}
     >
       {recordingStatus === "idle" && (
         <>
           <Spacer position="left" size="medium" />
           <Action_Container
-            width="60px"
-            height="60px"
-            color={theme.colors.ui.ctas_bg_dark}
+            width="95px"
+            height="95px"
+            //color={theme.colors.ui.ctas_bg_dark}
+            color={theme.colors.ui.success}
             border_radius="100px"
             onPress={action1}
             style={{
@@ -45,41 +46,45 @@ export const Main_mic_CTA_component = ({
               elevation: 5, // Android shadow
             }}
           >
-            <Main_mic_icon width="35px" height="35px" fill="#FFFFFF" />
+            <Main_mic_icon width="50px" height="50px" fill="#FFFFFF" />
           </Action_Container>
           <Container
-            width="82%"
+            width="70%"
             height="90%"
             color={theme.colors.bg.screens_bg}
+            //color={"blue"}
             direction="column"
             align="center"
             justify="center"
-            style={{
-              borderTopRightRadius: 100,
-              borderBottomRightRadius: 100,
-            }}
+            // style={{
+            //   borderTopRightRadius: 100,
+            //   borderBottomRightRadius: 100,
+            // }}
           >
+            <Spacer position="top" size="large" />
             <Container
               width="92%"
-              height="42%"
+              height="20%"
               color={theme.colors.bg.screens_bg}
               // color={"green"}
               justify="center"
               align="flex-start"
               border_radius="10px"
             >
-              <Text variant="dm_sans_bold_16">{caption_line_1}</Text>
+              <Text variant="dm_sans_bold_18">{caption_line_1}</Text>
             </Container>
             <Container
               width="92%"
-              height="42%"
+              height="40%"
               color={theme.colors.bg.screens_bg}
               // color={"blue"}
               justify="center"
               align="flex-start"
               border_radius="10px"
             >
-              <Text variant="dm_sans_bold_16">{caption_line_2}</Text>
+              <Text variant="dm_sans_bold_16_disable_not_active">
+                {caption_line_2}
+              </Text>
             </Container>
           </Container>
         </>
@@ -94,7 +99,7 @@ export const Main_mic_CTA_component = ({
           />
           <Container
             width="60%"
-            height="90%"
+            height="100%"
             color={theme.colors.bg.screens_bg}
             // color="#FAD"
             direction="row"

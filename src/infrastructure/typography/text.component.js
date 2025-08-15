@@ -131,6 +131,11 @@ const menu_sub_title_text_2 = (theme) => `
         color: ${theme.colors.text.primary};
     `;
 // ****************************************************************************
+const dm_sans_bold_20 = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_bold_20};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.primary};
+    `;
 const dm_sans_bold_18 = (theme) => `
     font-size: ${theme.fontSizes.dm_sans_bold_18};
     font-family: ${theme.fonts.bold};
@@ -198,6 +203,7 @@ const variants = {
   menu_sub_title_text,
   menu_sub_title_text_2,
   message_tile_caption,
+  dm_sans_bold_20,
   dm_sans_bold_18,
   dm_sans_bold_18_white,
   dm_sans_bold_16,

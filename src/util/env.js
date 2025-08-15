@@ -11,4 +11,6 @@ export const environment = {
     "https://us-central1-cliplybe.cloudfunctions.net/transcriptionsEndPoint",
   usersEndPoint:
     "https://us-central1-cliplybe.cloudfunctions.net/usersEndPoint",
+  typeMessageEndPoint:
+    "https://us-central1-cliplybe.cloudfunctions.net/typeMessageEndPoint",
 };
