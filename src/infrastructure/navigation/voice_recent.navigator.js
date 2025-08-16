@@ -6,6 +6,7 @@ import Voice_and_recent_View from "../../views/voice_and_recent_views/voice_and_
 import RecentMessagesScreen from "../../views/home_views/recents_messages.view";
 import Menu_Screen from "../../views/home_views/menu.view"; // Assuming this is the correct import for the menu screen
 import Messages_by_Categories_Screen from "../../views/home_views/messages_by_categories.view"; // Assuming this is the correct import for the messages by categories screen
+import { Recent_Text_Clip_View } from "../../views/voice_and_recent_views/recent_text_clip.view";
 
 const VoiceStack = createNativeStackNavigator();
 
@@ -22,6 +23,10 @@ export const Voice_and_recent_navigator = () => {
       <VoiceStack.Screen
         name="Messages_by_categories_View"
         component={Messages_by_Categories_Screen}
+      />
+      <VoiceStack.Screen
+        name="Recent_Text_Clip_View"
+        component={Recent_Text_Clip_View}
       />
     </VoiceStack.Navigator>
   );

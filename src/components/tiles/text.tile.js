@@ -5,7 +5,7 @@ import { Container } from "../global_components/containers/general_containers.js
 import { theme } from "../../infrastructure/theme/index.js";
 import { Spacer } from "../global_components/optimized.spacer.component.js";
 
-export const Text_Tile = ({ caption_1, caption_2 }) => {
+export const Text_Tile = ({ caption_1, caption_2, color }) => {
   return (
     <>
       <Container
@@ -16,26 +16,22 @@ export const Text_Tile = ({ caption_1, caption_2 }) => {
         direction="row"
       >
         <Container
-          width="70%"
-          height="100%"
+          width="68%"
+          height="90%"
           // color="yellow"
           justify="center"
           align="flex-start"
-          color={theme.colors.bg.elements_bg}
+          //   color={theme.colors.bg.elements_bg}
+          color={color}
         >
-          <Spacer position="left" size="large">
-            <Spacer position="top" size="large" />
+          <Spacer position="left" size="extraLarge">
+            {/* <Spacer position="top" size="large" /> */}
             <Text variant="dm_sans_bold_20">{caption_1}</Text>
-            <Text variant="dm_sans_bold_14_disable_not_active">
-              {caption_2}
-            </Text>
+            {/* <Text variant="dm_sans_bold_14_disable_not_active"> */}
+            <Text variant="dm_sans_bold_14">{caption_2}</Text>
           </Spacer>
         </Container>
-        <Container
-          width="30%"
-          height="100%"
-          color={theme.colors.bg.elements_bg}
-        ></Container>
+        <Container width="30%" height="90%" color={color}></Container>
       </Container>
     </>
   );

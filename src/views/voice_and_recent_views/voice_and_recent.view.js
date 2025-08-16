@@ -12,6 +12,7 @@ import { Spacer } from "../../components/global_components/optimized.spacer.comp
 
 import { HomeContext } from "../../infrastructure/services/home/home.context";
 import { MessagesContext } from "../../infrastructure/services/messages/messages.context.js";
+import { VoiceRecentClipsContext } from "../../infrastructure/services/voice_recents/voice_recent.context.js";
 
 import { Voice_Recording_Component } from "../../components/operations_components/voice_recording.component.js";
 import { Loading_Spinner_area } from "../../components/global_components/global_loading_spinner_area.component.js";
@@ -31,10 +32,11 @@ export default function Voice_and_recent_View({ navigation }) {
     userData,
   } = useContext(HomeContext);
   const { recent_messages } = userData[0] || { recent_messages: [] };
-  const { renderRecentMessagesTile } = useContext(MessagesContext);
-
+  const { renderRecentClipsTile } = useContext(VoiceRecentClipsContext);
+  // const [recordingStatus, setRecordingStatus] = React.useState("idle");
+  // const [response, setResponse] = React.useState(null);
   return (
-    <SafeArea background_color={theme.colors.bg.screens_bg}>
+    <SafeArea background_color={theme.colors.bg.elements_bg}>
       <Container
         width="100%"
         height={"100%"}
@@ -43,39 +45,45 @@ export default function Voice_and_recent_View({ navigation }) {
         align="center"
       >
         <HomeHeader action={() => navigation.navigate("Menu_View")} />
-
+        <Container
+          width="100%"
+          height={"1%"}
+          color={theme.colors.bg.screens_bg}
+        />
         {!response && (
           <>
-            {/* <Container height={"5%"} /> */}
             <Voice_Recording_Component
               action1={() => startRecording()}
+              //action1={() => setRecordingStatus("listening")}
+              //action2={() => setRecordingStatus("idle")}
               action2={() => stopRecording()}
               action3={() => startTranscription()}
+              //action3={() => setRecordingStatus("transcribing")}
               recordingStatus={recordingStatus}
             />
           </>
         )}
 
-        <Spacer position="top" size="small" />
+        <Spacer position="top" size="medium" />
 
-        {/* {recordingStatus === "idle" && !response && <Categories_Area />} */}
         {!response && recordingStatus === "idle" && (
-          // <Categories_Area navigation={navigation} />
           <Container
             width="100%"
-            height={"66%"}
-            //color={theme.colors.bg.screens_bg}
-            color={"red"}
+            height={"70%"}
+            color={theme.colors.bg.screens_bg}
+            //color={"red"}
           >
             <Text_Tile
               caption_1={"Recent text clips"}
               caption_2={"Last 5 text clips created"}
+              color={theme.colors.ui.highlight_color_2}
             />
 
             <Container
               width="100%"
               height="80%"
               color={theme.colors.bg.screens_bg}
+              //color={"blue"}
             >
               {recent_messages.length > 0 && (
                 <>
@@ -84,7 +92,7 @@ export default function Voice_and_recent_View({ navigation }) {
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
                     data={recent_messages}
-                    renderItem={renderRecentMessagesTile}
+                    renderItem={renderRecentClipsTile}
                     keyExtractor={(item, id) => {
                       return item.message_id;
                     }}

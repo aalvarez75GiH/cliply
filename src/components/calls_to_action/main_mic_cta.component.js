@@ -21,19 +21,19 @@ export const Main_mic_CTA_component = ({
   return (
     <Container
       width="95%"
-      height="85%"
+      height="75%"
       color={theme.colors.bg.screens_bg}
       direction="row"
       align="center"
       justify={recordingStatus ? "center" : "flex-start"}
-      border_radius={recordingStatus === "idle" ? "20px" : "70px"}
+      border_radius={recordingStatus === "idle" ? "10px" : "70px"}
     >
       {recordingStatus === "idle" && (
         <>
           <Spacer position="left" size="medium" />
           <Action_Container
-            width="95px"
-            height="95px"
+            width="75px"
+            height="75px"
             //color={theme.colors.ui.ctas_bg_dark}
             color={theme.colors.ui.success}
             border_radius="100px"
@@ -46,7 +46,7 @@ export const Main_mic_CTA_component = ({
               elevation: 5, // Android shadow
             }}
           >
-            <Main_mic_icon width="50px" height="50px" fill="#FFFFFF" />
+            <Main_mic_icon width="45px" height="45px" fill="#FFFFFF" />
           </Action_Container>
           <Container
             width="70%"
@@ -61,31 +61,20 @@ export const Main_mic_CTA_component = ({
             //   borderBottomRightRadius: 100,
             // }}
           >
-            <Spacer position="top" size="large" />
-            <Container
-              width="92%"
-              height="20%"
-              color={theme.colors.bg.screens_bg}
-              // color={"green"}
-              justify="center"
-              align="flex-start"
-              border_radius="10px"
-            >
+            <Spacer position="top" size="medium" />
+            <Spacer position="left" size="small">
               <Text variant="dm_sans_bold_18">{caption_line_1}</Text>
-            </Container>
-            <Container
-              width="92%"
-              height="40%"
-              color={theme.colors.bg.screens_bg}
-              // color={"blue"}
-              justify="center"
-              align="flex-start"
-              border_radius="10px"
-            >
-              <Text variant="dm_sans_bold_16_disable_not_active">
+            </Spacer>
+            <Spacer position="top" size="medium" />
+            <Spacer position="left" size="large">
+              <Text
+                variant="dm_sans_bold_16_disable_not_active"
+                style={{ lineHeight: 18 }}
+              >
                 {caption_line_2}
               </Text>
-            </Container>
+            </Spacer>
+            {/* </Container> */}
           </Container>
         </>
       )}

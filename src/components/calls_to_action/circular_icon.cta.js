@@ -20,12 +20,13 @@ export const Circular_Icon_CTA = ({
       justify="center"
       align="center"
       color={theme.colors.bg.screens_bg}
+      //color={"red"}
       onPress={action}
       border_radius={"100px"}
     >
       <Container
         width={"52%"}
-        height={"60%"}
+        height={"67%"}
         color={
           recordingStatus === "transcribing"
             ? theme.colors.ui.disabled

@@ -11,6 +11,9 @@ export const Squared_action_CTA_component = ({
   height = "12%",
   action,
   label = "Transcribe",
+  color = theme.colors.ui.primary,
+  text_variant = "transcripted_message_copied_caption",
+  icon_visible = true,
 }) => {
   return (
     <Action_Container
@@ -20,21 +23,27 @@ export const Squared_action_CTA_component = ({
       align="center"
       direction="row"
       // color={theme.colors.bg.screens_bg}
-      color={theme.colors.ui.primary}
+      color={color}
       // onPress={() => setRecordingStatus("idle")}
       onPress={action}
     >
       <Spacer position="left" size="large" />
-      <Spacer position="left" size="large" />
-      <Spacer position="left" size="medium" />
-      <Text variant="transcripted_message_copied_caption">{label}</Text>
-      <Spacer position="left" size="large" />
-      <Arrow_next_icon
-        width={20}
-        height={20}
-        fill={theme.colors.ui.secondary}
-        style={{ marginLeft: 10 }}
-      />
+      {icon_visible && (
+        <>
+          <Spacer position="left" size="large" />
+          <Spacer position="left" size="medium" />
+          <Spacer position="left" size="large" />
+        </>
+      )}
+      <Text variant={text_variant}>{label}</Text>
+      {icon_visible && (
+        <Arrow_next_icon
+          width={20}
+          height={20}
+          fill={theme.colors.ui.secondary}
+          style={{ marginLeft: 10 }}
+        />
+      )}
     </Action_Container>
   );
 };
