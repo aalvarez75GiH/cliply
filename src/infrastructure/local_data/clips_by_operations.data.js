@@ -27,6 +27,7 @@ export const food_delivery_operation_data = {
               language_detected: "ES",
               original_message:
                 "Hola, este es tu conductor aquí. Ten en cuenta que podría enviarte mensajes sobre tu orden, ¿ok?",
+              specific: "",
             },
           ],
         },
@@ -54,6 +55,7 @@ export const food_delivery_operation_data = {
               language_detected: "ES",
               original_message:
                 "Hola, estoy en el restaurante/tienda ahora recogiendo tu orden. Estaré en camino en breve.",
+              specific: "",
             },
             {
               message_id: "CLP_FD_OP_0003",
@@ -68,6 +70,7 @@ export const food_delivery_operation_data = {
               language_detected: "ES",
               original_message:
                 "Hola, este es tu conductor aquí. Ten en cuenta que podría enviarte mensajes sobre tu orden, ¿ok?",
+              specific: "",
             },
             {
               message_id: "CLP_FD_OP_0004",
@@ -82,6 +85,7 @@ export const food_delivery_operation_data = {
               language_detected: "EN",
               original_message:
                 "Hi. For some reasons here at the store they ran out of this product. I sent to you a substitute, can you check it out and confirm it or deny it?",
+              specific: "",
             },
             {
               message_id: "CLP_FD_OP_0005",
@@ -95,6 +99,7 @@ export const food_delivery_operation_data = {
               language_detected: "EN",
               original_message:
                 "I am wating for you to check out the substitutions i sent, thanks.",
+              specific: "",
             },
             {
               message_id: "CLP_FD_OP_0006",
@@ -109,6 +114,7 @@ export const food_delivery_operation_data = {
               language_detected: "ES",
               original_message:
                 "Hola. Por alguna razón aquí en el restaurante están teniendo problemas con tu pedido, te avisaré si lo solucionan, ¿ok?",
+              specific: "",
             },
             // Additional messages here...
           ],
@@ -137,6 +143,7 @@ export const food_delivery_operation_data = {
               language_detected: "ES",
               original_message:
                 "Hola, solo quería informarte que estoy en camino para entregar tu orden. Debería llegar pronto.",
+              specific: "",
             },
             {
               message_id: "CLP_FD_OP_0008",
@@ -147,6 +154,7 @@ export const food_delivery_operation_data = {
               used: 0,
               language_detected: "EN",
               original_message: "On my way, too much traffic",
+              specific: "",
             },
             {
               message_id: "CLP_FD_OP_0009",
@@ -160,6 +168,7 @@ export const food_delivery_operation_data = {
               language_detected: "ES",
               original_message:
                 "Hola. Por alguna razón no pude leer tu mensaje sobre los extras que necesitabas y ya estoy en camino a tu lugar, lo siento",
+              specific: "",
             },
             {
               message_id: "CLP_FD_OP_0010",
@@ -174,6 +183,7 @@ export const food_delivery_operation_data = {
               language_detected: "EN",
               original_message:
                 "Sorry, GPS is a little bit crazy right now and i can’t find your place. Can you elaborate more about where you live?",
+              specific: "",
             },
             {
               message_id: "CLP_FD_OP_0011",
@@ -188,6 +198,7 @@ export const food_delivery_operation_data = {
               language_detected: "EN",
               original_message:
                 "Hi. this is your driver here. Do you know if i have access to the building? Sometimes when is too late we are not allowed to come up.",
+              specific: "",
             },
             {
               message_id: "CLP_FD_OP_0012",
@@ -201,6 +212,7 @@ export const food_delivery_operation_data = {
               language_detected: "EN",
               original_message:
                 "Hi. I am on my way but actually i am very close, be ready just in case you need the food in your hands, ok?",
+              specific: "",
             },
             {
               message_id: "CLP_FD_OP_0013",
@@ -214,6 +226,7 @@ export const food_delivery_operation_data = {
               language_detected: "EN",
               original_message:
                 "Hi. This is your driver here. I am working in multiple orders at the same time, so i could be late, i am gonna try to be there soon ok?",
+              specific: "",
             },
             // Additional messages here...
           ],
@@ -251,6 +264,7 @@ export const ride_share_operation_data = {
               language_detected: "ES",
               original_message:
                 "Hola, este es tu conductor. Estoy en camino para recogerte ahora y debería llegar en breve.",
+              specific: "",
             },
             {
               message_id: "CLP_RS_OP_0002",
@@ -265,6 +279,7 @@ export const ride_share_operation_data = {
               language_detected: "EN",
               original_message:
                 "Look i need to put some gas in my car and use a restroom. didn’t have plans to go take such a long drive so i am doing that before picking you up, is that ok?",
+              specific: "",
             },
             {
               message_id: "CLP_0003",
@@ -279,6 +294,7 @@ export const ride_share_operation_data = {
               language_detected: "ES",
               original_message:
                 "Hola. Este es tu conductor. Por favor, no contenedores abiertos o comida sin empaquetar dentro del carro, ¿ok? Toda la comida debe mantenerse dentro de las cajas o contenedores, gracias",
+              specific: "",
             },
             {
               message_id: "CLP_RS_OP_0003",
@@ -293,6 +309,7 @@ export const ride_share_operation_data = {
               language_detected: "ES",
               original_message:
                 "Hola, tu conductor aquí. Solo un recordatorio, puedo llevar solo a 4 personas, ¿ok? Si son más de 4, siéntete libre de cancelar y solicitar un carro XL",
+              specific: "",
             },
             {
               message_id: "CLP_RS_OP_0004",
@@ -307,6 +324,7 @@ export const ride_share_operation_data = {
               language_detected: "EN",
               original_message:
                 "Hi, your driver here. I understand you are carrying a pet. Be sure its paws are clean ok?",
+              specific: "",
             },
             {
               message_id: "CLP_RS_OP_0005",
@@ -321,6 +339,7 @@ export const ride_share_operation_data = {
               language_detected: "EN",
               original_message:
                 "Hi. This is your driver. Please, not open containers or unpacked food inside of the car ok? All food must be kept inside of the boxes or containers, Thanks",
+              specific: "",
             },
             {
               message_id: "CLP_RS_OP_0006",
@@ -335,6 +354,7 @@ export const ride_share_operation_data = {
               language_detected: "EN",
               original_message:
                 "Hi. this is your driver here. Do you know if i have access to the building? Sometimes when is too late we are not allowed to come up.",
+              specific: "",
             },
           ],
         },
@@ -362,6 +382,7 @@ export const ride_share_operation_data = {
               language_detected: "ES",
               original_message:
                 "Hola, solo quería informarte que estoy cerca de tu ubicación y llegaré pronto.",
+              specific: "",
             },
             {
               message_id: "CLP_RS_OP_0008",
@@ -376,6 +397,7 @@ export const ride_share_operation_data = {
               language_detected: "EN",
               original_message:
                 "Hi. This is your driver here. be ready ok? There is too much traffic and parking could be very tricky",
+              specific: "",
             },
           ],
         },
@@ -403,6 +425,7 @@ export const ride_share_operation_data = {
               language_detected: "ES",
               original_message:
                 "Hola, he llegado al lugar de recogida. Por favor, sal cuando estés listo.",
+              specific: "",
             },
           ],
         },

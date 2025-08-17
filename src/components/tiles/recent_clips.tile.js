@@ -9,6 +9,7 @@ import {
   Action_Container,
 } from "../global_components/containers/general_containers.js";
 import { theme } from "../../infrastructure/theme/index.js";
+import { Spacer } from "../global_components/optimized.spacer.component.js";
 
 export const Recent_clips_Tile = ({
   item,
@@ -17,7 +18,7 @@ export const Recent_clips_Tile = ({
   onSelect,
 }) => {
   //   *******************************************************
-  const { summary_en, summary_es, message_en, message_es, message_id } = item;
+  const { summary_en, summary_es, message_id, specific } = item;
   console.log("ITEM:", JSON.stringify(item, null, 2));
 
   const isSelected = selectedItemId === message_id;
@@ -31,8 +32,8 @@ export const Recent_clips_Tile = ({
         height="130px"
         align="center"
         justify="flex-start"
-        //   color={theme.colors.bg.elements_bg}
-        color={"#FFE299"}
+        color={theme.colors.bg.elements_bg}
+        //color={"#FFE299"}
         //color={"red"}
         style={{
           shadowColor: "#000", // iOS shadow color
@@ -49,8 +50,8 @@ export const Recent_clips_Tile = ({
           align="center"
           justify="center"
           direction="row"
-          //color={theme.colors.bg.elements_bg}
-          color={"#FFE299"}
+          color={theme.colors.bg.elements_bg}
+          //color={"#FFE299"}
         >
           <Container
             width="100%"
@@ -59,6 +60,7 @@ export const Recent_clips_Tile = ({
             justify="center"
             direction="row"
             color={theme.colors.bg.elements_bg}
+            //color={"red"}
           >
             {globalLanguage === "ES" && (
               <Text
@@ -80,20 +82,93 @@ export const Recent_clips_Tile = ({
             )}
           </Container>
         </Container>
+        {/* {specific === "specific" && (
+          <Container
+            width="100%"
+            height="50%"
+            align="center"
+            justify="center"
+            // color={theme.colors.bg.elements_bg}
+            color={"green"}
+            direction="row"
+          >
+            <Text
+              variant="dm_sans_bold_14"
+              numberOfLines={1}
+              style={{ textAlign: "right", textDecorationLine: "underline" }}
+            >
+              Specific
+            </Text>
+          </Container>
+        )} */}
         <Container
           width="100%"
           height="50%"
           align="center"
-          justify="center"
+          justify="space-around"
           color={theme.colors.bg.elements_bg}
+          //   color={"blue"}
+          direction="row"
         >
-          <Text
-            variant="dm_sans_bold_14"
-            numberOfLines={1}
-            style={{ textAlign: "right", textDecorationLine: "underline" }}
+          {specific === "specific" ? (
+            <>
+              <Container
+                width="20%"
+                height="50%"
+                align="center"
+                justify="center"
+                color={theme.colors.ui.primary}
+                //color={"purple"}
+              >
+                <Text
+                  variant="dm_sans_bold_14_white"
+                  style={{ textAlign: "right" }}
+                >
+                  Specific
+                </Text>
+              </Container>
+            </>
+          ) : (
+            <Container
+              width="20%"
+              height="100%"
+              align="center"
+              justify="center"
+              //color={"purple"}
+              color={theme.colors.bg.elements_bg}
+            />
+          )}
+          <Container
+            width="20%"
+            height="100%"
+            align="center"
+            justify="center"
+            color={theme.colors.bg.elements_bg}
           >
-            View
-          </Text>
+            <Text
+              variant="dm_sans_bold_14_disable_not_active"
+              numberOfLines={1}
+              style={{ textAlign: "right", textDecorationLine: "underline" }}
+            >
+              View
+            </Text>
+          </Container>
+          <Container
+            width="30%"
+            height="100%"
+            align="center"
+            justify="center"
+            //            color={"lightblue"}
+            color={theme.colors.bg.elements_bg}
+          >
+            <Text
+              variant="dm_sans_bold_14_disable_not_active"
+              //numberOfLines={1}
+              style={{ textAlign: "right", textDecorationLine: "underline" }}
+            >
+              08/21/2023
+            </Text>
+          </Container>
         </Container>
       </Action_Container>
     </>
