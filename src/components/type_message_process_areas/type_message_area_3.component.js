@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Container } from "../global_components/containers/general_containers.js";
 import { theme } from "../../infrastructure/theme/index.js";
 import { Type_Message_Header } from "../headers/type_message.header";
+import { ExitHeader } from "../headers/exit_header.component.js";
 import { Squared_action_CTA_component } from "../calls_to_action/squared_action.cta";
 import { HomeHeader } from "../headers/home_header.component.js";
 import { Message_Input } from "../inputs/message.input.js";

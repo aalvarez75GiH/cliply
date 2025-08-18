@@ -8,14 +8,13 @@ import {
   Flex_Container,
   Container,
 } from "../../components/global_components/containers/general_containers";
-import { Message_Input } from "../../components/inputs/message.input";
-import { Squared_action_CTA_component } from "../../components/calls_to_action/squared_action.cta";
 import { TypeMessageContext } from "../../infrastructure/services/type_message/type_message.context";
 import { Type_message_process_area_1 } from "../../components/type_message_process_areas/type_message_area_1.component";
 import { Type_message_process_area_2 } from "../../components/type_message_process_areas/type_message_area_2.component";
 import { Type_message_process_area_3 } from "../../components/type_message_process_areas/type_message_area_3.component";
 export default function Type_Message_View() {
   const [textInputValue, setTextInputvalue] = useState("");
+
   const {
     type_message_request,
     isLoading,

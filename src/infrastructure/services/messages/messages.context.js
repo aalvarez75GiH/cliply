@@ -51,9 +51,6 @@ export const MessagesContextProvider = ({ children }) => {
         renderRecentMessagesTile,
         renderStoredMessagesTile,
         setSelectedItemId,
-        // setting_data_and_captions_to_messages,
-        // dataTorender,
-        // headers_caption,
       }}
     >
       {children}

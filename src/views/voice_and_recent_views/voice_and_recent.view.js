@@ -4,14 +4,10 @@ import { FlatList } from "react-native-gesture-handler";
 import { HomeHeader } from "../../components/headers/home_header.component.js";
 import { SafeArea } from "../../components/global_components/safe-area.component.js";
 import { theme } from "../../infrastructure/theme/index.js";
-import {
-  Container,
-  Scrollable_Container,
-} from "../../components/global_components/containers/general_containers.js";
+import { Container } from "../../components/global_components/containers/general_containers.js";
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
 
-import { HomeContext } from "../../infrastructure/services/home/home.context";
-import { MessagesContext } from "../../infrastructure/services/messages/messages.context.js";
+import { TextClipsContext } from "../../infrastructure/services/home/text_clips.context.js";
 import { VoiceRecentClipsContext } from "../../infrastructure/services/voice_recents/voice_recent.context.js";
 
 import { Voice_Recording_Component } from "../../components/operations_components/voice_recording.component.js";
@@ -23,16 +19,24 @@ import { Text_Tile } from "../../components/tiles/text.tile.js";
 
 export default function Voice_and_recent_View({ navigation }) {
   const {
+    //   startRecording,
+    //   recordingStatus,
+    //   response,
+    //   startTranscription,
+    //   setResponse,
+    //   stopRecording,
+    userData,
+  } = useContext(TextClipsContext);
+  const { recent_messages } = userData[0] || { recent_messages: [] };
+  const {
+    renderRecentClipsTile,
     startRecording,
     recordingStatus,
     response,
     startTranscription,
     setResponse,
     stopRecording,
-    userData,
-  } = useContext(HomeContext);
-  const { recent_messages } = userData[0] || { recent_messages: [] };
-  const { renderRecentClipsTile } = useContext(VoiceRecentClipsContext);
+  } = useContext(VoiceRecentClipsContext);
   // const [recordingStatus, setRecordingStatus] = React.useState("idle");
   // const [response, setResponse] = React.useState(null);
   return (

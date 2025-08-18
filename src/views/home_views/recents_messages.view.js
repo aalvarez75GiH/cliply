@@ -12,10 +12,10 @@ import { Container } from "../../components/global_components/containers/general
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
 import { Text } from "../../infrastructure/typography/text.component.js";
 import { Global_activity_indicator } from "../../components/global_components/global_activity_indicator_screen.component.js";
-import { get_User_Data_Request } from "../../infrastructure/services/home/home.requests.js";
+import { get_User_Data_Request } from "../../infrastructure/services/home/text_clips.requests.js";
 
 import { MessagesContext } from "../../infrastructure/services/messages/messages.context.js";
-import { HomeContext } from "../../infrastructure/services/home/home.context";
+import { HomeContext } from "../../infrastructure/services/home/text_clips.context.js";
 
 export default function RecentMessagesScreen({ navigation }) {
   const { renderRecentMessagesTile } = useContext(MessagesContext);

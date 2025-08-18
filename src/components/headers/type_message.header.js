@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
-import ExitIcon from "../../../assets/my-icons/exit_icon.svg";
 import PencilIcon from "../../../assets/my-icons/pencil.svg";
 import { Text } from "../../infrastructure/typography/text.component.js";
 import {
@@ -11,6 +10,7 @@ import {
 import { theme } from "../../infrastructure/theme/index.js";
 import MicIcon from "../../../assets/my-icons/micIcon.svg";
 import { Spacer } from "../global_components/optimized.spacer.component.js";
+import ExitIcon from "../../../assets/my-icons/exit_icon.svg";
 
 export const Type_Message_Header = ({ label = "" }) => {
   const navigation = useNavigation();
@@ -41,7 +41,7 @@ export const Type_Message_Header = ({ label = "" }) => {
           color={theme.colors.bg.elements_bg}
           onPress={() => navigation.navigate("Home")}
         >
-          <MicIcon width={30} height={30} fill={"#000000"} />
+          <ExitIcon width={20} height={20} fill={"#000000"} />
         </Action_Container>
       </Container>
       <Container

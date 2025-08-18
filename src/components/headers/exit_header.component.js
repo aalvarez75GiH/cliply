@@ -37,7 +37,7 @@ export const ExitHeader = ({ label = "" }) => {
         color={theme.colors.bg.elements_bg}
         onPress={() => navigation.goBack()}
       >
-        <ExitIcon width={25} height={25} fill={"#000000"} />
+        <ExitIcon width={20} height={20} fill={"#000000"} />
       </Action_Container>
     </Container>
   );

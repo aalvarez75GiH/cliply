@@ -12,7 +12,7 @@ import { Spacer } from "../../components/global_components/optimized.spacer.comp
 import { Container } from "../../components/global_components/containers/general_containers";
 import { Text } from "../../infrastructure/typography/text.component";
 
-import { HomeContext } from "../../infrastructure/services/home/home.context";
+import { HomeContext } from "../../infrastructure/services/home/text_clips.context";
 import { MessagesContext } from "../../infrastructure/services/messages/messages.context";
 
 export default function Messages_by_Categories_Screen({ navigation, route }) {

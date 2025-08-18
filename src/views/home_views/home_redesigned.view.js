@@ -7,7 +7,7 @@ import { theme } from "../../infrastructure/theme/index.js";
 import { Container } from "../../components/global_components/containers/general_containers.js";
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
 
-import { HomeContext } from "../../infrastructure/services/home/home.context";
+import { HomeContext } from "../../infrastructure/services/home/text_clips.context.js";
 
 import { Voice_transcription_Area } from "./home operations views/voice_transcription.area.js";
 import { Loading_Spinner_area } from "./home operations views/loading_spinner.area.js";
