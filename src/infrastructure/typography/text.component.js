@@ -141,6 +141,11 @@ const dm_sans_bold_20 = (theme) => `
     font-family: ${theme.fonts.bold};
     color: ${theme.colors.text.primary};
     `;
+const dm_sans_bold_20_white = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_bold_20};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.secondary};
+    `;
 const dm_sans_bold_18 = (theme) => `
     font-size: ${theme.fontSizes.dm_sans_bold_18};
     font-family: ${theme.fonts.bold};
@@ -220,6 +225,7 @@ const variants = {
   message_tile_caption,
   dm_sans_bold_24,
   dm_sans_bold_20,
+  dm_sans_bold_20_white,
   dm_sans_bold_18,
   dm_sans_bold_18_white,
   dm_sans_bold_16,

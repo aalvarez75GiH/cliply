@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import * as Clipboard from "expo-clipboard";
 import { ActivityIndicator } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { Text } from "../../infrastructure/typography/text.component.js";
 import { EN_ES_CTA_component } from "../calls_to_action/en_es.cta.js";
@@ -10,6 +11,7 @@ import {
 } from "../global_components/containers/general_containers.js";
 import CopyPaste_icon from "../../../assets/my-icons/copy_paste.svg";
 import { theme } from "../../infrastructure/theme/index.js";
+import { GlobalContext } from "../../infrastructure/services/global/global.context.js";
 
 export const Transcripted_Clips_Tile = ({
   message_en,
@@ -17,17 +19,23 @@ export const Transcripted_Clips_Tile = ({
   language_detected,
   width = "95%",
   height = "45%",
+  item_id = null,
 }) => {
-  console.log("MESAAGE EN:", message_en);
-  console.log("MESAAGE ES:", message_es);
   //   *******************************************************
   const [language, setLanguage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [copiedMessage, setCopiedMessage] = useState(false);
 
+  console.log("ITEM ID AT TRANSCRIPTED CLIP TILE:", item_id);
   useState(() => {
     setLanguage(language_detected);
   }, []);
+
+  const navigation = useNavigation();
+  const { userToDB } = useContext(GlobalContext);
+  console.log(userToDB.user_id);
+
+  const { user_id } = userToDB;
 
   const toggleLanguage = async () => {
     setIsLoading(true);
@@ -50,7 +58,6 @@ export const Transcripted_Clips_Tile = ({
       await Clipboard.setStringAsync(
         language === "EN" ? message_en : message_es
       );
-      console.log(`Copied to clipboard: ${message_en}`);
       setIsLoading(false);
     }, 300);
   };
@@ -64,9 +71,6 @@ export const Transcripted_Clips_Tile = ({
       setIsLoading(false);
     }, 300);
   };
-
-  console.log("LEGUANGE DETECTED: ", language_detected);
-  console.log("LEGUANGE LOCAL: ", language);
 
   //   *******************************************************
 
@@ -178,6 +182,13 @@ export const Transcripted_Clips_Tile = ({
                 justify="center"
                 direction="column"
                 color={theme.colors.bg.elements_bg}
+                onPress={() =>
+                  navigation.navigate("Delete_Item_View", {
+                    item_id: item_id,
+                    user_id: user_id,
+                    item_to_delete: "Text clip",
+                  })
+                }
               >
                 <Text
                   variant="dm_sans_bold_12_disable_not_active"
