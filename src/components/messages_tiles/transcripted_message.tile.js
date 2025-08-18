@@ -177,7 +177,14 @@ export const Transcripted_Messages_Tile = ({
                 direction="column"
                 color={theme.colors.bg.elements_bg}
               >
-                <Text variant="underlined_small_caption">Delete</Text>
+                <Text
+                  variant="dm_sans_bold_12_disable_not_active"
+                  style={{
+                    textDecorationLine: "underline",
+                  }}
+                >
+                  Delete
+                </Text>
               </Action_Container>
               <Container
                 width="30%"

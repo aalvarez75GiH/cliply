@@ -82,25 +82,7 @@ export const Recent_clips_Tile = ({
             )}
           </Container>
         </Container>
-        {/* {specific === "specific" && (
-          <Container
-            width="100%"
-            height="50%"
-            align="center"
-            justify="center"
-            // color={theme.colors.bg.elements_bg}
-            color={"green"}
-            direction="row"
-          >
-            <Text
-              variant="dm_sans_bold_14"
-              numberOfLines={1}
-              style={{ textAlign: "right", textDecorationLine: "underline" }}
-            >
-              Specific
-            </Text>
-          </Container>
-        )} */}
+
         <Container
           width="100%"
           height="50%"
@@ -111,23 +93,21 @@ export const Recent_clips_Tile = ({
           direction="row"
         >
           {specific === "specific" ? (
-            <>
-              <Container
-                width="20%"
-                height="50%"
-                align="center"
-                justify="center"
-                color={theme.colors.ui.primary}
-                //color={"purple"}
+            <Container
+              width="20%"
+              height="40%"
+              align="center"
+              justify="center"
+              color={theme.colors.ui.primary}
+              //color={"purple"}
+            >
+              <Text
+                variant="dm_sans_bold_12_white"
+                style={{ textAlign: "right" }}
               >
-                <Text
-                  variant="dm_sans_bold_14_white"
-                  style={{ textAlign: "right" }}
-                >
-                  Specific
-                </Text>
-              </Container>
-            </>
+                Specific
+              </Text>
+            </Container>
           ) : (
             <Container
               width="20%"
@@ -138,15 +118,16 @@ export const Recent_clips_Tile = ({
               color={theme.colors.bg.elements_bg}
             />
           )}
+          <Spacer position="left" size="small" />
           <Container
-            width="20%"
+            width="30%"
             height="100%"
             align="center"
             justify="center"
             color={theme.colors.bg.elements_bg}
           >
             <Text
-              variant="dm_sans_bold_14_disable_not_active"
+              variant="dm_sans_bold_12_disable_not_active"
               numberOfLines={1}
               style={{ textAlign: "right", textDecorationLine: "underline" }}
             >
@@ -162,11 +143,11 @@ export const Recent_clips_Tile = ({
             color={theme.colors.bg.elements_bg}
           >
             <Text
-              variant="dm_sans_bold_14_disable_not_active"
+              variant="dm_sans_bold_12_disable_not_active"
               //numberOfLines={1}
               style={{ textAlign: "right", textDecorationLine: "underline" }}
             >
-              08/21/2023
+              08/21/25
             </Text>
           </Container>
         </Container>

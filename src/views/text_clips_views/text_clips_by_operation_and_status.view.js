@@ -11,30 +11,22 @@ import { theme } from "../../infrastructure/theme/index";
 import { Spacer } from "../../components/global_components/optimized.spacer.component";
 import { Container } from "../../components/global_components/containers/general_containers";
 import { Text } from "../../infrastructure/typography/text.component";
-import { Categories_Messages_Sub_Header } from "../../components/headers/categories_messages_sub.header";
+import { Text_Clips_By_Status_Sub_Header } from "../../components/headers/text_clips_by_operations_and_status.header";
 import {
   food_delivery_operation_data,
   ride_share_operation_data,
 } from "../../infrastructure/local_data/clips_by_operations.data";
 
-import { HomeContext } from "../../infrastructure/services/home/home.context";
 import { MessagesContext } from "../../infrastructure/services/messages/messages.context";
 
 export default function Text_Clips_by_Operations_And_Status_View({
   navigation,
   route,
 }) {
-  const { renderStoredMessagesTile } = useContext(MessagesContext);
+  const { renderStoredMessagesTile, setSelectedItemId } =
+    useContext(MessagesContext);
   const { operation, status_name, caption } = route.params;
-  console.log("OPERATION COMING:", operation);
-  console.log("STATUS COMING:", status_name);
-  console.log("CAPTION COMING:", caption);
-  console.log("DATA FOUND:", food_delivery_operation_data);
-  //   console.log("DATA1 FOUND:", food_delivery_operation_data[0]);
-  console.log(
-    "DATA1 FOUND:",
-    food_delivery_operation_data.food_delivery_operation[0]
-  );
+
   const { food_delivery_operation } = food_delivery_operation_data;
   const { ride_share_operation } = ride_share_operation_data;
 
@@ -71,13 +63,20 @@ export default function Text_Clips_by_Operations_And_Status_View({
     } else {
       console.warn("User data or operation_status is missing.");
     }
+
+    // Cleanup function to set state when leaving the view
+    return () => {
+      setDataToRender([]); // Reset data or set any state you want
+      set_Headers_Caption(""); // Reset headers or perform other cleanup
+      setSelectedItemId(null); // Clear selected item ID on exit
+    };
   }, [food_delivery_operation, status_name]);
 
   return (
     <SafeArea background_color="#FFFFFF">
       <Flex_Container color={theme.colors.bg.screens_bg}>
         <ExitHeader navigation={navigation} />
-        <Categories_Messages_Sub_Header caption={headers_caption} />
+        <Text_Clips_By_Status_Sub_Header caption={headers_caption} />
         <MainContent
           color={theme.colors.bg.screens_bg}
           // color={"red"}

@@ -47,4 +47,5 @@ export const fontSizes = {
   dm_sans_bold_18: "18px",
   dm_sans_bold_16: "16px",
   dm_sans_bold_14: "14px",
+  dm_sans_bold_12: "12px",
 };

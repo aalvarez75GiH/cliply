@@ -11,7 +11,6 @@ import { theme } from "../../infrastructure/theme/index";
 import { Spacer } from "../../components/global_components/optimized.spacer.component";
 import { Container } from "../../components/global_components/containers/general_containers";
 import { Text } from "../../infrastructure/typography/text.component";
-import { Categories_Messages_Sub_Header } from "../../components/headers/categories_messages_sub.header";
 
 import { HomeContext } from "../../infrastructure/services/home/home.context";
 import { MessagesContext } from "../../infrastructure/services/messages/messages.context";

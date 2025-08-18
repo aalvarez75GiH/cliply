@@ -10,7 +10,7 @@ import { Text } from "../../infrastructure/typography/text.component.js";
 import { Container } from "../global_components/containers/general_containers.js";
 import { theme } from "../../infrastructure/theme/index.js";
 
-export const Categories_Messages_Sub_Header = ({ caption }) => {
+export const Text_Clips_By_Status_Sub_Header = ({ caption }) => {
   return (
     <Container
       width="100%"

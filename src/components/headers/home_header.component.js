@@ -37,6 +37,7 @@ export const HomeHeader = ({ action }) => {
         color={theme.colors.bg.elements_bg}
       >
         <Text variant="logo_caption">Cliply</Text>
+        {/* <Text variant="logo_caption">textClips</Text> */}
       </Container>
     </Container>
   );

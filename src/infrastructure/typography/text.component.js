@@ -181,6 +181,16 @@ const dm_sans_bold_14_disable_not_active = (theme) => `
         font-family: ${theme.fonts.bold};
         color: ${theme.colors.text.disabled};
         `;
+const dm_sans_bold_12_white = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_bold_12};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.secondary};
+    `;
+const dm_sans_bold_12_disable_not_active = (theme) => `
+        font-size: ${theme.fontSizes.dm_sans_bold_12};
+        font-family: ${theme.fonts.bold};
+        color: ${theme.colors.text.disabled};
+        `;
 
 const variants = {
   summary_tile_caption,
@@ -218,6 +228,8 @@ const variants = {
   dm_sans_bold_14,
   dm_sans_bold_14_white,
   dm_sans_bold_14_disable_not_active,
+  dm_sans_bold_12_white,
+  dm_sans_bold_12_disable_not_active,
 };
 
 export const Text = styled.Text`
