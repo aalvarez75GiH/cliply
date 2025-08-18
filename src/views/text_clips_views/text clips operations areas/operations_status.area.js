@@ -14,7 +14,7 @@ import PassengerIcon from "../../../../assets/my_colored_icons/passenger.svg";
 import locationIcon from "../../../../assets/my_colored_icons/location_icon.svg";
 import { Scrollable_Container } from "../../../components/global_components/containers/general_containers";
 import { Flex_Container } from "../../../components/global_components/containers/general_containers";
-import { Loading_Spinner_area } from "../../home_views/home operations views/loading_spinner.area";
+import { Loading_Spinner_area } from "../../../components/global_components/global_loading_spinner_area.component";
 
 export const Operations_Status_Area = ({ operation, isLoading }) => {
   const navigation = useNavigation();
