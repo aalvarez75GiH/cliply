@@ -5,7 +5,6 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { Navigation } from "./src/infrastructure/navigation";
 import { theme } from "./src/infrastructure/theme";
-import { MessagesContextProvider } from "./src/infrastructure/services/messages/messages.context";
 import { VoiceRecentClipsContextProvider } from "./src/infrastructure/services/voice_recents/voice_recent.context";
 import { TextClipsContextProvider } from "./src/infrastructure/services/home/text_clips.context";
 import { Type_Message_ContextProvider } from "./src/infrastructure/services/type_message/type_message.context";
@@ -37,11 +36,9 @@ export default function App() {
         <GlobalContextProvider>
           <TextClipsContextProvider>
             <VoiceRecentClipsContextProvider>
-              <MessagesContextProvider>
-                <Type_Message_ContextProvider>
-                  <Navigation />
-                </Type_Message_ContextProvider>
-              </MessagesContextProvider>
+              <Type_Message_ContextProvider>
+                <Navigation />
+              </Type_Message_ContextProvider>
             </VoiceRecentClipsContextProvider>
           </TextClipsContextProvider>
         </GlobalContextProvider>

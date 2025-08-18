@@ -17,7 +17,7 @@ import {
   ride_share_operation_data,
 } from "../../infrastructure/local_data/clips_by_operations.data";
 
-import { MessagesContext } from "../../infrastructure/services/messages/messages.context";
+// import { MessagesContext } from "../../infrastructure/services/messages/messages.context";
 import { TextClipsContext } from "../../infrastructure/services/home/text_clips.context";
 
 export default function Text_Clips_by_Operations_And_Status_View({
@@ -28,6 +28,7 @@ export default function Text_Clips_by_Operations_And_Status_View({
 
   const { renderStoredMessagesTile, setSelectedItemId } =
     useContext(TextClipsContext);
+
   const { food_delivery_operation } = food_delivery_operation_data;
   const { ride_share_operation } = ride_share_operation_data;
 

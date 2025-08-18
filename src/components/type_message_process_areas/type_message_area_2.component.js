@@ -4,9 +4,11 @@ import { useNavigation } from "@react-navigation/native";
 import { Container } from "../global_components/containers/general_containers.js";
 import { theme } from "../../infrastructure/theme/index.js";
 import { HomeHeader } from "../headers/home_header.component.js";
-import { Transcripted_Messages_Tile } from "../messages_tiles/transcripted_message.tile.js";
+import { Transcripted_Clips_Tile } from "../tiles/transcripted_clip.tile.js";
 import { Rounded_Ctas_Belt } from "../belts/rounded_ctas_belt.component.js";
 import { SemiRounded_Clear_CTA } from "../calls_to_action/semi_rounded_clear.cta.js";
+import { Squared_action_CTA_component } from "../calls_to_action/squared_action.cta.js";
+import { Spacer } from "../global_components/optimized.spacer.component.js";
 
 export const Type_message_process_area_2 = ({
   message_en,
@@ -14,47 +16,65 @@ export const Type_message_process_area_2 = ({
   original_message,
   language_detected,
   setResponse,
+  action_1,
+  action_2,
 }) => {
   const navigation = useNavigation();
   return (
     <>
       <HomeHeader />
-      {/* <Spacer position="top" size="small" /> */}
-      <Rounded_Ctas_Belt action_1={() => navigation.navigate("Recents_View")} />
+      <Spacer position="top" size="extraLarge" />
       <Container
         width={"100%"}
-        height={"73%"}
+        height={"80%"}
         color={theme.colors.bg.screens_bg}
         //color={"#FAD"}
         justify="center"
         align="center"
       >
-        <Transcripted_Messages_Tile
-          message_en={message_en}
-          message_es={message_es}
-          original_message={original_message}
-          language_detected={language_detected}
-        />
         <Container
           width={"100%"}
-          height={"12%"}
-          justify="center"
+          height={"60%"}
+          color={theme.colors.bg.screens_bg}
+          //color={"purple"}
           align="center"
-          direction="row"
-          //color={"red"}
-          style={{
-            position: "absolute",
-            top: 450,
-          }}
+          justify="flex-end"
+        >
+          <Transcripted_Clips_Tile
+            message_en={message_en}
+            message_es={message_es}
+            language_detected={language_detected}
+            width="95%"
+            height="70%"
+          />
+        </Container>
+
+        <Container
+          width={"100%"}
+          height={"40%"}
+          justify="flex-start"
+          align="center"
+          direction="column"
           color={theme.colors.bg.screens_bg}
         >
-          <SemiRounded_Clear_CTA
-            action={() => {
-              setResponse(null);
-              navigation.navigate("Home");
-            }}
+          <Squared_action_CTA_component
+            action={action_1}
+            label="Tap here to save text clip"
+            width="95%"
+            height={"20%"}
+            color={theme.colors.ui.primary}
+            text_variant={"dm_sans_bold_16_white"}
           />
-          {/* <SemiRounded_Clear_CTA action={() => setResponse(null)} /> */}
+          <Spacer position="top" size="medium" />
+          <Squared_action_CTA_component
+            label="Exit"
+            width="95%"
+            height={"20%"}
+            color={theme.colors.ui.highlight_color}
+            text_variant={"dm_sans_bold_16"}
+            icon_visible={false}
+            action={action_2}
+          />
         </Container>
       </Container>
       <Container

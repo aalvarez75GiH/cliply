@@ -11,10 +11,12 @@ import {
 import CopyPaste_icon from "../../../assets/my-icons/copy_paste.svg";
 import { theme } from "../../infrastructure/theme/index.js";
 
-export const Transcripted_Messages_Tile = ({
+export const Transcripted_Clips_Tile = ({
   message_en,
   message_es,
   language_detected,
+  width = "95%",
+  height = "45%",
 }) => {
   console.log("MESAAGE EN:", message_en);
   console.log("MESAAGE ES:", message_es);
@@ -89,8 +91,8 @@ export const Transcripted_Messages_Tile = ({
       )}
       {!isLoading && (
         <Container
-          width="95%"
-          height="45%"
+          width={width}
+          height={height}
           align="center"
           justify="center"
           color={theme.colors.bg.elements_bg}

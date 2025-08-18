@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback, useContext } from "react";
 import { useFocusEffect } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 // import { Type_Message_Header } from "../../components/headers/type_message.header";
 import { SafeArea } from "../../components/global_components/safe-area.component";
@@ -12,6 +13,7 @@ import { TypeMessageContext } from "../../infrastructure/services/type_message/t
 import { Type_message_process_area_1 } from "../../components/type_message_process_areas/type_message_area_1.component";
 import { Type_message_process_area_2 } from "../../components/type_message_process_areas/type_message_area_2.component";
 import { Type_message_process_area_3 } from "../../components/type_message_process_areas/type_message_area_3.component";
+
 export default function Type_Message_View() {
   const [textInputValue, setTextInputvalue] = useState("");
 
@@ -25,6 +27,7 @@ export default function Type_Message_View() {
   const { message_en, message_es, original_message, language_detected } =
     messageTranslated;
 
+  const navigation = useNavigation();
   console.log("MESSAGE EN AT TYPE MESSAGE VIEW:", message_en);
   console.log("MESSAGE ES AT TYPE MESSAGE VIEW:", message_es);
   console.log("ORIGINAL MESSAGE AT TYPE MESSAGE VIEW:", original_message);
@@ -59,6 +62,11 @@ export default function Type_Message_View() {
             original_message={original_message}
             language_detected={language_detected}
             setResponse={setResponse}
+            action_1={() => null}
+            action_2={() => {
+              setResponse(null);
+              navigation.navigate("Home");
+            }}
           />
         )}
         {!isLoading && !response && (

@@ -11,7 +11,7 @@ import {
 import CopyPaste_icon from "../../../assets/my-icons/copy_paste.svg";
 import { theme } from "../../infrastructure/theme/index.js";
 
-export const Recents_Messages_Tile = ({
+export const Stored_Clips_Tile = ({
   item,
   globalLanguage,
   selectedItemId,
@@ -115,9 +115,7 @@ export const Recents_Messages_Tile = ({
                   ? theme.colors.ui.success
                   : theme.colors.bg.elements_bg
               }
-              onPress={() =>
-                console.log("IT SHOULD BE SELECTED TO CATEGORIZE IT...")
-              }
+              onPress={() => (isSelected ? null : copy_message_action(item))}
             >
               {language === "ES" && (
                 <Text

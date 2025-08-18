@@ -6,10 +6,8 @@ import {
   Action_Container,
   Flex_Container,
 } from "../../components/global_components/containers/general_containers.js";
-import { Transcripted_Messages_Tile } from "../../components/messages_tiles/transcripted_message.tile.js";
+import { Transcripted_Clips_Tile } from "../../components/tiles/transcripted_clip.tile.js";
 import { theme } from "../../infrastructure/theme/index.js";
-import { SemiRounded_Clear_CTA } from "../../components/calls_to_action/semi_rounded_clear.cta.js";
-import { HomeHeader } from "../../components/headers/home_header.component.js";
 import { ExitHeader } from "../../components/headers/exit_header.component.js";
 import { SafeArea } from "../../components/global_components/safe-area.component.js";
 import { Squared_action_CTA_component } from "../../components/calls_to_action/squared_action.cta.js";
@@ -38,7 +36,7 @@ export const Recent_Text_Clip_View = (route) => {
             align="center"
             justify="center"
           >
-            <Transcripted_Messages_Tile
+            <Transcripted_Clips_Tile
               message_en={message_en}
               message_es={message_es}
               language_detected={language_detected}

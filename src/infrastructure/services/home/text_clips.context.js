@@ -5,7 +5,7 @@ import { GlobalContext } from "../global/global.context.js";
 import { get_User_Data_Request } from "./text_clips.requests.js";
 
 import { Spacer } from "../../../components/global_components/optimized.spacer.component.js";
-import { Stored_Messages_Tile } from "../../../components/messages_tiles/stored_messages.tile.js";
+import { Stored_Clips_Tile } from "../../../components/tiles/stored_clip.tile.js";
 
 export const TextClipsContext = createContext();
 
@@ -37,7 +37,7 @@ export const TextClipsContextProvider = ({ children }) => {
   const renderStoredMessagesTile = ({ item }) => {
     return (
       <Spacer position="bottom" size="medium">
-        <Stored_Messages_Tile
+        <Stored_Clips_Tile
           item={item}
           globalLanguage={globalLanguage}
           setIsLoading={setIsLoading}

@@ -137,7 +137,8 @@ export default function Voice_and_recent_View({ navigation }) {
             message_en={response.message_en}
             message_es={response.message_es}
             language_detected={response.language_detected}
-            action={() => setResponse(null)}
+            action_1={() => null}
+            action_2={() => setResponse(null)}
           />
         )}
       </Container>

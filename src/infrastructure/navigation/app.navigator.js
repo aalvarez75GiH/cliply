@@ -2,9 +2,7 @@ import { Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { HomeNavigator } from "./home.navigator";
 import { Voice_and_recent_navigator } from "./voice_recent.navigator";
-import { Messages_Navigator } from "./messages.navigator";
 import { Type_Message_Navigator } from "./type_message.navigator";
 import { Text_Clips_Navigator } from "./text_clips.navigator";
 

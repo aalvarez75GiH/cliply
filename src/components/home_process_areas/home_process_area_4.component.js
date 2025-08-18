@@ -5,7 +5,8 @@ import {
   Action_Container,
   Flex_Container,
 } from "../global_components/containers/general_containers.js";
-import { Transcripted_Messages_Tile } from "../messages_tiles/transcripted_message.tile.js";
+// import { Transcripted_Messages_Tile } from "../messages_tiles/transcripted_message.tile.js";
+import { Transcripted_Clips_Tile } from "../tiles/transcripted_clip.tile.js";
 import { theme } from "../../infrastructure/theme/index.js";
 import { SemiRounded_Clear_CTA } from "../calls_to_action/semi_rounded_clear.cta.js";
 
@@ -25,7 +26,7 @@ export const Home_process_area_4 = ({
         align="center"
         justify="center"
       >
-        <Transcripted_Messages_Tile
+        <Transcripted_Clips_Tile
           message_en={message_en}
           message_es={message_es}
           language_detected={language_detected}
