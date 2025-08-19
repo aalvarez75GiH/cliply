@@ -24,3 +24,22 @@ export const post_a_voice_message_Request = async (audioBuffer, user_id) => {
       return error;
     });
 };
+
+export const deleteRecentTextClipRequest = async (requestBody) => {
+  console.log(
+    "DATA TO DELETE AT REQUEST:",
+    JSON.stringify(requestBody, null, 2)
+  );
+
+  const { usersDataEndPoint } = environment;
+  return await axios
+    .delete(`${usersDataEndPoint}/deleteOneRecentMessageByUserID`, {
+      data: requestBody,
+    })
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error;
+    });
+};

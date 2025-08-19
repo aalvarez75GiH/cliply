@@ -1,4 +1,10 @@
-import React, { createContext, useState, useContext, useRef } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useRef,
+  useEffect,
+} from "react";
 import { Audio } from "expo-av";
 import * as FileSystem from "expo-file-system";
 import { Buffer } from "buffer";
@@ -6,6 +12,7 @@ import { Buffer } from "buffer";
 import { Spacer } from "../../../components/global_components/optimized.spacer.component";
 import { Recent_clips_Tile } from "../../../components/tiles/recent_clips.tile";
 import { post_a_voice_message_Request } from "../voice_recents/voice_recent.requests";
+import { deleteRecentTextClipRequest } from "../voice_recents/voice_recent.requests";
 
 import { GlobalContext } from "../global/global.context";
 import { TextClipsContext } from "../home/text_clips.context";
@@ -18,10 +25,17 @@ export const VoiceRecentClipsContextProvider = ({ children }) => {
   const [response, setResponse] = useState(null);
   const [recordingStatus, setRecordingStatus] = useState("idle");
   const [recording, setRecording] = useState(null);
+  const [deletedStatus, setDeletedStatus] = useState(false);
 
   const { gettingUserData } = useContext(TextClipsContext);
   const { globalLanguage, userToDB } = useContext(GlobalContext);
   const { user_id } = userToDB || {}; // Ensure userToDB is not undefined or null
+
+  useEffect(() => {
+    return () => {
+      setDeletedStatus(false);
+    };
+  }, [user_id]);
 
   const recordingRef = useRef(null);
 
@@ -108,6 +122,29 @@ export const VoiceRecentClipsContextProvider = ({ children }) => {
     );
   };
 
+  const delete_recent_clip = async (message_id, user_id) => {
+    console.log("Deleting item with ID:", message_id);
+    console.log("User ID for deletion:", user_id);
+
+    const data_to_delete = {
+      user_id: user_id,
+      item_id: message_id, // Rename `message_id` to `item_id`
+    };
+    const requestBody = {
+      data_to_delete: data_to_delete, // Nest `data_to_delete` inside another object
+    };
+
+    console.log(
+      "DATA TO DELETE AT CONTEXT:",
+      JSON.stringify(data_to_delete, null, 2)
+    );
+
+    const response = await deleteRecentTextClipRequest(requestBody);
+    console.log("DATA DELETED RESPONSE:", response.status);
+    response.status === 200 ? setDeletedStatus(true) : setDeletedStatus(false);
+    // Implement deletion logic here
+  };
+
   // This context is currently empty, but can be expanded in the future
   return (
     <VoiceRecentClipsContext.Provider
@@ -124,6 +161,9 @@ export const VoiceRecentClipsContextProvider = ({ children }) => {
         startTranscription,
         setResponse,
         stopRecording,
+        delete_recent_clip,
+        deletedStatus,
+        setDeletedStatus,
       }}
     >
       {children}

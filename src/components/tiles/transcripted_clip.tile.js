@@ -19,14 +19,14 @@ export const Transcripted_Clips_Tile = ({
   language_detected,
   width = "95%",
   height = "45%",
-  item_id = null,
+  message_id = null,
 }) => {
   //   *******************************************************
   const [language, setLanguage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [copiedMessage, setCopiedMessage] = useState(false);
 
-  console.log("ITEM ID AT TRANSCRIPTED CLIP TILE:", item_id);
+  console.log("ITEM ID AT TRANSCRIPTED CLIP TILE:", message_id);
   useState(() => {
     setLanguage(language_detected);
   }, []);
@@ -184,9 +184,9 @@ export const Transcripted_Clips_Tile = ({
                 color={theme.colors.bg.elements_bg}
                 onPress={() =>
                   navigation.navigate("Delete_Item_View", {
-                    item_id: item_id,
+                    item_id: message_id,
                     user_id: user_id,
-                    item_to_delete: "Text clip",
+                    item_to_delete_label: "Text clip",
                   })
                 }
               >

@@ -40,7 +40,7 @@ export const Recent_Text_Clip_View = (route) => {
               message_en={message_en}
               message_es={message_es}
               language_detected={language_detected}
-              item_id={message_id}
+              message_id={message_id}
             />
             <Container
               width={"100%"}
