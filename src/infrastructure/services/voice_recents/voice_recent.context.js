@@ -122,30 +122,42 @@ export const VoiceRecentClipsContextProvider = ({ children }) => {
     );
   };
 
-  const delete_recent_clip = async (message_id, user_id) => {
+  const delete_one_recent_clip = async (message_id, user_id) => {
     console.log("Deleting item with ID:", message_id);
     console.log("User ID for deletion:", user_id);
 
-    const data_to_delete = {
-      user_id: user_id,
-      item_id: message_id, // Rename `message_id` to `item_id`
-    };
-    const requestBody = {
-      data_to_delete: data_to_delete, // Nest `data_to_delete` inside another object
-    };
+    try {
+      setIsLoading(true);
+      const requestBody = {
+        data_to_delete: {
+          user_id: user_id,
+          item_id: message_id, // Rename `message_id` to `item_id`
+        },
+      };
+      const response = await deleteRecentTextClipRequest(requestBody);
 
-    console.log(
-      "DATA TO DELETE AT CONTEXT:",
-      JSON.stringify(data_to_delete, null, 2)
-    );
-
-    const response = await deleteRecentTextClipRequest(requestBody);
-    console.log("DATA DELETED RESPONSE:", response.status);
-    response.status === 200 ? setDeletedStatus(true) : setDeletedStatus(false);
-    // Implement deletion logic here
+      if (response.status === 404) {
+        setDeletedStatus(false);
+        gettingUserData(user_id);
+        console.log("No matching record found to delete.");
+      }
+      if (response.status === 500) {
+        setDeletedStatus(false);
+        console.log("An error occurred while deleting the recent message.");
+      }
+      if (response.status === 200) {
+        console.log("Item deleted successfully.");
+        setDeletedStatus(true);
+        gettingUserData(user_id);
+      }
+    } catch (error) {
+      console.error("Error deleting item:", error);
+      setDeletedStatus(false);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  // This context is currently empty, but can be expanded in the future
   return (
     <VoiceRecentClipsContext.Provider
       value={{
@@ -161,7 +173,7 @@ export const VoiceRecentClipsContextProvider = ({ children }) => {
         startTranscription,
         setResponse,
         stopRecording,
-        delete_recent_clip,
+        delete_one_recent_clip,
         deletedStatus,
         setDeletedStatus,
       }}

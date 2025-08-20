@@ -13,29 +13,9 @@ import { VoiceRecentClipsContext } from "../../infrastructure/services/voice_rec
 
 export default function Delete_Item_View({ route }) {
   const { item_id, user_id, item_to_delete_label } = route.params;
-  const { delete_recent_clip, deletedStatus, setDeletedStatus } = useContext(
-    VoiceRecentClipsContext
-  );
+  const { delete_one_recent_clip, deletedStatus, setDeletedStatus, isLoading } =
+    useContext(VoiceRecentClipsContext);
   const navigation = useNavigation();
-
-  const [isLoading, setIsLoading] = useState(false);
-
-  const deletingItemProcess = async (item_id, user_id) => {
-    setIsLoading(true);
-    setTimeout(async () => {
-      try {
-        await delete_recent_clip(item_id, user_id);
-        // navigation.goBack();
-      } catch (error) {
-        console.error("Error deleting item:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }, 1500);
-  };
-
-  console.log("Delete_Item_View: item_id:", item_id);
-  console.log("USER ID AT DELETE VIEW:", user_id);
 
   return (
     <SafeArea background_color={theme.colors.bg.elements_bg}>
@@ -60,7 +40,7 @@ export default function Delete_Item_View({ route }) {
             justify="center"
           >
             <Delete_Plus_Label_CTA
-              action_1={() => deletingItemProcess(item_id, user_id)}
+              action_1={() => delete_one_recent_clip(item_id, user_id)}
               action_2={() => navigation.goBack()}
               item_to_delete_label={item_to_delete_label}
               user_id={user_id}
@@ -89,7 +69,8 @@ export default function Delete_Item_View({ route }) {
             //   border_radius="60px"
             onPress={() => {
               setDeletedStatus(false);
-              navigation.goBack();
+              //   navigation.goBack();
+              navigation.popToTop();
             }}
             style={{
               shadowColor: "#000", // iOS shadow color

@@ -57,11 +57,11 @@ export const Recent_Text_Clip_View = (route) => {
             >
               <Squared_action_CTA_component
                 action={null}
-                label="Tap here to save text clip"
+                label="Save text clip"
                 width="95%"
                 height={"65%"}
                 color={theme.colors.ui.primary}
-                text_variant={"dm_sans_bold_18_white"}
+                text_variant={"dm_sans_bold_16_white"}
               />
               <Spacer position="top" size="medium" />
               <Squared_action_CTA_component
@@ -69,11 +69,10 @@ export const Recent_Text_Clip_View = (route) => {
                 width="95%"
                 height={"65%"}
                 color={theme.colors.ui.highlight_color}
-                text_variant={"dm_sans_bold_18"}
+                text_variant={"dm_sans_bold_16"}
                 icon_visible={false}
                 action={() => navigation.goBack()}
               />
-              {/* <SemiRounded_Clear_CTA action={null} /> */}
             </Container>
           </Container>
         </Container>

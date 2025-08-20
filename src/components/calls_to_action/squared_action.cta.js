@@ -2,7 +2,10 @@ import React from "react";
 
 import { Text } from "../../infrastructure/typography/text.component";
 import { theme } from "../../infrastructure/theme/index";
-import { Action_Container } from "../global_components/containers/general_containers";
+import {
+  Action_Container,
+  Container,
+} from "../global_components/containers/general_containers";
 import Arrow_next_icon from "../../../assets/my-icons/arrow_next_icon.svg";
 import { Spacer } from "../global_components/optimized.spacer.component";
 
@@ -27,23 +30,43 @@ export const Squared_action_CTA_component = ({
       // onPress={() => setRecordingStatus("idle")}
       onPress={action}
     >
-      <Spacer position="left" size="large" />
-      {icon_visible && (
-        <>
-          <Spacer position="left" size="large" />
-          <Spacer position="left" size="medium" />
-          <Spacer position="left" size="large" />
-        </>
-      )}
-      <Text variant={text_variant}>{label}</Text>
-      {icon_visible && (
-        <Arrow_next_icon
-          width={20}
-          height={20}
-          fill={theme.colors.ui.secondary}
-          style={{ marginLeft: 10 }}
-        />
-      )}
+      <Container
+        width="20%"
+        height="100%"
+        justify="center"
+        align="center"
+        direction="row"
+        color={color}
+      />
+      <Container
+        width="60%"
+        height="100%"
+        justify="center"
+        align="center"
+        direction="row"
+        color={color}
+        // color="green"
+      >
+        <Text variant={text_variant}>{label}</Text>
+      </Container>
+      <Container
+        width="20%"
+        height="100%"
+        justify="center"
+        align="center"
+        direction="row"
+        color={color}
+        // color="blue"
+      >
+        {icon_visible && (
+          <Arrow_next_icon
+            width={20}
+            height={20}
+            fill={theme.colors.ui.secondary}
+            style={{ marginLeft: 10 }}
+          />
+        )}
+      </Container>
     </Action_Container>
   );
 };
