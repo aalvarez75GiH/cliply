@@ -40,7 +40,9 @@
     "react-native-svg-transformer": "^1.5.1",
     "styled-components": "^6.1.19",
     "uuid": "^11.1.0",
-    "uuidv4": "^6.2.13"
+    "uuidv4": "^6.2.13",
+    "expo-image": "~2.4.0",
+    "expo-asset": "~11.1.7"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

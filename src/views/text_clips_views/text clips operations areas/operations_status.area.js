@@ -1,23 +1,26 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import { theme } from "../../../infrastructure/theme";
 import { Container } from "../../../components/global_components/containers/general_containers";
-import { Text } from "../../../infrastructure/typography/text.component";
 import { Spacer } from "../../../components/global_components/optimized.spacer.component";
-import { Status_CTA_component } from "../../../components/calls_to_action/status.cta";
+import { Status_CTA_PNG } from "../../../components/calls_to_action/status_cta_png.cta";
 
-import AutoIcon from "../../../../assets/my_colored_icons/auto_icon.svg";
-import ShopIcon from "../../../../assets/my_colored_icons/merchant_store.svg";
-import DropOffIcon from "../../../../assets/my_colored_icons/dropoff_icon.svg";
-import PassengerIcon from "../../../../assets/my_colored_icons/passenger.svg";
-import locationIcon from "../../../../assets/my_colored_icons/location_icon.svg";
 import { Scrollable_Container } from "../../../components/global_components/containers/general_containers";
 import { Flex_Container } from "../../../components/global_components/containers/general_containers";
 import { Loading_Spinner_area } from "../../../components/global_components/global_loading_spinner_area.component";
+import { Operations_Status_Connector_Line } from "../../../components/global_components/operations_status_connector_line.component";
 
 export const Operations_Status_Area = ({ operation, isLoading }) => {
   const navigation = useNavigation();
+
+  const image_source_1 = require("../../../../assets/illustrations/heading_to_pickup.png");
+  const image_source_2 = require("../../../../assets/illustrations/at restaurant-shopping.png");
+  const image_source_3 = require("../../../../assets/illustrations/heading to drop off.png");
+  const image_source_4 = require("../../../../assets/illustrations/heading to passenger.png");
+  const image_source_5 = require("../../../../assets/illustrations/close to passenger.png");
+  const image_source_6 = require("../../../../assets/illustrations/at pickUp location.png");
+
   return (
     <Flex_Container
       width="100%"
@@ -61,50 +64,43 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
           {/* ****************************************************************** */}
           <Container
             width="100%"
-            height={"25%"}
+            height={"auto"}
             justify="flex-start"
             color={theme.colors.bg.elements_bg}
-            //color={"red"}
+            //color={"green"}
             align="center"
             direction="row"
           >
-            <Spacer position="left" size="extraLarge">
-              <Status_CTA_component
-                Icon={AutoIcon}
+            <Spacer position="left" size="medium">
+              <Status_CTA_PNG
                 caption1={"Heading to"}
                 caption2={"pickup/shop"}
-                width="70px"
-                height="70px"
                 action={() =>
                   navigation.navigate("Clips_by_Operations_And_Status_View", {
                     operation: "food_delivery",
                     status_name: "Heading to pickup/shop",
                     caption: "Heading to pickup/shop",
-                    // category: "issues_at_store",
-                    // caption: "Issues at store",
                   })
                 }
+                inverted={false}
+                image_source={image_source_1}
               />
             </Spacer>
           </Container>
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
+          <Operations_Status_Connector_Line side="right" />
+
           {/* ****************************************************************** */}
           <Container
             width="100%"
-            height={"25%"}
+            height={"auto"}
             justify="flex-end"
             color={theme.colors.bg.elements_bg}
-            //color={"red"}
+            //color={"blue"}
             align="center"
             direction="row"
           >
-            <Spacer position="right" size="extraLarge">
-              <Status_CTA_component
-                Icon={ShopIcon}
+            <Spacer position="right" size="medium">
+              <Status_CTA_PNG
                 caption1={"Picking up"}
                 caption2={"Shopping"}
                 width="45px"
@@ -114,32 +110,29 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
                     operation: "food_delivery",
                     status_name: "Picking up / Shopping",
                     caption: "Picking up / Shopping",
-                    // category: "issues_at_store",
-                    // caption: "Issues at store",
                   })
                 }
                 icon_bg_color={theme.colors.ui.primary}
+                inverted={true}
+                image_source={image_source_2}
               />
             </Spacer>
           </Container>
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
+
+          <Operations_Status_Connector_Line side="left" />
+
           {/* ****************************************************************** */}
           <Container
             width="100%"
-            height={"25%"}
+            height={"auto"}
             justify="flex-start"
             color={theme.colors.bg.elements_bg}
             //color={"red"}
             align="center"
             direction="row"
           >
-            <Spacer position="left" size="extraLarge">
-              <Status_CTA_component
-                Icon={DropOffIcon}
+            <Spacer position="left" size="medium">
+              <Status_CTA_PNG
                 caption1={"Heading to"}
                 caption2={"dropp off"}
                 width="70px"
@@ -149,17 +142,22 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
                     operation: "food_delivery",
                     status_name: "Heading to drop off",
                     caption: "Heading to drop off",
-                    // category: "issues_at_store",
-                    // caption: "Issues at store",
                   })
                 }
+                image_source={image_source_3}
+                //image_source={require("../../../../assets/illustrations/heading to drop off.png")}
               />
             </Spacer>
           </Container>
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
+          <Container
+            width="100%"
+            height={"5%"}
+            justify="center"
+            color={theme.colors.bg.elements_bg}
+            //color={"red"}
+            align="center"
+            direction="row"
+          />
         </Scrollable_Container>
       ) : operation === "ride_share" ? (
         <Scrollable_Container
@@ -182,16 +180,15 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
           {/* ****************************************************************** */}
           <Container
             width="100%"
-            height={"25%"}
+            height={"auto"}
             justify="flex-start"
             color={theme.colors.bg.elements_bg}
             //color={"red"}
             align="center"
             direction="row"
           >
-            <Spacer position="left" size="extraLarge">
-              <Status_CTA_component
-                Icon={AutoIcon}
+            <Spacer position="left" size="medium">
+              <Status_CTA_PNG
                 caption1={"Heading to"}
                 caption2={"Passenger"}
                 width="70px"
@@ -201,31 +198,26 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
                     operation: "ride_share",
                     status_name: "Heading to Passenger",
                     caption: "Heading to Passenger",
-                    // category: "issues_at_store",
-                    // caption: "Issues at store",
                   })
                 }
+                image_source={image_source_4}
               />
             </Spacer>
           </Container>
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
+
+          <Operations_Status_Connector_Line side="right" />
           {/* ****************************************************************** */}
           <Container
             width="100%"
-            height={"25%"}
+            height={"auto"}
             justify="flex-end"
             color={theme.colors.bg.elements_bg}
             //color={"red"}
             align="center"
             direction="row"
           >
-            <Spacer position="right" size="extraLarge">
-              <Status_CTA_component
-                Icon={PassengerIcon}
+            <Spacer position="right" size="medium">
+              <Status_CTA_PNG
                 caption1={"Close to"}
                 caption2={"Passenger"}
                 width="50px"
@@ -235,32 +227,28 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
                     operation: "ride_share",
                     status_name: "Close to Passenger",
                     caption: "Close to Passenger",
-                    // category: "issues_at_store",
-                    // caption: "Issues at store",
                   })
                 }
                 icon_bg_color={theme.colors.ui.primary}
+                inverted={true}
+                image_source={image_source_5}
               />
             </Spacer>
           </Container>
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
+
+          <Operations_Status_Connector_Line side="left" />
           {/* ****************************************************************** */}
           <Container
             width="100%"
-            height={"25%"}
+            height={"auto"}
             justify="flex-start"
             color={theme.colors.bg.elements_bg}
             //color={"red"}
             align="center"
             direction="row"
           >
-            <Spacer position="left" size="extraLarge">
-              <Status_CTA_component
-                Icon={locationIcon}
+            <Spacer position="left" size="medium">
+              <Status_CTA_PNG
                 caption1={"At passenger`s"}
                 caption2={"location"}
                 width="45px"
@@ -270,17 +258,22 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
                     operation: "ride_share",
                     status_name: "At Passengers location",
                     caption: "At Passengers location",
-                    // category: "issues_at_store",
-                    // caption: "Issues at store",
                   })
                 }
                 color="red"
+                image_source={image_source_6}
               />
             </Spacer>
           </Container>
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
-          <Spacer position="top" size="small" />
+          <Container
+            width="100%"
+            height={"10%"}
+            justify="center"
+            color={theme.colors.bg.elements_bg}
+            //color={"red"}
+            align="center"
+            direction="row"
+          />
         </Scrollable_Container>
       ) : null}
     </Flex_Container>

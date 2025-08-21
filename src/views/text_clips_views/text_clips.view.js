@@ -42,6 +42,7 @@ export default function Text_Clips_View({ navigation }) {
           cta_caption_active_variant="dm_sans_bold_14_white"
           cta_caption_not_active_variant="dm_sans_bold_14_disable_not_active"
           operation={operation}
+          border_radius="30px"
         />
         <Spacer position="top" size="small" />
         <Container

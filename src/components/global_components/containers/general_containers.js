@@ -8,13 +8,22 @@ const baseStyles = css`
   justify-content: ${(props) => props.justify || "center"};
   align-items: ${(props) => props.align || "center"};
   border: ${(props) => props.border || "none"};
-  border-radius: ${(props) => props.border_radius || "0px"};
   background-color: ${(props) => props.color || "#FADADD"};
   flex-direction: ${(props) => props.direction || "column"};
   margin-top: ${(props) => props.margin_top || "0px"};
   margin-bottom: ${(props) => props.margin_bottom || "0px"};
   margin-right: ${(props) => props.margin_right || "0px"};
   margin-left: ${(props) => props.margin_left || "0px"};
+  border-radius: ${(props) => props.border_radius || "0px"};
+  /* Correctly apply individual border radius properties */
+  border-top-left-radius: ${(props) =>
+    props.border_radius_top_left || props.border_radius || "0px"};
+  border-top-right-radius: ${(props) =>
+    props.border_radius_top_right || props.border_radius || "0px"};
+  border-bottom-left-radius: ${(props) =>
+    props.border_radius_bottom_left || props.border_radius || "0px"};
+  border-bottom-right-radius: ${(props) =>
+    props.border_radius_bottom_right || props.border_radius || "0px"};
 `;
 
 export const Container = styled(View)`
