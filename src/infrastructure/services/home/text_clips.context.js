@@ -13,6 +13,8 @@ export const TextClipsContextProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [introAdded, setIntroAdded] = useState(false);
+  // const [intro, setIntro] = useState("");
 
   const { userToDB, globalLanguage } = useContext(GlobalContext);
   const { user_id } = userToDB || {}; // Ensure userToDB is not undefined or null
@@ -58,6 +60,8 @@ export const TextClipsContextProvider = ({ children }) => {
         setSelectedItemId,
         isLoading,
         setIsLoading,
+        introAdded,
+        setIntroAdded,
         // globalLanguage,
       }}
     >

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { use, useState, useContext } from "react";
 import * as Clipboard from "expo-clipboard";
 import { ActivityIndicator, Platform } from "react-native";
 
@@ -11,6 +11,8 @@ import {
 import CopyPaste_icon from "../../../assets/my-icons/copy_paste.svg";
 import { theme } from "../../infrastructure/theme/index.js";
 
+import { TextClipsContext } from "../../infrastructure/services/home/text_clips.context.js";
+
 export const Stored_Clips_Tile = ({
   item,
   globalLanguage,
@@ -20,8 +22,11 @@ export const Stored_Clips_Tile = ({
   //   *******************************************************
   const [language, setLanguage] = useState(globalLanguage);
   const [isLoading, setIsLoading] = useState(false);
+
   const { summary_en, summary_es, message_en, message_es, message_id } = item;
   console.log("ITEM:", JSON.stringify(item, null, 2));
+
+  const { introAdded, setIntroAdded } = useContext(TextClipsContext);
 
   const toggleLanguage = async () => {
     setIsLoading(true);
@@ -39,14 +44,35 @@ export const Stored_Clips_Tile = ({
     setIsLoading(true);
     setTimeout(async () => {
       await Clipboard.setStringAsync(
-        language === "EN" ? message_en : message_es
+        introAdded
+          ? `Hey, Your driver here. ${
+              language === "EN" ? message_en : message_es
+            }`
+          : language === "EN"
+          ? message_en
+          : message_es
       );
+
       console.log(`Copied to clipboard: ${message_en}`);
       //   setIsSelected(id);
       onSelect(message_id);
       setIsLoading(false);
+      setIntroAdded(false);
     }, 300);
   };
+
+  //   const copy_message_action = async (item) => {
+  //     setIsLoading(true);
+  //     setTimeout(async () => {
+  //       await Clipboard.setStringAsync(
+  //         language === "EN" ? message_en : message_es
+  //       );
+  //       console.log(`Copied to clipboard: ${message_en}`);
+  //       //   setIsSelected(id);
+  //       onSelect(message_id);
+  //       setIsLoading(false);
+  //     }, 300);
+  //   };
 
   const uncopy_message_action = async (item) => {
     setIsLoading(true);
@@ -55,6 +81,7 @@ export const Stored_Clips_Tile = ({
       onSelect(null);
       await Clipboard.setStringAsync("");
       setIsLoading(false);
+      setIntroAdded(false);
     }, 300);
   };
 

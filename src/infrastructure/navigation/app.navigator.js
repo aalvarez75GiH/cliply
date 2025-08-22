@@ -1,6 +1,7 @@
 import { Platform } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
 import { Voice_and_recent_navigator } from "./voice_recent.navigator";
 import { Type_Message_Navigator } from "./type_message.navigator";
@@ -80,6 +81,19 @@ export const AppNavigator = () => {
             <MessagesIcon width={30} height={30} fill={color} />
           ),
         }}
+        // options={({ route }) => {
+        //   const focused = getFocusedRouteNameFromRoute(route) ?? "Home_View";
+        //   const hideTab = focused === "Clips_by_Operations_And_Status_View";
+
+        //   return {
+        //     title: "Text clips",
+        //     tabBarIcon: ({ color }) => (
+        //       <MessagesIcon width={30} height={30} fill={color} />
+        //     ),
+        //     // Hide on that specific nested screen
+        //     tabBarStyle: hideTab ? { display: "none" } : undefined,
+        //   };
+        // }}
       />
       <Tab.Screen
         name="Messages"

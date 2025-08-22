@@ -9,7 +9,10 @@ import {
 import { SafeArea } from "../../components/global_components/safe-area.component";
 import { theme } from "../../infrastructure/theme/index";
 import { Spacer } from "../../components/global_components/optimized.spacer.component";
-import { Container } from "../../components/global_components/containers/general_containers";
+import {
+  Container,
+  Action_Container,
+} from "../../components/global_components/containers/general_containers";
 import { Text } from "../../infrastructure/typography/text.component";
 import { Text_Clips_By_Status_Sub_Header } from "../../components/headers/text_clips_by_operations_and_status.header";
 import {
@@ -26,8 +29,13 @@ export default function Text_Clips_by_Operations_And_Status_View({
 }) {
   const { operation, status_name, caption } = route.params;
 
-  const { renderStoredMessagesTile, setSelectedItemId } =
-    useContext(TextClipsContext);
+  const {
+    renderStoredMessagesTile,
+    setSelectedItemId,
+    // togglingIntroAdded,
+    introAdded,
+    setIntroAdded,
+  } = useContext(TextClipsContext);
 
   const { food_delivery_operation } = food_delivery_operation_data;
   const { ride_share_operation } = ride_share_operation_data;
@@ -71,6 +79,7 @@ export default function Text_Clips_by_Operations_And_Status_View({
       setDataToRender([]); // Reset data or set any state you want
       set_Headers_Caption(""); // Reset headers or perform other cleanup
       setSelectedItemId(null); // Clear selected item ID on exit
+      setIntroAdded(false); // Reset intro added state
     };
   }, [food_delivery_operation, status_name]);
 
@@ -79,11 +88,29 @@ export default function Text_Clips_by_Operations_And_Status_View({
       <Flex_Container color={theme.colors.bg.screens_bg}>
         <ExitHeader navigation={navigation} />
         <Text_Clips_By_Status_Sub_Header caption={headers_caption} />
+        <Spacer position="bottom" size="medium"></Spacer>
+        <Action_Container
+          width="95%"
+          height="8%"
+          color={
+            introAdded
+              ? theme.colors.ui.success
+              : theme.colors.ui.highlight_color_2
+          }
+          onPress={() => setIntroAdded(!introAdded)}
+        >
+          <Text
+            variant={introAdded ? "dm_sans_bold_16_white" : "dm_sans_bold_16"}
+            // variant={"dm_sans_bold_16_white"}
+          >
+            Add intro: "Hey, your driver here"
+          </Text>
+        </Action_Container>
         <MainContent
           color={theme.colors.bg.screens_bg}
           // color={"red"}
           width={"100%"}
-          height={"85%"}
+          height={"75%"}
           align="center"
           justify="center"
         >
