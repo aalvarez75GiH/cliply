@@ -13,8 +13,8 @@ import {
 import { Spacer } from "../global_components/optimized.spacer.component";
 
 export const Status_CTA_PNG = ({
-  caption1,
-  caption2,
+  caption_1,
+  caption_2,
   action,
   inverted = false,
   aspectRatio = 1024 / 650,
@@ -73,8 +73,8 @@ export const Status_CTA_PNG = ({
         border_radius="10px"
       >
         <Spacer position="left" size="medium">
-          <Text variant="dm_sans_bold_16_white">{caption1}</Text>
-          <Text variant="dm_sans_bold_16_white">{caption2}</Text>
+          <Text variant="dm_sans_bold_16_white">{caption_1}</Text>
+          <Text variant="dm_sans_bold_16_white">{caption_2}</Text>
         </Spacer>
       </Container>
     </Action_Container>
@@ -102,8 +102,8 @@ export const Status_CTA_PNG = ({
         border_radius="10px"
       >
         <Spacer position="left" size="medium">
-          <Text variant="dm_sans_bold_16_white">{caption1}</Text>
-          <Text variant="dm_sans_bold_16_white">{caption2}</Text>
+          <Text variant="dm_sans_bold_16_white">{caption_1}</Text>
+          <Text variant="dm_sans_bold_16_white">{caption_2}</Text>
         </Spacer>
       </Container>
       <Container
@@ -128,7 +128,6 @@ export const Status_CTA_PNG = ({
             borderTopRightRadius: 0,
             borderBottomRightRadius: 0,
           }}
-          resizeMode="cover"
         />
       </Container>
     </Action_Container>

@@ -60,6 +60,7 @@ export default function Text_Clips_View({ navigation }) {
                   caption_1={"Text clips"}
                   caption_2={"by your status in the delivery order"}
                   color={theme.colors.ui.highlight_color_2}
+                  // color={"#0D965B"}
                   height={"100%"}
                 />
               </Spacer>
@@ -73,6 +74,7 @@ export default function Text_Clips_View({ navigation }) {
                   caption_1={"Text clips"}
                   caption_2={"by your status in the ride share"}
                   color={theme.colors.ui.highlight_color_2}
+                  // color={"#5C8FD6"}
                   height={"100%"}
                 />
               </Spacer>
