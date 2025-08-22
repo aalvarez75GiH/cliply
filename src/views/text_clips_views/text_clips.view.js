@@ -8,7 +8,7 @@ import { Container } from "../../components/global_components/containers/general
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
 
 import { Operations_Status_Area } from "./text clips operations areas/operations_status.area.js";
-import { Text } from "../../infrastructure/typography/text.component.js";
+import { Text_Tile } from "../../components/tiles/text.tile.js";
 
 export default function Text_Clips_View({ navigation }) {
   const [operation, setOperation] = useState("food_delivery");
@@ -55,20 +55,26 @@ export default function Text_Clips_View({ navigation }) {
         >
           {operation === "food_delivery" && (
             <>
-              <Spacer position="left" size="extraLarge">
-                <Text variant="dm_sans_bold_18">
-                  Tap to find text clips depending on where you are in the
-                  order.
-                </Text>
+              <Spacer position="left" size="small">
+                <Text_Tile
+                  caption_1={"Text clips"}
+                  caption_2={"by your status in the delivery order"}
+                  color={theme.colors.ui.highlight_color_2}
+                  height={"100%"}
+                />
               </Spacer>
             </>
           )}
+
           {operation === "ride_share" && (
             <>
-              <Spacer position="left" size="extraLarge">
-                <Text variant="dm_sans_bold_18">
-                  Tap to find text clips depending on where you are in the ride.
-                </Text>
+              <Spacer position="left" size="small">
+                <Text_Tile
+                  caption_1={"Text clips"}
+                  caption_2={"by your status in the ride share"}
+                  color={theme.colors.ui.highlight_color_2}
+                  height={"100%"}
+                />
               </Spacer>
             </>
           )}

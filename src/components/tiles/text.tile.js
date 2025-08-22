@@ -5,18 +5,24 @@ import { Container } from "../global_components/containers/general_containers.js
 import { theme } from "../../infrastructure/theme/index.js";
 import { Spacer } from "../global_components/optimized.spacer.component.js";
 
-export const Text_Tile = ({ caption_1, caption_2, color }) => {
+export const Text_Tile = ({
+  caption_1,
+  caption_2,
+  color,
+  width = "100%",
+  height = "20%",
+}) => {
   return (
     <>
       <Container
-        width="100%"
-        height={"20%"}
+        width={width}
+        height={height}
         color={theme.colors.bg.screens_bg}
         //color={"blue"}
         direction="row"
       >
         <Container
-          width="68%"
+          width="75%"
           height="90%"
           // color="yellow"
           justify="center"
