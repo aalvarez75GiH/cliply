@@ -1,5 +1,8 @@
 import { Platform } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  createBottomTabNavigator,
+  BottomTabBar,
+} from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
@@ -10,6 +13,7 @@ import { Text_Clips_Navigator } from "./text_clips.navigator";
 import KeyBoardIcon from "../../../assets/my-icons/keyboard.svg";
 import MessagesIcon from "../../../assets/my-icons/Messages_icon.svg";
 import MicIcon from "../../../assets/my-icons/micIcon.svg";
+import { Quickies_CTA } from "../../components/calls_to_action/quickies.cta";
 
 const Tab = createBottomTabNavigator();
 
@@ -43,9 +47,40 @@ const tabBarListeners = ({ navigation, route }) => ({
   tabPress: () => navigation.navigate(route.name),
 });
 
+const getActiveRouteName = (route) => {
+  if (!route) return undefined;
+  // Try the helper first
+  const focused = getFocusedRouteNameFromRoute(route);
+  if (focused) return focused;
+
+  // Fallback: walk nested state (works on RN v6)
+  let r = route;
+  while (r && r.state && r.state.routes && r.state.index != null) {
+    r = r.state.routes[r.state.index];
+  }
+  return r?.name;
+};
+
+const ConditionalTabBar = (props) => {
+  const currentTabRoute = props.state.routes[props.state.index];
+  const nestedName = getActiveRouteName(currentTabRoute);
+
+  const showQuickies =
+    currentTabRoute.name === "Home" &&
+    nestedName === "Clips_by_Operations_And_Status_View";
+
+  if (showQuickies) {
+    // render your custom bar instead of the default one
+    return <Quickies_CTA />;
+  }
+
+  return <BottomTabBar {...props} />;
+};
+
 export const AppNavigator = () => {
   return (
     <Tab.Navigator
+      tabBar={(props) => <ConditionalTabBar {...props} />}
       screenOptions={{
         tabBarActiveTintColor: "#898989",
         tabBarInactiveTintColor: "#000000",
@@ -83,15 +118,17 @@ export const AppNavigator = () => {
         }}
         // options={({ route }) => {
         //   const focused = getFocusedRouteNameFromRoute(route) ?? "Home_View";
-        //   const hideTab = focused === "Clips_by_Operations_And_Status_View";
+
+        //   // Replace the tab bar with a custom component for specific screens
+        //   const isCustomTabBar =
+        //     focused === "Clips_by_Operations_And_Status_View";
 
         //   return {
         //     title: "Text clips",
         //     tabBarIcon: ({ color }) => (
         //       <MessagesIcon width={30} height={30} fill={color} />
         //     ),
-        //     // Hide on that specific nested screen
-        //     tabBarStyle: hideTab ? { display: "none" } : undefined,
+        //     tabBarStyle: isCustomTabBar ? { display: "none" } : undefined,
         //   };
         // }}
       />

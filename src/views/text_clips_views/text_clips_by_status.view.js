@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { FlatList } from "react-native-gesture-handler";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { ExitHeader } from "../../components/headers/exit_header.component";
 import {
@@ -19,20 +20,18 @@ import {
   food_delivery_operation_data,
   ride_share_operation_data,
 } from "../../infrastructure/local_data/clips_by_operations.data";
+import { Add_intro_CTA } from "../../components/calls_to_action/add_intro.cta";
 
 // import { MessagesContext } from "../../infrastructure/services/messages/messages.context";
 import { TextClipsContext } from "../../infrastructure/services/home/text_clips.context";
 
-export default function Text_Clips_by_Operations_And_Status_View({
-  navigation,
-  route,
-}) {
+export default function Text_Clips_by_Status_View({ navigation, route }) {
+  const insets = useSafeAreaInsets();
   const { operation, status_name, caption } = route.params;
 
   const {
     renderStoredMessagesTile,
     setSelectedItemId,
-    // togglingIntroAdded,
     introAdded,
     setIntroAdded,
   } = useContext(TextClipsContext);
@@ -84,37 +83,25 @@ export default function Text_Clips_by_Operations_And_Status_View({
   }, [food_delivery_operation, status_name]);
 
   return (
-    <SafeArea background_color="#FFFFFF">
-      <Flex_Container color={theme.colors.bg.screens_bg}>
+    <SafeArea background_color={theme.colors.bg.elements_bg}>
+      <Container
+        width="100%"
+        height={"100%"}
+        //color={theme.colors.bg.screens_bg}
+        color="green"
+        // style={{ flex: 1, paddingBottom: insets.bottom || 50 }}
+      >
         <ExitHeader navigation={navigation} />
         <Text_Clips_By_Status_Sub_Header caption={headers_caption} />
-        <Spacer position="bottom" size="medium"></Spacer>
-        <Action_Container
-          width="95%"
-          height="8%"
-          color={
-            introAdded
-              ? theme.colors.ui.success
-              : theme.colors.ui.highlight_color_2
-          }
-          onPress={() => setIntroAdded(!introAdded)}
-        >
-          <Text
-            variant={introAdded ? "dm_sans_bold_16_white" : "dm_sans_bold_16"}
-            // variant={"dm_sans_bold_16_white"}
-          >
-            Add intro: "Hey, your driver here"
-          </Text>
-        </Action_Container>
-        <MainContent
-          color={theme.colors.bg.screens_bg}
-          // color={"red"}
-          width={"100%"}
+        <Add_intro_CTA introAdded={introAdded} setIntroAdded={setIntroAdded} />
+
+        <Container
+          width="100%"
           height={"75%"}
-          align="center"
-          justify="center"
+          color={theme.colors.bg.screens_bg}
+          //   color={"lightblue"}
         >
-          <Spacer position="top" size="large" />
+          <Spacer position="top" size="medium" />
           {dataToRender.length === 0 && (
             <Container
               width="100%"
@@ -128,6 +115,7 @@ export default function Text_Clips_by_Operations_And_Status_View({
               </Text>
             </Container>
           )}
+
           {dataToRender.length > 0 && (
             <FlatList
               showsHorizontalScrollIndicator={false}
@@ -139,10 +127,9 @@ export default function Text_Clips_by_Operations_And_Status_View({
               }}
             />
           )}
-
           <Spacer position="top" size="large" />
-        </MainContent>
-      </Flex_Container>
+        </Container>
+      </Container>
     </SafeArea>
   );
 }

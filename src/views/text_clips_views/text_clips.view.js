@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 import { HomeHeader } from "../../components/headers/home_header.component.js";
 import { Two_Rounded_Ctas_Belt } from "../../components/belts/two_semi_rounded_ctas_belt.component.js";
@@ -6,12 +6,14 @@ import { SafeArea } from "../../components/global_components/safe-area.component
 import { theme } from "../../infrastructure/theme/index.js";
 import { Container } from "../../components/global_components/containers/general_containers.js";
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
+import { TextClipsContext } from "../../infrastructure/services/home/text_clips.context.js";
 
 import { Operations_Status_Area } from "./text clips operations areas/operations_status.area.js";
 import { Text_Tile } from "../../components/tiles/text.tile.js";
 
 export default function Text_Clips_View({ navigation }) {
-  const [operation, setOperation] = useState("food_delivery");
+  const { operation, setOperation } = useContext(TextClipsContext);
+  // const [operation, setOperation] = useState("food_delivery");
   const [isLoading, setIsLoading] = useState(false);
 
   const togglingOperation = (op) => {

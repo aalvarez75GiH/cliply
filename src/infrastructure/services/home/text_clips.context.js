@@ -14,6 +14,7 @@ export const TextClipsContextProvider = ({ children }) => {
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [introAdded, setIntroAdded] = useState(false);
+  const [operation, setOperation] = useState("food_delivery");
   // const [intro, setIntro] = useState("");
 
   const { userToDB, globalLanguage } = useContext(GlobalContext);
@@ -32,9 +33,9 @@ export const TextClipsContextProvider = ({ children }) => {
       console.error("ERROR GETTING USER DATA AT HOME CONTEXT:", error.message);
     }
   };
-
+  console.log("OPERATION at CONTEXT:", operation);
   // const recordingRef = useRef(null);
-  console.log("USER DATA AT STATE:", JSON.stringify(userData, null, 2));
+  // console.log("USER DATA AT STATE:", JSON.stringify(userData, null, 2));
 
   const renderStoredMessagesTile = ({ item }) => {
     return (
@@ -62,6 +63,8 @@ export const TextClipsContextProvider = ({ children }) => {
         setIsLoading,
         introAdded,
         setIntroAdded,
+        operation,
+        setOperation,
         // globalLanguage,
       }}
     >
