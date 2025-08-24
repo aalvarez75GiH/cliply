@@ -30,10 +30,6 @@ const createScreenOptions = ({ route }) => {
     case "Type":
       iconName = "home-outline";
       break;
-    // case "Settings":
-    //   iconName = "settings";
-    //   break;
-    // Add more cases as needed for other screens
   }
 
   return {
@@ -116,21 +112,6 @@ export const AppNavigator = () => {
             <MessagesIcon width={30} height={30} fill={color} />
           ),
         }}
-        // options={({ route }) => {
-        //   const focused = getFocusedRouteNameFromRoute(route) ?? "Home_View";
-
-        //   // Replace the tab bar with a custom component for specific screens
-        //   const isCustomTabBar =
-        //     focused === "Clips_by_Operations_And_Status_View";
-
-        //   return {
-        //     title: "Text clips",
-        //     tabBarIcon: ({ color }) => (
-        //       <MessagesIcon width={30} height={30} fill={color} />
-        //     ),
-        //     tabBarStyle: isCustomTabBar ? { display: "none" } : undefined,
-        //   };
-        // }}
       />
       <Tab.Screen
         name="Messages"

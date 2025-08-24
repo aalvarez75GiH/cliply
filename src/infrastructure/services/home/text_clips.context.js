@@ -6,6 +6,7 @@ import { get_User_Data_Request } from "./text_clips.requests.js";
 
 import { Spacer } from "../../../components/global_components/optimized.spacer.component.js";
 import { Stored_Clips_Tile } from "../../../components/tiles/stored_clip.tile.js";
+import { Quickies_Tile } from "../../../components/tiles/quickies.tile.js";
 
 export const TextClipsContext = createContext();
 
@@ -51,6 +52,20 @@ export const TextClipsContextProvider = ({ children }) => {
       </Spacer>
     );
   };
+  const renderQuickiesTile = ({ item }) => {
+    return (
+      <Spacer position="bottom" size="medium">
+        <Quickies_Tile
+          item={item}
+          globalLanguage={globalLanguage}
+          setIsLoading={setIsLoading}
+          selectedItemId={selectedItemId}
+          onSelect={setSelectedItemId}
+          isLoading={isLoading}
+        />
+      </Spacer>
+    );
+  };
 
   return (
     <TextClipsContext.Provider
@@ -65,6 +80,7 @@ export const TextClipsContextProvider = ({ children }) => {
         setIntroAdded,
         operation,
         setOperation,
+        renderQuickiesTile,
         // globalLanguage,
       }}
     >

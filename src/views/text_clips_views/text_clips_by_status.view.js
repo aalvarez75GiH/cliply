@@ -26,7 +26,6 @@ import { Add_intro_CTA } from "../../components/calls_to_action/add_intro.cta";
 import { TextClipsContext } from "../../infrastructure/services/home/text_clips.context";
 
 export default function Text_Clips_by_Status_View({ navigation, route }) {
-  const insets = useSafeAreaInsets();
   const { operation, status_name, caption } = route.params;
 
   const {

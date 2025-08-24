@@ -7,7 +7,6 @@ const baseStyles = css`
   height: ${(props) => props.height || "89%"};
   justify-content: ${(props) => props.justify || "center"};
   align-items: ${(props) => props.align || "center"};
-  border: ${(props) => props.border || "none"};
   background-color: ${(props) => props.color || "#FADADD"};
   flex-direction: ${(props) => props.direction || "column"};
   margin-top: ${(props) => props.margin_top || "0px"};
@@ -24,6 +23,11 @@ const baseStyles = css`
     props.border_radius_bottom_left || props.border_radius || "0px"};
   border-bottom-right-radius: ${(props) =>
     props.border_radius_bottom_right || props.border_radius || "0px"};
+  /* border-top-color: ${(props) => props.border_top_color || "transparent"}; */
+  border: ${(props) => props.border || "none"};
+  border-top-width: ${(props) => props.borderTopWidth || "0"};
+  border-top-style: ${(props) => props.borderTopStyle || "none"};
+  border-top-color: ${(props) => props.borderTopColor || "transparent"};
 `;
 
 export const Container = styled(View)`

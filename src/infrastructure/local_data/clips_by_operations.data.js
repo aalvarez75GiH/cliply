@@ -432,3 +432,87 @@ export const ride_share_operation_data = {
     },
   ],
 };
+
+export const quickies_food_delivery = [
+  {
+    quicky_id: "QK_0001",
+    quicky_en: "I am close, be ready.",
+    quicky_es: "Estoy cerca, esté listo",
+    used: 0,
+  },
+  {
+    quicky_id: "QK_0002",
+    quicky_en: "Need a PIN number, be ready.",
+    quicky_es: "Necesito un numero PIN, esté listo",
+    used: 0,
+  },
+  {
+    quicky_id: "QK_0003",
+    quicky_en: "Can't find your place, need guidance.",
+    quicky_es: "No consigo tu casa, necesito orientación.",
+    used: 0,
+  },
+  {
+    quicky_id: "QK_0004",
+    quicky_en: "On my way but traffic.",
+    quicky_es: "Voy en camino pero hay tráfico.",
+    used: 0,
+  },
+  {
+    quicky_id: "QK_0005",
+    quicky_en: "No worries, I am on my way.",
+    quicky_es: "No te preocupes, estoy en camino.",
+    used: 0,
+  },
+  {
+    quicky_id: "QK_0006",
+    quicky_en: "Heading to restaurant.",
+    quicky_es: "Yendo al restaurante.",
+    used: 0,
+  },
+];
+
+export const quickies_ride_share = [
+  {
+    quicky_id: "QK_0007",
+    quicky_en: "I am close, be ready.",
+    quicky_es: "Estoy cerca, esté listo",
+    used: 0,
+  },
+  {
+    quicky_id: "QK_0008",
+    quicky_en: "Messaged received?",
+    quicky_es: "¿Mensaje recibido?",
+    used: 0,
+  },
+  {
+    quicky_id: "QK_0009",
+    quicky_en: "Please, just 4 people",
+    quicky_es: "Por favor, solo 4 personas",
+    used: 0,
+  },
+  {
+    quicky_id: "QK_0010",
+    quicky_en: "Not open containers",
+    quicky_es: "Sin contenedores abiertos",
+    used: 0,
+  },
+  {
+    quicky_id: "QK_0011",
+    quicky_en: "No food unpacked",
+    quicky_es: "Nada de comida",
+    used: 0,
+  },
+  {
+    quicky_id: "QK_0012",
+    quicky_en: "At pickup location?",
+    quicky_es: "¿En el lugar de recogida?",
+    used: 0,
+  },
+  {
+    quicky_id: "QK_0013",
+    quicky_en: "Here, hurry up.",
+    quicky_es: "Aquí, date prisa.",
+    used: 0,
+  },
+];
