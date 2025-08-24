@@ -136,6 +136,11 @@ const dm_sans_bold_24 = (theme) => `
     font-family: ${theme.fonts.bold};
     color: ${theme.colors.text.primary};
     `;
+const dm_sans_bold_24_white = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_bold_24};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.secondary};
+    `;
 const dm_sans_bold_20 = (theme) => `
     font-size: ${theme.fontSizes.dm_sans_bold_20};
     font-family: ${theme.fonts.bold};
@@ -186,6 +191,11 @@ const dm_sans_bold_14_disable_not_active = (theme) => `
         font-family: ${theme.fonts.bold};
         color: ${theme.colors.text.disabled};
         `;
+const dm_sans_bold_12 = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_bold_12};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.primary};
+    `;
 const dm_sans_bold_12_white = (theme) => `
     font-size: ${theme.fontSizes.dm_sans_bold_12};
     font-family: ${theme.fonts.bold};
@@ -224,6 +234,7 @@ const variants = {
   menu_sub_title_text_2,
   message_tile_caption,
   dm_sans_bold_24,
+  dm_sans_bold_24_white,
   dm_sans_bold_20,
   dm_sans_bold_20_white,
   dm_sans_bold_18,
@@ -234,6 +245,7 @@ const variants = {
   dm_sans_bold_14,
   dm_sans_bold_14_white,
   dm_sans_bold_14_disable_not_active,
+  dm_sans_bold_12,
   dm_sans_bold_12_white,
   dm_sans_bold_12_disable_not_active,
 };

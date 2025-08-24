@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import * as Clipboard from "expo-clipboard";
 import { Platform } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { ActivityIndicator } from "react-native-paper";
 
 import { Text } from "../../infrastructure/typography/text.component.js";
@@ -11,6 +10,7 @@ import {
 } from "../global_components/containers/general_containers.js";
 import { theme } from "../../infrastructure/theme/index.js";
 import { Spacer } from "../global_components/optimized.spacer.component.js";
+import CopyPaste_icon from "../../../assets/my-icons/copy_paste.svg";
 
 export const Quickies_Tile = ({
   item,
@@ -23,7 +23,6 @@ export const Quickies_Tile = ({
   console.log("ITEM:", JSON.stringify(item, null, 2));
 
   const isSelected = selectedItemId === quicky_id;
-  const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(false);
   //   *******************************************************
   const copy_quicky_action = async (item) => {
@@ -133,15 +132,21 @@ export const Quickies_Tile = ({
             width="100%"
             height="50%"
             align="center"
-            justify="space-around"
-            // color={theme.colors.bg.elements_bg}
+            justify="flex-end"
             color={
               isSelected ? theme.colors.ui.success : theme.colors.bg.elements_bg
             }
-            //   color={"blue"}
+            // color={"blue"}
             direction="row"
           >
-            <Spacer position="left" size="small" />
+            {!isSelected && (
+              <CopyPaste_icon
+                width="30px"
+                height="30px"
+                fill={theme.colors.text.middle_screens_text}
+              />
+            )}
+            <Spacer position="right" size="large" />
           </Container>
         </Action_Container>
       )}

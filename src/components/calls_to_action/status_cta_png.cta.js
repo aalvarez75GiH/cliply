@@ -11,6 +11,7 @@ import {
   Container,
 } from "../global_components/containers/general_containers";
 import { Spacer } from "../global_components/optimized.spacer.component";
+import { Circular_Step_Indicator } from "../global_components/small_circular_step_indicator.component";
 
 export const Status_CTA_PNG = ({
   caption_1,
@@ -20,6 +21,8 @@ export const Status_CTA_PNG = ({
   aspectRatio = 1024 / 650,
   radius = 16,
   image_source,
+  step_number = 1,
+  status,
 }) => {
   return !inverted ? (
     <Action_Container
@@ -51,8 +54,8 @@ export const Status_CTA_PNG = ({
         <Image
           source={image_source}
           style={{
-            width: "100%",
-            height: "100%",
+            width: "120%",
+            height: "120%",
             aspectRatio,
             borderRadius: radius,
             borderRadiusTopLeft: 10,
@@ -61,6 +64,7 @@ export const Status_CTA_PNG = ({
             borderBottomRightRadius: 0,
           }}
           resizeMode="cover"
+          //   contentFit="cover"
         />
       </Container>
       <Container
@@ -69,13 +73,33 @@ export const Status_CTA_PNG = ({
         justify="center"
         align="center"
         color="transparent"
-        direction="row"
+        //color="red"
+        direction="colum"
         border_radius="10px"
       >
+        {/* <Container
+          width="100%"
+          height="20%"
+          color="transparent"
+          justify="center"
+          //   align="space-around"
+          align="flex-start"
+        >
+          <Spacer position="left" size="medium">
+            <Circular_Step_Indicator
+              width={"20px"}
+              height={"20px"}
+              caption={step_number}
+              color={"#FFFFFF"}
+            />
+          </Spacer>
+        </Container> */}
+        <Spacer position="bottom" size="medium" />
         <Spacer position="left" size="medium">
-          <Text variant="dm_sans_bold_16_white">{caption_1}</Text>
-          <Text variant="dm_sans_bold_16_white">{caption_2}</Text>
+          <Text variant="dm_sans_bold_14_white">{caption_1}</Text>
+          <Text variant="dm_sans_bold_14_white">{caption_2}</Text>
         </Spacer>
+        <Spacer position="bottom" size="large" />
       </Container>
     </Action_Container>
   ) : (
@@ -98,13 +122,37 @@ export const Status_CTA_PNG = ({
         justify="center"
         align="center"
         color="transparent"
-        direction="row"
+        direction="column"
         border_radius="10px"
       >
+        {/* <Container
+          width="100%"
+          height="20%"
+          color="transparent"
+          justify="center"
+          align="flex-end"
+        >
+          <Spacer position="right" size="medium">
+            <Circular_Step_Indicator
+              width={"20px"}
+              height={"20px"}
+              caption={step_number}
+              color={"#FFFFFF"}
+            />
+          </Spacer>
+
+        </Container> */}
+        <Spacer position="bottom" size="medium" />
         <Spacer position="left" size="medium">
+          <Text variant="dm_sans_bold_14_white">{caption_1}</Text>
+          <Text variant="dm_sans_bold_14_white">{caption_2}</Text>
+        </Spacer>
+        <Spacer position="bottom" size="large" />
+
+        {/* <Spacer position="left" size="medium">
           <Text variant="dm_sans_bold_16_white">{caption_1}</Text>
           <Text variant="dm_sans_bold_16_white">{caption_2}</Text>
-        </Spacer>
+        </Spacer> */}
       </Container>
       <Container
         width="55%"
@@ -128,6 +176,7 @@ export const Status_CTA_PNG = ({
             borderTopRightRadius: 0,
             borderBottomRightRadius: 0,
           }}
+          //   contentFit="cover"
         />
       </Container>
     </Action_Container>

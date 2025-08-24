@@ -1,29 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import { Status_CTA_PNG } from "../calls_to_action/status_cta_png.cta";
 import { theme } from "../../infrastructure/theme/index";
-import { Container } from "../global_components/containers/general_containers";
+import {
+  Container,
+  Action_Container,
+} from "../global_components/containers/general_containers";
 import { Spacer } from "../global_components/optimized.spacer.component.js";
-import { Circular_Step_Indicator } from "../../components/global_components/small_circular_step_indicator.component.js";
+import RocketIcon from "../../../assets/my-icons/rocket_icon.svg";
+import { Text } from "../../infrastructure/typography/text.component";
+
+import { TextClipsContext } from "../../infrastructure/services/home/text_clips.context";
 
 export const Operations_Status_Step_Component = ({
   caption_1,
   caption_2,
-  caption_3,
   image_source_1,
-  step_indicator_color,
   inverted,
   action,
+  status,
+  step_number,
 }) => {
+  const { operation } = useContext(TextClipsContext);
+  const navigation = useNavigation();
   return !inverted ? (
     <>
       <Container
         width="100%"
-        height={"auto"}
+        height={"22%"}
         justify="flex-start"
         color={theme.colors.bg.elements_bg}
-        //color={"green"}
+        // color={"green"}
         align="center"
         direction="row"
       >
@@ -34,52 +42,62 @@ export const Operations_Status_Step_Component = ({
             action={action}
             inverted={inverted}
             image_source={image_source_1}
+            step_number={step_number}
           />
         </Spacer>
-
-        <Container
-          width="20%"
-          height={"100%"}
+        <Spacer position="left" size="small" />
+        <Action_Container
+          width="18%"
+          height={"95%"}
           justify="center"
-          color={theme.colors.bg.elements_bg}
+          color={theme.colors.bg.screens_bg}
+          //   color={"red"}
           align="center"
-          direction="row"
+          direction="column"
+          //   border_radius="10px"
+          onPress={() =>
+            navigation.navigate("Quickies_Text_Clips_View", {
+              operation: operation,
+              status: status,
+            })
+          }
         >
-          <Circular_Step_Indicator
-            width={"47%"}
-            height={"35%"}
-            caption={caption_3}
-            color={step_indicator_color}
-          />
-        </Container>
+          <RocketIcon width={30} height={30} />
+          <Text variant="dm_sans_bold_12">Quickies</Text>
+        </Action_Container>
       </Container>
     </>
   ) : (
     <>
       <Container
         width="100%"
-        height={"auto"}
+        height={"22%"}
         justify="flex-start"
         color={theme.colors.bg.elements_bg}
         //color={"green"}
         align="center"
         direction="row"
       >
-        <Container
-          width="20%"
-          height={"100%"}
+        <Spacer position="left" size="small" />
+        <Action_Container
+          width="18%"
+          height={"95%"}
           justify="center"
-          color={theme.colors.bg.elements_bg}
+          color={theme.colors.bg.screens_bg}
+          //   color={"red"}
           align="center"
-          direction="row"
+          direction="column"
+          onPress={() =>
+            navigation.navigate("Quickies_Text_Clips_View", {
+              operation: operation,
+              status: status,
+            })
+          }
         >
-          <Circular_Step_Indicator
-            width={"47%"}
-            height={"35%"}
-            caption={caption_3}
-            color={step_indicator_color}
-          />
-        </Container>
+          <RocketIcon width={30} height={30} />
+          <Text variant="dm_sans_bold_12">Quickies</Text>
+        </Action_Container>
+
         <Spacer position="left" size="medium">
           <Status_CTA_PNG
             caption_1={caption_1}
@@ -87,6 +105,7 @@ export const Operations_Status_Step_Component = ({
             action={action}
             inverted={inverted}
             image_source={image_source_1}
+            step_number={step_number}
           />
         </Spacer>
       </Container>

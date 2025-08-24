@@ -72,6 +72,8 @@ const ConditionalTabBar = (props) => {
 
   return <BottomTabBar {...props} />;
 };
+// const focused = getFocusedRouteNameFromRoute(route) ?? "Home_View";
+// const hideTab = focused === "Clips_by_Operations_And_Status_View";
 
 export const AppNavigator = () => {
   return (

@@ -32,7 +32,7 @@ export const Transcripted_Clips_Tile = ({
   }, []);
 
   const navigation = useNavigation();
-  const { userToDB } = useContext(GlobalContext);
+  const { userToDB, globalLanguage } = useContext(GlobalContext);
   console.log(userToDB.user_id);
 
   const { user_id } = userToDB;
@@ -167,6 +167,7 @@ export const Transcripted_Clips_Tile = ({
                 justify="flex-start"
                 direction="row"
                 color={theme.colors.bg.elements_bg}
+                // color={"red"}
               >
                 <EN_ES_CTA_component
                   //   language={language === "EN" ? "ES" : "EN"}

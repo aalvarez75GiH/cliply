@@ -77,6 +77,8 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
                 caption: "Heading to pickup/shop",
               })
             }
+            status="heading_to_pickup_shop"
+            step_number={"1"}
           />
 
           <Operations_Status_Connector_Line side="right" />
@@ -96,6 +98,8 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
                 caption: "Picking up / Shopping",
               })
             }
+            status="picking_up_shopping"
+            step_number={"2"}
           />
 
           <Operations_Status_Connector_Line side="left" />
@@ -115,6 +119,8 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
                 caption: "Heading to drop off",
               })
             }
+            status="heading_to_drop_off"
+            step_number={"3"}
           />
 
           <Container
@@ -161,6 +167,8 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
                 caption: "Heading to Passenger",
               })
             }
+            status="heading_to_passenger"
+            step_number={"1"}
           />
 
           <Operations_Status_Connector_Line side="right" />
@@ -179,6 +187,8 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
                 caption: "Close to Passenger",
               })
             }
+            status="close_to_passenger"
+            step_number={"2"}
           />
 
           <Operations_Status_Connector_Line side="left" />
@@ -198,6 +208,8 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
                 caption: "At Passengers location",
               })
             }
+            status="at_passenger_location"
+            step_number={"3"}
           />
 
           <Container

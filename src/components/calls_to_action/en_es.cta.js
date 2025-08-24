@@ -17,42 +17,24 @@ export const EN_ES_CTA_component = ({ language, action, isSelected }) => {
       justify="center"
       align="center"
       color={isSelected ? theme.colors.ui.success : theme.colors.bg.elements_bg}
-      // color={theme.colors.bg.elements_bg}
-      // color={"red"}
       onPress={action}
     >
       <Container
-        width={"80%"}
-        height={"70%"}
+        width={"90%"}
+        height={"60%"}
         color={theme.colors.ui.secondary}
         border_radius={"5px"}
         direction="row"
         align="center"
         justify="center"
-        border={"1px solid #000000"}
       >
-        <Text variant="ES_EN_ctas_black">{language}</Text>
+        <Text
+          variant="ES_EN_ctas_black"
+          style={{ textDecorationLine: "underline" }}
+        >
+          {language}
+        </Text>
       </Container>
     </Action_Container>
-    // <Action_Container
-    //   width={"35%"}
-    //   height={"100%"}
-    //   justify="center"
-    //   align="center"
-    //   color={theme.colors.bg.elements_bg}
-    //   onPress={action}
-    // >
-    //   <Container
-    //     width={"100%"}
-    //     height={"90%"}
-    //     color={theme.colors.ui.primary}
-    //     border_radius={"40px"}
-    //     direction="row"
-    //     align="center"
-    //     justify="center"
-    //   >
-    //     <Text variant="stages_ctas_white">{language}</Text>
-    //   </Container>
-    // </Action_Container>
   );
 };
