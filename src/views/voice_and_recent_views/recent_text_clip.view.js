@@ -12,6 +12,7 @@ import { ExitHeader } from "../../components/headers/exit_header.component.js";
 import { SafeArea } from "../../components/global_components/safe-area.component.js";
 import { Squared_action_CTA_component } from "../../components/calls_to_action/squared_action.cta.js";
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
+import { Platform } from "react-native";
 
 export const Recent_Text_Clip_View = (route) => {
   const { item } = route.route.params;
@@ -55,6 +56,14 @@ export const Recent_Text_Clip_View = (route) => {
               }}
               color={theme.colors.bg.screens_bg}
             >
+              {Platform.OS === "ios" ? null : (
+                <>
+                  <Spacer position="top" size="extraLarge" />
+                  <Spacer position="top" size="extraLarge" />
+                  <Spacer position="top" size="medium" />
+                </>
+              )}
+              <Spacer position="top" size="large" />
               <Squared_action_CTA_component
                 action={null}
                 label="Save text clip"

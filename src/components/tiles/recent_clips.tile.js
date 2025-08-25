@@ -21,7 +21,8 @@ export const Recent_clips_Tile = ({ item, globalLanguage }) => {
   return (
     <>
       <Action_Container
-        width={Platform.OS === "ios" ? "400px" : "90%"}
+        // width={Platform.OS === "ios" ? "100%" : "90%"}
+        width={Platform.OS === "ios" ? "400px" : "410px"}
         height="130px"
         align="center"
         justify="flex-start"
