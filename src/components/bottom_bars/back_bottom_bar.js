@@ -15,7 +15,7 @@ import { TextClipsContext } from "../../infrastructure/services/home/text_clips.
 import { GlobalContext } from "../../infrastructure/services/global/global.context";
 import LeftArrow from "../../../assets/my-icons/arrow_back_icon.svg";
 
-export const Quickies_CTA = ({ language, action, isSelected }) => {
+export const Back_Bottom_Bar = ({ language, action, isSelected }) => {
   const { operation } = useContext(TextClipsContext);
   console.log("operation at Quickie", operation);
   const navigation = useNavigation();

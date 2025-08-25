@@ -8,8 +8,10 @@ import { Container } from "../../components/global_components/containers/general
 import { Delete_Plus_Label_CTA } from "../../components/calls_to_action/delete_plus_label.cta.js";
 import { Action_Container } from "../../components/global_components/containers/general_containers.js";
 import { Text } from "../../infrastructure/typography/text.component.js";
-
+import { Squared_action_CTA_component } from "../../components/calls_to_action/squared_action.cta.js";
+import SuccessIcon from "../../../assets/my-icons/success_icon.svg";
 import { VoiceRecentClipsContext } from "../../infrastructure/services/voice_recents/voice_recent.context.js";
+import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
 
 export default function Delete_Item_View({ route }) {
   const { item_id, user_id, item_to_delete_label } = route.params;
@@ -60,28 +62,26 @@ export default function Delete_Item_View({ route }) {
           // color={theme.colors.bg.elements_bg}
           color={theme.colors.bg.screens_bg}
         >
-          <Action_Container
-            width={"60%"}
-            height={"10%"}
+          <Container
+            width={"100%"}
+            height={"92%"}
             align="center"
             justify="center"
-            color={theme.colors.ui.success}
-            //   border_radius="60px"
-            onPress={() => {
+            color={theme.colors.bg.elements_bg}
+          >
+            <SuccessIcon width={80} height={80} />
+            <Spacer position="top" size="medium" />
+            <Text variant="dm_sans_bold_20">Deleted successfully...</Text>
+          </Container>
+          <Squared_action_CTA_component
+            label="Back"
+            action={() => {
               setDeletedStatus(false);
-              //   navigation.goBack();
               navigation.popToTop();
             }}
-            style={{
-              shadowColor: "#000", // iOS shadow color
-              shadowOffset: { width: 1, height: 2 }, // iOS shadow offset
-              shadowOpacity: 0.25, // iOS shadow opacity
-              shadowRadius: 3.84, // iOS shadow radius
-              elevation: 10, // Android shadow
-            }}
-          >
-            <Text variant="dm_sans_bold_20_white">Deleted</Text>
-          </Action_Container>
+            icon_visible={false}
+            height="8%"
+          />
         </Container>
       )}
     </SafeArea>

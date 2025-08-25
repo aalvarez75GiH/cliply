@@ -111,7 +111,7 @@ export const Transcripted_Clips_Tile = ({
             bottom: 20,
           }}
         >
-          <Container
+          <Action_Container
             width="100%"
             height="70%"
             align="center"
@@ -122,6 +122,7 @@ export const Transcripted_Clips_Tile = ({
                 ? theme.colors.ui.success
                 : theme.colors.bg.elements_bg
             }
+            onPress={() => copy_message_action()}
           >
             {/* ***************** MESSAGE CONTENT  *********** */}
             {
@@ -149,7 +150,7 @@ export const Transcripted_Clips_Tile = ({
                 </Text>
               </Container>
             }
-          </Container>
+          </Action_Container>
           {/* ***************** FOOTER 1 *********** */}
           {!copiedMessage && (
             <Container
@@ -214,8 +215,8 @@ export const Transcripted_Clips_Tile = ({
                   color={theme.colors.bg.elements_bg}
                 >
                   <CopyPaste_icon
-                    width="40px"
-                    height="40px"
+                    width="30px"
+                    height="30px"
                     fill={theme.colors.text.middle_screens_text}
                   />
                 </Action_Container>

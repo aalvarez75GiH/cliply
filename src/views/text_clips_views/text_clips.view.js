@@ -27,7 +27,7 @@ export default function Text_Clips_View({ navigation }) {
   };
 
   return (
-    <SafeArea background_color={theme.colors.bg.screens_bg}>
+    <SafeArea background_color={theme.colors.bg.elements_bg}>
       <Container
         width="100%"
         height={"100%"}

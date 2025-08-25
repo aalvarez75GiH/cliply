@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import * as Clipboard from "expo-clipboard";
+import React from "react";
 import { Platform } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -11,17 +10,11 @@ import {
 import { theme } from "../../infrastructure/theme/index.js";
 import { Spacer } from "../global_components/optimized.spacer.component.js";
 
-export const Recent_clips_Tile = ({
-  item,
-  globalLanguage,
-  selectedItemId,
-  onSelect,
-}) => {
+export const Recent_clips_Tile = ({ item, globalLanguage }) => {
   //   *******************************************************
   const { summary_en, summary_es, message_id, specific } = item;
   console.log("ITEM:", JSON.stringify(item, null, 2));
 
-  const isSelected = selectedItemId === message_id;
   const navigation = useNavigation();
   //   *******************************************************
 

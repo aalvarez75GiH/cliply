@@ -25,7 +25,7 @@ export const Quickies_Tile = ({
   const isSelected = selectedItemId === quicky_id;
   const [isLoading, setIsLoading] = useState(false);
   //   *******************************************************
-  const copy_quicky_action = async (item) => {
+  const copy_quicky_action = async () => {
     setIsLoading(true);
     setTimeout(async () => {
       await Clipboard.setStringAsync(
@@ -58,6 +58,7 @@ export const Quickies_Tile = ({
       {!isLoading && (
         <Action_Container
           width={Platform.OS === "ios" ? "400px" : "90%"}
+          //   width={"140px"}
           height="130px"
           align="center"
           justify="flex-start"

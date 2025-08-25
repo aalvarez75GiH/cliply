@@ -3,7 +3,6 @@ import {
   createBottomTabNavigator,
   BottomTabBar,
 } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
 import { Voice_and_recent_navigator } from "./voice_recent.navigator";
@@ -13,31 +12,9 @@ import { Text_Clips_Navigator } from "./text_clips.navigator";
 import KeyBoardIcon from "../../../assets/my-icons/keyboard.svg";
 import MessagesIcon from "../../../assets/my-icons/Messages_icon.svg";
 import MicIcon from "../../../assets/my-icons/micIcon.svg";
-import { Quickies_CTA } from "../../components/calls_to_action/quickies.cta";
+import { Back_Bottom_Bar } from "../../components/bottom_bars/back_bottom_bar";
 
 const Tab = createBottomTabNavigator();
-
-const createScreenOptions = ({ route }) => {
-  let iconName;
-
-  switch (route.name) {
-    case "Home":
-      iconName = "home";
-      break;
-    case "Messages":
-      iconName = "home-outline";
-      break;
-    case "Type":
-      iconName = "home-outline";
-      break;
-  }
-
-  return {
-    tabBarIcon: ({ color, size }) => (
-      <MaterialCommunityIcons name={iconName} color={color} size={size} />
-    ),
-  };
-};
 
 const tabBarListeners = ({ navigation, route }) => ({
   tabPress: () => navigation.navigate(route.name),
@@ -61,19 +38,18 @@ const ConditionalTabBar = (props) => {
   const currentTabRoute = props.state.routes[props.state.index];
   const nestedName = getActiveRouteName(currentTabRoute);
 
-  const showQuickies =
-    currentTabRoute.name === "Home" &&
-    nestedName === "Clips_by_Operations_And_Status_View";
+  const BackBottomBar =
+    (currentTabRoute.name === "Home" &&
+      nestedName === "Clips_by_Operations_And_Status_View") ||
+    nestedName === "Quickies_Text_Clips_View";
 
-  if (showQuickies) {
+  if (BackBottomBar) {
     // render your custom bar instead of the default one
-    return <Quickies_CTA />;
+    return <Back_Bottom_Bar />;
   }
 
   return <BottomTabBar {...props} />;
 };
-// const focused = getFocusedRouteNameFromRoute(route) ?? "Home_View";
-// const hideTab = focused === "Clips_by_Operations_And_Status_View";
 
 export const AppNavigator = () => {
   return (

@@ -1,16 +1,3 @@
-// export const fonts = {
-//   regular: "DM-Sans-Regular",
-//   medium: "DM-Sans-Medium",
-//   semi_bold: "DM-Sans-semiBold",
-//   bold: "DM-Sans-Bold",
-// };
-// export const fonts = {
-//   regular: "DMSans_400Regular",
-//   medium: "DM-Sans-Medium",
-//   semi_bold: "DMSans_700Bold",
-//   bold: "DM-Sans-Bold",
-// };
-
 export const fonts = {
   regular: "DMSans_400Regular",
   medium: "DMSans_500Medium",
@@ -42,6 +29,8 @@ export const fontSizes = {
   en_es_cta: "14px",
   bottom_tab_bar: "12px",
   menu_tiles_caption: "14px",
+  dm_sans_bold_28: "28px",
+  dm_sans_bold_26: "26px",
   dm_sans_bold_24: "24px",
   dm_sans_bold_20: "20px",
   dm_sans_bold_18: "18px",

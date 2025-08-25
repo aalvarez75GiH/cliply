@@ -7,12 +7,6 @@ const defaultTextStyles = (theme) => `
   
 `;
 
-const summary_tile_caption = (theme) => `
-    font-size: ${theme.fontSizes.summary_tile_text};
-    font-family: ${theme.fonts.bold};
-    text-align: center;
-    
-    `;
 const logo_caption = (theme) => `
     font-size: ${"20px"};
     font-family: ${theme.fonts.bold};
@@ -130,7 +124,30 @@ const menu_sub_title_text_2 = (theme) => `
         font-family: ${theme.fonts.bold};
         color: ${theme.colors.text.primary};
     `;
+const summary_tile_caption = (theme) => `
+        font-size: ${theme.fontSizes.summary_tile_text};
+        font-family: ${theme.fonts.bold};
+        text-align: center;
+        
+        `;
 // ****************************************************************************
+const dm_sans_bold_28 = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_bold_28};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.primary};
+    `;
+const dm_sans_bold_28_centered = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_bold_28};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.primary};
+    text-align: center;
+    `;
+const dm_sans_bold_26_centered = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_bold_26};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.primary};
+    text-align: center;
+    `;
 const dm_sans_bold_24 = (theme) => `
     font-size: ${theme.fontSizes.dm_sans_bold_24};
     font-family: ${theme.fonts.bold};
@@ -161,6 +178,12 @@ const dm_sans_bold_18_white = (theme) => `
     font-family: ${theme.fonts.bold};
     color: ${theme.colors.text.secondary};
     `;
+const dm_sans_bold_18_white_centered = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_bold_18};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.secondary};
+    text-align: center;
+    `;
 const dm_sans_bold_16 = (theme) => `
     font-size: ${theme.fontSizes.dm_sans_bold_16};
     font-family: ${theme.fonts.bold};
@@ -170,6 +193,12 @@ const dm_sans_bold_16_white = (theme) => `
     font-size: ${theme.fontSizes.dm_sans_bold_16};
     font-family: ${theme.fonts.bold};
     color: ${theme.colors.text.secondary};
+    `;
+const dm_sans_bold_16_white_centered = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_bold_16};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.secondary};
+    text-align: center;
     `;
 const dm_sans_bold_16_disable_not_active = (theme) => `
     font-size: ${theme.fontSizes.dm_sans_bold_16};
@@ -233,14 +262,19 @@ const variants = {
   menu_sub_title_text,
   menu_sub_title_text_2,
   message_tile_caption,
+  dm_sans_bold_28,
+  dm_sans_bold_28_centered,
+  dm_sans_bold_26_centered,
   dm_sans_bold_24,
   dm_sans_bold_24_white,
   dm_sans_bold_20,
   dm_sans_bold_20_white,
   dm_sans_bold_18,
   dm_sans_bold_18_white,
+  dm_sans_bold_18_white_centered,
   dm_sans_bold_16,
   dm_sans_bold_16_white,
+  dm_sans_bold_16_white_centered,
   dm_sans_bold_16_disable_not_active,
   dm_sans_bold_14,
   dm_sans_bold_14_white,

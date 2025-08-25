@@ -1,9 +1,11 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useContext } from "react";
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
 import { post_a_typed_message_Request } from "./type_message.requests";
-import { recent_messages } from "../../data.dummy";
+
+import { TextClipsContext } from "../home/text_clips.context";
+
 export const TypeMessageContext = createContext();
 
 export const Type_Message_ContextProvider = ({ children }) => {
@@ -11,32 +13,18 @@ export const Type_Message_ContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [messageTranslated, setMessageTranslated] = useState({});
 
-  const type_message_request = async (text_to_operate) => {
+  const { gettingUserData } = useContext(TextClipsContext);
+  const type_message_request = async (text_to_operate, user_id) => {
     setIsLoading(true);
     try {
       const encodedText = encodeURIComponent(text_to_operate);
-      console.log("TEXT INPUT VALUE AT CONTEXT:", text_to_operate);
-      const response = await post_a_typed_message_Request(encodedText);
-      console.log("RESPONSE FROM API:", JSON.stringify(response.data, null, 2));
-      const recent_message_to_add = {
-        original_message: response.data.original_message,
-        summary_en: response.data.summary_en,
-        summary_es: response.data.summary_es,
-        message_en: response.data.message_en,
-        message_es: response.data.message_es,
-        language_detected: response.data.language_detected,
-        used: 0,
-        message_id: uuidv4(),
-      };
-      console.log(
-        "RECENT_MESSAGE_TO_ADD:",
-        JSON.stringify(recent_message_to_add, null, 2)
-      );
-      recent_messages.push(recent_message_to_add);
+      const response = await post_a_typed_message_Request(encodedText, user_id);
+
       if (response.data) {
-        setMessageTranslated(recent_message_to_add);
+        setMessageTranslated(response.data);
         setResponse(response.data);
         setIsLoading(false);
+        gettingUserData(user_id);
       }
     } catch (error) {
       console.log("Error in type_message_request:", error);

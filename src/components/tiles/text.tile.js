@@ -31,9 +31,7 @@ export const Text_Tile = ({
           color={color}
         >
           <Spacer position="left" size="extraLarge">
-            {/* <Spacer position="top" size="large" /> */}
             <Text variant="dm_sans_bold_20">{caption_1}</Text>
-            {/* <Text variant="dm_sans_bold_14_disable_not_active"> */}
             <Text variant="dm_sans_bold_14">{caption_2}</Text>
           </Spacer>
         </Container>
