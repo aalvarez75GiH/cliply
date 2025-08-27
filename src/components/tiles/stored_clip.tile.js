@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import * as Clipboard from "expo-clipboard";
 import { ActivityIndicator, Platform } from "react-native";
 import * as IntentLauncher from "expo-intent-launcher";
+import { Linking } from "react-native";
 
 import { Text } from "../../infrastructure/typography/text.component.js";
 import { EN_ES_CTA_component } from "../calls_to_action/en_es.cta.js";
@@ -77,7 +78,7 @@ export const Stored_Clips_Tile = ({
     <>
       {isLoading && (
         <Container
-          width={Platform.OS === "ios" ? "410px" : "100%"}
+          width={Platform.OS === "ios" ? "400px" : "100%"}
           height="210px"
           color={"#FFFFFF"}
           justify="center"
@@ -88,7 +89,7 @@ export const Stored_Clips_Tile = ({
       )}
       {!isLoading && (
         <Container
-          width={Platform.OS === "ios" ? "410px" : "100%"}
+          width={Platform.OS === "ios" ? "400px" : "100%"}
           height="210px"
           align="center"
           justify="flex-start"
@@ -180,7 +181,6 @@ export const Stored_Clips_Tile = ({
                   isSelected={isSelected}
                 />
               </Container>
-              <Spacer position="left" size="extraLarge" />
 
               <Action_Container
                 width="30%"

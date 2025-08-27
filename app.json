@@ -16,6 +16,7 @@
       "supportsTablet": true,
       "infoPlist": {
         "LSApplicationQueriesSchemes": [
+          "uber",
           "uberdriver",
           "uber-partner",
           "lyftdriver",

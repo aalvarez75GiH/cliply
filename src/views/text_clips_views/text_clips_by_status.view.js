@@ -22,7 +22,6 @@ import {
 } from "../../infrastructure/local_data/clips_by_operations.data";
 import { Add_intro_CTA } from "../../components/calls_to_action/add_intro.cta";
 
-// import { MessagesContext } from "../../infrastructure/services/messages/messages.context";
 import { TextClipsContext } from "../../infrastructure/services/home/text_clips.context";
 
 export default function Text_Clips_by_Status_View({ navigation, route }) {
@@ -99,41 +98,6 @@ export default function Text_Clips_by_Status_View({ navigation, route }) {
     };
   }, []);
 
-  //   useEffect(() => {
-  //     if (
-  //       operationDataMap &&
-  //       operationDataMap[0] &&
-  //       operationDataMap[0].operation_status
-  //     ) {
-  //       const operationStatuses = operationDataMap[0].operation_status;
-
-  //       const statusData = operationStatuses.find(
-  //         (st) => st.status_name === status_name
-  //       );
-
-  //       console.log("STATUS DATA FOUND:", statusData);
-
-  //       if (statusData) {
-  //         setDataToRender(statusData.stored_messages || []);
-  //         set_Headers_Caption(caption);
-  //       } else {
-  //         console.warn(`Status "${status_name}" not found in user data.`);
-  //         setDataToRender([]);
-  //         set_Headers_Caption("Category Not Found");
-  //       }
-  //     } else {
-  //       console.warn("User data or operation_status is missing.");
-  //     }
-
-  //     // Cleanup function to set state when leaving the view
-  //     return () => {
-  //       setDataToRender([]); // Reset data or set any state you want
-  //       set_Headers_Caption(""); // Reset headers or perform other cleanup
-  //       setSelectedItemId(null); // Clear selected item ID on exit
-  //       setIntroAdded(false); // Reset intro added state
-  //     };
-  //   }, [food_delivery_operation, status_name]);
-
   return (
     <SafeArea background_color={theme.colors.bg.elements_bg}>
       <Container
@@ -144,7 +108,7 @@ export default function Text_Clips_by_Status_View({ navigation, route }) {
         // style={{ flex: 1, paddingBottom: insets.bottom || 50 }}
       >
         <ExitHeader navigation={navigation} />
-        <Text_Clips_By_Status_Sub_Header caption={headers_caption} />
+        <Text_Clips_By_Status_Sub_Header caption={caption} />
         <Add_intro_CTA introAdded={introAdded} setIntroAdded={setIntroAdded} />
 
         <Container

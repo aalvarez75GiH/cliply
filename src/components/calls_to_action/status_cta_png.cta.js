@@ -63,8 +63,7 @@ export const Status_CTA_PNG = ({
             borderTopRightRadius: 0,
             borderBottomRightRadius: 0,
           }}
-          resizeMode="cover"
-          //   contentFit="cover"
+          contentFit="cover"
         />
       </Container>
       <Container
@@ -73,27 +72,10 @@ export const Status_CTA_PNG = ({
         justify="center"
         align="center"
         color="transparent"
-        //color="red"
         direction="colum"
-        border_radius="10px"
+        border_radius_top_right="10px"
+        border_radius_bottom_right="10px"
       >
-        {/* <Container
-          width="100%"
-          height="20%"
-          color="transparent"
-          justify="center"
-          //   align="space-around"
-          align="flex-start"
-        >
-          <Spacer position="left" size="medium">
-            <Circular_Step_Indicator
-              width={"20px"}
-              height={"20px"}
-              caption={step_number}
-              color={"#FFFFFF"}
-            />
-          </Spacer>
-        </Container> */}
         <Spacer position="bottom" size="medium" />
         <Spacer position="left" size="medium">
           <Text variant="dm_sans_bold_14_white">{caption_1}</Text>
@@ -125,23 +107,6 @@ export const Status_CTA_PNG = ({
         direction="column"
         border_radius="10px"
       >
-        {/* <Container
-          width="100%"
-          height="20%"
-          color="transparent"
-          justify="center"
-          align="flex-end"
-        >
-          <Spacer position="right" size="medium">
-            <Circular_Step_Indicator
-              width={"20px"}
-              height={"20px"}
-              caption={step_number}
-              color={"#FFFFFF"}
-            />
-          </Spacer>
-
-        </Container> */}
         <Spacer position="bottom" size="medium" />
         <Spacer position="left" size="medium">
           <Text variant="dm_sans_bold_14_white">{caption_1}</Text>
