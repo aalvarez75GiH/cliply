@@ -57,18 +57,19 @@ export const GlobalContextProvider = ({ children }) => {
   };
 
   const user = {
-    first_name: "Arnoldo",
-    last_name: "Alvarez",
-    email: "arnoldo.alvarez75@yahoo.com",
-    display_name: "Arnoldo",
+    first_name: "Kris",
+    last_name: "Summers",
+    email: "kris@gmail.com",
+    display_name: "Kris",
     isFirstTime: true,
     role: "user",
-    uid: "onQniDL2rsSCzspat9HS8BRBbIG2",
+    uid: "ynQniDL2rsSCzspat9HS8BRBbIG2",
     updatedAt: "2025-08-31T17:23:42.556Z",
     createdAt: "2025-08-31T17:23:42.556Z",
-    user_id: "3cfccb6c-b4d7-4582-b183-940606a9469f",
-    phone_number: "(706)612.46.02",
+    user_id: "243d274f-11fb-4695-b714-27f4b5104e44",
+    phone_number: "(706)352.84.46",
   };
+
   // This context is currently empty, but can be expanded in the future
   return (
     <GlobalContext.Provider

@@ -19,12 +19,16 @@ export const Type_Message_ContextProvider = ({ children }) => {
     try {
       const encodedText = encodeURIComponent(text_to_operate);
       const response = await post_a_typed_message_Request(encodedText, user_id);
-
-      if (response.data) {
+      console.log("RESPONSE AT TYPE MESSAGE CONTEXT:", response);
+      if (response.status === 200) {
         setMessageTranslated(response.data);
         setResponse(response.data);
         setIsLoading(false);
         gettingUserData(user_id);
+      } else {
+        setIsLoading(false);
+        setResponse(null);
+        console.log("Failed to get a valid response:", response.status);
       }
     } catch (error) {
       console.log("Error in type_message_request:", error);

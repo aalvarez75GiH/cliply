@@ -42,7 +42,8 @@
     "uuid": "^11.1.0",
     "uuidv4": "^6.2.13",
     "expo-image": "~2.4.0",
-    "expo-asset": "~11.1.7"
+    "expo-asset": "~11.1.7",
+    "expo-intent-launcher": "~12.1.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

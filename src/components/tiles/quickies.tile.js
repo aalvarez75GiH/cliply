@@ -46,7 +46,7 @@ export const Quickies_Tile = ({
         <Container
           // style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}
           //   width="410px"
-          width={Platform.OS === "ios" ? "400px" : "100%"}
+          width={Platform.OS === "ios" ? "400px" : "400px"}
           height="130px"
           color={"#FFFFFF"}
           justify="center"
@@ -56,100 +56,109 @@ export const Quickies_Tile = ({
         </Container>
       )}
       {!isLoading && (
-        <Action_Container
-          width={Platform.OS === "ios" ? "400px" : "90%"}
-          //   width={"140px"}
-          height="130px"
-          align="center"
-          justify="flex-start"
-          //   color={theme.colors.bg.elements_bg}
-          color={
-            isSelected ? theme.colors.ui.success : theme.colors.bg.elements_bg
-          }
-          //color={"#FFE299"}
-          //color={"red"}
-          style={{
-            shadowColor: "#000", // iOS shadow color
-            shadowOffset: { width: 0, height: 2 }, // iOS shadow offset
-            shadowOpacity: 0.25, // iOS shadow opacity
-            shadowRadius: 3.84, // iOS shadow radius
-            elevation: 5, // Android shadow
-          }}
-          onPress={() => copy_quicky_action(item)}
-        >
-          <Container
-            width="100%"
-            height="50%"
-            align="center"
-            justify="center"
-            direction="row"
-            // color={theme.colors.bg.elements_bg}
-            color={
-              isSelected ? theme.colors.ui.success : theme.colors.bg.elements_bg
-            }
-            //color={"#FFE299"}
-          >
-            <Container
-              width="100%"
-              height="100%"
-              align="flex-end"
-              justify="center"
-              direction="row"
+        <>
+          <Spacer position="left" size="small">
+            <Action_Container
+              width={"99%"}
+              height="130px"
+              align="center"
+              justify="flex-start"
               //   color={theme.colors.bg.elements_bg}
               color={
                 isSelected
                   ? theme.colors.ui.success
                   : theme.colors.bg.elements_bg
               }
+              //color={"#FFE299"}
               //color={"red"}
+              style={{
+                shadowColor: "#000", // iOS shadow color
+                shadowOffset: { width: 0, height: 2 }, // iOS shadow offset
+                shadowOpacity: 0.25, // iOS shadow opacity
+                shadowRadius: 3.84, // iOS shadow radius
+                elevation: 5, // Android shadow
+              }}
+              onPress={() => copy_quicky_action(item)}
             >
-              {globalLanguage === "ES" && (
-                <Text
-                  //   variant="dm_sans_bold_24"
-                  variant={
-                    isSelected ? "dm_sans_bold_20_white" : "dm_sans_bold_20"
+              <Container
+                width="100%"
+                height="50%"
+                align="center"
+                justify="center"
+                direction="row"
+                // color={theme.colors.bg.elements_bg}
+                color={
+                  isSelected
+                    ? theme.colors.ui.success
+                    : theme.colors.bg.elements_bg
+                }
+                //color={"#FFE299"}
+              >
+                <Container
+                  width="100%"
+                  height="100%"
+                  align="flex-end"
+                  justify="center"
+                  direction="row"
+                  //   color={theme.colors.bg.elements_bg}
+                  color={
+                    isSelected
+                      ? theme.colors.ui.success
+                      : theme.colors.bg.elements_bg
                   }
-                  numberOfLines={1}
-                  style={{ textAlign: "right" }}
+                  //color={"red"}
                 >
-                  "{quicky_es}"
-                </Text>
-              )}
-              {globalLanguage === "EN" && (
-                <Text
-                  variant={
-                    isSelected ? "dm_sans_bold_20_white" : "dm_sans_bold_20"
-                  }
-                  numberOfLines={1}
-                  style={{ textAlign: "right" }}
-                >
-                  "{quicky_en}"
-                </Text>
-              )}
-            </Container>
-          </Container>
+                  {globalLanguage === "ES" && (
+                    <Text
+                      //   variant="dm_sans_bold_24"
+                      variant={
+                        isSelected ? "dm_sans_bold_20_white" : "dm_sans_bold_20"
+                      }
+                      numberOfLines={1}
+                      style={{ textAlign: "right" }}
+                    >
+                      "{quicky_es}"
+                    </Text>
+                  )}
+                  {globalLanguage === "EN" && (
+                    <Text
+                      variant={
+                        isSelected ? "dm_sans_bold_20_white" : "dm_sans_bold_20"
+                      }
+                      numberOfLines={1}
+                      style={{ textAlign: "right" }}
+                    >
+                      "{quicky_en}"
+                    </Text>
+                  )}
+                </Container>
+              </Container>
 
-          <Container
-            width="100%"
-            height="50%"
-            align="center"
-            justify="flex-end"
-            color={
-              isSelected ? theme.colors.ui.success : theme.colors.bg.elements_bg
-            }
-            // color={"blue"}
-            direction="row"
-          >
-            {!isSelected && (
-              <CopyPaste_icon
-                width="30px"
-                height="30px"
-                fill={theme.colors.text.middle_screens_text}
-              />
-            )}
-            <Spacer position="right" size="large" />
-          </Container>
-        </Action_Container>
+              <Container
+                width="100%"
+                height="50%"
+                align="center"
+                justify="flex-end"
+                color={
+                  isSelected
+                    ? theme.colors.ui.success
+                    : theme.colors.bg.elements_bg
+                }
+                // color={"blue"}
+                direction="row"
+              >
+                {!isSelected && (
+                  <CopyPaste_icon
+                    width="30px"
+                    height="30px"
+                    fill={theme.colors.text.middle_screens_text}
+                  />
+                )}
+                <Spacer position="right" size="large" />
+              </Container>
+            </Action_Container>
+          </Spacer>
+        </>
       )}
     </>
   );

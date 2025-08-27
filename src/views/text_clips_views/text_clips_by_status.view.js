@@ -33,7 +33,31 @@ export default function Text_Clips_by_Status_View({ navigation, route }) {
     setSelectedItemId,
     introAdded,
     setIntroAdded,
+    userData,
   } = useContext(TextClipsContext);
+
+  const { global_operations } = userData;
+  const { statuses } = global_operations.find(
+    (op) => op.operation_name === operation
+  ) || { statuses: [] };
+  const status_to_render = statuses.find(
+    (st) => st.status_name === status_name
+  );
+  console.log(
+    "GLOBAL OPERATIONS AT TEXT CLIPS VIEW:",
+    JSON.stringify(global_operations, null, 2)
+  );
+  console.log(
+    "STATUSES AT TEXT CLIPS VIEW:",
+    JSON.stringify(statuses, null, 2)
+  );
+  console.log(
+    "STATUS NAME AT TEXT CLIPS VIEW:",
+    JSON.stringify(status_to_render, null, 2)
+  );
+
+  const [dataToRender, setDataToRender] = useState([]);
+  const [headers_caption, set_Headers_Caption] = useState("");
 
   const { food_delivery_operation } = food_delivery_operation_data;
   const { ride_share_operation } = ride_share_operation_data;
@@ -43,34 +67,28 @@ export default function Text_Clips_by_Status_View({ navigation, route }) {
       ? food_delivery_operation
       : ride_share_operation;
 
-  const [dataToRender, setDataToRender] = useState([]);
-  const [headers_caption, set_Headers_Caption] = useState("");
-
   useEffect(() => {
-    if (
-      operationDataMap &&
-      operationDataMap[0] &&
-      operationDataMap[0].operation_status
-    ) {
-      const operationStatuses = operationDataMap[0].operation_status;
+    const { global_operations } = userData;
+    const { statuses } = global_operations.find(
+      (op) => op.operation_name === operation
+    ) || { statuses: [] };
+    const status_to_render = statuses.find(
+      (st) => st.status_name === status_name
+    );
+    console.log(
+      "GLOBAL OPERATIONS AT TEXT CLIPS VIEW:",
+      JSON.stringify(global_operations, null, 2)
+    );
+    console.log(
+      "STATUSES AT TEXT CLIPS VIEW:",
+      JSON.stringify(statuses, null, 2)
+    );
+    console.log(
+      "STATUS NAME AT TEXT CLIPS VIEW:",
+      JSON.stringify(status_to_render, null, 2)
+    );
 
-      const statusData = operationStatuses.find(
-        (st) => st.status_name === status_name
-      );
-
-      console.log("STATUS DATA FOUND:", statusData);
-
-      if (statusData) {
-        setDataToRender(statusData.stored_messages || []);
-        set_Headers_Caption(caption);
-      } else {
-        console.warn(`Status "${status_name}" not found in user data.`);
-        setDataToRender([]);
-        set_Headers_Caption("Category Not Found");
-      }
-    } else {
-      console.warn("User data or operation_status is missing.");
-    }
+    setDataToRender(status_to_render.stored_messages || []);
 
     // Cleanup function to set state when leaving the view
     return () => {
@@ -79,7 +97,42 @@ export default function Text_Clips_by_Status_View({ navigation, route }) {
       setSelectedItemId(null); // Clear selected item ID on exit
       setIntroAdded(false); // Reset intro added state
     };
-  }, [food_delivery_operation, status_name]);
+  }, []);
+
+  //   useEffect(() => {
+  //     if (
+  //       operationDataMap &&
+  //       operationDataMap[0] &&
+  //       operationDataMap[0].operation_status
+  //     ) {
+  //       const operationStatuses = operationDataMap[0].operation_status;
+
+  //       const statusData = operationStatuses.find(
+  //         (st) => st.status_name === status_name
+  //       );
+
+  //       console.log("STATUS DATA FOUND:", statusData);
+
+  //       if (statusData) {
+  //         setDataToRender(statusData.stored_messages || []);
+  //         set_Headers_Caption(caption);
+  //       } else {
+  //         console.warn(`Status "${status_name}" not found in user data.`);
+  //         setDataToRender([]);
+  //         set_Headers_Caption("Category Not Found");
+  //       }
+  //     } else {
+  //       console.warn("User data or operation_status is missing.");
+  //     }
+
+  //     // Cleanup function to set state when leaving the view
+  //     return () => {
+  //       setDataToRender([]); // Reset data or set any state you want
+  //       set_Headers_Caption(""); // Reset headers or perform other cleanup
+  //       setSelectedItemId(null); // Clear selected item ID on exit
+  //       setIntroAdded(false); // Reset intro added state
+  //     };
+  //   }, [food_delivery_operation, status_name]);
 
   return (
     <SafeArea background_color={theme.colors.bg.elements_bg}>

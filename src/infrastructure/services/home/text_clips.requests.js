@@ -27,9 +27,9 @@ export const post_a_voice_message_Request = async (audioBuffer, user_id) => {
 };
 
 export const get_User_Data_Request = async (user_id) => {
-  const { usersEndPoint } = environment;
+  const { usersDataEndPoint } = environment;
   return await axios
-    .get(`${usersEndPoint}/userDataByUserId?user_id=${user_id}`)
+    .get(`${usersDataEndPoint}/userDataByUserId?user_id=${user_id}`)
     .then((response) => {
       return response;
     })

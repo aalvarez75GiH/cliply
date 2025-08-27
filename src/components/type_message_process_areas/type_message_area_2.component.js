@@ -5,8 +5,6 @@ import { Container } from "../global_components/containers/general_containers.js
 import { theme } from "../../infrastructure/theme/index.js";
 import { HomeHeader } from "../headers/home_header.component.js";
 import { Transcripted_Clips_Tile } from "../tiles/transcripted_clip.tile.js";
-import { Rounded_Ctas_Belt } from "../belts/rounded_ctas_belt.component.js";
-import { SemiRounded_Clear_CTA } from "../calls_to_action/semi_rounded_clear.cta.js";
 import { Squared_action_CTA_component } from "../calls_to_action/squared_action.cta.js";
 import { Spacer } from "../global_components/optimized.spacer.component.js";
 
@@ -15,7 +13,6 @@ export const Type_message_process_area_2 = ({
   message_es,
   original_message,
   language_detected,
-  setResponse,
   action_1,
   action_2,
 }) => {

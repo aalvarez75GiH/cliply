@@ -16,6 +16,7 @@ import { Sound_Wave_Component } from "../../components/operations_components/sou
 import { Home_process_area_4 } from "../../components/home_process_areas/home_process_area_4.component.js";
 import { Transcripted_Text_Clip_View } from "./transcripted_text_clip.view.js";
 import { Text_Tile } from "../../components/tiles/text.tile.js";
+import { Text } from "../../infrastructure/typography/text.component.js";
 
 export default function Voice_and_recent_View({ navigation }) {
   const {
@@ -27,7 +28,7 @@ export default function Voice_and_recent_View({ navigation }) {
     //   stopRecording,
     userData,
   } = useContext(TextClipsContext);
-  const { recent_messages } = userData[0] || { recent_messages: [] };
+  const { recent_messages } = userData || { recent_messages: [] };
   const {
     renderRecentClipsTile,
     startRecording,
@@ -103,6 +104,25 @@ export default function Voice_and_recent_View({ navigation }) {
                   />
                 </>
               )}
+              {!recent_messages.length && (
+                <>
+                  <Container
+                    width="100%"
+                    height="100%"
+                    justify="center"
+                    align="center"
+                    color={theme.colors.bg.screens_bg}
+                  >
+                    <Text
+                      variant="middle_screens_caption"
+                      style={{ fontSize: 28 }}
+                    >
+                      No Recent Messages!!
+                    </Text>
+                    <Spacer position="bottom" size="extraLarge" />
+                  </Container>
+                </>
+              )}
             </Container>
           </Container>
         )}
@@ -134,8 +154,8 @@ export default function Voice_and_recent_View({ navigation }) {
 
         {response && recordingStatus === "idle" && (
           <Transcripted_Text_Clip_View
-            message_en={response.message_en}
-            message_es={response.message_es}
+            message_en={response.body.en}
+            message_es={response.body.es}
             language_detected={response.language_detected}
             action_1={() => null}
             action_2={() => setResponse(null)}

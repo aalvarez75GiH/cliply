@@ -2,13 +2,9 @@ import React, { useState, useRef, useCallback, useContext } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 
-// import { Type_Message_Header } from "../../components/headers/type_message.header";
 import { SafeArea } from "../../components/global_components/safe-area.component";
 import { theme } from "../../infrastructure/theme/index";
-import {
-  Flex_Container,
-  Container,
-} from "../../components/global_components/containers/general_containers";
+import { Flex_Container } from "../../components/global_components/containers/general_containers";
 import { TypeMessageContext } from "../../infrastructure/services/type_message/type_message.context";
 import { Type_message_process_area_1 } from "../../components/type_message_process_areas/type_message_area_1.component";
 import { Type_message_process_area_2 } from "../../components/type_message_process_areas/type_message_area_2.component";
@@ -24,13 +20,8 @@ export default function Type_Message_View() {
     setResponse,
     messageTranslated,
   } = useContext(TypeMessageContext);
-  const { message_en, message_es, original_message, language_detected } =
-    messageTranslated;
 
   const navigation = useNavigation();
-  console.log("MESSAGE EN AT TYPE MESSAGE VIEW:", message_en);
-  console.log("MESSAGE ES AT TYPE MESSAGE VIEW:", message_es);
-  console.log("ORIGINAL MESSAGE AT TYPE MESSAGE VIEW:", original_message);
 
   const inputRef = useRef(null);
 
@@ -57,11 +48,10 @@ export default function Type_Message_View() {
         {isLoading && <Type_message_process_area_1 />}
         {!isLoading && response && (
           <Type_message_process_area_2
-            message_en={message_en}
-            message_es={message_es}
-            original_message={original_message}
-            language_detected={language_detected}
-            setResponse={setResponse}
+            message_en={messageTranslated.body.en}
+            message_es={messageTranslated.body.es}
+            original_message={messageTranslated.original_message}
+            language_detected={messageTranslated.language_detected}
             action_1={() => null}
             action_2={() => {
               setResponse(null);

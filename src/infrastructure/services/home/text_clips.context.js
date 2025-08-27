@@ -36,7 +36,7 @@ export const TextClipsContextProvider = ({ children }) => {
   };
   console.log("OPERATION at CONTEXT:", operation);
   // const recordingRef = useRef(null);
-  // console.log("USER DATA AT STATE:", JSON.stringify(userData, null, 2));
+  console.log("USER DATA AT STATE:", JSON.stringify(userData, null, 2));
 
   const renderStoredMessagesTile = ({ item }) => {
     return (

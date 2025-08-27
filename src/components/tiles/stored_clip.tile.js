@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import * as Clipboard from "expo-clipboard";
 import { ActivityIndicator, Platform } from "react-native";
+import * as IntentLauncher from "expo-intent-launcher";
 
 import { Text } from "../../infrastructure/typography/text.component.js";
 import { EN_ES_CTA_component } from "../calls_to_action/en_es.cta.js";
@@ -12,6 +13,7 @@ import CopyPaste_icon from "../../../assets/my-icons/copy_paste.svg";
 import { theme } from "../../infrastructure/theme/index.js";
 
 import { TextClipsContext } from "../../infrastructure/services/home/text_clips.context.js";
+import { Spacer } from "../global_components/optimized.spacer.component.js";
 
 export const Stored_Clips_Tile = ({
   item,
@@ -23,7 +25,8 @@ export const Stored_Clips_Tile = ({
   const [language, setLanguage] = useState(globalLanguage);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { summary_en, summary_es, message_en, message_es, message_id } = item;
+  const { summary, body, message_id } = item;
+
   console.log("ITEM:", JSON.stringify(item, null, 2));
 
   const { introAdded, setIntroAdded } = useContext(TextClipsContext);
@@ -36,20 +39,19 @@ export const Stored_Clips_Tile = ({
     }, 300);
   };
 
-  const copy_message_action = async () => {
+  const copy_message_action = async (item) => {
+    const { body, message_id } = item;
     setIsLoading(true);
     setTimeout(async () => {
       await Clipboard.setStringAsync(
         introAdded
-          ? `Hey, Your driver here. ${
-              language === "EN" ? message_en : message_es
-            }`
+          ? `Hey, Your driver here. ${language === "EN" ? body.en : body.es}`
           : language === "EN"
-          ? message_en
-          : message_es
+          ? body.en
+          : body.es
       );
 
-      console.log(`Copied to clipboard: ${message_en}`);
+      console.log(`Copied to clipboard: ${body.en}`);
       //   setIsSelected(id);
       onSelect(message_id);
       setIsLoading(false);
@@ -130,7 +132,7 @@ export const Stored_Clips_Tile = ({
                       : "dm_sans_bold_26_centered"
                   }
                 >
-                  {!isSelected ? summary_es : message_es}
+                  {!isSelected ? summary.es : body.es}
                 </Text>
               )}
               {language === "EN" && (
@@ -141,7 +143,7 @@ export const Stored_Clips_Tile = ({
                       : "dm_sans_bold_28_centered"
                   }
                 >
-                  {!isSelected ? summary_en : message_en}
+                  {!isSelected ? summary.en : body.en}
                 </Text>
               )}
             </Action_Container>
@@ -178,6 +180,8 @@ export const Stored_Clips_Tile = ({
                   isSelected={isSelected}
                 />
               </Container>
+              <Spacer position="left" size="extraLarge" />
+
               <Action_Container
                 width="30%"
                 height="65%"

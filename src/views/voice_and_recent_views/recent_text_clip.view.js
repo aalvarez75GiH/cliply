@@ -16,7 +16,8 @@ import { Platform } from "react-native";
 
 export const Recent_Text_Clip_View = (route) => {
   const { item } = route.route.params;
-  const { message_en, message_es, language_detected, message_id } = item;
+  //   const { message_en, message_es, language_detected, message_id } = item;
+  const { language_detected, message_id } = item;
   const navigation = useNavigation();
   return (
     <>
@@ -38,8 +39,8 @@ export const Recent_Text_Clip_View = (route) => {
             justify="center"
           >
             <Transcripted_Clips_Tile
-              message_en={message_en}
-              message_es={message_es}
+              message_en={item.body.en}
+              message_es={item.body.es}
               language_detected={language_detected}
               message_id={message_id}
             />
