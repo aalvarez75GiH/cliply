@@ -16,6 +16,7 @@ export const TextClipsContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [introAdded, setIntroAdded] = useState(false);
   const [operation, setOperation] = useState("food_delivery");
+
   // const [intro, setIntro] = useState("");
 
   const { userToDB, globalLanguage } = useContext(GlobalContext);
@@ -81,7 +82,6 @@ export const TextClipsContextProvider = ({ children }) => {
         operation,
         setOperation,
         renderQuickiesTile,
-        // globalLanguage,
       }}
     >
       {children}

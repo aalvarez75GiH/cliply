@@ -13,10 +13,11 @@ export const Squared_action_CTA_component = ({
   width = "100%",
   height = "12%",
   action,
-  label = "Transcribe",
+  label,
   color = theme.colors.ui.primary,
   text_variant = "transcripted_message_copied_caption",
   icon_visible = true,
+  Icon = null,
 }) => {
   return (
     <Action_Container
@@ -56,16 +57,9 @@ export const Squared_action_CTA_component = ({
         align="center"
         direction="row"
         color={color}
-        // color="blue"
+        //color="blue"
       >
-        {icon_visible && (
-          <Arrow_next_icon
-            width={20}
-            height={20}
-            fill={theme.colors.ui.secondary}
-            style={{ marginLeft: 10 }}
-          />
-        )}
+        {icon_visible && Icon}
       </Container>
     </Action_Container>
   );

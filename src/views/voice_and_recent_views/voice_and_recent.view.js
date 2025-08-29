@@ -13,21 +13,12 @@ import { VoiceRecentClipsContext } from "../../infrastructure/services/voice_rec
 import { Voice_Recording_Component } from "../../components/operations_components/voice_recording.component.js";
 import { Loading_Spinner_area } from "../../components/global_components/global_loading_spinner_area.component.js";
 import { Sound_Wave_Component } from "../../components/operations_components/sound_wave.component.js";
-import { Home_process_area_4 } from "../../components/home_process_areas/home_process_area_4.component.js";
 import { Transcripted_Text_Clip_View } from "./transcripted_text_clip.view.js";
 import { Text_Tile } from "../../components/tiles/text.tile.js";
 import { Text } from "../../infrastructure/typography/text.component.js";
 
 export default function Voice_and_recent_View({ navigation }) {
-  const {
-    //   startRecording,
-    //   recordingStatus,
-    //   response,
-    //   startTranscription,
-    //   setResponse,
-    //   stopRecording,
-    userData,
-  } = useContext(TextClipsContext);
+  const { userData } = useContext(TextClipsContext);
   const { recent_messages } = userData || { recent_messages: [] };
   const {
     renderRecentClipsTile,

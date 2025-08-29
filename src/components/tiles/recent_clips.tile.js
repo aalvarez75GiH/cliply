@@ -10,10 +10,10 @@ import {
 import { theme } from "../../infrastructure/theme/index.js";
 import { Spacer } from "../global_components/optimized.spacer.component.js";
 
-export const Recent_clips_Tile = ({ item, globalLanguage }) => {
+export const Recent_clips_Tile = ({ item, globalLanguage, date_formatted }) => {
   //   *******************************************************
   //   const { summary_en, summary_es, message_id, specific } = item;
-  const { summary, message_id, specific } = item;
+  const { summary, specific } = item;
   console.log("ITEM:", JSON.stringify(item, null, 2));
 
   const navigation = useNavigation();
@@ -143,7 +143,7 @@ export const Recent_clips_Tile = ({ item, globalLanguage }) => {
                 //numberOfLines={1}
                 style={{ textAlign: "right", textDecorationLine: "underline" }}
               >
-                08/21/25
+                {date_formatted}
               </Text>
             </Container>
           </Container>

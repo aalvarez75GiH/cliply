@@ -15,8 +15,8 @@ export const colors = {
     ctas_bg_dark: "#000000",
     highlight_color: "#FFBA08",
     highlight_color_2: "#FFE8AD",
-    food_delivery_op_color: "#0A7346",
-    ride_share_op_color: "#265697",
+    food_delivery_theme_color: "#0A7346",
+    ride_share_theme_color: "#265697",
   },
   bg: {
     screens_bg: "#F5F4F4",

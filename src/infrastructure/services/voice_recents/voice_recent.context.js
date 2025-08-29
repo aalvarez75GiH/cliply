@@ -13,6 +13,7 @@ import { Spacer } from "../../../components/global_components/optimized.spacer.c
 import { Recent_clips_Tile } from "../../../components/tiles/recent_clips.tile";
 import { post_a_voice_message_Request } from "../voice_recents/voice_recent.requests";
 import { deleteRecentTextClipRequest } from "../voice_recents/voice_recent.requests";
+import { posting_new_text_clip_request } from "./voice_recent.requests";
 
 import { GlobalContext } from "../global/global.context";
 import { TextClipsContext } from "../home/text_clips.context";
@@ -20,22 +21,38 @@ import { TextClipsContext } from "../home/text_clips.context";
 export const VoiceRecentClipsContext = createContext();
 
 export const VoiceRecentClipsContextProvider = ({ children }) => {
+  const { gettingUserData, operation } = useContext(TextClipsContext);
+  const { globalLanguage, userToDB } = useContext(GlobalContext);
+  const { user_id } = userToDB || {}; // Ensure userToDB is not undefined or null
+
   const [isLoading, setIsLoading] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [response, setResponse] = useState(null);
   const [recordingStatus, setRecordingStatus] = useState("idle");
   const [recording, setRecording] = useState(null);
   const [deletedStatus, setDeletedStatus] = useState(false);
-
-  const { gettingUserData } = useContext(TextClipsContext);
-  const { globalLanguage, userToDB } = useContext(GlobalContext);
-  const { user_id } = userToDB || {}; // Ensure userToDB is not undefined or null
+  const [textClip_data_to_upload, setTextClip_data_to_upload] = useState({
+    user_id: user_id,
+    operation_name: operation,
+    status_name: "",
+    new_message: {},
+  });
 
   useEffect(() => {
     return () => {
       setDeletedStatus(false);
     };
   }, [user_id]);
+
+  const text_clip_data_initialState = {
+    user_id: user_id,
+    operation_name: "food_delivery",
+    status_name: "",
+    new_message: {},
+  };
+  const resetState = () => {
+    setTextClip_data_to_upload(text_clip_data_initialState);
+  };
 
   const recordingRef = useRef(null);
 
@@ -107,16 +124,23 @@ export const VoiceRecentClipsContextProvider = ({ children }) => {
     }
   };
 
+  const formattedDate = (createdAt) => {
+    const date = new Date(createdAt);
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
+    const day = String(date.getDate()).padStart(2, "0");
+    const year = String(date.getFullYear()).slice(-2); // Get last two digits of the year
+    return `${month}/${day}/${year}`;
+  };
+
   const renderRecentClipsTile = ({ item }) => {
+    const { createdAt } = item;
+    const date_formatted = formattedDate(createdAt);
     return (
       <Spacer position="bottom" size="medium">
         <Recent_clips_Tile
           item={item}
           globalLanguage={globalLanguage}
-          setIsLoading={setIsLoading}
-          selectedItemId={selectedItemId}
-          onSelect={setSelectedItemId}
-          isLoading={isLoading}
+          date_formatted={date_formatted}
         />
       </Spacer>
     );
@@ -158,6 +182,31 @@ export const VoiceRecentClipsContextProvider = ({ children }) => {
     }
   };
 
+  const posting_new_text_clip_to_upload = async (new_text_clip) => {
+    setIsLoading(true);
+    try {
+      const response = await posting_new_text_clip_request(new_text_clip);
+      console.log("RESPONSE AT POSTING NEW TEXT CLIP TO UPLOAD:", response);
+
+      if (response.status === 404) {
+        gettingUserData(user_id);
+        console.log("No matching record found to delete.");
+      }
+      if (response.status === 500) {
+        console.log("An error occurred while deleting the recent message.");
+      }
+      if (response.status === 201) {
+        console.log("Text Clip added successfully.");
+        gettingUserData(user_id);
+        return response.status;
+      }
+    } catch (error) {
+      console.error("Error posting new text clip:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <VoiceRecentClipsContext.Provider
       value={{
@@ -176,6 +225,10 @@ export const VoiceRecentClipsContextProvider = ({ children }) => {
         delete_one_recent_clip,
         deletedStatus,
         setDeletedStatus,
+        setTextClip_data_to_upload,
+        textClip_data_to_upload,
+        resetState,
+        posting_new_text_clip_to_upload,
       }}
     >
       {children}

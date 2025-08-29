@@ -16,7 +16,7 @@ export const Circular_Step_Indicator = ({ width, height, caption, color }) => {
       align="center"
       justify="center"
     >
-      <Text variant="dm_sans_bold_12" color="#FFFFFF">
+      <Text variant="dm_sans_bold_16_white" color="#FFFFFF">
         {caption}
       </Text>
     </Container>

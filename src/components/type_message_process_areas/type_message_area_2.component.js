@@ -7,6 +7,7 @@ import { HomeHeader } from "../headers/home_header.component.js";
 import { Transcripted_Clips_Tile } from "../tiles/transcripted_clip.tile.js";
 import { Squared_action_CTA_component } from "../calls_to_action/squared_action.cta.js";
 import { Spacer } from "../global_components/optimized.spacer.component.js";
+import ArrowIcon from "../../../assets/my-icons/arrow_next_icon.svg";
 
 export const Type_message_process_area_2 = ({
   message_en,

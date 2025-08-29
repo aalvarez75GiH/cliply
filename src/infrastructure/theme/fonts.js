@@ -32,6 +32,7 @@ export const fontSizes = {
   dm_sans_bold_28: "28px",
   dm_sans_bold_26: "26px",
   dm_sans_bold_24: "24px",
+  dm_sans_22: "22px",
   dm_sans_bold_20: "20px",
   dm_sans_bold_18: "18px",
   dm_sans_bold_16: "16px",

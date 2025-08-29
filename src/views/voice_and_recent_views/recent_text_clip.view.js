@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 
 import {
@@ -14,11 +14,29 @@ import { Squared_action_CTA_component } from "../../components/calls_to_action/s
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
 import { Platform } from "react-native";
 
+import { VoiceRecentClipsContext } from "../../infrastructure/services/voice_recents/voice_recent.context.js";
+
 export const Recent_Text_Clip_View = (route) => {
   const { item } = route.route.params;
   //   const { message_en, message_es, language_detected, message_id } = item;
   const { language_detected, message_id } = item;
   const navigation = useNavigation();
+
+  const { setTextClip_data_to_upload, textClip_data_to_upload, resetState } =
+    useContext(VoiceRecentClipsContext);
+
+  useEffect(() => {
+    setTextClip_data_to_upload({
+      ...textClip_data_to_upload,
+      new_message: item,
+    });
+  }, []);
+  //   console.log("ITEM TO UPLOAD:", JSON.stringify(item, null, 2));
+  console.log(
+    "TEXT CLIP DATA TO UPLOAD:",
+    JSON.stringify(textClip_data_to_upload, null, 2)
+  );
+
   return (
     <>
       <SafeArea background_color={theme.colors.bg.elements_bg}>
@@ -66,7 +84,8 @@ export const Recent_Text_Clip_View = (route) => {
               )}
               <Spacer position="top" size="large" />
               <Squared_action_CTA_component
-                action={null}
+                // action={null}
+                action={() => navigation.navigate("Saving_text_clip_1")}
                 label="Save text clip"
                 width="95%"
                 height={"65%"}
@@ -81,7 +100,10 @@ export const Recent_Text_Clip_View = (route) => {
                 color={theme.colors.ui.highlight_color}
                 text_variant={"dm_sans_bold_16"}
                 icon_visible={false}
-                action={() => navigation.goBack()}
+                action={() => {
+                  resetState();
+                  navigation.goBack();
+                }}
               />
             </Container>
           </Container>

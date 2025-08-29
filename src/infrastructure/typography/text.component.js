@@ -158,9 +158,19 @@ const dm_sans_bold_24_white = (theme) => `
     font-family: ${theme.fonts.bold};
     color: ${theme.colors.text.secondary};
     `;
+const dm_sans_bold_22 = (theme) => `
+        font-size: ${theme.fontSizes.dm_sans_22};
+        font-family: ${theme.fonts.bold};
+        color: ${theme.colors.text.primary};
+        `;
 const dm_sans_bold_20 = (theme) => `
     font-size: ${theme.fontSizes.dm_sans_bold_20};
     font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.primary};
+    `;
+const dm_sans_regular_20 = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_bold_20};
+    font-family: ${theme.fonts.regular};
     color: ${theme.colors.text.primary};
     `;
 const dm_sans_bold_20_white = (theme) => `
@@ -171,6 +181,11 @@ const dm_sans_bold_20_white = (theme) => `
 const dm_sans_bold_18 = (theme) => `
     font-size: ${theme.fontSizes.dm_sans_bold_18};
     font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.primary};
+    `;
+const dm_sans_regular_18 = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_bold_18};
+    font-family: ${theme.fonts.regular};
     color: ${theme.colors.text.primary};
     `;
 const dm_sans_bold_18_white = (theme) => `
@@ -187,6 +202,11 @@ const dm_sans_bold_18_white_centered = (theme) => `
 const dm_sans_bold_16 = (theme) => `
     font-size: ${theme.fontSizes.dm_sans_bold_16};
     font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.primary};
+    `;
+const dm_sans_regular_16 = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_bold_16};
+    font-family: ${theme.fonts.regular};
     color: ${theme.colors.text.primary};
     `;
 const dm_sans_bold_16_white = (theme) => `
@@ -267,12 +287,16 @@ const variants = {
   dm_sans_bold_26_centered,
   dm_sans_bold_24,
   dm_sans_bold_24_white,
+  dm_sans_bold_22,
   dm_sans_bold_20,
+  dm_sans_regular_20,
   dm_sans_bold_20_white,
   dm_sans_bold_18,
+  dm_sans_regular_18,
   dm_sans_bold_18_white,
   dm_sans_bold_18_white_centered,
   dm_sans_bold_16,
+  dm_sans_regular_16,
   dm_sans_bold_16_white,
   dm_sans_bold_16_white_centered,
   dm_sans_bold_16_disable_not_active,
