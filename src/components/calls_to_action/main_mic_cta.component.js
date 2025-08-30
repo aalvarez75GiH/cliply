@@ -8,6 +8,7 @@ import {
 import { Spacer } from "../global_components/optimized.spacer.component.js";
 import { Circular_Icon_CTA } from "./circular_icon.cta.js";
 import { ExitIcon } from "../transformed icons/exit_icon_transformed.js";
+import StopIcon from "../../../assets/my-icons/stop_icon.svg";
 import RightArrow from "../../../assets/my-icons/arrow_next_icon.svg";
 
 export const Main_mic_CTA_component = ({
@@ -82,9 +83,10 @@ export const Main_mic_CTA_component = ({
         <>
           <Circular_Icon_CTA
             action={action2}
-            Icon={ExitIcon}
-            width="10px"
-            height="10px"
+            Icon={StopIcon}
+            width="20px"
+            height="20px"
+            recordingStatus={recordingStatus}
           />
           <Container
             width="60%"
@@ -121,6 +123,7 @@ export const Main_mic_CTA_component = ({
             Icon={ExitIcon}
             width="10px"
             height="10px"
+            recordingStatus={recordingStatus}
           />
           <Container
             width="60%"

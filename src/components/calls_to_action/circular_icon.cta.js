@@ -13,6 +13,7 @@ export const Circular_Icon_CTA = ({
   height,
   recordingStatus,
 }) => {
+  console.log(recordingStatus);
   return (
     <Action_Container
       width={"20%"}
@@ -30,6 +31,8 @@ export const Circular_Icon_CTA = ({
         color={
           recordingStatus === "transcribing"
             ? theme.colors.ui.disabled
+            : recordingStatus === "listening"
+            ? "#E93F2E"
             : theme.colors.ui.primary
         }
         border_radius={"60px"}
