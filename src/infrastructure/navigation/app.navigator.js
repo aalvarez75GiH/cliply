@@ -8,11 +8,13 @@ import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { Voice_and_recent_navigator } from "./voice_recent.navigator";
 import { Type_Message_Navigator } from "./type_message.navigator";
 import { Text_Clips_Navigator } from "./text_clips.navigator";
+import { Work_Flow_Navigator } from "./work_flow.navigator";
 
 import KeyBoardIcon from "../../../assets/my-icons/keyboard.svg";
 import MessagesIcon from "../../../assets/my-icons/Messages_icon.svg";
 import MicIcon from "../../../assets/my-icons/micIcon.svg";
 import { Back_Bottom_Bar } from "../../components/bottom_bars/back_bottom_bar";
+import { Status_Next_Step_Bottom_Bar } from "../../components/bottom_bars/status_next_step.bar";
 
 const Tab = createBottomTabNavigator();
 
@@ -38,18 +40,36 @@ const ConditionalTabBar = (props) => {
   const currentTabRoute = props.state.routes[props.state.index];
   const nestedName = getActiveRouteName(currentTabRoute);
 
-  const BackBottomBar =
+  const BottomBar =
     (currentTabRoute.name === "Home" &&
-      nestedName === "Clips_by_Operations_And_Status_View") ||
+      nestedName === "Clips_by_Status_View_1") ||
+    nestedName === "Clips_by_Status_View_2" ||
+    nestedName === "Clips_by_Status_View_3" ||
     nestedName === "Quickies_Text_Clips_View";
 
-  if (BackBottomBar) {
+  if (BottomBar) {
     // render your custom bar instead of the default one
-    return <Back_Bottom_Bar />;
+    return <Status_Next_Step_Bottom_Bar />;
   }
 
   return <BottomTabBar {...props} />;
 };
+// const ConditionalTabBar = (props) => {
+//   const currentTabRoute = props.state.routes[props.state.index];
+//   const nestedName = getActiveRouteName(currentTabRoute);
+
+//   const BackBottomBar =
+//     (currentTabRoute.name === "Home" &&
+//       nestedName === "Clips_by_Operations_And_Status_View") ||
+//     nestedName === "Quickies_Text_Clips_View";
+
+//   if (BackBottomBar) {
+//     // render your custom bar instead of the default one
+//     return <Status_Next_Step_Bottom_Bar />;
+//   }
+
+//   return <BottomTabBar {...props} />;
+// };
 
 export const AppNavigator = () => {
   return (
@@ -82,7 +102,7 @@ export const AppNavigator = () => {
     >
       <Tab.Screen
         name="Home"
-        component={Text_Clips_Navigator}
+        component={Work_Flow_Navigator}
         listeners={tabBarListeners}
         options={{
           title: "Text clips",

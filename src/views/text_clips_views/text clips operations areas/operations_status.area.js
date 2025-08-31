@@ -72,7 +72,7 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
             inverted={false}
             action={() =>
               navigation.navigate("Clips_by_Operations_And_Status_View", {
-                operation: "food_delivery",
+                operation_name: "food_delivery",
                 status_name: "heading_to_pickup/shop",
                 caption: "Heading to pickup/shop",
               })
@@ -93,7 +93,7 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
             inverted={true}
             action={() =>
               navigation.navigate("Clips_by_Operations_And_Status_View", {
-                operation: "food_delivery",
+                operation_name: "food_delivery",
                 status_name: "picking_up/shopping",
                 caption: "Picking up / Shopping",
               })
@@ -114,7 +114,7 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
             inverted={false}
             action={() =>
               navigation.navigate("Clips_by_Operations_And_Status_View", {
-                operation: "food_delivery",
+                operation_name: "food_delivery",
                 status_name: "heading_to_drop_off",
                 caption: "Heading to drop off",
               })
@@ -162,7 +162,7 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
             inverted={false}
             action={() =>
               navigation.navigate("Clips_by_Operations_And_Status_View", {
-                operation: "ride_share",
+                operation_name: "ride_share",
                 status_name: "heading_to_passenger",
                 caption: "Heading to Passenger",
               })
@@ -182,7 +182,7 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
             inverted={true}
             action={() =>
               navigation.navigate("Clips_by_Operations_And_Status_View", {
-                operation: "ride_share",
+                operation_name: "ride_share",
                 status_name: "close_to_passenger",
                 caption: "Close to Passenger",
               })
@@ -203,7 +203,7 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
             inverted={false}
             action={() =>
               navigation.navigate("Clips_by_Operations_And_Status_View", {
-                operation: "ride_share",
+                operation_name: "ride_share",
                 status_name: "at_passenger_location",
                 caption: "At Passengers location",
               })

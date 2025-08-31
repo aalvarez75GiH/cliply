@@ -16,6 +16,18 @@ export const TextClipsContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [introAdded, setIntroAdded] = useState(false);
   const [operation, setOperation] = useState("food_delivery");
+  const [nextStep, setNextStep] = useState({
+    status_view: "Clips_by_Status_View_1",
+    operation_name: "food_delivery",
+    status_name: "heading_to_pickup/shop",
+    caption: "Heading to pickup/shop",
+    bottom_bar_caption: "Heading to pickup/shop",
+  });
+  // const [nextStep, setNextStep] = useState({
+  //   operation_name: "food_delivery",
+  //   status_name: "heading_to_drop_off",
+  //   caption: "Heading to drop off",
+  // });
 
   // const [intro, setIntro] = useState("");
 
@@ -82,6 +94,8 @@ export const TextClipsContextProvider = ({ children }) => {
         operation,
         setOperation,
         renderQuickiesTile,
+        nextStep,
+        setNextStep,
       }}
     >
       {children}
