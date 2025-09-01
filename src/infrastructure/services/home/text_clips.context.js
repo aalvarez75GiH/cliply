@@ -10,24 +10,39 @@ import { Quickies_Tile } from "../../../components/tiles/quickies.tile.js";
 
 export const TextClipsContext = createContext();
 
+const nextStepInitialState = {
+  status_view: "Clips_by_Status_View_1",
+  operation_name: "food_delivery",
+  status_name: "heading_to_pickup/shop",
+  caption: "Heading to pickup/shop",
+  bottom_bar_caption: "Heading to pickup/shop",
+};
+const nextStepInitialState_RS = {
+  status_view: "Clips_by_Status_View_1",
+  operation_name: "ride_share",
+  status_name: "heading_to_passenger",
+  caption: "Heading to passenger",
+  bottom_bar_caption: "Heading to passenger",
+};
+
 export const TextClipsContextProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [introAdded, setIntroAdded] = useState(false);
   const [operation, setOperation] = useState("food_delivery");
-  const [nextStep, setNextStep] = useState({
-    status_view: "Clips_by_Status_View_1",
-    operation_name: "food_delivery",
-    status_name: "heading_to_pickup/shop",
-    caption: "Heading to pickup/shop",
-    bottom_bar_caption: "Heading to pickup/shop",
-  });
-  // const [nextStep, setNextStep] = useState({
-  //   operation_name: "food_delivery",
-  //   status_name: "heading_to_drop_off",
-  //   caption: "Heading to drop off",
-  // });
+  const [nextStep, setNextStep] = useState(nextStepInitialState);
+  const [nextStepRS, setNextStepRS] = useState(nextStepInitialState_RS);
+  console.log("NEXT STEP AT HOME CONTEXT:", nextStep);
+
+  const resetNextStepState = (bottom_bar_caption) => {
+    if (bottom_bar_caption === "Restart") {
+      navigation.navigate("Home_View");
+      setNextStep(nextStepInitialState);
+    } else {
+      navigation.navigate(nextStep.status_view, nextStep);
+    }
+  };
 
   // const [intro, setIntro] = useState("");
 
@@ -47,8 +62,6 @@ export const TextClipsContextProvider = ({ children }) => {
       console.error("ERROR GETTING USER DATA AT HOME CONTEXT:", error.message);
     }
   };
-  console.log("OPERATION at CONTEXT:", operation);
-  // const recordingRef = useRef(null);
   console.log("USER DATA AT STATE:", JSON.stringify(userData, null, 2));
 
   const renderStoredMessagesTile = ({ item }) => {
@@ -91,11 +104,15 @@ export const TextClipsContextProvider = ({ children }) => {
         setIsLoading,
         introAdded,
         setIntroAdded,
-        operation,
-        setOperation,
         renderQuickiesTile,
         nextStep,
         setNextStep,
+        nextStepInitialState,
+        nextStepRS,
+        setNextStepRS,
+        resetNextStepState,
+        operation,
+        setOperation,
       }}
     >
       {children}

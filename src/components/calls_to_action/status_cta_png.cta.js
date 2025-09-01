@@ -21,8 +21,6 @@ export const Status_CTA_PNG = ({
   aspectRatio = 1024 / 650,
   radius = 16,
   image_source,
-  step_number = 1,
-  status,
 }) => {
   return !inverted ? (
     <Action_Container
@@ -32,12 +30,12 @@ export const Status_CTA_PNG = ({
       align="center"
       color={theme.colors.ui.primary} // Fallback to "red" if theme is undefined
       direction="row"
-      onPress={action}
       borderRadius="20px"
       border_radius_top_left="20px"
       border_radius_bottom_left="20px"
       border_radius_top_right="10px"
       border_radius_bottom_right="10px"
+      onPress={action}
     >
       <Container
         width="55%"
@@ -58,8 +56,8 @@ export const Status_CTA_PNG = ({
             height: "120%",
             aspectRatio,
             borderRadius: radius,
-            borderRadiusTopLeft: 10,
-            borderRadiusBottomLeft: 10,
+            borderRadiusTopLeft: 0,
+            borderRadiusBottomLeft: 0,
             borderTopRightRadius: 0,
             borderBottomRightRadius: 0,
           }}
@@ -92,11 +90,11 @@ export const Status_CTA_PNG = ({
       align="center"
       color={theme.colors.ui.primary} // Fallback to "red" if theme is undefined
       direction="row"
-      onPress={action}
       border_radius_top_right="20px"
       border_radius_bottom_right="20px"
       border_radius_top_left="10px"
       border_radius_bottom_left="10px"
+      onPress={action}
     >
       <Container
         width="45%"
@@ -136,8 +134,8 @@ export const Status_CTA_PNG = ({
             height: "100%",
             aspectRatio,
             // borderRadius: radius,
-            borderRadiusTopLeft: 10,
-            borderRadiusBottomLeft: 10,
+            borderRadiusTopLeft: 0,
+            borderRadiusBottomLeft: 0,
             borderTopRightRadius: 0,
             borderBottomRightRadius: 0,
           }}

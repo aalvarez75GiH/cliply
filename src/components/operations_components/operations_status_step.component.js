@@ -23,13 +23,13 @@ export const Operations_Status_Step_Component = ({
   status,
   step_number,
 }) => {
-  const { operation } = useContext(TextClipsContext);
+  const { operation, nextStep } = useContext(TextClipsContext);
   const navigation = useNavigation();
   return !inverted ? (
     <>
       <Container
         width={Platform.OS === "ios" ? "100%" : "100%"}
-        height={Platform.OS === "ios" ? "22%" : "20%"}
+        height={Platform.OS === "ios" ? "95%" : "95%"}
         justify="flex-start"
         color={theme.colors.bg.elements_bg}
         // color={"green"}
@@ -50,7 +50,7 @@ export const Operations_Status_Step_Component = ({
         <Action_Container
           //   width="18%"
           width={Platform.OS === "ios" ? "18%" : "25%"}
-          height={"95%"}
+          height={"100%"}
           justify="center"
           color={theme.colors.bg.screens_bg}
           //   color={"red"}
@@ -59,7 +59,7 @@ export const Operations_Status_Step_Component = ({
           //   border_radius="10px"
           onPress={() =>
             navigation.navigate("Quickies_Text_Clips_View", {
-              operation: operation,
+              operation: nextStep.operation_name,
               status: status,
             })
           }
@@ -93,7 +93,7 @@ export const Operations_Status_Step_Component = ({
           direction="column"
           onPress={() =>
             navigation.navigate("Quickies_Text_Clips_View", {
-              operation: operation,
+              operation: nextStep.operation_name,
               status: status,
             })
           }

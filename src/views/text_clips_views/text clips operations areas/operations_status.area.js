@@ -49,7 +49,7 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
           // color={"blue"}
           align="center"
         >
-          <Spacer position="top" size="small" />
+          {/* <Spacer position="top" size="small" /> */}
           {/* ******************************************* */}
           <Container
             width="100%"
@@ -81,7 +81,7 @@ export const Operations_Status_Area = ({ operation, isLoading }) => {
             step_number={"1"}
           />
 
-          <Operations_Status_Connector_Line side="right" />
+          {/* <Operations_Status_Connector_Line side="right" /> */}
 
           {/* ******************* PICKING UP/SHOPPING STATUS ****************************** */}
           <Operations_Status_Step_Component

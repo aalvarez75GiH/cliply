@@ -19,12 +19,11 @@ import { TextClipsContext } from "../../infrastructure/services/home/text_clips.
 
 export const Work_Flow_Area = ({ operation, isLoading }) => {
   const navigation = useNavigation();
-  const { nextStep } = useContext(TextClipsContext);
+  const { nextStep, nextStepRS } = useContext(TextClipsContext);
 
   const image_source_2 = require("../../../assets/illustrations/at restaurant-shopping.png");
   const image_source_5 = require("../../../assets/illustrations/close to passenger.png");
 
-  const aspectRatio = 1024 / 1080;
   return (
     <Scrollable_Container
       width="100%"
@@ -54,13 +53,6 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
         align="center"
         direction="row"
         onPress={() => navigation.navigate(nextStep.status_view, nextStep)}
-        // onPress={() =>
-        //   navigation.navigate("Clips_by_Status_View_1", {
-        //     operation_name: "food_delivery",
-        //     status_name: "heading_to_pickup/shop",
-        //     caption: "Heading to pickup/shop",
-        //   })
-        // }
       >
         <Container
           width="50%"
@@ -103,13 +95,7 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
             <Text variant="dm_sans_bold_14_white">text clips flow</Text>
           </Container>
         </Container>
-        {/* <Container
-          width="12%"
-          height={"100%"}
-          color={"white"}
-          justify="center"
-          align="center"
-        ></Container> */}
+
         <Container
           width="40%"
           height={"100%"}
@@ -155,13 +141,7 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
         justify="center"
         align="center"
         direction="column"
-        onPress={() =>
-          navigation.navigate("Clips_by_Status_View_1", {
-            operation_name: "ride_share",
-            status_name: "heading_to_passenger",
-            caption: "Heading to Passenger",
-          })
-        }
+        onPress={() => navigation.navigate(nextStepRS.status_view, nextStepRS)}
       >
         <Container
           width="100%"

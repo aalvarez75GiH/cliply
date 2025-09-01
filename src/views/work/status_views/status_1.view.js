@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { FlatList } from "react-native-gesture-handler";
 
-import { ExitHeader } from "../../../components/headers/exit_header.component";
 import { SafeArea } from "../../../components/global_components/safe-area.component";
 import { theme } from "../../../infrastructure/theme/index";
 import { Spacer } from "../../../components/global_components/optimized.spacer.component";
@@ -10,13 +9,15 @@ import {
   Action_Container,
 } from "../../../components/global_components/containers/general_containers";
 import { Text } from "../../../infrastructure/typography/text.component";
-import { Text_Clips_By_Status_Sub_Header } from "../../../components/headers/text_clips_by_operations_and_status.header";
+import { Restart_flow_operation_status_process_header } from "../../../components/headers/restart_flow_operation_status_process.header";
 import { Add_intro_CTA } from "../../../components/calls_to_action/add_intro.cta";
+import { Operations_Status_Step_Component } from "../../../components/operations_components/operations_status_step.component";
 
 import { TextClipsContext } from "../../../infrastructure/services/home/text_clips.context";
 
 export default function Text_Clips_by_Status_View_1({ navigation, route }) {
   const { operation_name, status_name, caption } = route.params;
+  const isFoodDelivery = operation_name === "food_delivery";
 
   const {
     renderStoredMessagesTile,
@@ -24,29 +25,8 @@ export default function Text_Clips_by_Status_View_1({ navigation, route }) {
     introAdded,
     setIntroAdded,
     userData,
-    nextStep,
     setNextStep,
   } = useContext(TextClipsContext);
-
-  const { global_operations } = userData;
-  const { statuses } = global_operations.find(
-    (op) => op.operation_name === operation_name
-  ) || { statuses: [] };
-  const status_to_render = statuses.find(
-    (st) => st.status_name === status_name
-  );
-  console.log(
-    "GLOBAL OPERATIONS AT TEXT CLIPS VIEW:",
-    JSON.stringify(global_operations, null, 2)
-  );
-  console.log(
-    "STATUSES AT TEXT CLIPS VIEW:",
-    JSON.stringify(statuses, null, 2)
-  );
-  console.log(
-    "STATUS NAME AT TEXT CLIPS VIEW:",
-    JSON.stringify(status_to_render, null, 2)
-  );
 
   const [dataToRender, setDataToRender] = useState([]);
   const [headers_caption, set_Headers_Caption] = useState("");
@@ -69,38 +49,13 @@ export default function Text_Clips_by_Status_View_1({ navigation, route }) {
           ? "Picking up / Shopping"
           : "Close to passenger",
     });
-    // setNextStep({
-    //   status_view: "Clips_by_Status_View_2",
-    //   operation_name: "food_delivery",
-    //   status_name: "picking_up/shopping",
-    //   caption: "Picking up / Shopping",
-    //   bottom_bar_caption: "Picking up / Shopping",
-    // });
-    //   onPress={() =>
-    //     navigation.navigate("Clips_by_Status_View_2", {
-    //       operation_name: "food_delivery",
-    //       status_name: "picking_up/shopping",
-    //       caption: "Picking up / Shopping",
-    //     })
-    //   }
+
     const { global_operations } = userData;
     const { statuses } = global_operations.find(
       (op) => op.operation_name === operation_name
     ) || { statuses: [] };
     const status_to_render = statuses.find(
       (st) => st.status_name === status_name
-    );
-    console.log(
-      "GLOBAL OPERATIONS AT TEXT CLIPS VIEW:",
-      JSON.stringify(global_operations, null, 2)
-    );
-    console.log(
-      "STATUSES AT TEXT CLIPS VIEW:",
-      JSON.stringify(statuses, null, 2)
-    );
-    console.log(
-      "STATUS NAME AT TEXT CLIPS VIEW:",
-      JSON.stringify(status_to_render, null, 2)
     );
 
     setDataToRender(status_to_render.stored_messages || []);
@@ -114,24 +69,47 @@ export default function Text_Clips_by_Status_View_1({ navigation, route }) {
     };
   }, []);
 
+  const image_source_1 = require("../../../../assets/illustrations/heading_to_pickup.png");
+  const image_source_2 = require("../../../../assets/illustrations/heading to passenger.png");
+
   return (
     <SafeArea background_color={theme.colors.bg.elements_bg}>
       <Container
         width="100%"
         height={"100%"}
-        //color={theme.colors.bg.screens_bg}
-        color="green"
-        // style={{ flex: 1, paddingBottom: insets.bottom || 50 }}
+        color={theme.colors.bg.screens_bg}
       >
-        <ExitHeader navigation={navigation} />
-        <Text_Clips_By_Status_Sub_Header caption={caption} />
-        <Add_intro_CTA introAdded={introAdded} setIntroAdded={setIntroAdded} />
+        <Restart_flow_operation_status_process_header />
+        <Spacer position="top" size="small" />
+        <Container
+          width="100%"
+          height={"15%"}
+          //color={"red"}
+          color={theme.colors.bg.elements_bg}
+          justify="center"
+          align="center"
+        >
+          <Spacer position="top" size="small" />
+          <Operations_Status_Step_Component
+            caption_1={isFoodDelivery ? "Heading to" : "Heading to"}
+            caption_2={isFoodDelivery ? "pickup/shop" : "passenger"}
+            caption_3={"1"}
+            image_source_1={isFoodDelivery ? image_source_1 : image_source_2}
+            step_indicator_color={theme.colors.ui.food_delivery_theme_color}
+            inverted={false}
+            status={
+              isFoodDelivery ? "heading_to_pickup_shop" : "heading_to_passenger"
+            }
+            step_number={"1"}
+          />
+          <Spacer position="top" size="small" />
+        </Container>
 
+        {/* <Add_intro_CTA introAdded={introAdded} setIntroAdded={setIntroAdded} /> */}
         <Container
           width="100%"
           height={"75%"}
           color={theme.colors.bg.screens_bg}
-          //   color={"lightblue"}
         >
           <Spacer position="top" size="medium" />
           {dataToRender.length === 0 && (
