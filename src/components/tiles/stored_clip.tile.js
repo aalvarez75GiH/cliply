@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, use } from "react";
 import * as Clipboard from "expo-clipboard";
 import { ActivityIndicator, Platform } from "react-native";
 import * as IntentLauncher from "expo-intent-launcher";
@@ -21,16 +21,30 @@ export const Stored_Clips_Tile = ({
   globalLanguage,
   selectedItemId,
   onSelect,
+  dataForUsedCountUpdate,
 }) => {
   //   *******************************************************
   const [language, setLanguage] = useState(globalLanguage);
   const [isLoading, setIsLoading] = useState(false);
-
   const { summary, body, message_id } = item;
 
-  console.log("ITEM:", JSON.stringify(item, null, 2));
-
-  const { introAdded, setIntroAdded } = useContext(TextClipsContext);
+  const {
+    introAdded,
+    setIntroAdded,
+    nextStep,
+    nextStepRS,
+    updatingTextClipsUsedCount,
+  } = useContext(TextClipsContext);
+  useState(() => {
+    // console.log(
+    //   "NEXT STEP AT STORED CLIPS TILE:",
+    //   JSON.stringify(nextStep, null, 2)
+    // );
+    // console.log(
+    //   "NEXT STEP RS AT STORED CLIPS TILE:",
+    //   JSON.stringify(nextStepRS, null, 2)
+    // );
+  }, []);
 
   const toggleLanguage = async () => {
     setIsLoading(true);
@@ -51,6 +65,13 @@ export const Stored_Clips_Tile = ({
           ? body.en
           : body.es
       );
+
+      const usedCountDataForUpdate = {
+        ...dataForUsedCountUpdate,
+        message_id: message_id,
+      };
+      console.log("DATA TO UPDATE USED COUNT:", usedCountDataForUpdate);
+      await updatingTextClipsUsedCount(usedCountDataForUpdate);
 
       console.log(`Copied to clipboard: ${body.en}`);
       //   setIsSelected(id);

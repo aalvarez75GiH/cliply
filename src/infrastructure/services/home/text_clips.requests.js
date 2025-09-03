@@ -37,3 +37,24 @@ export const get_User_Data_Request = async (user_id) => {
       return error;
     });
 };
+
+export const update_Text_Clips_Used_Count_Request = async (
+  usedCountDataForUpdate
+) => {
+  console.log(
+    "UPDATING USED COUNT FUNCTION TRIGGERED AT REQUEST:",
+    usedCountDataForUpdate
+  );
+  const { usersDataEndPoint } = environment;
+  return await axios
+    .put(
+      `${usersDataEndPoint}/updateStoredMessageUsedCount`,
+      usedCountDataForUpdate
+    )
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error;
+    });
+};

@@ -11,7 +11,7 @@ import {
 import { theme } from "../../infrastructure/theme/index.js";
 import { Spacer } from "../global_components/optimized.spacer.component.js";
 import CopyPaste_icon from "../../../assets/my-icons/copy_paste.svg";
-
+import { EN_ES_CTA_component } from "../calls_to_action/en_es.cta.js";
 export const Quickies_Tile = ({
   item,
   globalLanguage,
@@ -19,24 +19,36 @@ export const Quickies_Tile = ({
   onSelect,
 }) => {
   //   *******************************************************
-  const { quicky_en, quicky_es, quicky_id } = item;
+
+  const { body, message_id } = item;
+  const isSelected = selectedItemId === message_id;
   console.log("ITEM:", JSON.stringify(item, null, 2));
 
-  const isSelected = selectedItemId === quicky_id;
   const [isLoading, setIsLoading] = useState(false);
+  const [language, setLanguage] = useState("EN");
   //   *******************************************************
-  const copy_quicky_action = async () => {
+  const copy_quicky_action = async (item) => {
+    const { body, message_id } = item;
     setIsLoading(true);
     setTimeout(async () => {
-      await Clipboard.setStringAsync(
-        globalLanguage === "EN" ? quicky_en : quicky_es
-      );
+      await Clipboard.setStringAsync(language === "EN" ? body.en : body.es);
 
-      console.log(`Copied to clipboard: ${quicky_en}`);
+      console.log(`Copied to clipboard: ${body.en}`);
       //   setIsSelected(id);
-      onSelect(quicky_id);
+      onSelect(message_id);
       setIsLoading(false);
       setIntroAdded(false);
+    }, 300);
+  };
+
+  const toggleLanguage = async () => {
+    setIsLoading(true);
+    // setLanguageIsToggled(!languageIsToggled);
+    setTimeout(async () => {
+      setLanguage((prevLanguage) => (prevLanguage === "EN" ? "ES" : "EN"));
+      //   setLanguage(!language);
+      await Clipboard.setStringAsync(language === "EN" ? body.es : body.en);
+      setIsLoading(false);
     }, 300);
   };
 
@@ -108,7 +120,7 @@ export const Quickies_Tile = ({
                   }
                   //color={"red"}
                 >
-                  {globalLanguage === "ES" && (
+                  {language === "ES" && (
                     <Text
                       //   variant="dm_sans_bold_24"
                       variant={
@@ -117,10 +129,10 @@ export const Quickies_Tile = ({
                       numberOfLines={1}
                       style={{ textAlign: "right" }}
                     >
-                      "{quicky_es}"
+                      "{body.es}"
                     </Text>
                   )}
-                  {globalLanguage === "EN" && (
+                  {language === "EN" && (
                     <Text
                       variant={
                         isSelected ? "dm_sans_bold_20_white" : "dm_sans_bold_20"
@@ -128,7 +140,7 @@ export const Quickies_Tile = ({
                       numberOfLines={1}
                       style={{ textAlign: "right" }}
                     >
-                      "{quicky_en}"
+                      "{body.en}"
                     </Text>
                   )}
                 </Container>
@@ -138,7 +150,7 @@ export const Quickies_Tile = ({
                 width="100%"
                 height="50%"
                 align="center"
-                justify="flex-end"
+                justify="space-around"
                 color={
                   isSelected
                     ? theme.colors.ui.success
@@ -148,13 +160,49 @@ export const Quickies_Tile = ({
                 direction="row"
               >
                 {!isSelected && (
-                  <CopyPaste_icon
-                    width="30px"
-                    height="30px"
-                    fill={theme.colors.text.middle_screens_text}
-                  />
+                  <>
+                    <Container
+                      width="15%"
+                      height="55%"
+                      align="center"
+                      justify="center"
+                      direction="row"
+                      color={theme.colors.bg.elements_bg}
+                      //   color={"red"}
+                    >
+                      <EN_ES_CTA_component
+                        //   language={language === "EN" ? "ES" : "EN"}
+                        language={language === "EN" ? "ES" : "EN"}
+                        action={toggleLanguage}
+                        // isSelected={isSelected}
+                      />
+                    </Container>
+                    <Container
+                      width="55%"
+                      height="100%"
+                      align="center"
+                      justify="center"
+                      color={theme.colors.bg.elements_bg}
+                    />
+                  </>
                 )}
-                <Spacer position="right" size="large" />
+                {!isSelected && (
+                  <Container
+                    width="15%"
+                    height="55%"
+                    align="center"
+                    justify="center"
+                    direction="row"
+                    color={theme.colors.bg.elements_bg}
+                    // color={"lightgreen"}
+                  >
+                    <CopyPaste_icon
+                      width="30px"
+                      height="30px"
+                      fill={theme.colors.text.middle_screens_text}
+                    />
+                  </Container>
+                )}
               </Container>
             </Action_Container>
           </Spacer>

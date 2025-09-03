@@ -436,62 +436,71 @@ export const ride_share_operation_data = {
 export const quickies_food_delivery = {
   heading_to_pickup_shop: [
     {
-      quicky_id: "QK_0001",
-      quicky_en: "Heading to restaurant",
-      quicky_es: "Yendo al restaurante",
-      used: 0,
+      message_id: "QK_0001",
+      body: {
+        en: "Heading to restaurant",
+        es: "Yendo al restaurante",
+      },
     },
     {
-      quicky_id: "QK_0020",
-      quicky_en: "Heading to store",
-      quicky_es: "Yendo a la tienda",
-      used: 0,
+      message_id: "QK_0020",
+      body: {
+        en: "Heading to store",
+        es: "Yendo a la tienda",
+      },
     },
   ],
   picking_up_shopping: [
     {
-      quicky_id: "QK_0002",
-      quicky_en: "I am at restaurant",
-      quicky_es: "Estoy en el restaurante",
-      used: 0,
+      message_id: "QK_0002",
+      body: {
+        en: "I am at restaurant",
+        es: "Estoy en el restaurante",
+      },
     },
     {
-      quicky_id: "QK_0021",
-      quicky_en: "I am at store",
-      quicky_es: "Estoy en la tienda",
-      used: 0,
+      message_id: "QK_0021",
+      body: {
+        en: "I am at store",
+        es: "Estoy en la tienda",
+      },
     },
     {
-      quicky_id: "QK_0003",
-      quicky_en: "I'll check it out",
-      quicky_es: "Ya chequeo",
-      used: 0,
+      message_id: "QK_0003",
+      body: {
+        en: "Picking up order",
+        es: "Recogiendo la orden",
+      },
     },
   ],
   heading_to_drop_off: [
     {
-      quicky_id: "QK_0004",
-      quicky_en: "I am close, be ready",
-      quicky_es: "Estoy cerca, esté listo",
-      used: 0,
+      message_id: "QK_0004",
+      body: {
+        en: "I am close, be ready",
+        es: "Estoy cerca, esté listo",
+      },
     },
     {
-      quicky_id: "QK_0005",
-      quicky_en: "Will need a PIN number",
-      quicky_es: "Necesitare numero PIN",
-      used: 0,
+      message_id: "QK_0005",
+      body: {
+        en: "Will need a PIN number",
+        es: "Necesitaré un número PIN",
+      },
     },
     {
-      quicky_id: "QK_0006",
-      quicky_en: "Can't find your place",
-      quicky_es: "No consigo tu casa",
-      used: 0,
+      message_id: "QK_0006",
+      body: {
+        en: "Can't find your place",
+        es: "No consigo tu casa",
+      },
     },
     {
-      quicky_id: "QK_0007",
-      quicky_en: "On my way but traffic",
-      quicky_es: "En camino pero hay tráfico",
-      used: 0,
+      message_id: "QK_0007",
+      body: {
+        en: "On my way but traffic",
+        es: "En camino pero hay tráfico",
+      },
     },
   ],
 };
@@ -499,81 +508,93 @@ export const quickies_food_delivery = {
 export const quickies_ride_share = {
   heading_to_passenger: [
     {
-      quicky_id: "QK_0008",
-      quicky_en: "Heading to you",
-      quicky_es: "Yendo hacia ti",
-      used: 0,
+      message_id: "QK_0008",
+      body: {
+        en: "Heading to you",
+        es: "Yendo hacia ti",
+      },
     },
 
     {
-      quicky_id: "QK_0009",
-      quicky_en: "Messaged received?",
-      quicky_es: "¿Mensaje recibido?",
-      used: 0,
+      message_id: "QK_0009",
+      body: {
+        en: "Messaged received?",
+        es: "¿Mensaje recibido?",
+      },
     },
     {
-      quicky_id: "QK_0010",
-      quicky_en: "Please, just 4 people",
-      quicky_es: "Por favor, solo 4 personas",
-      used: 0,
+      message_id: "QK_0010",
+      body: {
+        en: "Please, just 4 people",
+        es: "Por favor, solo 4 personas",
+      },
     },
     {
-      quicky_id: "QK_0011",
-      quicky_en: "Not open containers",
-      quicky_es: "Sin contenedores abiertos",
-      used: 0,
+      message_id: "QK_0011",
+      body: {
+        en: "Not open containers",
+        es: "Nada de contenedores abiertos",
+      },
     },
     {
-      quicky_id: "QK_0012",
-      quicky_en: "No food unpacked",
-      quicky_es: "Nada de comida",
-      used: 0,
+      message_id: "QK_0012",
+      body: {
+        en: "No food unpacked",
+        es: "Nada de comida",
+      },
     },
   ],
   close_to_passenger: [
     {
-      quicky_id: "QK_0013",
-      quicky_en: "I am close, be ready.",
-      quicky_es: "Estoy cerca, esté listo",
-      used: 0,
+      message_id: "QK_0013",
+      body: {
+        en: "I am close, be ready.",
+        es: "Estoy cerca, esté listo",
+      },
     },
     {
-      quicky_id: "QK_0014",
-      quicky_en: "Please, just 4 people",
-      quicky_es: "Por favor, solo 4 personas",
-      used: 0,
+      message_id: "QK_0014",
+      body: {
+        en: "Please, just 4 people",
+        es: "Por favor, solo 4 personas",
+      },
     },
     {
-      quicky_id: "QK_0015",
-      quicky_en: "Not open containers",
-      quicky_es: "Sin contenedores abiertos",
-      used: 0,
+      message_id: "QK_0015",
+      body: {
+        en: "Not open containers",
+        es: "Nada de contenedores abiertos",
+      },
     },
     {
-      quicky_id: "QK_0016",
-      quicky_en: "No food unpacked",
-      quicky_es: "Nada de comida",
-      used: 0,
+      message_id: "QK_0016",
+      body: {
+        en: "No food unpacked",
+        es: "Nada de comida",
+      },
     },
   ],
   at_passenger_location: [
     {
-      quicky_id: "QK_0017",
-      quicky_en: "At pickup location!",
-      quicky_es: "En el lugar de recogida!",
-      used: 0,
+      message_id: "QK_0017",
+      body: {
+        en: "At pickup location!",
+        es: "En el lugar de recogida!",
+      },
     },
     {
-      quicky_id: "QK_0018",
-      quicky_en: "Here, hurry up.",
-      quicky_es: "Estoy Aquí, date prisa.",
-      used: 0,
+      message_id: "QK_0018",
+      body: {
+        en: "Here, hurry up.",
+        es: "Estoy Aquí, date prisa",
+      },
     },
     {
-      quicky_id: "QK_0019",
-      quicky_en: "Police is bitchy around",
-      quicky_es: "La policia esta un poco loca",
-      used: 0,
+      message_id: "QK_0019",
+      body: {
+        en: "Police is a little bit crazy here",
+        es: "La policía está un poco loca aquí",
+      },
     },
   ],
 };

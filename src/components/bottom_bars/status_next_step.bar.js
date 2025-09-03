@@ -18,8 +18,15 @@ import { TextClipsContext } from "../../infrastructure/services/home/text_clips.
 import { GlobalContext } from "../../infrastructure/services/global/global.context";
 
 export const Status_Next_Step_Bottom_Bar = () => {
-  const { nextStep, setNextStep, nextStepInitialState } =
-    useContext(TextClipsContext);
+  const {
+    nextStep,
+    setNextStep,
+    nextStepInitialState,
+    setDataForUsedCountUpdate,
+  } = useContext(TextClipsContext);
+
+  const { userToDB } = useContext(GlobalContext);
+  const { user_id } = userToDB || {}; // Ensure userToDB is not undefined or null
 
   const navigation = useNavigation();
 
@@ -31,7 +38,25 @@ export const Status_Next_Step_Bottom_Bar = () => {
         routes: [{ name: "Home_View" }],
       });
     } else {
-      navigation.navigate(nextStep.status_view, nextStep);
+      //   navigation.navigate(nextStep.status_view, nextStep);
+      const dataForUsedCountUpdate = {
+        operation_id:
+          nextStep.operation_name === "food_delivery"
+            ? "ac33dc0e-27df-4bec-8390-f63049cc0737"
+            : "c98742b6-74a7-4625-b3fb-ab1bb8a0d4b6",
+        operation_name:
+          nextStep.operation_name === "food_delivery"
+            ? "food_delivery"
+            : "ride_share",
+        user_id: user_id,
+      };
+
+      navigation.navigate(nextStep.status_view, {
+        ...nextStep,
+        dataForUsedCountUpdate, // Pass the data directly to the next screen
+      });
+
+      setDataForUsedCountUpdate(dataForUsedCountUpdate);
     }
   };
   //   const { globalLanguage } = useContext(GlobalContext);

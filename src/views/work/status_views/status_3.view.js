@@ -21,7 +21,7 @@ import image_source_1 from "../../../../assets/illustrations/heading to drop off
 import image_source_2 from "../../../../assets/illustrations/at pickUp location.png";
 
 export default function Text_Clips_by_Status_View_3({ navigation, route }) {
-  const { operation_name, status_name, caption } = route.params;
+  const { operation_name, status_name, dataForUsedCountUpdate } = route.params;
   const isFoodDelivery = operation_name === "food_delivery";
 
   const {
@@ -32,10 +32,16 @@ export default function Text_Clips_by_Status_View_3({ navigation, route }) {
     userData,
     setNextStep,
     nextStep,
+    setDataForUsedCountUpdate,
   } = useContext(TextClipsContext);
 
   const [dataToRender, setDataToRender] = useState([]);
   const [headers_caption, set_Headers_Caption] = useState("");
+
+  console.log(
+    "DATA FOR USED COUNT UPDATE IN STATUS 3 VIEW:",
+    JSON.stringify(dataForUsedCountUpdate, null, 2)
+  );
 
   console.log("NEXT STEP AT STATUS 3 VIEW:", nextStep);
   useEffect(() => {
@@ -53,6 +59,10 @@ export default function Text_Clips_by_Status_View_3({ navigation, route }) {
     );
 
     setDataToRender(status_to_render.stored_messages || []);
+    setDataForUsedCountUpdate({
+      ...dataForUsedCountUpdate,
+      status_name: status_name,
+    });
 
     // Cleanup function to set state when leaving the view
     return () => {

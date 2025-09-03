@@ -16,10 +16,15 @@ import { Operations_Status_Step_Component } from "../../components/operations_co
 import { Text } from "../../infrastructure/typography/text.component";
 
 import { TextClipsContext } from "../../infrastructure/services/home/text_clips.context";
+import { GlobalContext } from "../../infrastructure/services/global/global.context";
 
 export const Work_Flow_Area = ({ operation, isLoading }) => {
   const navigation = useNavigation();
-  const { nextStep, nextStepRS } = useContext(TextClipsContext);
+  const { nextStep, nextStepRS, setDataForUsedCountUpdate } =
+    useContext(TextClipsContext);
+
+  const { userToDB } = useContext(GlobalContext);
+  const { user_id } = userToDB || {}; // Ensure userToDB is not undefined or null
 
   const image_source_2 = require("../../../assets/illustrations/at restaurant-shopping.png");
   const image_source_5 = require("../../../assets/illustrations/close to passenger.png");
@@ -52,7 +57,20 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
         justify="center"
         align="center"
         direction="row"
-        onPress={() => navigation.navigate(nextStep.status_view, nextStep)}
+        onPress={() => {
+          const dataForUsedCountUpdate = {
+            user_id: user_id,
+            operation_id: "ac33dc0e-27df-4bec-8390-f63049cc0737",
+            operation_name: "food_delivery",
+          };
+
+          navigation.navigate(nextStep.status_view, {
+            ...nextStep,
+            dataForUsedCountUpdate, // Pass the data directly to the next screen
+          });
+
+          setDataForUsedCountUpdate(dataForUsedCountUpdate);
+        }}
       >
         <Container
           width="50%"
@@ -141,7 +159,26 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
         justify="center"
         align="center"
         direction="column"
-        onPress={() => navigation.navigate(nextStepRS.status_view, nextStepRS)}
+        // onPress={() => navigation.navigate(nextStepRS.status_view, nextStepRS)}
+        onPress={() => {
+          const dataForUsedCountUpdate = {
+            user_id: user_id,
+            operation_id: "c98742b6-74a7-4625-b3fb-ab1bb8a0d4b6",
+            operation_name: "ride_share",
+          };
+
+          navigation.navigate(nextStepRS.status_view, {
+            ...nextStepRS,
+            dataForUsedCountUpdate, // Pass the data directly to the next screen
+          });
+
+          setDataForUsedCountUpdate(dataForUsedCountUpdate);
+          // navigation.navigate(nextStep.status_view, nextStep);
+          // setDataForUsedCountUpdate({
+          //   operation_id: "ac33dc0e-27df-4bec-8390-f63049cc0737",
+          //   operation_name: "food_delivery",
+          // });
+        }}
       >
         <Container
           width="100%"
