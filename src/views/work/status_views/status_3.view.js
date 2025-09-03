@@ -1,18 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import { FlatList } from "react-native-gesture-handler";
 
-import { ExitHeader } from "../../../components/headers/exit_header.component";
 import { SafeArea } from "../../../components/global_components/safe-area.component";
 import { theme } from "../../../infrastructure/theme/index";
 import { Spacer } from "../../../components/global_components/optimized.spacer.component";
-import {
-  Container,
-  Action_Container,
-} from "../../../components/global_components/containers/general_containers";
+import { Container } from "../../../components/global_components/containers/general_containers";
 import { Text } from "../../../infrastructure/typography/text.component";
 import { Restart_flow_operation_status_process_header } from "../../../components/headers/restart_flow_operation_status_process.header";
 
-import { Add_intro_CTA } from "../../../components/calls_to_action/add_intro.cta";
 import { Operations_Status_Step_Component } from "../../../components/operations_components/operations_status_step.component";
 
 import { TextClipsContext } from "../../../infrastructure/services/home/text_clips.context";
@@ -20,14 +15,13 @@ import { TextClipsContext } from "../../../infrastructure/services/home/text_cli
 import image_source_1 from "../../../../assets/illustrations/heading to drop off.png";
 import image_source_2 from "../../../../assets/illustrations/at pickUp location.png";
 
-export default function Text_Clips_by_Status_View_3({ navigation, route }) {
+export default function Text_Clips_by_Status_View_3({ route }) {
   const { operation_name, status_name, dataForUsedCountUpdate } = route.params;
   const isFoodDelivery = operation_name === "food_delivery";
 
   const {
     renderStoredMessagesTile,
     setSelectedItemId,
-    introAdded,
     setIntroAdded,
     userData,
     setNextStep,

@@ -1,17 +1,15 @@
 // import MenuIcon from "../../../assets/my-icons/two_stripes_menu.svg";
-import React, { useContext, useState } from "react";
-import { useNavigation, CommonActions } from "@react-navigation/native";
+import React, { useContext } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import { Text } from "../../infrastructure/typography/text.component";
 import {
   Action_Container,
   Container,
 } from "../global_components/containers/general_containers";
-import QuickIcon from "../../../assets/my-icons/time_icon.svg";
 import { Spacer } from "../global_components/optimized.spacer.component";
 import { theme } from "../../infrastructure/theme";
 
-import LeftArrow from "../../../assets/my-icons/arrow_back_icon.svg";
 import NextArrowIcon from "../../../assets/my-icons/arrow_next_icon.svg";
 
 import { TextClipsContext } from "../../infrastructure/services/home/text_clips.context";

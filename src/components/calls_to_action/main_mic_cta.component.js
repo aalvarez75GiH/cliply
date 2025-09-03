@@ -66,7 +66,7 @@ export const Main_mic_CTA_component = ({
             <Spacer position="left" size="small">
               <Text variant="dm_sans_bold_18">{caption_line_1}</Text>
             </Spacer>
-            <Spacer position="top" size="medium" />
+            {/* <Spacer position="top" size="small" /> */}
             <Spacer position="left" size="large">
               <Text
                 variant="dm_sans_bold_16_disable_not_active"

@@ -1,8 +1,6 @@
 import React, { useState, useContext, use } from "react";
 import * as Clipboard from "expo-clipboard";
 import { ActivityIndicator, Platform } from "react-native";
-import * as IntentLauncher from "expo-intent-launcher";
-import { Linking } from "react-native";
 
 import { Text } from "../../infrastructure/typography/text.component.js";
 import { EN_ES_CTA_component } from "../calls_to_action/en_es.cta.js";
@@ -28,13 +26,8 @@ export const Stored_Clips_Tile = ({
   const [isLoading, setIsLoading] = useState(false);
   const { summary, body, message_id } = item;
 
-  const {
-    introAdded,
-    setIntroAdded,
-    nextStep,
-    nextStepRS,
-    updatingTextClipsUsedCount,
-  } = useContext(TextClipsContext);
+  const { introAdded, setIntroAdded, updatingTextClipsUsedCount } =
+    useContext(TextClipsContext);
   useState(() => {
     // console.log(
     //   "NEXT STEP AT STORED CLIPS TILE:",

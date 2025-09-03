@@ -5,7 +5,9 @@ import { theme } from "../../infrastructure/theme";
 import { Spacer } from "../../components/global_components/optimized.spacer.component";
 import { Container } from "../../components/global_components/containers/general_containers.js";
 
-export const Loading_Spinner_area = () => {
+export const Loading_Spinner_area = ({
+  color = theme.colors.bg.screens_bg,
+}) => {
   return (
     <>
       <Container
@@ -14,14 +16,14 @@ export const Loading_Spinner_area = () => {
         justify="space-between"
         align="center"
         // color={theme.colors.bg.screens_bg}
-        color={"green"}
+        color={color}
       >
         <Container
           width={"100%"}
           height={"100%"}
           justify="center"
           align="center"
-          color={theme.colors.bg.screens_bg}
+          color={color}
           //   color={"red"}
           direction="row"
         >

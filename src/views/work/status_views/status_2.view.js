@@ -19,7 +19,7 @@ import { TextClipsContext } from "../../../infrastructure/services/home/text_cli
 import image_source_1 from "../../../../assets/illustrations/at restaurant-shopping.png";
 import image_source_2 from "../../../../assets/illustrations/close to passenger.png";
 
-export default function Text_Clips_by_Status_View_2({ navigation, route }) {
+export default function Text_Clips_by_Status_View_2({ route }) {
   const { operation_name, status_name, dataForUsedCountUpdate } = route.params;
 
   const isFoodDelivery = operation_name === "food_delivery";
@@ -27,7 +27,6 @@ export default function Text_Clips_by_Status_View_2({ navigation, route }) {
   const {
     renderStoredMessagesTile,
     setSelectedItemId,
-    introAdded,
     setIntroAdded,
     userData,
     setNextStep,
@@ -91,7 +90,6 @@ export default function Text_Clips_by_Status_View_2({ navigation, route }) {
         height={"100%"}
         color={theme.colors.bg.screens_bg}
         // color="green"
-        // style={{ flex: 1, paddingBottom: insets.bottom || 50 }}
       >
         <Restart_flow_operation_status_process_header />
         <Spacer position="top" size="small" />

@@ -5,11 +5,11 @@ import { theme } from "../../infrastructure/theme";
 import { Spacer } from "../../components/global_components/optimized.spacer.component";
 import { Container } from "../../components/global_components/containers/general_containers.js";
 
-export const Sound_Wave_Component = () => {
+export const Sound_Wave_Component = ({ width = "100%" }) => {
   return (
     <>
       <Container
-        width={"100%"}
+        width={width}
         height={"100%"}
         justify="space-between"
         align="center"

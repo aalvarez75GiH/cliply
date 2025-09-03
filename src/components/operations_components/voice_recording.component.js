@@ -26,8 +26,8 @@ export const Voice_Recording_Component = ({
         action2={action2}
         action3={action3}
         recordingStatus={recordingStatus}
-        caption_line_1="Tap to record a voice clip"
-        caption_line_2="You will receive a text clip shortly after..."
+        caption_line_1="Tap to create a text clip    "
+        caption_line_2="using your voice, then copy & paste it anywhere"
       />
     </Container>
   );

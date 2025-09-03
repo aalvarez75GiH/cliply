@@ -15,23 +15,19 @@ import { Operations_Status_Step_Component } from "../../../components/operations
 
 import { TextClipsContext } from "../../../infrastructure/services/home/text_clips.context";
 
-export default function Text_Clips_by_Status_View_1({ navigation, route }) {
+export default function Text_Clips_by_Status_View_1({ route }) {
   const { operation_name, status_name, dataForUsedCountUpdate } = route.params;
   const isFoodDelivery = operation_name === "food_delivery";
 
   const {
     renderStoredMessagesTile,
     setSelectedItemId,
-    introAdded,
     setIntroAdded,
     userData,
     setNextStep,
     setDataForUsedCountUpdate,
   } = useContext(TextClipsContext);
-  //   console.log(
-  //     "NEXT STEP AT STORED CLIPS TILE:",
-  //     JSON.stringify(nextStep, null, 2)
-  //   );
+
   const [dataToRender, setDataToRender] = useState([]);
   const [headers_caption, set_Headers_Caption] = useState("");
 

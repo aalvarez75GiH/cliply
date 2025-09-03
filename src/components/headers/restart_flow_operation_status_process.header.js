@@ -1,22 +1,18 @@
-import React, { useContext } from "react";
-import { useNavigation, CommonActions } from "@react-navigation/native";
-
-import { Text } from "../../infrastructure/typography/text.component.js";
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import {
   Container,
   Action_Container,
 } from "../global_components/containers/general_containers.js";
 import { theme } from "../../infrastructure/theme/index.js";
+import MicIcon from "../../../assets/my-icons/micIcon.svg";
 
-import { TextClipsContext } from "../../infrastructure/services/home/text_clips.context.js";
+import { Spacer } from "../global_components/optimized.spacer.component.js";
+import { Restart_CTA } from "../calls_to_action/restart.cta.js";
 
 export const Restart_flow_operation_status_process_header = () => {
   const navigation = useNavigation();
-
-  const { setNextStep, nextStepInitialState, setSelectedItemId } =
-    useContext(TextClipsContext);
-
   return (
     <Container
       width="100%"
@@ -26,41 +22,30 @@ export const Restart_flow_operation_status_process_header = () => {
       justify="center"
       color={theme.colors.bg.elements_bg}
     >
-      <Container
-        width="70%"
+      <Action_Container
+        width="35%"
         height="100%"
-        // color={"red"}
+        // color={"blue"}
+        color={theme.colors.bg.elements_bg}
+        justify="center"
+        align="center"
+        style={{ paddingRight: "5%" }}
+        onPress={() => navigation.navigate("Quick_Voice_Text_Clip")}
+      >
+        <Spacer position="left" size="large">
+          <MicIcon width={30} height={30} fill={theme.colors.ui.primary} />
+        </Spacer>
+      </Action_Container>
+      <Container
+        width="35%"
+        height="100%"
+        //color={"red"}
         color={theme.colors.bg.elements_bg}
         justify="center"
         align="flex-end"
         style={{ paddingRight: "5%" }}
       ></Container>
-      <Action_Container
-        width="40%"
-        height="100%"
-        color={theme.colors.bg.elements_bg}
-        // color={"lightblue"}
-        onPress={() => {
-          setNextStep(nextStepInitialState);
-          setSelectedItemId(null);
-
-          navigation.popToTop("Home_View");
-        }}
-        justify="center"
-        align="center"
-      >
-        <Container
-          width="60%"
-          height="45%"
-          border_radius="10px"
-          color={"white"}
-          justify="center"
-          align="center"
-          border="2px solid"
-        >
-          <Text variant="dm_sans_bold_14">Restart</Text>
-        </Container>
-      </Action_Container>
+      <Restart_CTA />
     </Container>
   );
 };

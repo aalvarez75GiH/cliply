@@ -54,22 +54,6 @@ const ConditionalTabBar = (props) => {
 
   return <BottomTabBar {...props} />;
 };
-// const ConditionalTabBar = (props) => {
-//   const currentTabRoute = props.state.routes[props.state.index];
-//   const nestedName = getActiveRouteName(currentTabRoute);
-
-//   const BackBottomBar =
-//     (currentTabRoute.name === "Home" &&
-//       nestedName === "Clips_by_Operations_And_Status_View") ||
-//     nestedName === "Quickies_Text_Clips_View";
-
-//   if (BackBottomBar) {
-//     // render your custom bar instead of the default one
-//     return <Status_Next_Step_Bottom_Bar />;
-//   }
-
-//   return <BottomTabBar {...props} />;
-// };
 
 export const AppNavigator = () => {
   return (
@@ -105,7 +89,7 @@ export const AppNavigator = () => {
         component={Work_Flow_Navigator}
         listeners={tabBarListeners}
         options={{
-          title: "Text clips",
+          title: "Work",
           tabBarIcon: ({ color }) => (
             <MessagesIcon width={30} height={30} fill={color} />
           ),
@@ -117,14 +101,14 @@ export const AppNavigator = () => {
         component={Voice_and_recent_navigator}
         listeners={tabBarListeners}
         options={{
-          title: "Voice & Recents",
+          title: "Create",
           tabBarIcon: ({ color }) => (
             <MicIcon width={25} height={25} fill={color} />
           ),
         }}
       />
       <Tab.Screen
-        name="Type"
+        name="Type & translate"
         component={Type_Message_Navigator}
         listeners={tabBarListeners}
         options={{

@@ -5,6 +5,7 @@ import Text_Clips_View from "../../views/text_clips_views/text_clips.view";
 import Text_Clips_by_Status_View from "../../views/text_clips_views/text_clips_by_status.view";
 import Menu_Screen from "../../views/text_clips_views/menu.view";
 import Quickies_Text_Clips_View from "../../views/text_clips_views/text clips operations areas/quickies_text_clips.view";
+import Quick_Voice_Text_Clip from "../../views/work/status_views/quick_voice_text_clip";
 
 const TextClipsStack = createNativeStackNavigator();
 
@@ -25,6 +26,10 @@ export const Text_Clips_Navigator = () => {
       <TextClipsStack.Screen
         name="Quickies_Text_Clips_View"
         component={Quickies_Text_Clips_View}
+      />
+      <TextClipsStack.Screen
+        name="Quick_Voice_Text_Clip"
+        component={Quick_Voice_Text_Clip}
       />
     </TextClipsStack.Navigator>
   );

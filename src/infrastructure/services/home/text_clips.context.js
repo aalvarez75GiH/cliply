@@ -48,16 +48,10 @@ export const TextClipsContextProvider = ({ children }) => {
     }
   };
 
-  console.log(
-    "DATA FOR USED COUNT UPDATE AT HOME CONTEXT:",
-    dataForUsedCountUpdate
-  );
-
   // const [intro, setIntro] = useState("");
 
   const { userToDB, globalLanguage } = useContext(GlobalContext);
   const { user_id } = userToDB || {}; // Ensure userToDB is not undefined or null
-  // console.log("USER ID AT HOME CONTEXT:", user_id);
 
   useEffect(() => {
     gettingUserData(user_id);
@@ -67,6 +61,9 @@ export const TextClipsContextProvider = ({ children }) => {
     try {
       const user_data = await get_User_Data_Request(user_id);
       setUserData(user_data.data);
+      if (user_data.status === 200) {
+        console.log("USER DATA HAS BEEN SET LOADED...");
+      }
     } catch (error) {
       console.error("ERROR GETTING USER DATA AT HOME CONTEXT:", error.message);
     }
@@ -78,6 +75,7 @@ export const TextClipsContextProvider = ({ children }) => {
       "UPDATING USED COUNT FUNCTION TRIGGERED:",
       usedCountDataForUpdate
     );
+
     try {
       const response = await update_Text_Clips_Used_Count_Request(
         usedCountDataForUpdate
