@@ -52,6 +52,7 @@ export const TextClipsContextProvider = ({ children }) => {
 
   const { userToDB, globalLanguage } = useContext(GlobalContext);
   const { user_id } = userToDB || {}; // Ensure userToDB is not undefined or null
+  console.log("USER TO DB AT HOME CONTEXT:", userToDB);
 
   useEffect(() => {
     gettingUserData(user_id);
@@ -60,6 +61,7 @@ export const TextClipsContextProvider = ({ children }) => {
   const gettingUserData = async (user_id) => {
     try {
       const user_data = await get_User_Data_Request(user_id);
+      console.log("USER DATA AT HOME CONTEXT:", user_data.data);
       setUserData(user_data.data);
       if (user_data.status === 200) {
         console.log("USER DATA HAS BEEN SET LOADED...");

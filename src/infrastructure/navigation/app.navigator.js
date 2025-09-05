@@ -108,11 +108,11 @@ export const AppNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Type & translate"
+        name="Type"
         component={Type_Message_Navigator}
         listeners={tabBarListeners}
         options={{
-          title: "Type",
+          title: "Translate",
           tabBarIcon: ({ color }) => (
             <KeyBoardIcon width={25} height={25} fill={color} />
           ),

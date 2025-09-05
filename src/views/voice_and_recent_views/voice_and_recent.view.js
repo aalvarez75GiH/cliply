@@ -16,6 +16,7 @@ import { Sound_Wave_Component } from "../../components/operations_components/sou
 import { Transcripted_Text_Clip_View } from "./transcripted_text_clip.view.js";
 import { Text_Tile } from "../../components/tiles/text.tile.js";
 import { Text } from "../../infrastructure/typography/text.component.js";
+import { Squared_action_CTA_component } from "../../components/calls_to_action/squared_action.cta.js";
 
 export default function Voice_and_recent_View({ navigation }) {
   const { userData } = useContext(TextClipsContext);
@@ -129,6 +130,9 @@ export default function Voice_and_recent_View({ navigation }) {
             >
               <Sound_Wave_Component />
             </Container>
+            <Squared_action_CTA_component
+            
+            />
           </>
         )}
         {recordingStatus === "transcribing" && !response && (

@@ -21,8 +21,8 @@
   "users/user_123/stored_messages": {
     "msg_002": {
       "category_id": "traffic_delay",
-      "message_en": "I\u2019ll be a bit late due to traffic.",
-      "message_es": "Llegar\u00e9 un poco tarde por el tr\u00e1fico.",
+      "message_en": "I`ll be a bit late due to traffic.",
+      "message_es": "Llegare un poco tarde por el trafico.",
       "summary_en": "Running late",
       "summary_es": "Retraso",
       "original_message": "I'm in traffic",
@@ -33,7 +33,7 @@
   "categories": {
     "traffic_delay": {
       "name_en": "Traffic / Delay",
-      "name_es": "Tr\u00e1fico / Retraso",
+      "name_es": "Trafico / Retraso",
       "icon": "\ud83d\ude97",
       "order": 1
     },

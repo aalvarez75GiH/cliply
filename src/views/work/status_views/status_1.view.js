@@ -12,7 +12,7 @@ import { Text } from "../../../infrastructure/typography/text.component";
 import { Restart_flow_operation_status_process_header } from "../../../components/headers/restart_flow_operation_status_process.header";
 import { Add_intro_CTA } from "../../../components/calls_to_action/add_intro.cta";
 import { Operations_Status_Step_Component } from "../../../components/operations_components/operations_status_step.component";
-
+import { Shared_logic } from "../../../infrastructure/services/home/shared_logic";
 import { TextClipsContext } from "../../../infrastructure/services/home/text_clips.context";
 
 export default function Text_Clips_by_Status_View_1({ route }) {
@@ -35,6 +35,7 @@ export default function Text_Clips_by_Status_View_1({ route }) {
     "DATA FOR USED COUNT UPDATE IN STATUS 1 VIEW:",
     JSON.stringify(dataForUsedCountUpdate, null, 2)
   );
+  console.log("DATA  IN STATUS 1 VIEW:", JSON.stringify(userData, null, 2));
 
   useEffect(() => {
     setNextStep({

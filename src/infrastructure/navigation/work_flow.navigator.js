@@ -11,7 +11,10 @@ import Text_Clips_by_Status_View_1 from "../../views/work/status_views/status_1.
 import Text_Clips_by_Status_View_2 from "../../views/work/status_views/status_2.view";
 import Text_Clips_by_Status_View_3 from "../../views/work/status_views/status_3.view";
 import Quick_Voice_Text_Clip from "../../views/work/status_views/quick_voice_text_clip";
+import Menu_View from "../../views/work/menu.view";
 
+import Register_User_View from "../../views/global_views/register_user.view";
+import Login_User from "../../views/global_views/login_user.view";
 const WorkFlowStack = createNativeStackNavigator();
 
 export const Work_Flow_Navigator = () => {
@@ -23,7 +26,7 @@ export const Work_Flow_Navigator = () => {
     >
       <WorkFlowStack.Screen name="Home_View" component={Work_Flow_View} />
 
-      <WorkFlowStack.Screen name="Menu_View" component={Menu_Screen} />
+      <WorkFlowStack.Screen name="Menu_View" component={Menu_View} />
       <WorkFlowStack.Screen
         name="Clips_by_Status_View_1"
         component={Text_Clips_by_Status_View_1}

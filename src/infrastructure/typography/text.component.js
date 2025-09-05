@@ -131,6 +131,16 @@ const summary_tile_caption = (theme) => `
         
         `;
 // ****************************************************************************
+const dm_sans_bold_40 = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_40};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.primary};
+    `;
+const dm_sans_bold_40_white = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_40};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.secondary};
+    `;
 const dm_sans_bold_28 = (theme) => `
     font-size: ${theme.fontSizes.dm_sans_bold_28};
     font-family: ${theme.fonts.bold};
@@ -250,6 +260,11 @@ const dm_sans_bold_12 = (theme) => `
     font-family: ${theme.fonts.bold};
     color: ${theme.colors.text.primary};
     `;
+const dm_sans_bold_12_error_cancel = (theme) => `
+    font-size: ${theme.fontSizes.dm_sans_bold_12};
+    font-family: ${theme.fonts.bold};
+    color: ${theme.colors.text.error};
+    `;
 const dm_sans_bold_12_white = (theme) => `
     font-size: ${theme.fontSizes.dm_sans_bold_12};
     font-family: ${theme.fonts.bold};
@@ -287,6 +302,8 @@ const variants = {
   menu_sub_title_text,
   menu_sub_title_text_2,
   message_tile_caption,
+  dm_sans_bold_40,
+  dm_sans_bold_40_white,
   dm_sans_bold_28,
   dm_sans_bold_28_centered,
   dm_sans_bold_26_centered,
@@ -312,6 +329,7 @@ const variants = {
   dm_sans_bold_12,
   dm_sans_bold_12_white,
   dm_sans_bold_12_disable_not_active,
+  dm_sans_bold_12_error_cancel,
 };
 
 export const Text = styled.Text`

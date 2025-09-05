@@ -60,7 +60,7 @@ export const Type_Message_Header = ({ label = "" }) => {
         color={theme.colors.bg.elements_bg}
       >
         <Container
-          width="20%"
+          width="0%"
           height="100%"
           color={theme.colors.bg.elements_bg}
           //   color={"blue"}
@@ -69,16 +69,18 @@ export const Type_Message_Header = ({ label = "" }) => {
           style={{ paddingRight: "5%" }}
         ></Container>
         <Container
-          width="60%"
+          width="85%"
           height="100%"
-          //   color={"green"}
+          // color={"green"}
           color={theme.colors.bg.elements_bg}
           onPress={() => navigation.navigate("Home")}
         >
-          <Text variant="middle_screens_caption">Type a quick message</Text>
+          <Text variant="middle_screens_caption">
+            Paste here, translate & create
+          </Text>
         </Container>
         <Container
-          width="20%"
+          width="10%"
           height="100%"
           color={theme.colors.bg.elements_bg}
           //   color={"pink"}

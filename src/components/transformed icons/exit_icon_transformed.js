@@ -16,3 +16,4 @@ export const ExitIcon = ({ fill = "#000000", size = 18 }) => (
     </G>
   </Svg>
 );
+s
