@@ -5,7 +5,7 @@ import { GlobalContext } from "../global/global.context.js";
 import { get_User_Data_Request } from "./text_clips.requests.js";
 
 import { Spacer } from "../../../components/global_components/optimized.spacer.component.js";
-import { Stored_Clips_Tile } from "../../../components/tiles/stored_clip.tile.js";
+// import { Stored_Clips_Tile } from "../../../components/tiles/stored_clip.tile.js";
 import { Quickies_Tile } from "../../../components/tiles/quickies.tile.js";
 import { update_Text_Clips_Used_Count_Request } from "./text_clips.requests.js";
 
@@ -52,7 +52,6 @@ export const TextClipsContextProvider = ({ children }) => {
 
   const { userToDB, globalLanguage } = useContext(GlobalContext);
   const { user_id } = userToDB || {}; // Ensure userToDB is not undefined or null
-  console.log("USER TO DB AT HOME CONTEXT:", userToDB);
 
   useEffect(() => {
     gettingUserData(user_id);
@@ -94,21 +93,21 @@ export const TextClipsContextProvider = ({ children }) => {
     } catch (error) {}
   };
 
-  const renderStoredMessagesTile = ({ item }) => {
-    return (
-      <Spacer position="bottom" size="medium">
-        <Stored_Clips_Tile
-          item={item}
-          globalLanguage={globalLanguage}
-          setIsLoading={setIsLoading}
-          selectedItemId={selectedItemId}
-          onSelect={setSelectedItemId}
-          isLoading={isLoading}
-          dataForUsedCountUpdate={dataForUsedCountUpdate}
-        />
-      </Spacer>
-    );
-  };
+  // const renderStoredMessagesTile = ({ item }) => {
+  //   return (
+  //     <Spacer position="bottom" size="medium">
+  //       <Stored_Clips_Tile
+  //         item={item}
+  //         globalLanguage={globalLanguage}
+  //         setIsLoading={setIsLoading}
+  //         selectedItemId={selectedItemId}
+  //         onSelect={setSelectedItemId}
+  //         isLoading={isLoading}
+  //         dataForUsedCountUpdate={dataForUsedCountUpdate}
+  //       />
+  //     </Spacer>
+  //   );
+  // };
   const renderQuickiesTile = ({ item }) => {
     return (
       <Spacer position="bottom" size="medium">
@@ -129,7 +128,7 @@ export const TextClipsContextProvider = ({ children }) => {
       value={{
         userData,
         gettingUserData,
-        renderStoredMessagesTile,
+        // renderStoredMessagesTile,
         setSelectedItemId,
         isLoading,
         setIsLoading,
@@ -146,6 +145,7 @@ export const TextClipsContextProvider = ({ children }) => {
         setOperation,
         updatingTextClipsUsedCount,
         setDataForUsedCountUpdate,
+        dataForUsedCountUpdate,
       }}
     >
       {children}

@@ -1,9 +1,7 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { Platform, KeyboardAvoidingView } from "react-native";
 import { ActivityIndicator, TextInput } from "react-native-paper";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { validatingEmail } from "../../infrastructure/services/global/global.context.js";
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
 import { Text } from "../../infrastructure/typography/text.component.js";
 import { FormInput } from "../../components/inputs/form.input.js";
@@ -16,12 +14,10 @@ import { theme } from "../../infrastructure/theme/index.js";
 import { ExitHeader } from "../../components/headers/exit_header.component.js";
 
 import { GlobalContext } from "../../infrastructure/services/global/global.context.js";
-import { isLoading } from "expo-font";
 // import eye_on_icon from "../../../assets/pictures/ui/eye_on_icon.png";
 // import eye_off_icon from "../../../assets/pictures/ui/eye_off_icon.png";
 
 export default function Register_User_View_2({ navigation, route }) {
-  const [error, setError] = useState(null);
   const {
     setEmail,
     email,
@@ -30,15 +26,16 @@ export default function Register_User_View_2({ navigation, route }) {
     setEmailError,
     registerUser,
     user_added_successfully,
+    isLoading,
   } = useContext(GlobalContext);
 
   const inputRef = useRef(null);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      inputRef.current?.focus();
-    }, 100); // slight delay ensures focus sticks
-    return () => clearTimeout(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     inputRef.current?.focus();
+  //   }, 100); // slight delay ensures focus sticks
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   return (
     <SafeArea backgroundColor={theme.colors.bg.elements_bg}>

@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { FlatList } from "react-native-gesture-handler";
 
-import { ExitHeader } from "../../../components/headers/exit_header.component";
 import { SafeArea } from "../../../components/global_components/safe-area.component";
 import { theme } from "../../../infrastructure/theme/index";
 import { Spacer } from "../../../components/global_components/optimized.spacer.component";
@@ -10,9 +9,7 @@ import {
   Action_Container,
 } from "../../../components/global_components/containers/general_containers";
 import { Text } from "../../../infrastructure/typography/text.component";
-import { Text_Clips_By_Status_Sub_Header } from "../../../components/headers/text_clips_by_operations_and_status.header";
 import { Operations_Status_Step_Component } from "../../../components/operations_components/operations_status_step.component";
-import { Add_intro_CTA } from "../../../components/calls_to_action/add_intro.cta";
 import { Restart_flow_operation_status_process_header } from "../../../components/headers/restart_flow_operation_status_process.header";
 
 import { TextClipsContext } from "../../../infrastructure/services/home/text_clips.context";

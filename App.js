@@ -2,7 +2,7 @@ import React from "react";
 import "react-native-reanimated";
 import { ThemeProvider } from "styled-components/native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
+// import { NavigationContainer } from "@react-navigation/native";
 import { Navigation } from "./src/infrastructure/navigation";
 import { theme } from "./src/infrastructure/theme";
 import { VoiceRecentClipsContextProvider } from "./src/infrastructure/services/voice_recents/voice_recent.context";

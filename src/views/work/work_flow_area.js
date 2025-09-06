@@ -9,10 +9,7 @@ import {
 import { Spacer } from "../../components/global_components/optimized.spacer.component";
 
 import { Scrollable_Container } from "../../components/global_components/containers/general_containers";
-import { Flex_Container } from "../../components/global_components/containers/general_containers";
 import { Loading_Spinner_area } from "../../components/global_components/global_loading_spinner_area.component";
-import { Operations_Status_Connector_Line } from "../../components/global_components/operations_status_connector_line.component";
-import { Operations_Status_Step_Component } from "../../components/operations_components/operations_status_step.component";
 import { Text } from "../../infrastructure/typography/text.component";
 
 import { TextClipsContext } from "../../infrastructure/services/home/text_clips.context";
@@ -122,7 +119,7 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
           justify="center"
           align="center"
         >
-          <Container width="70%" color="trasnparent">
+          <Container width="70%" color="transparent">
             <Text
               variant="dm_sans_bold_16"
               style={{

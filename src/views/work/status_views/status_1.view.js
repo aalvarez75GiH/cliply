@@ -10,22 +10,29 @@ import {
 } from "../../../components/global_components/containers/general_containers";
 import { Text } from "../../../infrastructure/typography/text.component";
 import { Restart_flow_operation_status_process_header } from "../../../components/headers/restart_flow_operation_status_process.header";
-import { Add_intro_CTA } from "../../../components/calls_to_action/add_intro.cta";
+// import { Add_intro_CTA } from "../../../components/calls_to_action/add_intro.cta";
 import { Operations_Status_Step_Component } from "../../../components/operations_components/operations_status_step.component";
 import { Shared_logic } from "../../../infrastructure/services/home/shared_logic";
+import { renderStoredMessagesTile } from "../../../infrastructure/services/home/shared_logic";
+
 import { TextClipsContext } from "../../../infrastructure/services/home/text_clips.context";
+import { GlobalContext } from "../../../infrastructure/services/global/global.context";
 
 export default function Text_Clips_by_Status_View_1({ route }) {
   const { operation_name, status_name, dataForUsedCountUpdate } = route.params;
   const isFoodDelivery = operation_name === "food_delivery";
 
+  const { globalLanguage } = useContext(GlobalContext);
   const {
-    renderStoredMessagesTile,
+    // renderStoredMessagesTile,
     setSelectedItemId,
     setIntroAdded,
     userData,
     setNextStep,
     setDataForUsedCountUpdate,
+    setIsLoading,
+    isLoading,
+    selectedItemId,
   } = useContext(TextClipsContext);
 
   const [dataToRender, setDataToRender] = useState([]);
@@ -35,7 +42,7 @@ export default function Text_Clips_by_Status_View_1({ route }) {
     "DATA FOR USED COUNT UPDATE IN STATUS 1 VIEW:",
     JSON.stringify(dataForUsedCountUpdate, null, 2)
   );
-  console.log("DATA  IN STATUS 1 VIEW:", JSON.stringify(userData, null, 2));
+  // console.log("DATA  IN STATUS 1 VIEW:", JSON.stringify(userData, null, 2));
 
   useEffect(() => {
     setNextStep({
@@ -141,12 +148,43 @@ export default function Text_Clips_by_Status_View_1({ route }) {
               showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}
               data={dataToRender}
-              renderItem={renderStoredMessagesTile}
+              renderItem={({ item }) =>
+                renderStoredMessagesTile({
+                  item,
+                  globalLanguage,
+                  setIsLoading,
+                  selectedItemId,
+                  setSelectedItemId,
+                  isLoading,
+                  dataForUsedCountUpdate,
+                })
+              }
               keyExtractor={(item, id) => {
                 return item.message_id;
               }}
             />
           )}
+          {/* {dataToRender.length > 0 && (
+            <FlatList
+              showsHorizontalScrollIndicator={false}
+              showsVerticalScrollIndicator={false}
+              data={dataToRender}
+              renderItem={({ item }) =>
+                renderStoredMessagesTile(
+                  item,
+                  globalLanguage,
+                  setIsLoading,
+                  selectedItemId,
+                  setSelectedItemId,
+                  isLoading,
+                  dataForUsedCountUpdate
+                )
+              }
+              keyExtractor={(item, id) => {
+                return item.message_id;
+              }}
+            />
+          )} */}
           <Spacer position="top" size="large" />
         </Container>
       </Container>

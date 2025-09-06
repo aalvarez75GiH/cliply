@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 import { Platform } from "react-native";
 // import { useNavigation } from "@react-navigation/native";
 
-import { ActivityIndicator, TextInput } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { validatingEmail } from "../../infrastructure/services/global/global.context.js";
@@ -24,6 +23,18 @@ import { KeyboardAvoidingView } from "react-native";
 
 export default function Login_User({ navigation, route }) {
   //   const navigation = useNavigation();
+  const {
+    setIsAuthenticated,
+    loginUser,
+    errorInAuthentication,
+    temporaryAuthentication,
+    setFirst_name,
+    setLast_name,
+    setEmail,
+    setEmailError,
+    setPin,
+    pin,
+  } = useContext(GlobalContext);
 
   const inputRef = useRef(null);
   useEffect(() => {
@@ -61,7 +72,6 @@ export default function Login_User({ navigation, route }) {
     };
 
     checkAuthentication();
-    // Call this function wherever you want to inspect AsyncStorage
     logAsyncStorage();
 
     return () => clearTimeout(timer);
@@ -87,27 +97,14 @@ export default function Login_User({ navigation, route }) {
   //     checkAuthentication();
   //   }, []);
 
-  const submit = () => {
-    if (!/^\d{4}$/.test(pin)) {
-      setError("Enter your 4-digit PIN.");
-      return;
-    }
-    setError(null);
-    // TODO: your auth logic with `pin`
-  };
-
-  const {
-    setIsAuthenticated,
-    loginUser,
-    errorInAuthentication,
-    temporaryAuthentication,
-    setFirst_name,
-    setLast_name,
-    setEmail,
-    setEmailError,
-    setPin,
-    pin,
-  } = useContext(GlobalContext);
+  // const submit = () => {
+  //   if (!/^\d{4}$/.test(pin)) {
+  //     setError("Enter your 4-digit PIN.");
+  //     return;
+  //   }
+  //   setError(null);
+  //   // TODO: your auth logic with `pin`
+  // };
 
   return (
     <SafeArea backgroundColor={theme.colors.bg.elements_bg}>
@@ -131,7 +128,6 @@ export default function Login_User({ navigation, route }) {
             // color={"blue"}
             color={theme.colors.bg.elements_bg}
           >
-            {/* <Spacer position="top" size="large" /> */}
             <Text variant="dm_sans_bold_40">Cliply</Text>
             <Spacer position="bottom" size="large" />
             <Spacer position="bottom" size="large" />
@@ -141,8 +137,8 @@ export default function Login_User({ navigation, route }) {
           <Container
             width="80%"
             height="20%"
-            justifyContent="center"
-            alignItems="center"
+            justify="center"
+            align="center"
             color={theme.colors.bg.elements_bg}
             // color={"yellow"}
           >
@@ -150,7 +146,7 @@ export default function Login_User({ navigation, route }) {
               length={6}
               value={pin}
               onChange={setPin}
-              onFulfill={() => loginUser(pin)} // enable to auto-submit once 4 digits entered
+              onFulfill={() => null} // enable to auto-submit once 4 digits entered
               themeColor="#000000" // idle dot color (the gray you showed)
               digitColor="#000000"
               size={18}
@@ -166,8 +162,8 @@ export default function Login_User({ navigation, route }) {
           <Container
             width="100%"
             height="40%"
-            justifyContent="center"
-            alignItems="center"
+            justify="center"
+            align="center"
             color={theme.colors.bg.elements_bg}
             // color={"yellow"}
           >
@@ -181,10 +177,10 @@ export default function Login_User({ navigation, route }) {
               align="center"
               color="transparent"
               //   border_radius={8}
-              border_radius_top_left={30}
-              border_radius_top_right={30}
-              border_radius_bottom_left={30}
-              border_radius_bottom_right={30}
+              border_radius_top_left={"30px"}
+              border_radius_top_right={"30px"}
+              border_radius_bottom_left={"30px"}
+              border_radius_bottom_right={"30px"}
               border={"3px"}
               onPress={() => null}
             >
@@ -219,9 +215,9 @@ export default function Login_User({ navigation, route }) {
                 align="center"
                 color="transparent"
                 onPress={() => {
-                  setEmail("");
-                  setFirst_name("");
-                  setLast_name("");
+                  // setEmail("");
+                  // setFirst_name("");
+                  // setLast_name("");
                   navigation.navigate("Register_user_View");
                 }}
               >
@@ -243,8 +239,8 @@ export default function Login_User({ navigation, route }) {
             <Container
               width="100%"
               height="5%"
-              justifyContent="center"
-              alignItems="flex-start"
+              justify="center"
+              align="flex-start"
               // color="red"
               // backgroundColor="red"
               paddingLeft="5%"
@@ -254,7 +250,6 @@ export default function Login_User({ navigation, route }) {
           )}
         </Container>
       </KeyboardAvoidingView>
-      {/* </Container> */}
     </SafeArea>
   );
 }

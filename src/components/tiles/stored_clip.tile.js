@@ -1,4 +1,4 @@
-import React, { useState, useContext, use } from "react";
+import React, { useState, useContext } from "react";
 import * as Clipboard from "expo-clipboard";
 import { ActivityIndicator, Platform } from "react-native";
 
@@ -26,8 +26,7 @@ export const Stored_Clips_Tile = ({
   const [isLoading, setIsLoading] = useState(false);
   const { summary, body, message_id } = item;
 
-  const { introAdded, setIntroAdded, updatingTextClipsUsedCount } =
-    useContext(TextClipsContext);
+  const { updatingTextClipsUsedCount } = useContext(TextClipsContext);
   useState(() => {
     // console.log(
     //   "NEXT STEP AT STORED CLIPS TILE:",
@@ -49,30 +48,60 @@ export const Stored_Clips_Tile = ({
 
   const copy_message_action = async (item) => {
     const { body, message_id } = item;
+
+    // Defensive check for body structure
+    if (!body || !body.en || !body.es) {
+      console.error("Invalid body structure:", body);
+      return;
+    }
+
     setIsLoading(true);
     setTimeout(async () => {
-      await Clipboard.setStringAsync(
-        introAdded
-          ? `Hey, Your driver here. ${language === "EN" ? body.en : body.es}`
-          : language === "EN"
-          ? body.en
-          : body.es
-      );
+      try {
+        const message = language === "EN" ? body.en : body.es;
+        await Clipboard.setStringAsync(message);
 
-      const usedCountDataForUpdate = {
-        ...dataForUsedCountUpdate,
-        message_id: message_id,
-      };
-      console.log("DATA TO UPDATE USED COUNT:", usedCountDataForUpdate);
-      await updatingTextClipsUsedCount(usedCountDataForUpdate);
+        const usedCountDataForUpdate = {
+          ...dataForUsedCountUpdate,
+          message_id: message_id,
+        };
+        console.log("DATA TO UPDATE USED COUNT:", usedCountDataForUpdate);
+        await updatingTextClipsUsedCount(usedCountDataForUpdate);
 
-      console.log(`Copied to clipboard: ${body.en}`);
-      //   setIsSelected(id);
-      onSelect(message_id);
-      setIsLoading(false);
-      setIntroAdded(false);
+        console.log(`Copied to clipboard: ${message}`);
+        onSelect(message_id);
+      } catch (error) {
+        console.error("Error copying message to clipboard:", error);
+      } finally {
+        setIsLoading(false);
+      }
     }, 300);
   };
+
+  // const copy_message_action = async (item) => {
+  //   const { body, message_id } = item;
+  //   if (!body || !body.en || !body.es) {
+  //     console.error("Invalid body structure:", body);
+  //     return;
+  //   }
+
+  //   setIsLoading(true);
+  //   setTimeout(async () => {
+  //     try {
+  //       const message = introAdded
+  //         ? `Hey, Your driver here. ${language === "EN" ? body.en : body.es}`
+  //         : language === "EN"
+  //         ? body.en
+  //         : body.es;
+
+  //       await Clipboard.setStringAsync(message);
+  //     } catch (error) {
+  //       console.error("Clipboard error:", error);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   }, 300);
+  // };
 
   const uncopy_message_action = async () => {
     setIsLoading(true);

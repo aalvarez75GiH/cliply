@@ -510,6 +510,43 @@ export const quickies_food_delivery = {
       },
     },
   ],
+  // heading_to_drop_off: [
+  //   {
+  //     message_id: "QK_0004",
+  //     body: {
+  //       en: "I am close, be ready",
+  //       es: "Estoy cerca, esté listo",
+  //     },
+  //   },
+  //   {
+  //     message_id: "QK_0005",
+  //     body: {
+  //       en: "Will need a PIN number",
+  //       es: "Necesitaré un número PIN",
+  //     },
+  //   },
+  //   {
+  //     message_id: "QK_0020",
+  //     body: {
+  //       en: "This is a handoff delivery",
+  //       es: "Esta es una entrega en mano",
+  //     },
+  //   },
+  //   {
+  //     message_id: "QK_0006",
+  //     body: {
+  //       en: "Can't find your place",
+  //       es: "No consigo tu casa",
+  //     },
+  //   },
+  //   {
+  //     message_id: "QK_0007",
+  //     body: {
+  //       en: "On my way but traffic",
+  //       es: "En camino pero hay tráfico",
+  //     },
+  //   },
+  // ],
 };
 
 export const quickies_ride_share = {

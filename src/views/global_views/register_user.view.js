@@ -1,13 +1,10 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { KeyboardAvoidingView, Platform } from "react-native";
-import {
-  EmailAuthProvider,
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
+// import {
+//   EmailAuthProvider,
+//   createUserWithEmailAndPassword,
+// } from "firebase/auth";
 import { ActivityIndicator, TextInput } from "react-native-paper";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
-import { validatingEmail } from "../../infrastructure/services/global/global.context.js";
 
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
 import { Text } from "../../infrastructure/typography/text.component.js";
@@ -24,14 +21,17 @@ import { theme } from "../../infrastructure/theme/index.js";
 import { ExitHeader } from "../../components/headers/exit_header.component.js";
 
 import { GlobalContext } from "../../infrastructure/services/global/global.context.js";
-// import eye_on_icon from "../../../assets/pictures/ui/eye_on_icon.png";
-// import eye_off_icon from "../../../assets/pictures/ui/eye_off_icon.png";
 
 export default function Register_User({ navigation, route }) {
   const [error, setError] = useState(null);
 
-  const { auth, first_name, setFirst_name, last_name, setLast_name } =
-    useContext(GlobalContext);
+  const {
+    first_name,
+    setFirst_name,
+    last_name,
+    setLast_name,
+    validatingEmail,
+  } = useContext(GlobalContext);
 
   const inputRef = useRef(null);
 

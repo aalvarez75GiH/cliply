@@ -13,7 +13,7 @@ import { Spacer } from "../global_components/optimized.spacer.component";
 import { theme } from "../../infrastructure/theme/index.js";
 
 export const PinDotsInput = ({
-  length = 4,
+  length = 6,
   value,
   onChange,
   onFulfill,
