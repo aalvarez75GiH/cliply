@@ -489,6 +489,20 @@ export const quickies_food_delivery = {
       },
     },
     {
+      message_id: "QK_0020",
+      body: {
+        en: "Will need to hand it to you",
+        es: "Tendré que entregártelo en mano",
+      },
+    },
+    {
+      message_id: "QK_0021",
+      body: {
+        en: "This is s hand-off order",
+        es: "Esta es una orden de entrega en mano",
+      },
+    },
+    {
       message_id: "QK_0006",
       body: {
         en: "Can't find your place",
