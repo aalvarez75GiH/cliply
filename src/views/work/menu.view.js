@@ -15,7 +15,7 @@ import { Menu_Tile } from "../../components/tiles/menu.tile.js";
 import { GlobalContext } from "../../infrastructure/services/global/global.context.js";
 
 export default function Menu_Screen({ navigation }) {
-  const { globalLanguage, togglingGlobalLanguage, isLoading } =
+  const { globalLanguage, togglingGlobalLanguage, isLoading, loggingOutUser } =
     useContext(GlobalContext);
   return (
     <SafeArea background_color={theme.colors.bg.elements_bg}>
@@ -98,6 +98,16 @@ export default function Menu_Screen({ navigation }) {
               color={theme.colors.ui.primary}
               isLoading={isLoading}
               action={() => togglingGlobalLanguage()}
+            />
+            <Menu_Tile
+              Icon={ArrowSwitchIcon}
+              width={"30px"}
+              height={"30px"}
+              //   caption={"English"}
+              caption={globalLanguage === "EN" ? "Sign out" : "Salir"}
+              color={theme.colors.ui.error}
+              isLoading={isLoading}
+              action={() => loggingOutUser()}
             />
           </Container>
         </Container>

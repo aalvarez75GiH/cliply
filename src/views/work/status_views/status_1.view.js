@@ -14,6 +14,7 @@ import { Add_intro_CTA } from "../../../components/calls_to_action/add_intro.cta
 import { Operations_Status_Step_Component } from "../../../components/operations_components/operations_status_step.component";
 
 import { TextClipsContext } from "../../../infrastructure/services/home/text_clips.context";
+import { Shared_logic } from "../../../infrastructure/services/home/shared_logic";
 
 export default function Text_Clips_by_Status_View_1({ route }) {
   const { operation_name, status_name, dataForUsedCountUpdate } = route.params;
@@ -26,6 +27,7 @@ export default function Text_Clips_by_Status_View_1({ route }) {
     userData,
     setNextStep,
     setDataForUsedCountUpdate,
+    selectedItemId,
   } = useContext(TextClipsContext);
 
   const [dataToRender, setDataToRender] = useState([]);
@@ -140,7 +142,17 @@ export default function Text_Clips_by_Status_View_1({ route }) {
               showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}
               data={dataToRender}
-              renderItem={renderStoredMessagesTile}
+              renderItem={({ item }) =>
+                renderStoredMessagesTile({
+                  item,
+                  globalLanguage,
+                  setIsLoading,
+                  selectedItemId,
+                  setSelectedItemId,
+                  isLoading,
+                  dataForUsedCountUpdate,
+                })
+              }
               keyExtractor={(item, id) => {
                 return item.message_id;
               }}

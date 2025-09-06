@@ -29,6 +29,7 @@ export const fontSizes = {
   en_es_cta: "14px",
   bottom_tab_bar: "12px",
   menu_tiles_caption: "14px",
+  dm_sans_40: "40px",
   dm_sans_bold_28: "28px",
   dm_sans_bold_26: "26px",
   dm_sans_bold_24: "24px",

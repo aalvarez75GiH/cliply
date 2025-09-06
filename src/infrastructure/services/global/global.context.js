@@ -1,14 +1,18 @@
 import React, { createContext, useState, useEffect } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  getReactNativePersistence,
+  initializeAuth,
+} from "firebase/auth";
+import { initializeApp, getApps } from "firebase/app";
+import AsyncStorage from "@react-native-async-storage/async-storage"; // Ensure this is installed
+
+// Create Global Context
 export const GlobalContext = createContext();
 
-// *************** Firebase SDK ***************************
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCnf4GGhTXxqMersW4ufM5zayh3BRYLyoM",
   authDomain: "cliplybe.firebaseapp.com",
@@ -17,11 +21,28 @@ const firebaseConfig = {
   messagingSenderId: "136903132349",
   appId: "1:136903132349:web:7b5638842445acdd5723d4",
 };
-// *************** Firebase SDK - END ***************************
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth();
+// Initialize Firebase App (only if not already initialized)
+let app;
+if (!getApps().length) {
+  app = initializeApp(firebaseConfig);
+} else {
+  app = getApps()[0]; // Use the already initialized app
+}
+
+// Initialize Firebase Auth (only if not already initialized)
+// const auth = initializeAuth(app, {
+//   persistence: getReactNativePersistence(AsyncStorage),
+// });
+let auth;
+try {
+  auth = getAuth(app); // Use getAuth to retrieve the existing instance
+} catch (error) {
+  auth = initializeAuth(app, {
+    persistence: getReactNativePersistence(AsyncStorage),
+  });
+}
+export { app, auth };
 // export const db = app.firestore();
 
 export const GlobalContextProvider = ({ children }) => {
@@ -29,22 +50,29 @@ export const GlobalContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userToDB, setUserToDB] = useState(null);
+  const [pin, setPin] = useState("");
+  const [errorInAuthentication, setErrorInAuthentication] = useState(null);
 
   useEffect(() => {
     setUserToDB(user);
-    signInWithEmailAndPassword(auth, "arnoldo.alvarez75@yahoo.com", "123456")
-      .then((data_user) => {
-        // console.log(JSON.stringify(data_user, 0, 2));
-        console.log("USER UID FROM GOOGLE:", data_user.user.uid);
-        console.log("USER EMAIL FROM GOOGLE:", data_user.user.email);
-        console.log("USER AUTHENTICATED WITH FIREBASE...");
-        setIsAuthenticated(true);
-      })
-      .catch((e) => {
-        console.error("Authentication failed:", e.message);
-        setIsAuthenticated(false);
-      });
+    // signInWithEmailAndPassword(auth, "arnoldo.alvarez75@yahoo.com", "123456")
+    //   .then((data_user) => {
+    //     // console.log(JSON.stringify(data_user, 0, 2));
+    //     console.log("USER UID FROM GOOGLE:", data_user.user.uid);
+    //     console.log("USER EMAIL FROM GOOGLE:", data_user.user.email);
+    //     console.log("USER AUTHENTICATED WITH FIREBASE...");
+    //     setIsAuthenticated(true);
+    //   })
+    //   .catch((e) => {
+    //     console.error("Authentication failed:", e.message);
+    //     setIsAuthenticated(false);
+    //   });
   }, [user]);
+
+  const temporaryAuthentication = async () => {
+    setIsAuthenticated(true);
+    await AsyncStorage.setItem("isAuthenticated", "true");
+  };
 
   const togglingGlobalLanguage = () => {
     setIsLoading(true);
@@ -70,6 +98,19 @@ export const GlobalContextProvider = ({ children }) => {
     phone_number: "(706)352.84.46",
   };
 
+  const loggingOutUser = async () => {
+    try {
+      // await auth.signOut();
+      // await AsyncStorage.clear();
+      await AsyncStorage.setItem("isAuthenticated", "false");
+      setIsAuthenticated(false);
+      setPin("");
+      console.log("User logged out successfully.");
+    } catch (error) {
+      console.error("Logout error:", error.message);
+    }
+  };
+
   // This context is currently empty, but can be expanded in the future
   return (
     <GlobalContext.Provider
@@ -81,10 +122,16 @@ export const GlobalContextProvider = ({ children }) => {
         app,
         userToDB,
         isAuthenticated,
+        setPin,
+        pin,
+        errorInAuthentication,
+        temporaryAuthentication,
+        loggingOutUser,
         // db,
       }}
     >
-      {isAuthenticated ? children : null}
+      {/* {isAuthenticated ? children : null} */}
+      {children}
     </GlobalContext.Provider>
   );
 };

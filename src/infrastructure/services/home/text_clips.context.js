@@ -92,21 +92,21 @@ export const TextClipsContextProvider = ({ children }) => {
     } catch (error) {}
   };
 
-  const renderStoredMessagesTile = ({ item }) => {
-    return (
-      <Spacer position="bottom" size="medium">
-        <Stored_Clips_Tile
-          item={item}
-          globalLanguage={globalLanguage}
-          setIsLoading={setIsLoading}
-          selectedItemId={selectedItemId}
-          onSelect={setSelectedItemId}
-          isLoading={isLoading}
-          dataForUsedCountUpdate={dataForUsedCountUpdate}
-        />
-      </Spacer>
-    );
-  };
+  // const renderStoredMessagesTile = ({ item }) => {
+  //   return (
+  //     <Spacer position="bottom" size="medium">
+  //       <Stored_Clips_Tile
+  //         item={item}
+  //         globalLanguage={globalLanguage}
+  //         setIsLoading={setIsLoading}
+  //         selectedItemId={selectedItemId}
+  //         onSelect={setSelectedItemId}
+  //         isLoading={isLoading}
+  //         dataForUsedCountUpdate={dataForUsedCountUpdate}
+  //       />
+  //     </Spacer>
+  //   );
+  // };
   const renderQuickiesTile = ({ item }) => {
     return (
       <Spacer position="bottom" size="medium">
@@ -127,7 +127,7 @@ export const TextClipsContextProvider = ({ children }) => {
       value={{
         userData,
         gettingUserData,
-        renderStoredMessagesTile,
+        // renderStoredMessagesTile,
         setSelectedItemId,
         isLoading,
         setIsLoading,
