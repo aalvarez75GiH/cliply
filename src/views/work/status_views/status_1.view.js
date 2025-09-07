@@ -10,12 +10,12 @@ import {
 } from "../../../components/global_components/containers/general_containers";
 import { Text } from "../../../infrastructure/typography/text.component";
 import { Restart_flow_operation_status_process_header } from "../../../components/headers/restart_flow_operation_status_process.header";
-import { Add_intro_CTA } from "../../../components/calls_to_action/add_intro.cta";
+// import { Add_intro_CTA } from "../../../components/calls_to_action/add_intro.cta";
 import { Operations_Status_Step_Component } from "../../../components/operations_components/operations_status_step.component";
+// import { Shared_logic } from "../../../infrastructure/services/home/shared_logic";
 
 import { TextClipsContext } from "../../../infrastructure/services/home/text_clips.context";
-import { Shared_logic } from "../../../infrastructure/services/home/shared_logic";
-
+// import { GlobalContext } from "../../../infrastructure/services/global/global.context";
 export default function Text_Clips_by_Status_View_1({ route }) {
   const { operation_name, status_name, dataForUsedCountUpdate } = route.params;
   const isFoodDelivery = operation_name === "food_delivery";
@@ -27,9 +27,12 @@ export default function Text_Clips_by_Status_View_1({ route }) {
     userData,
     setNextStep,
     setDataForUsedCountUpdate,
-    selectedItemId,
+    // selectedItemId,
+    // setIsLoading,
+    // isLoading,
   } = useContext(TextClipsContext);
 
+  // const { globalLanguage } = useContext(GlobalContext);
   const [dataToRender, setDataToRender] = useState([]);
   const [headers_caption, set_Headers_Caption] = useState("");
 
@@ -142,17 +145,7 @@ export default function Text_Clips_by_Status_View_1({ route }) {
               showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}
               data={dataToRender}
-              renderItem={({ item }) =>
-                renderStoredMessagesTile({
-                  item,
-                  globalLanguage,
-                  setIsLoading,
-                  selectedItemId,
-                  setSelectedItemId,
-                  isLoading,
-                  dataForUsedCountUpdate,
-                })
-              }
+              renderItem={renderStoredMessagesTile}
               keyExtractor={(item, id) => {
                 return item.message_id;
               }}

@@ -52,12 +52,16 @@ export const TextClipsContextProvider = ({ children }) => {
 
   const { userToDB, globalLanguage } = useContext(GlobalContext);
   const { user_id } = userToDB || {}; // Ensure userToDB is not undefined or null
-
+  console.log("USER TO DB AT HOME CONTEXT:", userToDB);
   useEffect(() => {
-    gettingUserData(user_id);
-  }, []);
+    if (user_id) {
+      console.log("USER ID AT HOME CONTEXT:", user_id);
+      gettingUserData(user_id);
+    }
+  }, [user_id]);
 
   const gettingUserData = async (user_id) => {
+    console.log("USER ID AT GETTING USER DATA:", user_id);
     try {
       const user_data = await get_User_Data_Request(user_id);
       setUserData(user_data.data);
@@ -92,21 +96,21 @@ export const TextClipsContextProvider = ({ children }) => {
     } catch (error) {}
   };
 
-  // const renderStoredMessagesTile = ({ item }) => {
-  //   return (
-  //     <Spacer position="bottom" size="medium">
-  //       <Stored_Clips_Tile
-  //         item={item}
-  //         globalLanguage={globalLanguage}
-  //         setIsLoading={setIsLoading}
-  //         selectedItemId={selectedItemId}
-  //         onSelect={setSelectedItemId}
-  //         isLoading={isLoading}
-  //         dataForUsedCountUpdate={dataForUsedCountUpdate}
-  //       />
-  //     </Spacer>
-  //   );
-  // };
+  const renderStoredMessagesTile = ({ item }) => {
+    return (
+      <Spacer position="bottom" size="medium">
+        <Stored_Clips_Tile
+          item={item}
+          globalLanguage={globalLanguage}
+          setIsLoading={setIsLoading}
+          selectedItemId={selectedItemId}
+          onSelect={setSelectedItemId}
+          isLoading={isLoading}
+          dataForUsedCountUpdate={dataForUsedCountUpdate}
+        />
+      </Spacer>
+    );
+  };
   const renderQuickiesTile = ({ item }) => {
     return (
       <Spacer position="bottom" size="medium">
@@ -127,7 +131,7 @@ export const TextClipsContextProvider = ({ children }) => {
       value={{
         userData,
         gettingUserData,
-        // renderStoredMessagesTile,
+        renderStoredMessagesTile,
         setSelectedItemId,
         isLoading,
         setIsLoading,

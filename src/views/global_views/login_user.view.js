@@ -51,23 +51,23 @@ export default function Login_User({ route }) {
         console.error("Error reading AsyncStorage:", error);
       }
     };
-    const checkAuthentication = async () => {
-      try {
-        const isAuthenticated = await AsyncStorage.getItem("isAuthenticated");
+    // const checkAuthentication = async () => {
+    //   try {
+    //     const isAuthenticated = await AsyncStorage.getItem("isAuthenticated");
 
-        if (isAuthenticated === "true") {
-          console.log("USER IS AUTHENTICATED:", isAuthenticated);
-          setIsAuthenticated(true);
-        } else {
-          console.log("USER NOT AUTHENTICATED:", isAuthenticated);
-          setIsAuthenticated(false);
-        }
-      } catch (error) {
-        console.error("Error checking authentication:", error);
-      }
-    };
+    //     if (isAuthenticated === "true") {
+    //       console.log("USER IS AUTHENTICATED:", isAuthenticated);
+    //       setIsAuthenticated(true);
+    //     } else {
+    //       console.log("USER NOT AUTHENTICATED:", isAuthenticated);
+    //       setIsAuthenticated(false);
+    //     }
+    //   } catch (error) {
+    //     console.error("Error checking authentication:", error);
+    //   }
+    // };
 
-    checkAuthentication();
+    // checkAuthentication();
     logAsyncStorage();
 
     return () => clearTimeout(timer);
