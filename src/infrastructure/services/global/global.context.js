@@ -136,13 +136,13 @@ export const GlobalContextProvider = ({ children }) => {
   console.log("LAST NAME AT GLOBAL CONTEXT:", last_name);
   console.log("EMAIL AT GLOBAL CONTEXT:", email);
   console.log("PIN AT GLOBAL CONTEXT:", pin);
-  console.log("USERTODB:", userToDB);
+  console.log("USER TO DB:", userToDB);
 
-  const temporaryAuthentication = async () => {
-    setIsAuthenticated(true);
-    await AsyncStorage.setItem("isAuthenticated", "true");
-    setUserToDB(user);
-  };
+  // const temporaryAuthentication = async () => {
+  //   setIsAuthenticated(true);
+  //   await AsyncStorage.setItem("isAuthenticated", "true");
+  //   setUserToDB(user);
+  // };
 
   const validatingEmail = (email) => {
     // const validate = (text) => {
@@ -156,12 +156,74 @@ export const GlobalContextProvider = ({ children }) => {
     return true;
   };
 
+  const handlePinChange = (newPin) => {
+    setPin(newPin);
+    // Check if the PIN is empty
+    if (newPin === "") {
+      setErrorInAuthentication(null); // Set error when PIN is cleared
+    } else {
+      setErrorInAuthentication(null); // Clear error when PIN is not empty
+    }
+  };
+
+  // ********************* LOGIN USER LOGIC *************************
+
+  const loginUser = async (pin) => {
+    console.log("PIN BEFORE LOGIN:", pin);
+    const PIN_LENGTH = 6;
+    setIsLoading(true);
+    if (pin.length === PIN_LENGTH) {
+      console.log("PIN BEFORE LOGIN:", pin);
+      const email = await AsyncStorage.getItem("userEmail");
+      console.log("EMAIL BEFORE LOGIN:", email);
+      try {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          pin
+        );
+        console.log(
+          "USER LOGGED IN:",
+          JSON.stringify(userCredential.user.uid, null, 2)
+        );
+        if (userCredential.user) {
+          setIsAuthenticated(true);
+          await AsyncStorage.setItem("isAuthenticated", "true");
+
+          // *********** GET USER BY UID FROM BACKEND AND SET TO CONTEXT ************
+
+          // ************************************************************************
+
+          setUserToDB(user);
+          console.log("USER AUTHENTICATED...");
+        } else {
+          setIsAuthenticated(false);
+          await AsyncStorage.setItem("isAuthenticated", "false");
+          console.log("USER NOT AUTHENTICATED...");
+        }
+        // console.log("User logged in:", userCredential.user);
+      } catch (error) {
+        setErrorInAuthentication(
+          error.message === "Firebase: Error (auth/missing-email)."
+            ? "We haven't found an email for this PIN number"
+            : "Invalid Email or PIN number."
+        );
+        console.error("Login error:", error.message);
+        setEmailError("Invalid Email or PIN number.");
+      } finally {
+        setIsLoading(false);
+      }
+      return;
+    }
+  };
+
+  // ********** LOGOUT USER FUNCTION **********
   const loggingOutUser = async () => {
     try {
       // await auth.signOut();
       // await AsyncStorage.clear();
       await AsyncStorage.setItem("isAuthenticated", "false");
-      await AsyncStorage.setItem("userEmail", "");
+      // await AsyncStorage.setItem("userEmail", "");
       await AsyncStorage.setItem("user_uid", "");
       setIsAuthenticated(false);
       setPin("");
@@ -170,6 +232,8 @@ export const GlobalContextProvider = ({ children }) => {
       console.error("Logout error:", error.message);
     }
   };
+
+  // ****************** REGISTER USER LOGIC *********************
   const generatePin = () => {
     // Generate a random number between 100000 and 999999
     return Math.floor(100000 + Math.random() * 900000).toString();
@@ -211,9 +275,11 @@ export const GlobalContextProvider = ({ children }) => {
         JSON.stringify(userToCreateAtFirebase, null, 2)
       );
       const response = await post_user_Request(userToCreateAtFirebase);
-      console.log("RESPONSE FROM POST USER REQUEST:", response.data);
-
-      console.log("USER REGISTERED AND NOT AUTHENTICATED...");
+      console.log(
+        "RESPONSE FROM POST USER REQUEST:",
+        JSON.stringify(response.data, null, 2)
+      );
+      console.log("USER REGISTERED BUT NOT AUTHENTICATED...");
     } catch (error) {
       console.error("Error creating user:", error.message);
     } finally {
@@ -235,7 +301,8 @@ export const GlobalContextProvider = ({ children }) => {
         setPin,
         pin,
         errorInAuthentication,
-        temporaryAuthentication,
+        setErrorInAuthentication,
+        // temporaryAuthentication,
         loggingOutUser,
         first_name,
         setFirst_name,
@@ -248,7 +315,9 @@ export const GlobalContextProvider = ({ children }) => {
         user_added_successfully,
         registerUser,
         validatingEmail,
-        // db,
+        loginUser,
+        handlePinChange,
+        // handlePinInput,
       }}
     >
       {/* {isAuthenticated ? children : null} */}

@@ -110,7 +110,7 @@ export default function Register_User({ navigation, route }) {
               underlineColor={"#dedede"}
               onFocus={() => setError(null)}
               autoFocus
-              onBlur={handleBlur}
+              // onBlur={handleBlur}
             />
             <Container
               color={theme.colors.bg.elements_bg}

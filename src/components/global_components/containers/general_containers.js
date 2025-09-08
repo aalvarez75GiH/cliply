@@ -16,13 +16,13 @@ const baseStyles = css`
 
   /* Correctly apply individual border radius properties */
   border-top-left-radius: ${(props) =>
-    props.border_radius_top_left || props.border_radius || "0px"};
+    (props.border_radius_top_left || props.border_radius || "0") + "px"};
   border-top-right-radius: ${(props) =>
-    props.border_radius_top_right || props.border_radius || "0px"};
+    (props.border_radius_top_right || props.border_radius || "0") + "px"};
   border-bottom-left-radius: ${(props) =>
-    props.border_radius_bottom_left || props.border_radius || "0px"};
+    (props.border_radius_bottom_left || props.border_radius || "0") + "px"};
   border-bottom-right-radius: ${(props) =>
-    props.border_radius_bottom_right || props.border_radius || "0px"};
+    (props.border_radius_bottom_right || props.border_radius || "0") + "px"};
   border: ${(props) => props.border || "none"};
 `;
 
