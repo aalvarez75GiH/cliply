@@ -9,7 +9,10 @@ import {
 } from "firebase/auth";
 import { initializeApp, getApps } from "firebase/app";
 
-import { post_user_Request } from "./global.requests";
+import {
+  post_user_Request,
+  get_user_by_uid_and_user_data_Request,
+} from "./global.requests";
 // Create Global Context
 export const GlobalContext = createContext();
 
@@ -59,51 +62,21 @@ export const GlobalContextProvider = ({ children }) => {
   const [emailError, setEmailError] = useState(null);
   const [user_added_successfully, setUser_added_successfully] = useState(false);
 
-  const user = {
-    first_name: "Kris",
-    last_name: "Summers",
-    email: "kris@gmail.com",
-    display_name: "Kris",
-    isFirstTime: true,
-    role: "user",
-    uid: "ynQniDL2rsSCzspat9HS8BRBbIG2",
-    updatedAt: "2025-08-31T17:23:42.556Z",
-    createdAt: "2025-08-31T17:23:42.556Z",
-    user_id: "243d274f-11fb-4695-b714-27f4b5104e44",
-    phone_number: "(706)352.84.46",
-  };
+  // const user = {
+  //   first_name: "Kris",
+  //   last_name: "Summers",
+  //   email: "kris@gmail.com",
+  //   display_name: "Kris",
+  //   isFirstTime: true,
+  //   role: "user",
+  //   uid: "ynQniDL2rsSCzspat9HS8BRBbIG2",
+  //   updatedAt: "2025-08-31T17:23:42.556Z",
+  //   createdAt: "2025-08-31T17:23:42.556Z",
+  //   user_id: "243d274f-11fb-4695-b714-27f4b5104e44",
+  //   phone_number: "(706)352.84.46",
+  // };
 
   useEffect(() => {
-    const logAsyncStorage = async () => {
-      try {
-        const keys = await AsyncStorage.getAllKeys();
-        const items = await AsyncStorage.multiGet(keys);
-
-        console.log("AsyncStorage contents:");
-        items.forEach(([key, value]) => {
-          console.log(`${key}: ${value}`);
-        });
-      } catch (error) {
-        console.error("Error reading AsyncStorage:", error);
-      }
-    };
-    const checkAuthentication = async () => {
-      try {
-        const isAuthenticated = await AsyncStorage.getItem("isAuthenticated");
-
-        if (isAuthenticated === "true") {
-          console.log("USER IS AUTHENTICATED:", isAuthenticated);
-          setUserToDB(user);
-          setIsAuthenticated(true);
-        } else {
-          console.log("USER NOT AUTHENTICATED:", isAuthenticated);
-          setIsAuthenticated(false);
-        }
-      } catch (error) {
-        console.error("Error checking authentication:", error);
-      }
-    };
-
     checkAuthentication();
     logAsyncStorage();
     // signInWithEmailAndPassword(auth, "arnoldo.alvarez75@yahoo.com", "123456")
@@ -119,6 +92,62 @@ export const GlobalContextProvider = ({ children }) => {
     //     setIsAuthenticated(false);
     //   });
   }, []);
+
+  // **************** AUTHENTICATION CHECKERS ****************
+  const logAsyncStorage = async () => {
+    try {
+      const keys = await AsyncStorage.getAllKeys();
+      const items = await AsyncStorage.multiGet(keys);
+
+      console.log("AsyncStorage contents:");
+      items.forEach(([key, value]) => {
+        console.log(`${key}: ${value}`);
+      });
+    } catch (error) {
+      console.error("Error reading AsyncStorage:", error);
+    }
+  };
+
+  const checkAuthentication = async () => {
+    setIsLoading(true);
+    try {
+      const isAuthenticated = await AsyncStorage.getItem("isAuthenticated");
+
+      if (isAuthenticated === "true") {
+        setIsAuthenticated(true);
+        console.log("USER IS AUTHENTICATED:", isAuthenticated);
+        const uid = await AsyncStorage.getItem("uid");
+        const userFromBackend = await get_user_by_uid_and_user_data_Request(
+          uid
+        );
+        console.log(
+          "USER FROM BACKEND AT LOGIN:",
+          JSON.stringify(userFromBackend.data.first_name, null, 2)
+        );
+        setUserToDB({
+          first_name: userFromBackend.data.first_name,
+          last_name: userFromBackend.data.last_name,
+          email: userFromBackend.data.email,
+          display_name: userFromBackend.data.display_name,
+          isFirstTime: userFromBackend.data.isFirstTime,
+          role: userFromBackend.data.role,
+          uid: userFromBackend.data.uid,
+          updatedAt: userFromBackend.data.updatedAt,
+          createdAt: userFromBackend.data.createdAt,
+          user_id: userFromBackend.data.user_id,
+        });
+        // setUserToDB(user);
+      } else {
+        console.log("USER NOT AUTHENTICATED:", isAuthenticated);
+        setIsAuthenticated(false);
+      }
+    } catch (error) {
+      console.error("Error checking authentication:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  // **********************************************************
 
   const togglingGlobalLanguage = () => {
     setIsLoading(true);
@@ -189,12 +218,33 @@ export const GlobalContextProvider = ({ children }) => {
         if (userCredential.user) {
           setIsAuthenticated(true);
           await AsyncStorage.setItem("isAuthenticated", "true");
+          await AsyncStorage.setItem("userEmail", userCredential.user.email); // Replace `userEmail` with the actual email value
+          await AsyncStorage.setItem("uid", userCredential.user.uid);
 
           // *********** GET USER BY UID FROM BACKEND AND SET TO CONTEXT ************
 
+          const userFromBackend = await get_user_by_uid_and_user_data_Request(
+            userCredential.user.uid
+          );
+          console.log(
+            "USER FROM BACKEND AT LOGIN:",
+            JSON.stringify(userFromBackend.data.first_name, null, 2)
+          );
+          setUserToDB({
+            first_name: userFromBackend.data.first_name,
+            last_name: userFromBackend.data.last_name,
+            email: userFromBackend.data.email,
+            display_name: userFromBackend.data.display_name,
+            isFirstTime: userFromBackend.data.isFirstTime,
+            role: userFromBackend.data.role,
+            uid: userFromBackend.data.uid,
+            updatedAt: userFromBackend.data.updatedAt,
+            createdAt: userFromBackend.data.createdAt,
+            user_id: userFromBackend.data.user_id,
+          });
           // ************************************************************************
 
-          setUserToDB(user);
+          // setUserToDB(user);
           console.log("USER AUTHENTICATED...");
         } else {
           setIsAuthenticated(false);
@@ -217,14 +267,14 @@ export const GlobalContextProvider = ({ children }) => {
     }
   };
 
-  // ********** LOGOUT USER FUNCTION **********
+  // ****************** LOGOUT USER FUNCTION ************************
   const loggingOutUser = async () => {
     try {
       // await auth.signOut();
       // await AsyncStorage.clear();
       await AsyncStorage.setItem("isAuthenticated", "false");
-      // await AsyncStorage.setItem("userEmail", "");
-      await AsyncStorage.setItem("user_uid", "");
+      // await AsyncStorage.setItem("userEmail", "arnoldo@yahoo.com");
+      await AsyncStorage.setItem("uid", "");
       setIsAuthenticated(false);
       setPin("");
       console.log("User logged out successfully.");
@@ -257,7 +307,7 @@ export const GlobalContextProvider = ({ children }) => {
       );
       await AsyncStorage.setItem("isAuthenticated", "false");
       await AsyncStorage.setItem("userEmail", userCredential.user.email); // Replace `userEmail` with the actual email value
-      await AsyncStorage.setItem("user_uid", userCredential.user.uid); // Replace `userEmail` with the actual email value
+      await AsyncStorage.setItem("uid", userCredential.user.uid); // Replace `userEmail` with the actual email value
 
       setIsAuthenticated(false);
       const userToCreateAtFirebase = {
@@ -302,7 +352,6 @@ export const GlobalContextProvider = ({ children }) => {
         pin,
         errorInAuthentication,
         setErrorInAuthentication,
-        // temporaryAuthentication,
         loggingOutUser,
         first_name,
         setFirst_name,
@@ -317,7 +366,9 @@ export const GlobalContextProvider = ({ children }) => {
         validatingEmail,
         loginUser,
         handlePinChange,
-        // handlePinInput,
+        setIsAuthenticated,
+        checkAuthentication,
+        logAsyncStorage,
       }}
     >
       {/* {isAuthenticated ? children : null} */}

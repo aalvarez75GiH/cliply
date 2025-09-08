@@ -10,13 +10,20 @@ import AccounIcon from "../../../assets/my-icons/account_icon.svg";
 import CategoriesIcon from "../../../assets/my-icons/categories_icon.svg";
 import EnvelopeIcon from "../../components/transformed icons/email_icon_transformed.js";
 import ArrowSwitchIcon from "../../components/transformed icons/arrow_switch_icon.js";
+import LogOutIcon from "../../../assets/my-icons/logout_exit_out_icon.svg";
 import { Menu_Sub_title_Tile } from "../../components/tiles/menu_sub_title.tile.js";
 import { Menu_Tile } from "../../components/tiles/menu.tile.js";
 import { GlobalContext } from "../../infrastructure/services/global/global.context.js";
 
 export default function Menu_Screen({ navigation }) {
-  const { globalLanguage, togglingGlobalLanguage, isLoading, loggingOutUser } =
-    useContext(GlobalContext);
+  const {
+    globalLanguage,
+    togglingGlobalLanguage,
+    isLoading,
+    loggingOutUser,
+    userToDB,
+  } = useContext(GlobalContext);
+  const { display_name, first_name, last_name, email } = userToDB;
   return (
     <SafeArea background_color={theme.colors.bg.elements_bg}>
       <Container
@@ -55,7 +62,7 @@ export default function Menu_Screen({ navigation }) {
               Icon={AccounIcon}
               width={"30px"}
               height={"30px"}
-              caption={"Arnoldo Alvarez"}
+              caption={first_name + " " + last_name || "User"}
               color={theme.colors.ui.primary}
             />
             <Spacer position="top" size="small" />
@@ -64,7 +71,7 @@ export default function Menu_Screen({ navigation }) {
               Icon={EnvelopeIcon}
               width={"40px"}
               height={"40px"}
-              caption={"arnoldo@yahoo.com"}
+              caption={email}
               color={theme.colors.ui.primary}
             />
           </Container>
@@ -100,12 +107,12 @@ export default function Menu_Screen({ navigation }) {
               action={() => togglingGlobalLanguage()}
             />
             <Menu_Tile
-              Icon={ArrowSwitchIcon}
+              Icon={LogOutIcon}
               width={"30px"}
               height={"30px"}
               //   caption={"English"}
               caption={globalLanguage === "EN" ? "Sign out" : "Salir"}
-              color={theme.colors.ui.error}
+              color={theme.colors.ui.primary}
               isLoading={isLoading}
               action={() => loggingOutUser()}
             />

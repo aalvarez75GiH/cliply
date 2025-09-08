@@ -21,7 +21,18 @@ import { environment } from "../../../util/env";
 //         return error;
 //       });
 //   };
-
+export const get_user_by_uid_and_user_data_Request = async (uid) => {
+  const { usersEndPoint } = environment;
+  console.log("UID AT REQUEST:", uid);
+  return await axios
+    .get(`${usersEndPoint}/userByUId?uid=${uid}`)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error;
+    });
+};
 export const post_user_Request = async (user_to_create_at_firebase) => {
   const { usersEndPoint } = environment;
   console.log(

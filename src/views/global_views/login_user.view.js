@@ -30,6 +30,8 @@ export default function Login_User({ route }) {
     loginUser,
     isLoading,
     setErrorInAuthentication,
+    checkAuthentication,
+    logAsyncStorage,
   } = useContext(GlobalContext);
 
   const inputRef = useRef(null);
@@ -38,36 +40,8 @@ export default function Login_User({ route }) {
     const timer = setTimeout(() => {
       inputRef.current?.focus();
     }, 100); // slight delay ensures focus sticks
-    const logAsyncStorage = async () => {
-      try {
-        const keys = await AsyncStorage.getAllKeys();
-        const items = await AsyncStorage.multiGet(keys);
 
-        console.log("AsyncStorage contents:");
-        items.forEach(([key, value]) => {
-          console.log(`${key}: ${value}`);
-        });
-      } catch (error) {
-        console.error("Error reading AsyncStorage:", error);
-      }
-    };
-    // const checkAuthentication = async () => {
-    //   try {
-    //     const isAuthenticated = await AsyncStorage.getItem("isAuthenticated");
-
-    //     if (isAuthenticated === "true") {
-    //       console.log("USER IS AUTHENTICATED:", isAuthenticated);
-    //       setIsAuthenticated(true);
-    //     } else {
-    //       console.log("USER NOT AUTHENTICATED:", isAuthenticated);
-    //       setIsAuthenticated(false);
-    //     }
-    //   } catch (error) {
-    //     console.error("Error checking authentication:", error);
-    //   }
-    // };
-
-    // checkAuthentication();
+    checkAuthentication();
     logAsyncStorage();
 
     return () => clearTimeout(timer);
@@ -176,10 +150,10 @@ export default function Login_User({ route }) {
               align="center"
               color="transparent"
               //   border_radius={8}
-              border_radius_top_left={30}
-              border_radius_top_right={30}
-              border_radius_bottom_left={30}
-              border_radius_bottom_right={30}
+              border_radius_top_left="30px"
+              border_radius_top_right="30px"
+              border_radius_bottom_left="30px"
+              border_radius_bottom_right="30px"
               border={"3px"}
               onPress={() => null}
             >
@@ -192,10 +166,10 @@ export default function Login_User({ route }) {
               align="center"
               color="transparent"
               //   border_radius={8}
-              border_radius_top_left={30}
-              border_radius_top_right={30}
-              border_radius_bottom_left={30}
-              border_radius_bottom_right={30}
+              border_radius_top_left="30px"
+              border_radius_top_right="30px"
+              border_radius_bottom_left="30px"
+              border_radius_bottom_right="30px"
               direction="row"
             >
               <Container
@@ -205,7 +179,7 @@ export default function Login_User({ route }) {
                 align="center"
                 color="transparent"
               >
-                <Text variant="dm_sans_bold_16">Nor registered?</Text>
+                <Text variant="dm_sans_bold_16">Not registered?</Text>
               </Container>
               <Action_Container
                 width="30%"
@@ -214,9 +188,6 @@ export default function Login_User({ route }) {
                 align="center"
                 color="transparent"
                 onPress={() => {
-                  // setEmail("");
-                  // setFirst_name("");
-                  // setLast_name("");
                   navigation.navigate("Register_user_View");
                 }}
               >

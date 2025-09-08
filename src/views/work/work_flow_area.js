@@ -85,7 +85,8 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
             // height={"178px"}
             width="100%"
             height={"70%"}
-            color={"brown"}
+            // color={"brown"}
+            color={"transparent"}
             justify="center"
             align="center"
             style={{ overflow: "hidden" }}
@@ -107,7 +108,7 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
             justify="center"
             align="center"
             color="black"
-            direction="colum"
+            direction="column"
           >
             <Text variant="dm_sans_bold_14_white">Food delivery</Text>
             <Text variant="dm_sans_bold_14_white">text clips flow</Text>
@@ -122,7 +123,7 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
           justify="center"
           align="center"
         >
-          <Container width="70%" color="trasnparent">
+          <Container width="70%" color="transparent">
             <Text
               variant="dm_sans_bold_16"
               style={{
@@ -212,8 +213,8 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
               // height={"178px"}
               width="45%"
               height={"100%"}
-              //color={"transparent"}
-              color={"red"}
+              color={"transparent"}
+              // color={"red"}
               justify="center"
               align="center"
               style={{ overflow: "hidden" }}
@@ -239,7 +240,7 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
               width="55%"
               height={"100%"}
               // color={"lightblue"}
-              color={"black"}
+              color={theme.colors.ui.primary}
               justify="center"
               align="center"
               style={{ overflow: "hidden" }}
@@ -289,8 +290,9 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
             <Container
               width="92%"
               height={"100%"}
-              color={"#D4DDEA"}
+              // color={"#D4DDEA"}
               //color={"red"}
+              color={"transparent"}
               justify="center"
               align="center"
             >

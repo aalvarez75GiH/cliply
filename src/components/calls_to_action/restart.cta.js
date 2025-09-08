@@ -34,7 +34,16 @@ export const Restart_CTA = () => {
         color={theme.colors.bg.elements_bg}
         justify="center"
         align="center"
-        border="2px solid black"
+        border="2px"
+        style={{
+          borderColor: theme.colors.ui.primary,
+          borderStyle: "solid",
+          borderWidth: 2,
+        }}
+        border_radius_top_left="10px"
+        border_radius_top_right="10px"
+        border_radius_bottom_left="10px"
+        border_radius_bottom_right="10px"
       >
         <Text variant="dm_sans_bold_14">Restart</Text>
       </Container>
