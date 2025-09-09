@@ -7,10 +7,14 @@ import {
   StyleSheet,
   Platform,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons"; // expo vector icons
 import { Spacer } from "../global_components/optimized.spacer.component";
 import { theme } from "../../infrastructure/theme/index.js";
+import { Container } from "../global_components/containers/general_containers.js";
+
+import { GlobalContext } from "../../infrastructure/services/global/global.context.js";
 
 export const PinDotsInput = ({
   length = 6,
@@ -25,7 +29,7 @@ export const PinDotsInput = ({
 }) => {
   const [pin, setPin] = useState(value ?? "");
   const inputRef = useRef(null);
-
+  const { isLoading } = React.useContext(GlobalContext);
   useEffect(() => {
     if (typeof value === "string" && value !== pin) {
       setPin(value.slice(0, length));
@@ -84,54 +88,64 @@ export const PinDotsInput = ({
   });
   console.log("RENDER PIN DOTS", pin);
   return (
-    <View style={{ alignItems: "center", gap: 12, flexDirection: "row" }}>
-      <Spacer position="left" size="extraLarge" />
-      <Pressable onPress={focus} style={styles.wrapper}>
-        <TextInput
-          ref={inputRef}
-          value={pin}
-          onChangeText={handleChange}
-          keyboardType={Platform.OS === "ios" ? "number-pad" : "numeric"}
-          inputMode="numeric"
-          textContentType="oneTimeCode"
-          autoComplete="one-time-code"
-          importantForAutofill="yes"
-          autoFocus={autoFocus}
-          onBlur={handleBlur}
-          maxLength={length}
-          caretHidden
-          selection={{ start: pin.length, end: pin.length }}
-          style={styles.hiddenInput}
+    <View
+      style={{
+        alignItems: "center",
+        gap: 12,
+        flexDirection: "row",
+        justifyContent: "center",
+      }}
+    >
+      <>
+        <Spacer position="left" size="extraLarge" />
+        <Pressable onPress={focus} style={styles.wrapper}>
+          <TextInput
+            ref={inputRef}
+            value={pin}
+            onChangeText={handleChange}
+            keyboardType={Platform.OS === "ios" ? "number-pad" : "numeric"}
+            inputMode="numeric"
+            textContentType="oneTimeCode"
+            autoComplete="one-time-code"
+            importantForAutofill="yes"
+            autoFocus={autoFocus}
+            onBlur={handleBlur}
+            maxLength={length}
+            caretHidden
+            selection={{ start: pin.length, end: pin.length }}
+            style={styles.hiddenInput}
 
-          //   ref={inputRef}
-          //   value={pin}
-          //   onChangeText={handleChange}
-          //   keyboardType={Platform.OS === "ios" ? "number-pad" : "numeric"}
-          //   inputMode="numeric"
-          //   textContentType="oneTimeCode"
-          //   autoComplete="one-time-code"
-          //   importantForAutofill="yes"
-          //   autoFocus   // <- important
-          //   onBlur={handleBlur}
-          //   maxLength={length}
-          //   caretHidden
-          //   selection={{ start: pin.length, end: pin.length }}
-          //   style={styles.hiddenInput}
-        />
-        <View style={styles.cellsRow}>{cells}</View>
-      </Pressable>
+            //   ref={inputRef}
+            //   value={pin}
+            //   onChangeText={handleChange}
+            //   keyboardType={Platform.OS === "ios" ? "number-pad" : "numeric"}
+            //   inputMode="numeric"
+            //   textContentType="oneTimeCode"
+            //   autoComplete="one-time-code"
+            //   importantForAutofill="yes"
+            //   autoFocus   // <- important
+            //   onBlur={handleBlur}
+            //   maxLength={length}
+            //   caretHidden
+            //   selection={{ start: pin.length, end: pin.length }}
+            //   style={styles.hiddenInput}
+          />
+          <View style={styles.cellsRow}>{cells}</View>
+        </Pressable>
 
-      {/* {showDelete && pin.length > 0 && ( */}
-      <TouchableOpacity
-        onPress={pin.length > 0 ? handleDelete : null}
-        style={styles.deleteBtn}
-      >
-        <MaterialIcons
-          name="backspace"
-          size={28}
-          color={pin.length > 0 ? digitColor : theme.colors.ui.disabled}
-        />
-      </TouchableOpacity>
+        {/* {showDelete && pin.length > 0 && ( */}
+        <TouchableOpacity
+          onPress={pin.length > 0 ? handleDelete : null}
+          style={styles.deleteBtn}
+        >
+          <MaterialIcons
+            name="backspace"
+            size={28}
+            color={pin.length > 0 ? digitColor : theme.colors.ui.disabled}
+          />
+        </TouchableOpacity>
+        {/* )} */}
+      </>
       {/* )} */}
     </View>
   );

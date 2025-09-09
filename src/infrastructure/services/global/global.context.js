@@ -167,11 +167,26 @@ export const GlobalContextProvider = ({ children }) => {
   console.log("PIN AT GLOBAL CONTEXT:", pin);
   console.log("USER TO DB:", userToDB);
 
-  // const temporaryAuthentication = async () => {
-  //   setIsAuthenticated(true);
-  //   await AsyncStorage.setItem("isAuthenticated", "true");
-  //   setUserToDB(user);
-  // };
+  const temporaryAuthentication = async (error_message_from_FB) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      // setErrorInAuthentication("We haven't found a user for this PIN number");
+      setErrorInAuthentication(
+        error_message_from_FB === "Firebase: Error (auth/missing-email)."
+          ? "We haven't found an email for this PIN number"
+          : error_message_from_FB ===
+            "Login error: Firebase: Error (auth/invalid-credential)."
+          ? "We haven't found a user for this PIN number"
+          : error_message_from_FB ===
+            "Login error: Firebase: Error (auth/too-many-requests)."
+          ? "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your PIN or you can try again later."
+          : null
+      );
+      setIsLoading(false);
+    }, 2000);
+    // await AsyncStorage.setItem("isAuthenticated", "true");
+    // setUserToDB(user);
+  };
 
   const validatingEmail = (email) => {
     // const validate = (text) => {
@@ -256,10 +271,15 @@ export const GlobalContextProvider = ({ children }) => {
         setErrorInAuthentication(
           error.message === "Firebase: Error (auth/missing-email)."
             ? "We haven't found an email for this PIN number"
-            : "Invalid Email or PIN number."
+            : error.message === "Firebase: Error (auth/invalid-credential)."
+            ? "We haven't found a user for this PIN number"
+            : error.message === "Firebase: Error (auth/too-many-requests)."
+            ? "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your PIN or you can try again later."
+            : null
         );
         console.error("Login error:", error.message);
-        setEmailError("Invalid Email or PIN number.");
+
+        // setEmailError("Invalid Email or PIN number.");
       } finally {
         setIsLoading(false);
       }
@@ -369,6 +389,7 @@ export const GlobalContextProvider = ({ children }) => {
         setIsAuthenticated,
         checkAuthentication,
         logAsyncStorage,
+        temporaryAuthentication,
       }}
     >
       {/* {isAuthenticated ? children : null} */}
