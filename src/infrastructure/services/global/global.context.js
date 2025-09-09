@@ -219,6 +219,7 @@ export const GlobalContextProvider = ({ children }) => {
     if (pin.length === PIN_LENGTH) {
       console.log("PIN BEFORE LOGIN:", pin);
       const email = await AsyncStorage.getItem("userEmail");
+      // const email = "arnoldo@yahoo.com";
       console.log("EMAIL BEFORE LOGIN:", email);
       try {
         const userCredential = await signInWithEmailAndPassword(
@@ -293,8 +294,8 @@ export const GlobalContextProvider = ({ children }) => {
       // await auth.signOut();
       // await AsyncStorage.clear();
       await AsyncStorage.setItem("isAuthenticated", "false");
-      // await AsyncStorage.setItem("userEmail", "arnoldo@yahoo.com");
-      await AsyncStorage.setItem("uid", "");
+      // await AsyncStorage.removeItem("userEmail");
+      await AsyncStorage.removeItem("uid");
       setIsAuthenticated(false);
       setPin("");
       console.log("User logged out successfully.");

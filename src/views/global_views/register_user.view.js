@@ -1,75 +1,112 @@
-import React, { useState, useContext, useRef, useEffect } from "react";
-import { KeyboardAvoidingView, Platform, Keyboard } from "react-native";
-// import {
-//   EmailAuthProvider,
-//   createUserWithEmailAndPassword,
-// } from "firebase/auth";
-import { ActivityIndicator, TextInput } from "react-native-paper";
+import React, {
+  useState,
+  useContext,
+  useRef,
+  useEffect,
+  useCallback,
+  useHea,
+} from "react";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  InteractionManager,
+} from "react-native";
+import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
 import { Text } from "../../infrastructure/typography/text.component.js";
 import { FormInput } from "../../components/inputs/form.input.js";
 import { Container } from "../../components/global_components/containers/general_containers.js";
 import { Squared_action_CTA_component } from "../../components/calls_to_action/squared_action.cta.js";
-
 import { SafeArea } from "../../components/global_components/safe-area.component.js";
 import { theme } from "../../infrastructure/theme/index.js";
 import { ExitHeader } from "../../components/headers/exit_header.component.js";
+import { New_FormInput } from "../../components/inputs/new_form_input.js";
 
 import { GlobalContext } from "../../infrastructure/services/global/global.context.js";
 
-export default function Register_User({ navigation, route }) {
+export default function Register_User({ navigation }) {
   const [error, setError] = useState(null);
 
   const { first_name, setFirst_name, last_name, setLast_name } =
     useContext(GlobalContext);
 
-  const firstNameRef = useRef(null);
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     inputRef.current?.focus();
-  //   }, 100); // slight delay ensures focus sticks
-  //   return () => clearTimeout(timer);
-  // }, []);
-
+  const inputRef = useRef(null);
   useEffect(() => {
-    const t = setTimeout(() => {
-      if (firstNameRef.current) {
-        firstNameRef.current.focus();
-        // Keyboard.show(); // extra guarantee
-      }
-    }, 100);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => {
+      inputRef.current?.focus();
+    }, 100); // slight delay ensures focus sticks
+    return () => clearTimeout(timer);
   }, []);
+  // const firstNameRef = useRef(null);
+  // const focusingRef = useRef(false);
+
+  // const isScreenFocused = useIsFocused(); // are we on top?
+
+  // // // safe focus helper
+  // const focusFirst = useCallback(() => {
+  //   requestAnimationFrame(() => {
+  //     if (isScreenFocused && firstNameRef.current?.focus) {
+  //       firstNameRef.current.focus();
+  //     }
+  //   });
+  // }, [isScreenFocused]);
+
+  // // // Focus each time the screen becomes visible
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     const t = setTimeout(focusFirst, 50); // small delay helps iOS
+  //     return () => clearTimeout(t);
+  //   }, [focusFirst])
+  // );
+
+  // // // Also try right after the form container lays out (first render)
+  // const onFormLayout = useCallback(() => {
+  //   setTimeout(focusFirst, 0);
+  // }, [focusFirst]);
+
+  // // // If the input blurs while we’re still on this screen, grab focus back
+  // const handleFirstBlur = useCallback(() => {
+  //   if (isScreenFocused) {
+  //     setTimeout(focusFirst, 60);
+  //   }
+  // }, [isScreenFocused, focusFirst]);
 
   const handleBlur = () => {
-    setTimeout(() => firstNameRef.current?.focus(), 60);
+    setTimeout(() => inputRef.current?.focus(), 60);
   };
 
   return (
     <SafeArea backgroundColor={theme.colors.bg.elements_bg}>
       <KeyboardAvoidingView
+        // behavior={Platform.OS === "ios" ? "padding" : "height"}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
+        // keyboardVerticalOffset={Platform.OS === "ios" ? headerHeight : 0}
+        // keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
         style={{ flex: 1 }}
       >
-        {/* <KeyboardAwareScrollView enableOnAndroid={true} extraHeight={590}> */}
         <Container
           width={"100%"}
           height={"100%"}
           justifyContent={"flex-start"}
           alignItems={"flex-start"}
           color={theme.colors.bg.elements_bg}
-          //   color="red"
         >
           <Spacer position="top" size="large" />
           <Spacer position="top" size="large" />
-          <ExitHeader action={() => navigation.goBack()} />
+          <ExitHeader
+            action={() => {
+              setFirst_name("");
+              setLast_name("");
+              setError(null);
+              navigation.goBack();
+            }}
+          />
           <Container
             width="100%"
             height="12%"
-            color={"lightblue"}
-            //color={theme.colors.bg.elements_bg}
+            // color={"lightblue"}
+            color={theme.colors.bg.elements_bg}
             justify="center"
             align="center"
           >
@@ -80,7 +117,6 @@ export default function Register_User({ navigation, route }) {
           <Container
             width="100%"
             height="65%"
-            //   color={"lightyellow"}
             color={theme.colors.bg.elements_bg}
             justify="flex-start"
             align="center"
@@ -88,18 +124,16 @@ export default function Register_User({ navigation, route }) {
             <Container
               width="100%"
               height="10%"
-              // color={"brown"}
               justify="flex-start"
               align="center"
               color={theme.colors.bg.elements_bg}
             />
-            <FormInput
+            {/* <FormInput
               label="First name"
               ref={firstNameRef}
               value={first_name}
-              textContentType={""}
               keyboardType="default"
-              autoCapitalize="none"
+              autoCapitalize="words"
               onChangeText={(value) => setFirst_name(value)}
               theme={{
                 colors: { primary: theme.colors.brand.primary },
@@ -109,41 +143,83 @@ export default function Register_User({ navigation, route }) {
               }}
               underlineColor={"#dedede"}
               onFocus={() => setError(null)}
-              autoFocus
-              // onBlur={handleBlur}
+            /> */}
+            <FormInput
+              label="First name"
+              value={first_name}
+              textContentType={"words"}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              onChangeText={(value) => {
+                setFirst_name(value);
+              }}
+              theme={{ colors: { primary: theme.colors.brand.primary } }}
+              //   underlineColor={theme.colors.brand.primary}
+              underlineColor={"#dedede"}
+              // right={<TextInput.Icon icon={EmailIcon} width={35} height={35} />}
+              onFocus={() => setError(null)}
+              style={{
+                height: 80,
+              }}
+              onBlur={handleBlur}
             />
+            <FormInput
+              label="Last name"
+              value={last_name}
+              textContentType={"words"}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              onChangeText={(value) => {
+                setLast_name(value);
+              }}
+              theme={{ colors: { primary: theme.colors.brand.primary } }}
+              //   underlineColor={theme.colors.brand.primary}
+              underlineColor={"#dedede"}
+              // right={<TextInput.Icon icon={EmailIcon} width={35} height={35} />}
+              onFocus={() => setError(null)}
+              style={{
+                height: 80,
+              }}
+              onBlur={handleBlur}
+            />
+            {/* <New_FormInput
+              label="First name"
+              value={first_name}
+              keyboardType="default"
+              autoCapitalize="words"
+              onChangeText={setFirst_name}
+              underlineColor="#dedede"
+              // style={{ height: 80 }}
+              onFocus={() => setError(null)}
+              blurOnSubmit={false} // keeps focus on this screen
+              returnKeyType="next"
+              style={{ height: 80, width: "90%" }}
+            /> */}
             <Container
               color={theme.colors.bg.elements_bg}
               width="100%"
               height="5%"
-              // color={"brown"}
               justify="flex-start"
               align="center"
             />
-            <Spacer size="large" />
-            <FormInput
+            {/* <New_FormInput
               label="Last name"
-              ref={firstNameRef}
               value={last_name}
-              textContentType=""
-              style={{
-                height: 80,
-              }}
-              secureTextEntry={false}
-              autoCapitalize="none"
-              secure
-              onChangeText={(value) => setLast_name(value)}
-              theme={{ colors: { primary: theme.colors.brand.primary } }}
-              underlineColor={"#dedede"}
+              keyboardType="default"
+              autoCapitalize="words"
+              onChangeText={setLast_name}
+              underlineColor="#dedede"
+              // style={{ height: 80 }}
               onFocus={() => setError(null)}
-              onBlur={handleBlur}
-            />
+              blurOnSubmit={false} // keeps focus on this screen
+              returnKeyType="next"
+              style={{ height: 80, width: "90%" }}
+            /> */}
             <FormInput
-              ref={firstNameRef}
+              ref={inputRef}
               style={{ opacity: 0, height: 0 }} // keep invisible
               autoFocus
               keyboardType="default"
-              // onBlur={handleBlur}
             />
           </Container>
 
@@ -154,7 +230,6 @@ export default function Register_User({ navigation, route }) {
             height="12%"
           />
         </Container>
-        {/* </KeyboardAwareScrollView> */}
       </KeyboardAvoidingView>
     </SafeArea>
   );

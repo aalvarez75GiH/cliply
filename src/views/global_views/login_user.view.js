@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect, useRef } from "react";
 import { Platform } from "react-native";
 import { KeyboardAvoidingView, ActivityIndicator } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { validatingEmail } from "../../infrastructure/services/global/global.context.js";
 
@@ -10,11 +9,7 @@ import { Spacer } from "../../components/global_components/optimized.spacer.comp
 import { Text } from "../../infrastructure/typography/text.component.js";
 import { PinDotsInput } from "../../components/inputs/pin_dots.input.js";
 import { FormInput } from "../../components/inputs/form.input.js";
-import {
-  Container,
-  Action_Container,
-} from "../../components/global_components/containers/general_containers.js";
-import { Loading_Spinner_area } from "../../components/global_components/global_loading_spinner_area.component.js";
+import { Container } from "../../components/global_components/containers/general_containers.js";
 
 import { SafeArea } from "../../components/global_components/safe-area.component.js";
 import { theme } from "../../infrastructure/theme/index.js";
@@ -24,7 +19,6 @@ import { Not_Registered_Sign_Up_CTA } from "../../components/calls_to_action/not
 import { GlobalContext } from "../../infrastructure/services/global/global.context.js";
 
 export default function Login_User({ route }) {
-  const navigation = useNavigation();
   const {
     errorInAuthentication,
     setPin,
@@ -35,6 +29,9 @@ export default function Login_User({ route }) {
     checkAuthentication,
     logAsyncStorage,
     temporaryAuthentication,
+    setFirst_name,
+    setLast_name,
+    setEmail,
   } = useContext(GlobalContext);
 
   const inputRef = useRef(null);
@@ -101,9 +98,6 @@ export default function Login_User({ route }) {
                   setPin(newPin); // Update the pin state
                   if (newPin.length === 6) {
                     loginUser(newPin); // Pass the updated pin directly
-                    // temporaryAuthentication(
-                    //   "Login error: Firebase: Error (auth/invalid-credential)."
-                    // );
                   }
                   if (newPin === "") {
                     setErrorInAuthentication(null); // Set error when PIN is cleared
@@ -111,12 +105,7 @@ export default function Login_User({ route }) {
                     setErrorInAuthentication(null); // Clear error when PIN is not empty
                   }
                 }}
-                onFulfill={(pin) =>
-                  // temporaryAuthentication(
-                  //   "Login error: Firebase: Error (auth/invalid-credential)."
-                  // )
-                  loginUser(pin)
-                } // enable to auto-submit once 4 digits entered
+                onFulfill={(pin) => loginUser(pin)}
                 themeColor="#000000" // idle dot color (the gray you showed)
                 digitColor="#000000"
                 size={18}
