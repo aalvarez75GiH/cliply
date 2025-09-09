@@ -18,7 +18,8 @@ import { Loading_Spinner_area } from "../../components/global_components/global_
 
 import { SafeArea } from "../../components/global_components/safe-area.component.js";
 import { theme } from "../../infrastructure/theme/index.js";
-
+import { Forgot_PIN_CTA } from "../../components/calls_to_action/forgot_pin.cta.js";
+import { Not_Registered_Sign_Up_CTA } from "../../components/calls_to_action/not_registered_sign_up.cta.js";
 import { GlobalContext } from "../../infrastructure/services/global/global.context.js";
 
 export default function Login_User({ route }) {
@@ -143,64 +144,8 @@ export default function Login_User({ route }) {
             <Spacer position="bottom" size="large" />
             <Spacer position="bottom" size="large" />
             <Spacer position="bottom" size="extraLarge" />
-            <Action_Container
-              width="70%"
-              height="25%"
-              justify="center"
-              align="center"
-              color="transparent"
-              //   border_radius={8}
-              border_radius_top_left="30px"
-              border_radius_top_right="30px"
-              border_radius_bottom_left="30px"
-              border_radius_bottom_right="30px"
-              border={"3px"}
-              onPress={() => null}
-            >
-              <Text variant="dm_sans_bold_16">Forgot pin number</Text>
-            </Action_Container>
-            <Container
-              width="60%"
-              height="45%"
-              justify="center"
-              align="center"
-              color="transparent"
-              //   border_radius={8}
-              border_radius_top_left="30px"
-              border_radius_top_right="30px"
-              border_radius_bottom_left="30px"
-              border_radius_bottom_right="30px"
-              direction="row"
-            >
-              <Container
-                width="60%"
-                height="30%"
-                justify="center"
-                align="center"
-                color="transparent"
-              >
-                <Text variant="dm_sans_bold_16">Not registered?</Text>
-              </Container>
-              <Action_Container
-                width="30%"
-                height="30%"
-                justify="center"
-                align="center"
-                color="transparent"
-                onPress={() => {
-                  navigation.navigate("Register_user_View");
-                }}
-              >
-                <Text
-                  variant="dm_sans_bold_16"
-                  style={{
-                    textDecorationLine: "underline",
-                  }}
-                >
-                  Sign up
-                </Text>
-              </Action_Container>
-            </Container>
+            <Forgot_PIN_CTA />
+            <Not_Registered_Sign_Up_CTA />
           </Container>
 
           <Spacer size="large" />
