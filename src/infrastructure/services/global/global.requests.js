@@ -52,3 +52,26 @@ export const post_user_Request = async (user_to_create_at_firebase) => {
       return error;
     });
 };
+export const put_preference_language_Request = async (
+  user_id,
+  language_chosen
+) => {
+  const { usersEndPoint } = environment;
+  console.log("USER ID FOR LANGUAGE AT REQUEST:", JSON.stringify(user_id));
+
+  console.log(
+    "LANGUAGE CHOSEN FOR LANGUAGE AT REQUEST:",
+    JSON.stringify(language_chosen)
+  );
+
+  return await axios
+    .put(
+      `${usersEndPoint}/updatePreferenceLanguage?user_id=${user_id}&preference_language=${language_chosen}`
+    )
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return error;
+    });
+};

@@ -8,11 +8,13 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { initializeApp, getApps } from "firebase/app";
+import { put_preference_language_Request } from "./global.requests.js";
 
 import {
   post_user_Request,
   get_user_by_uid_and_user_data_Request,
 } from "./global.requests";
+
 // Create Global Context
 export const GlobalContext = createContext();
 
@@ -35,9 +37,7 @@ if (!getApps().length) {
 }
 
 // Initialize Firebase Auth (only if not already initialized)
-// const auth = initializeAuth(app, {
-//   persistence: getReactNativePersistence(AsyncStorage),
-// });
+
 let auth;
 try {
   auth = getAuth(app); // Use getAuth to retrieve the existing instance
@@ -49,7 +49,7 @@ try {
 export { app, auth };
 // export const db = app.firestore();
 
-export const GlobalContextProvider = ({ children }) => {
+export const GlobalContextProvider = ({ children, navigation }) => {
   const [globalLanguage, setGlobalLanguage] = useState("EN");
   const [isLoading, setIsLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -61,7 +61,6 @@ export const GlobalContextProvider = ({ children }) => {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(null);
   const [user_added_successfully, setUser_added_successfully] = useState(false);
-
   // const user = {
   //   first_name: "Kris",
   //   last_name: "Summers",
@@ -77,20 +76,17 @@ export const GlobalContextProvider = ({ children }) => {
   // };
 
   useEffect(() => {
-    checkAuthentication();
-    logAsyncStorage();
-    // signInWithEmailAndPassword(auth, "arnoldo.alvarez75@yahoo.com", "123456")
-    //   .then((data_user) => {
-    //     // console.log(JSON.stringify(data_user, 0, 2));
-    //     console.log("USER UID FROM GOOGLE:", data_user.user.uid);
-    //     console.log("USER EMAIL FROM GOOGLE:", data_user.user.email);
-    //     console.log("USER AUTHENTICATED WITH FIREBASE...");
-    //     setIsAuthenticated(true);
-    //   })
-    //   .catch((e) => {
-    //     console.error("Authentication failed:", e.message);
-    //     setIsAuthenticated(false);
-    //   });
+    const settingThingsUp = async () => {
+      checkAuthentication();
+      logAsyncStorage();
+      const preference_language = await AsyncStorage.getItem(
+        "preference_language"
+      );
+      if (preference_language) {
+        setGlobalLanguage(preference_language);
+      }
+    };
+    settingThingsUp();
   }, []);
 
   // **************** AUTHENTICATION CHECKERS ****************
@@ -232,11 +228,7 @@ export const GlobalContextProvider = ({ children }) => {
           JSON.stringify(userCredential.user.uid, null, 2)
         );
         if (userCredential.user) {
-          setIsAuthenticated(true);
-          await AsyncStorage.setItem("isAuthenticated", "true");
-          await AsyncStorage.setItem("userEmail", userCredential.user.email); // Replace `userEmail` with the actual email value
-          await AsyncStorage.setItem("uid", userCredential.user.uid);
-
+          // setIsAuthenticated(true);
           // *********** GET USER BY UID FROM BACKEND AND SET TO CONTEXT ************
 
           const userFromBackend = await get_user_by_uid_and_user_data_Request(
@@ -246,6 +238,19 @@ export const GlobalContextProvider = ({ children }) => {
             "USER FROM BACKEND AT LOGIN:",
             JSON.stringify(userFromBackend.data.first_name, null, 2)
           );
+          console.log(
+            "USER IS FIRST TIME AT LOGIN:",
+            JSON.stringify(userFromBackend.data.isFirstTime, null, 2)
+          );
+          // *********************************************************
+          if (userFromBackend.data.isFirstTime) {
+            return {
+              ok: true,
+              next: "Preference_language_View",
+              user_from_backEnd: userFromBackend.data,
+            };
+          }
+
           setUserToDB({
             first_name: userFromBackend.data.first_name,
             last_name: userFromBackend.data.last_name,
@@ -258,10 +263,11 @@ export const GlobalContextProvider = ({ children }) => {
             createdAt: userFromBackend.data.createdAt,
             user_id: userFromBackend.data.user_id,
           });
-          // ************************************************************************
-
-          // setUserToDB(user);
           console.log("USER AUTHENTICATED...");
+          await AsyncStorage.setItem("isAuthenticated", "true");
+          await AsyncStorage.setItem("userEmail", userCredential.user.email); // Replace `userEmail` with the actual email value
+          await AsyncStorage.setItem("uid", userCredential.user.uid);
+          setIsAuthenticated(true);
         } else {
           setIsAuthenticated(false);
           await AsyncStorage.setItem("isAuthenticated", "false");
@@ -358,6 +364,80 @@ export const GlobalContextProvider = ({ children }) => {
     }
   };
 
+  const settingPreferenceLanguage = async (data_to_change) => {
+    const language_chosen = data_to_change.language;
+    const user_id = data_to_change.user_id;
+    console.log("LANGUAGE CHOOSEN:", language_chosen);
+    console.log("USER ID TO UPDATE PREFERENCE LANGUAGE:", user_id);
+    setIsLoading(true);
+    setTimeout(async () => {
+      try {
+        const set_preference_language_response =
+          await put_preference_language_Request(user_id, language_chosen);
+        console.log(
+          "RESPONSE STATUS:",
+          set_preference_language_response.status
+        );
+        console.log(
+          " USER UPDATED:",
+          set_preference_language_response.data.user_updated
+        );
+        if (set_preference_language_response.status === 200) {
+          console.log("PASA POR AQUI...");
+          setUserToDB({
+            first_name:
+              set_preference_language_response.data.user_updated.first_name,
+            last_name:
+              set_preference_language_response.data.user_updated.last_name,
+            email: set_preference_language_response.data.user_updated.email,
+            display_name:
+              set_preference_language_response.data.user_updated.display_name,
+            isFirstTime:
+              set_preference_language_response.data.user_updated.isFirstTime,
+            role: set_preference_language_response.data.user_updated.role,
+            uid: set_preference_language_response.data.user_updated.uid,
+            updatedAt:
+              set_preference_language_response.data.user_updated.updatedAt,
+            createdAt:
+              set_preference_language_response.data.user_updated.createdAt,
+            user_id: set_preference_language_response.data.user_updated.user_id,
+            preference_language:
+              set_preference_language_response.data.user_updated
+                .preference_language,
+          });
+          await AsyncStorage.setItem("isAuthenticated", "true");
+          await AsyncStorage.setItem(
+            "userEmail",
+            set_preference_language_response.data.user_updated.email
+          ); // Replace `userEmail` with the actual email value
+          await AsyncStorage.setItem(
+            "uid",
+            set_preference_language_response.data.user_updated.uid
+          );
+          await AsyncStorage.setItem(
+            "preference_language",
+            set_preference_language_response.data.user_updated
+              .preference_language
+          );
+          setGlobalLanguage(
+            set_preference_language_response.data.user_updated
+              .preference_language
+          );
+          setIsAuthenticated(true);
+          return { ok: true, next: "Home_View" };
+        } else {
+          setIsAuthenticated(false);
+          await AsyncStorage.setItem("isAuthenticated", "false");
+          console.log("USER NOT AUTHENTICATED...");
+        }
+      } catch (error) {
+        console.error("Error updating preference language:", error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    }, 500);
+  };
+
   // This context is currently empty, but can be expanded in the future
   return (
     <GlobalContext.Provider
@@ -391,6 +471,7 @@ export const GlobalContextProvider = ({ children }) => {
         checkAuthentication,
         logAsyncStorage,
         temporaryAuthentication,
+        settingPreferenceLanguage,
       }}
     >
       {/* {isAuthenticated ? children : null} */}

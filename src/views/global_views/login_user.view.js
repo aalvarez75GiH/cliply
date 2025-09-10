@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { Platform } from "react-native";
 import { KeyboardAvoidingView, ActivityIndicator } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
 import { Text } from "../../infrastructure/typography/text.component.js";
@@ -26,6 +27,7 @@ export default function Login_User({ route }) {
     logAsyncStorage,
     temporaryAuthentication,
   } = useContext(GlobalContext);
+  const navigation = useNavigation();
 
   const inputRef = useRef(null);
 
@@ -98,7 +100,14 @@ export default function Login_User({ route }) {
                     setErrorInAuthentication(null); // Clear error when PIN is not empty
                   }
                 }}
-                onFulfill={(pin) => loginUser(pin)}
+                // onFulfill={(pin) => loginUser(pin)}
+                onFulfill={async (pin) => {
+                  const res = await loginUser(pin);
+                  if (res?.ok && res?.next)
+                    navigation.navigate(res.next, {
+                      user_from_back_end: res.user_from_backEnd,
+                    });
+                }}
                 themeColor="#000000" // idle dot color (the gray you showed)
                 digitColor="#000000"
                 size={18}

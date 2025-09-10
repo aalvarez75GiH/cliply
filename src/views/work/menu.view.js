@@ -101,7 +101,11 @@ export default function Menu_Screen({ navigation }) {
               width={"30px"}
               height={"30px"}
               //   caption={"English"}
-              caption={globalLanguage === "EN" ? "English" : "Español"}
+              caption={
+                globalLanguage === "EN"
+                  ? "Cambia a español"
+                  : "Change to English"
+              }
               color={theme.colors.ui.primary}
               isLoading={isLoading}
               action={() => togglingGlobalLanguage()}
@@ -113,7 +117,7 @@ export default function Menu_Screen({ navigation }) {
               //   caption={"English"}
               caption={globalLanguage === "EN" ? "Sign out" : "Salir"}
               color={theme.colors.ui.primary}
-              isLoading={isLoading}
+              // isLoading={isLoading}
               action={() => loggingOutUser()}
             />
           </Container>
