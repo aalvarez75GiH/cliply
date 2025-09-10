@@ -12,8 +12,11 @@ const baseStyles = css`
   margin-bottom: ${(props) => props.margin_bottom || "0px"};
   margin-right: ${(props) => props.margin_right || "0px"};
   margin-left: ${(props) => props.margin_left || "0px"};
-  border-radius: ${(props) => props.border_radius || "0px"};
   /* Correctly apply individual border radius properties */
+  border-width: ${(props) => props.border_width || "0px"};
+  border-color: ${(props) => props.border_color || "transparent"};
+  border-style: ${(props) => props.border_style || "solid"};
+  border-radius: ${(props) => props.border_radius || "0px"};
   border-top-left-radius: ${(props) =>
     props.border_radius_top_left || props.border_radius || "0px"};
   border-top-right-radius: ${(props) =>

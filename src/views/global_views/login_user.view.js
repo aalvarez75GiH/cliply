@@ -1,20 +1,16 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Platform } from "react-native";
 import { KeyboardAvoidingView, ActivityIndicator } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-
-import { validatingEmail } from "../../infrastructure/services/global/global.context.js";
 
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
 import { Text } from "../../infrastructure/typography/text.component.js";
 import { PinDotsInput } from "../../components/inputs/pin_dots.input.js";
 import { FormInput } from "../../components/inputs/form.input.js";
 import { Container } from "../../components/global_components/containers/general_containers.js";
-
 import { SafeArea } from "../../components/global_components/safe-area.component.js";
 import { theme } from "../../infrastructure/theme/index.js";
-import { Forgot_PIN_CTA } from "../../components/calls_to_action/forgot_pin.cta.js";
 import { Not_Registered_Sign_Up_CTA } from "../../components/calls_to_action/not_registered_sign_up.cta.js";
+import { Outlined_CTA } from "../../components/calls_to_action/outlined.cta.js";
 
 import { GlobalContext } from "../../infrastructure/services/global/global.context.js";
 
@@ -29,9 +25,6 @@ export default function Login_User({ route }) {
     checkAuthentication,
     logAsyncStorage,
     temporaryAuthentication,
-    setFirst_name,
-    setLast_name,
-    setEmail,
   } = useContext(GlobalContext);
 
   const inputRef = useRef(null);
@@ -162,7 +155,15 @@ export default function Login_User({ route }) {
             <Spacer position="bottom" size="large" />
             <Spacer position="bottom" size="large" />
             <Spacer position="bottom" size="extraLarge" />
-            <Forgot_PIN_CTA />
+            <Outlined_CTA
+              width={"70%"}
+              height={"25%"}
+              label="Forgot pin number"
+              border_radius="30px"
+              border_width="2px"
+              label_variant="dm_sans_bold_16"
+              action={() => null}
+            />
             <Not_Registered_Sign_Up_CTA />
           </Container>
 
