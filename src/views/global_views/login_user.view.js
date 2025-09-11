@@ -101,12 +101,27 @@ export default function Login_User({ route }) {
                   }
                 }}
                 // onFulfill={(pin) => loginUser(pin)}
+                // onFulfill={async (pin) => {
+                //   const res = await loginUser(pin);
+                //   if (res?.ok && res?.next)
+                //     navigation.navigate(res.next, {
+                //       data: data,
+                //     });
+                // }}
                 onFulfill={async (pin) => {
-                  const res = await loginUser(pin);
-                  if (res?.ok && res?.next)
-                    navigation.navigate(res.next, {
-                      user_from_back_end: res.user_from_backEnd,
-                    });
+                  try {
+                    const res = await loginUser(pin);
+                    if (res?.ok && res?.next) {
+                      console.log("AHhhHHHHHHHH:", res.data);
+                      navigation.navigate(res.next, {
+                        data: res.data, // Ensure 'data' is defined
+                      });
+                    } else {
+                      console.error("Login failed or invalid response:", res);
+                    }
+                  } catch (error) {
+                    console.error("An error occurred during login:", error);
+                  }
                 }}
                 themeColor="#000000" // idle dot color (the gray you showed)
                 digitColor="#000000"

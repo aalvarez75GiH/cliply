@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, use } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage"; // Ensure this is installed
 import {
   getAuth,
@@ -84,6 +84,11 @@ export const GlobalContextProvider = ({ children, navigation }) => {
       );
       if (preference_language) {
         setGlobalLanguage(preference_language);
+        // await AsyncStorage.removeItem("userEmails");
+        await AsyncStorage.removeItem("userEmail");
+        // await AsyncStorage.removeItem("uid");
+        // await AsyncStorage.removeItem("isAuthenticated");
+        // await AsyncStorage.removeItem("preference_language");
       }
     };
     settingThingsUp();
@@ -214,9 +219,48 @@ export const GlobalContextProvider = ({ children, navigation }) => {
     setIsLoading(true);
     if (pin.length === PIN_LENGTH) {
       console.log("PIN BEFORE LOGIN:", pin);
-      const email = await AsyncStorage.getItem("userEmail");
-      // const email = "arnoldo@yahoo.com";
-      console.log("EMAIL BEFORE LOGIN:", email);
+      let email;
+      // const email = await AsyncStorage.getItem("userEmail");
+      const existingEmails = await AsyncStorage.getItem("userEmails");
+
+      let emailArray = [];
+      if (existingEmails) {
+        try {
+          emailArray = JSON.parse(existingEmails); // Convert the string to an array
+          console.log("Parsed email array:", emailArray);
+        } catch (error) {
+          console.error("Error parsing existingEmails:", error);
+        }
+      } else {
+        console.log("No emails found in AsyncStorage.");
+      }
+      console.log(emailArray.length);
+      if (emailArray.length > 1) {
+        email = emailArray[0];
+        // console.log("EXISTING EMAILS:", emailArray);
+        // console.log(" TYPE EXISTING EMAILS:", typeof emailArray);
+        // let data = emailArray;
+        // return {
+        //   ok: true,
+        //   next: "Multiple_Emails_LoginIn_View",
+        //   data: emailArray,
+        // };
+      }
+      if (emailArray.length === 1) {
+        console.log("EXISTING EMAILS:", emailArray[0]);
+        email = emailArray[0];
+      }
+      // if (!existingEmails.includes(newEmail)) {
+      //   // Avoid duplicates
+      //   existingEmails.push(newEmail); // Add the new email to the array
+      //   await AsyncStorage.setItem(
+      //     "userEmails",
+      //     JSON.stringify(existingEmails)
+      //   ); // Save the updated array back to AsyncStorage
+      // } else {
+      //   console.log("Email already exists in AsyncStorage.");
+      // }
+
       try {
         const userCredential = await signInWithEmailAndPassword(
           auth,
@@ -236,7 +280,7 @@ export const GlobalContextProvider = ({ children, navigation }) => {
           );
           console.log(
             "USER FROM BACKEND AT LOGIN:",
-            JSON.stringify(userFromBackend.data.first_name, null, 2)
+            JSON.stringify(userFromBackend.data, null, 2)
           );
           console.log(
             "USER IS FIRST TIME AT LOGIN:",
@@ -244,10 +288,13 @@ export const GlobalContextProvider = ({ children, navigation }) => {
           );
           // *********************************************************
           if (userFromBackend.data.isFirstTime) {
+            // let data = userFromBackend.data;
+
             return {
               ok: true,
               next: "Preference_language_View",
-              user_from_backEnd: userFromBackend.data,
+              // user_from_back_end: userFromBackend.data,
+              data: userFromBackend.data,
             };
           }
 
@@ -265,7 +312,25 @@ export const GlobalContextProvider = ({ children, navigation }) => {
           });
           console.log("USER AUTHENTICATED...");
           await AsyncStorage.setItem("isAuthenticated", "true");
-          await AsyncStorage.setItem("userEmail", userCredential.user.email); // Replace `userEmail` with the actual email value
+
+          const existingEmails = await AsyncStorage.getItem("userEmails");
+          let emailArray = [];
+          const newEmail = userCredential.user.email;
+          if (existingEmails) {
+            emailArray = JSON.parse(existingEmails); // Parse existing emails into an array
+          }
+
+          if (!emailArray.includes(newEmail)) {
+            emailArray.push(newEmail); // Add the new email to the array
+            await AsyncStorage.setItem(
+              "userEmails",
+              JSON.stringify(emailArray)
+            ); // Save the updated array
+            console.log("Email added successfully:", newEmail);
+          } else {
+            console.log("Email already exists in AsyncStorage.");
+          }
+          // await AsyncStorage.setItem("userEmail", userCredential.user.email); // Replace `userEmail` with the actual email value
           await AsyncStorage.setItem("uid", userCredential.user.uid);
           setIsAuthenticated(true);
         } else {
@@ -316,6 +381,27 @@ export const GlobalContextProvider = ({ children, navigation }) => {
     return Math.floor(100000 + Math.random() * 900000).toString();
   };
 
+  const addEmailToAsyncStorage = async (newEmail) => {
+    try {
+      const existingEmails = await AsyncStorage.getItem("userEmails");
+      let emailArray = [];
+
+      if (existingEmails) {
+        emailArray = JSON.parse(existingEmails); // Parse existing emails into an array
+      }
+
+      if (!emailArray.includes(newEmail)) {
+        emailArray.push(newEmail); // Add the new email to the array
+        await AsyncStorage.setItem("userEmails", JSON.stringify(emailArray)); // Save the updated array
+        console.log("Email added successfully:", newEmail);
+      } else {
+        console.log("Email already exists in AsyncStorage.");
+      }
+    } catch (error) {
+      console.error("Error adding email to AsyncStorage:", error);
+    }
+  };
+
   const registerUser = async () => {
     const pinGenerated = generatePin();
     console.log("EMAIL BEFORE REGISTERING:", email);
@@ -333,8 +419,39 @@ export const GlobalContextProvider = ({ children, navigation }) => {
         JSON.stringify(userCredential.user, null, 2)
       );
       await AsyncStorage.setItem("isAuthenticated", "false");
-      await AsyncStorage.setItem("userEmail", userCredential.user.email); // Replace `userEmail` with the actual email value
       await AsyncStorage.setItem("uid", userCredential.user.uid); // Replace `userEmail` with the actual email value
+
+      // *******************************************************************************
+      const existingEmails = await AsyncStorage.getItem("userEmails");
+      let emailArray = [];
+      const newEmail = userCredential.user.email;
+
+      if (existingEmails) {
+        emailArray = JSON.parse(existingEmails); // Parse existing emails into an array
+      }
+      if (!emailArray.includes(newEmail)) {
+        emailArray.push(newEmail); // Add the new email to the array
+        await AsyncStorage.setItem("userEmails", JSON.stringify(emailArray)); // Save the updated array
+        console.log("Email added successfully:", newEmail);
+      } else {
+        console.log("Email already exists in AsyncStorage.");
+      }
+
+      // *******************************************************************************
+      // const existingEmails =
+      //   JSON.parse(await AsyncStorage.getItem("userEmails")) || []; // Retrieve existing emails or initialize an empty array
+      // const newEmail = userCredential.user.email;
+      // if (!existingEmails.includes(newEmail)) {
+      //   // Avoid duplicates
+      //   existingEmails.push(newEmail); // Add the new email to the array
+      //   await AsyncStorage.setItem(
+      //     "userEmails",
+      //     JSON.stringify(existingEmails)
+      //   ); // Save the updated array back to AsyncStorage
+      // } else {
+      //   console.log("Email already exists in AsyncStorage.");
+      // }
+      // await AsyncStorage.setItem("userEmail", userCredential.user.email); // Replace `userEmail` with the actual email value
 
       setIsAuthenticated(false);
       const userToCreateAtFirebase = {

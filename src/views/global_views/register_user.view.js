@@ -24,6 +24,7 @@ import { ExitHeader } from "../../components/headers/exit_header.component.js";
 import { New_FormInput } from "../../components/inputs/new_form_input.js";
 
 import { GlobalContext } from "../../infrastructure/services/global/global.context.js";
+import { fonts } from "../../infrastructure/theme/fonts.js";
 
 export default function Register_User({ navigation }) {
   const [error, setError] = useState(null);
@@ -38,39 +39,6 @@ export default function Register_User({ navigation }) {
     }, 100); // slight delay ensures focus sticks
     return () => clearTimeout(timer);
   }, []);
-  // const firstNameRef = useRef(null);
-  // const focusingRef = useRef(false);
-
-  // const isScreenFocused = useIsFocused(); // are we on top?
-
-  // // // safe focus helper
-  // const focusFirst = useCallback(() => {
-  //   requestAnimationFrame(() => {
-  //     if (isScreenFocused && firstNameRef.current?.focus) {
-  //       firstNameRef.current.focus();
-  //     }
-  //   });
-  // }, [isScreenFocused]);
-
-  // // // Focus each time the screen becomes visible
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     const t = setTimeout(focusFirst, 50); // small delay helps iOS
-  //     return () => clearTimeout(t);
-  //   }, [focusFirst])
-  // );
-
-  // // // Also try right after the form container lays out (first render)
-  // const onFormLayout = useCallback(() => {
-  //   setTimeout(focusFirst, 0);
-  // }, [focusFirst]);
-
-  // // // If the input blurs while we’re still on this screen, grab focus back
-  // const handleFirstBlur = useCallback(() => {
-  //   if (isScreenFocused) {
-  //     setTimeout(focusFirst, 60);
-  //   }
-  // }, [isScreenFocused, focusFirst]);
 
   const handleBlur = () => {
     setTimeout(() => inputRef.current?.focus(), 60);
@@ -79,10 +47,7 @@ export default function Register_User({ navigation }) {
   return (
     <SafeArea backgroundColor={theme.colors.bg.elements_bg}>
       <KeyboardAvoidingView
-        // behavior={Platform.OS === "ios" ? "padding" : "height"}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
-        // keyboardVerticalOffset={Platform.OS === "ios" ? headerHeight : 0}
-        // keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
         style={{ flex: 1 }}
       >
         <Container
@@ -128,22 +93,7 @@ export default function Register_User({ navigation }) {
               align="center"
               color={theme.colors.bg.elements_bg}
             />
-            {/* <FormInput
-              label="First name"
-              ref={firstNameRef}
-              value={first_name}
-              keyboardType="default"
-              autoCapitalize="words"
-              onChangeText={(value) => setFirst_name(value)}
-              theme={{
-                colors: { primary: theme.colors.brand.primary },
-              }}
-              style={{
-                height: 80,
-              }}
-              underlineColor={"#dedede"}
-              onFocus={() => setError(null)}
-            /> */}
+
             <FormInput
               label="First name"
               value={first_name}
@@ -154,9 +104,7 @@ export default function Register_User({ navigation }) {
                 setFirst_name(value);
               }}
               theme={{ colors: { primary: theme.colors.brand.primary } }}
-              //   underlineColor={theme.colors.brand.primary}
               underlineColor={"#dedede"}
-              // right={<TextInput.Icon icon={EmailIcon} width={35} height={35} />}
               onFocus={() => setError(null)}
               style={{
                 height: 80,
@@ -173,28 +121,14 @@ export default function Register_User({ navigation }) {
                 setLast_name(value);
               }}
               theme={{ colors: { primary: theme.colors.brand.primary } }}
-              //   underlineColor={theme.colors.brand.primary}
               underlineColor={"#dedede"}
-              // right={<TextInput.Icon icon={EmailIcon} width={35} height={35} />}
               onFocus={() => setError(null)}
               style={{
                 height: 80,
               }}
               onBlur={handleBlur}
             />
-            {/* <New_FormInput
-              label="First name"
-              value={first_name}
-              keyboardType="default"
-              autoCapitalize="words"
-              onChangeText={setFirst_name}
-              underlineColor="#dedede"
-              // style={{ height: 80 }}
-              onFocus={() => setError(null)}
-              blurOnSubmit={false} // keeps focus on this screen
-              returnKeyType="next"
-              style={{ height: 80, width: "90%" }}
-            /> */}
+
             <Container
               color={theme.colors.bg.elements_bg}
               width="100%"
@@ -202,19 +136,25 @@ export default function Register_User({ navigation }) {
               justify="flex-start"
               align="center"
             />
-            {/* <New_FormInput
-              label="Last name"
-              value={last_name}
-              keyboardType="default"
-              autoCapitalize="words"
-              onChangeText={setLast_name}
-              underlineColor="#dedede"
-              // style={{ height: 80 }}
-              onFocus={() => setError(null)}
-              blurOnSubmit={false} // keeps focus on this screen
-              returnKeyType="next"
-              style={{ height: 80, width: "90%" }}
-            /> */}
+            {error && (
+              <Container
+                width="100%"
+                height="20%"
+                justify="center"
+                align="flex-start"
+                color={theme.colors.bg.elements_bg}
+              >
+                <Spacer position="left" size="small">
+                  <Text
+                    variant="dm_sans_bold_12_error_cancel"
+                    style={{ padding: 10, textAlign: "center" }}
+                  >
+                    {error}
+                  </Text>
+                </Spacer>
+              </Container>
+            )}
+
             <FormInput
               ref={inputRef}
               style={{ opacity: 0, height: 0 }} // keep invisible
@@ -225,10 +165,20 @@ export default function Register_User({ navigation }) {
 
           <Squared_action_CTA_component
             label="Next"
-            action={() => navigation.navigate("Register_User_View_2")}
+            action={() => {
+              if (!first_name.length || !last_name.length) {
+                setError("Please fill in first name & last name to continue");
+                return;
+              }
+              navigation.navigate("Register_User_View_2");
+            }}
             icon_visible={false}
             height="12%"
           />
+          <Spacer position="top" size="small" />
+          <Spacer position="top" size="small" />
+          <Spacer position="top" size="small" />
+          <Spacer position="top" size="small" />
         </Container>
       </KeyboardAvoidingView>
     </SafeArea>

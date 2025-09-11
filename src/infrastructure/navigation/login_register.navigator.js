@@ -7,6 +7,7 @@ import Login_User from "../../views/global_views/login_user.view";
 import Successful_Process_View from "../../views/global_views/successfull_process.view";
 import Preference_Language_View from "../../views/global_views/selecting_preference_language.view";
 import Menu_Screen from "../../views/work/menu.view";
+import Multiple_Emails_LoginIn_View from "../../views/global_views/multiple_emails_login.view";
 const LoginRegisterStack = createNativeStackNavigator();
 
 export const Login_Register_Navigator = () => {
@@ -35,6 +36,10 @@ export const Login_Register_Navigator = () => {
       <LoginRegisterStack.Screen
         name="Preference_language_View"
         component={Preference_Language_View}
+      />
+      <LoginRegisterStack.Screen
+        name="Multiple_Emails_LoginIn_View"
+        component={Multiple_Emails_LoginIn_View}
       />
       <LoginRegisterStack.Screen name="Menu_View" component={Menu_Screen} />
     </LoginRegisterStack.Navigator>

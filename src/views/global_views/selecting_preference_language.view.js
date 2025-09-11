@@ -15,9 +15,9 @@ import { Loading_Spinner_area } from "../../components/global_components/global_
 import { GlobalContext } from "../../infrastructure/services/global/global.context.js";
 
 export default function Preference_Language_View({ route }) {
-  const { user_from_back_end } = route.params;
-  const { user_id } = user_from_back_end;
-
+  const { data } = route.params;
+  console.log("DATA PASSED TO PREFERENCE LANGUAGE VIEW:", data.data);
+  const user_id = data.user_id;
   const {
     checkAuthentication,
     logAsyncStorage,
