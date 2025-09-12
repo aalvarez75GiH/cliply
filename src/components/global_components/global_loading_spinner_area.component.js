@@ -7,12 +7,14 @@ import { Container } from "../../components/global_components/containers/general
 
 export const Loading_Spinner_area = ({
   color = theme.colors.bg.screens_bg,
+  width = "100%",
+  height = "100%",
 }) => {
   return (
     <>
       <Container
-        width={"100%"}
-        height={"100%"}
+        width={width}
+        height={height}
         justify="space-between"
         align="center"
         // color={theme.colors.bg.screens_bg}

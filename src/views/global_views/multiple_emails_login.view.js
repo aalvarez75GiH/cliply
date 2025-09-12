@@ -1,93 +1,146 @@
-import React, {
-  useState,
-  useContext,
-  useRef,
-  useEffect,
-  useCallback,
-  useHea,
-} from "react";
-import {
-  KeyboardAvoidingView,
-  Platform,
-  InteractionManager,
-} from "react-native";
-import { useFocusEffect, useIsFocused } from "@react-navigation/native";
+import React, { useState, useContext } from "react";
+import { FlatList } from "react-native";
 
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
 import { Text } from "../../infrastructure/typography/text.component.js";
+import { Text_Tile } from "../../components/tiles/text.tile.js";
 import { FormInput } from "../../components/inputs/form.input.js";
+import { Loading_Spinner_area } from "../../components/global_components/global_loading_spinner_area.component.js";
 import { Container } from "../../components/global_components/containers/general_containers.js";
-import { Squared_action_CTA_component } from "../../components/calls_to_action/squared_action.cta.js";
 import { SafeArea } from "../../components/global_components/safe-area.component.js";
 import { theme } from "../../infrastructure/theme/index.js";
 import { ExitHeader } from "../../components/headers/exit_header.component.js";
-import { New_FormInput } from "../../components/inputs/new_form_input.js";
 
 import { GlobalContext } from "../../infrastructure/services/global/global.context.js";
-import { fonts } from "../../infrastructure/theme/fonts.js";
 
 export default function Multiple_Emails_LoginIn_View({ navigation, route }) {
   const [error, setError] = useState(null);
   const { data } = route.params;
+  const {
+    signingInWithEmailAndPasswordFunction,
+    pin,
+    renderEmailForLoginTile,
+    errorInAuthentication,
+    isLoading,
+  } = useContext(GlobalContext);
   console.log(
     "DATA PASSED TO MULTIPLE EMAILS VIEW:",
     JSON.stringify(data, null, 2)
   );
+
+  const action = async (item) => {
+    console.log("DATA IN ACTION:", item);
+    console.log("PIN IN ACTION:", pin);
+    const res = await signingInWithEmailAndPasswordFunction(item, pin);
+    if (res?.ok && res?.next) {
+      console.log("AHhhHHHHHHHH:", res.data);
+      navigation.navigate(res.next, {
+        data: res.data, // Ensure 'data' is defined
+      });
+    } else {
+      console.log("Login failed or invalid response");
+    }
+  };
+
   return (
     <SafeArea backgroundColor={theme.colors.bg.elements_bg}>
-      <Container
-        width={"100%"}
-        height={"100%"}
-        justifyContent={"flex-start"}
-        alignItems={"flex-start"}
-        color={theme.colors.bg.elements_bg}
-      >
-        <Spacer position="top" size="large" />
-        <Spacer position="top" size="large" />
-        <ExitHeader
-          action={() => {
-            setFirst_name("");
-            setLast_name("");
-            setError(null);
-            navigation.goBack();
-          }}
-        />
-
-        <Container
-          width="100%"
-          height="65%"
-          color={theme.colors.bg.elements_bg}
-          justify="flex-start"
-          align="center"
-        >
+      {isLoading && (
+        <>
           <Container
-            width="100%"
-            height="10%"
-            justify="flex-start"
+            width={"100%"}
+            height={"40%"}
+            justify="center"
             align="center"
             color={theme.colors.bg.elements_bg}
           />
-          <Text variant="dm_sans_bold_18">{data[0]}</Text>
-          <Text variant="dm_sans_bold_18">{data[1]}</Text>
-
-          <Squared_action_CTA_component
-            label="Next"
-            action={() => {
-              if (!first_name.length || !last_name.length) {
-                setError("Please fill in first name & last name to continue");
-                return;
-              }
-              navigation.navigate("Register_User_View_2");
-            }}
-            icon_visible={false}
-            height="12%"
+          <Loading_Spinner_area
+            color={theme.colors.bg.elements_bg}
+            height="10%"
           />
+          <Container
+            width={"100%"}
+            height={"10%"}
+            justify="center"
+            align="center"
+            // color="red"
+            color={theme.colors.bg.elements_bg}
+          >
+            <Text variant="dm_sans_bold_18">Wait, we are sining you in...</Text>
+          </Container>
+        </>
+      )}
+      {!isLoading && (
+        <Container
+          width={"100%"}
+          height={"100%"}
+          justifyContent={"flex-start"}
+          alignItems={"flex-start"}
+          color={theme.colors.bg.elements_bg}
+          // color="yellow"
+        >
+          <Container
+            width="100%"
+            height="100%"
+            color={theme.colors.bg.screens_bg}
+            justify="flex-start"
+            align="center"
+            //   color="lightblue"
+          >
+            <ExitHeader
+              action={() => {
+                setFirst_name("");
+                setLast_name("");
+                setError(null);
+                navigation.goBack();
+              }}
+            />
+            <Spacer position="top" size="small" />
+
+            <Text_Tile
+              caption_1={"Select the email"}
+              caption_2={"you want to log in with"}
+              color={theme.colors.ui.highlight_color_2}
+              // color={"#0D965B"}
+              height={"10%"}
+            />
+            <Spacer position="top" size="small" />
+            <Container
+              width={"100%"}
+              height={"70%"}
+              color={theme.colors.bg.screens_bg}
+            >
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                showsVerticalScrollIndicator={false}
+                data={data}
+                //   renderItem={(item) => renderEmailForLoginTile(item, pin)}
+                renderItem={({ item }) =>
+                  renderEmailForLoginTile({ item, pin, action })
+                }
+                keyExtractor={(item, id) => {
+                  return item.toString() + id.toString();
+                }}
+              />
+            </Container>
+
+            <Spacer position="top" size="small" />
+            <Spacer position="top" size="small" />
+            <Spacer position="top" size="small" />
+            {errorInAuthentication && (
+              <Text
+                variant="dm_sans_bold_12_error_cancel"
+                style={{ textAlign: "center", paddingHorizontal: 20 }}
+              >
+                {errorInAuthentication}
+              </Text>
+            )}
+          </Container>
+          <Spacer position="top" size="small" />
+          <Spacer position="top" size="small" />
+          <Spacer position="top" size="small" />
+          <Spacer position="top" size="small" />
         </Container>
-        <Spacer position="top" size="small" />
-        <Spacer position="top" size="small" />
-        <Spacer position="top" size="small" />
-        <Spacer position="top" size="small" />
-      </Container>
+      )}
     </SafeArea>
   );
 }

@@ -18,6 +18,7 @@ export default function Preference_Language_View({ route }) {
   const { data } = route.params;
   console.log("DATA PASSED TO PREFERENCE LANGUAGE VIEW:", data.data);
   const user_id = data.user_id;
+  console.log("USER ID PASSED TO PREFERENCE LANGUAGE VIEW:", user_id);
   const {
     checkAuthentication,
     logAsyncStorage,

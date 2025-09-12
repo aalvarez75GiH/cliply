@@ -86,7 +86,6 @@ export const PinDotsInput = ({
       </View>
     );
   });
-  console.log("RENDER PIN DOTS", pin);
   return (
     <View
       style={{
@@ -114,21 +113,6 @@ export const PinDotsInput = ({
             caretHidden
             selection={{ start: pin.length, end: pin.length }}
             style={styles.hiddenInput}
-
-            //   ref={inputRef}
-            //   value={pin}
-            //   onChangeText={handleChange}
-            //   keyboardType={Platform.OS === "ios" ? "number-pad" : "numeric"}
-            //   inputMode="numeric"
-            //   textContentType="oneTimeCode"
-            //   autoComplete="one-time-code"
-            //   importantForAutofill="yes"
-            //   autoFocus   // <- important
-            //   onBlur={handleBlur}
-            //   maxLength={length}
-            //   caretHidden
-            //   selection={{ start: pin.length, end: pin.length }}
-            //   style={styles.hiddenInput}
           />
           <View style={styles.cellsRow}>{cells}</View>
         </Pressable>

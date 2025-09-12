@@ -8,13 +8,14 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { initializeApp, getApps } from "firebase/app";
-import { put_preference_language_Request } from "./global.requests.js";
 
 import {
   post_user_Request,
   get_user_by_uid_and_user_data_Request,
+  put_preference_language_Request,
 } from "./global.requests";
-
+import { Email_For_Login_Tile } from "../../../components/tiles/email_for_login.tile";
+import { Spacer } from "../../../components/global_components/optimized.spacer.component";
 // Create Global Context
 export const GlobalContext = createContext();
 
@@ -79,17 +80,6 @@ export const GlobalContextProvider = ({ children, navigation }) => {
     const settingThingsUp = async () => {
       checkAuthentication();
       logAsyncStorage();
-      const preference_language = await AsyncStorage.getItem(
-        "preference_language"
-      );
-      if (preference_language) {
-        setGlobalLanguage(preference_language);
-        // await AsyncStorage.removeItem("userEmails");
-        await AsyncStorage.removeItem("userEmail");
-        // await AsyncStorage.removeItem("uid");
-        // await AsyncStorage.removeItem("isAuthenticated");
-        // await AsyncStorage.removeItem("preference_language");
-      }
     };
     settingThingsUp();
   }, []);
@@ -136,7 +126,9 @@ export const GlobalContextProvider = ({ children, navigation }) => {
           updatedAt: userFromBackend.data.updatedAt,
           createdAt: userFromBackend.data.createdAt,
           user_id: userFromBackend.data.user_id,
+          preference_language: userFromBackend.data.preference_language,
         });
+        setGlobalLanguage(userFromBackend.data.preference_language);
         // setUserToDB(user);
       } else {
         console.log("USER NOT AUTHENTICATED:", isAuthenticated);
@@ -162,32 +154,30 @@ export const GlobalContextProvider = ({ children, navigation }) => {
 
   // **************** AUTHENTICATION HANDLERS ****************
 
-  console.log("FIRST NAME AT GLOBAL CONTEXT:", first_name);
-  console.log("LAST NAME AT GLOBAL CONTEXT:", last_name);
-  console.log("EMAIL AT GLOBAL CONTEXT:", email);
-  console.log("PIN AT GLOBAL CONTEXT:", pin);
-  console.log("USER TO DB:", userToDB);
+  // console.log("FIRST NAME AT GLOBAL CONTEXT:", first_name);
+  // console.log("LAST NAME AT GLOBAL CONTEXT:", last_name);
+  // console.log("EMAIL AT GLOBAL CONTEXT:", email);
+  // console.log("PIN AT GLOBAL CONTEXT:", pin);
+  // console.log("USER TO DB:", userToDB);
 
-  const temporaryAuthentication = async (error_message_from_FB) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      // setErrorInAuthentication("We haven't found a user for this PIN number");
-      setErrorInAuthentication(
-        error_message_from_FB === "Firebase: Error (auth/missing-email)."
-          ? "We haven't found an email for this PIN number"
-          : error_message_from_FB ===
-            "Login error: Firebase: Error (auth/invalid-credential)."
-          ? "We haven't found a user for this PIN number"
-          : error_message_from_FB ===
-            "Login error: Firebase: Error (auth/too-many-requests)."
-          ? "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your PIN or you can try again later."
-          : null
-      );
-      setIsLoading(false);
-    }, 2000);
-    // await AsyncStorage.setItem("isAuthenticated", "true");
-    // setUserToDB(user);
-  };
+  // const temporaryAuthentication = async (error_message_from_FB) => {
+  //   setIsLoading(true);
+  //   setTimeout(() => {
+  //     // setErrorInAuthentication("We haven't found a user for this PIN number");
+  //     setErrorInAuthentication(
+  //       error_message_from_FB === "Firebase: Error (auth/missing-email)."
+  //         ? "We haven't found an email for this PIN number"
+  //         : error_message_from_FB ===
+  //           "Login error: Firebase: Error (auth/invalid-credential)."
+  //         ? "We haven't found a user for this PIN number"
+  //         : error_message_from_FB ===
+  //           "Login error: Firebase: Error (auth/too-many-requests)."
+  //         ? "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your PIN or you can try again later."
+  //         : null
+  //     );
+  //     setIsLoading(false);
+  //   }, 2000);
+  // };
 
   const validatingEmail = (email) => {
     // const validate = (text) => {
@@ -211,6 +201,104 @@ export const GlobalContextProvider = ({ children, navigation }) => {
     }
   };
 
+  const addEmailToAsyncStorage = async (newEmail) => {
+    const existingEmails = await AsyncStorage.getItem("userEmails");
+    let emailArray = [];
+    // const newEmail = userCredential.user.email;
+
+    if (existingEmails) {
+      emailArray = JSON.parse(existingEmails); // Parse existing emails into an array
+    }
+    if (!emailArray.includes(newEmail)) {
+      emailArray.push(newEmail); // Add the new email to the array
+      await AsyncStorage.setItem("userEmails", JSON.stringify(emailArray)); // Save the updated array
+    } else {
+      console.log("Email already exists in AsyncStorage.");
+    }
+    return emailArray;
+  };
+
+  const checking_for_array_of_multiple_emails = async () => {
+    const existingEmails = await AsyncStorage.getItem("userEmails");
+    let emailArray = [];
+    if (existingEmails) {
+      try {
+        emailArray = JSON.parse(existingEmails); // Convert the string to an array
+        console.log("Parsed email array:", emailArray);
+      } catch (error) {
+        console.error("Error parsing existingEmails:", error);
+      }
+    } else {
+      console.log("No emails found in AsyncStorage.");
+    }
+    console.log(emailArray.length);
+    return emailArray;
+  };
+
+  const signingInWithEmailAndPasswordFunction = async (email, pin) => {
+    setIsLoading(true);
+    console.log("SIGNING IN WITH EMAIL:", email);
+    console.log("SIGNING IN WITH PIN:", pin);
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, pin);
+      console.log("USER LOGGED IN:", userCredential.user);
+      if (userCredential.user) {
+        const userFromBackend = await get_user_by_uid_and_user_data_Request(
+          userCredential.user.uid
+        );
+        console.log("USER FROM BACKEND:", userFromBackend.data);
+        if (userFromBackend.data.isFirstTime) {
+          // let data = userFromBackend.data;
+          return {
+            ok: true,
+            next: "Preference_language_View",
+            // user_from_back_end: userFromBackend.data,
+            data: userFromBackend.data,
+          };
+        }
+        setUserToDB({
+          first_name: userFromBackend.data.first_name,
+          last_name: userFromBackend.data.last_name,
+          email: userFromBackend.data.email,
+          display_name: userFromBackend.data.display_name,
+          isFirstTime: userFromBackend.data.isFirstTime,
+          role: userFromBackend.data.role,
+          uid: userFromBackend.data.uid,
+          updatedAt: userFromBackend.data.updatedAt,
+          createdAt: userFromBackend.data.createdAt,
+          user_id: userFromBackend.data.user_id,
+          preference_language: userFromBackend.data.preference_language,
+        });
+        await AsyncStorage.setItem("isAuthenticated", "true");
+        await AsyncStorage.setItem("uid", userCredential.user.uid);
+        await AsyncStorage.setItem(
+          "preference_language",
+          userFromBackend.data.preference_language
+        );
+        setGlobalLanguage(userFromBackend.data.preference_language);
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+        await AsyncStorage.setItem("isAuthenticated", "false");
+        console.log("USER NOT AUTHENTICATED...");
+      }
+    } catch (error) {
+      setErrorInAuthentication(
+        error.message === "Firebase: Error (auth/missing-email)."
+          ? "We haven't found an email for this PIN number"
+          : error.message === "Firebase: Error (auth/invalid-credential)."
+          ? "We haven't found a user for this PIN number"
+          : error.message === "Firebase: Error (auth/too-many-requests)."
+          ? "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your PIN or you can try again later."
+          : null
+      );
+      console.error("Login error:", error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // ********************* LOGIN USER LOGIC *************************
 
   const loginUser = async (pin) => {
@@ -221,141 +309,29 @@ export const GlobalContextProvider = ({ children, navigation }) => {
       console.log("PIN BEFORE LOGIN:", pin);
       let email;
       // const email = await AsyncStorage.getItem("userEmail");
-      const existingEmails = await AsyncStorage.getItem("userEmails");
+      const Emails_array_checked =
+        await checking_for_array_of_multiple_emails();
 
-      let emailArray = [];
-      if (existingEmails) {
-        try {
-          emailArray = JSON.parse(existingEmails); // Convert the string to an array
-          console.log("Parsed email array:", emailArray);
-        } catch (error) {
-          console.error("Error parsing existingEmails:", error);
+      if (Emails_array_checked.length === 1) {
+        console.log("EXISTING EMAILS:", Emails_array_checked[0]);
+        email = Emails_array_checked[0];
+        const res = await signingInWithEmailAndPasswordFunction(email, pin);
+        if (res?.ok && res?.next) {
+          console.log("AHhhHHHHHHHH:", res.data);
+          setIsLoading(false);
+          return res;
         }
-      } else {
-        console.log("No emails found in AsyncStorage.");
+        return;
       }
-      console.log(emailArray.length);
-      if (emailArray.length > 1) {
-        email = emailArray[0];
-        // console.log("EXISTING EMAILS:", emailArray);
-        // console.log(" TYPE EXISTING EMAILS:", typeof emailArray);
-        // let data = emailArray;
-        // return {
-        //   ok: true,
-        //   next: "Multiple_Emails_LoginIn_View",
-        //   data: emailArray,
-        // };
-      }
-      if (emailArray.length === 1) {
-        console.log("EXISTING EMAILS:", emailArray[0]);
-        email = emailArray[0];
-      }
-      // if (!existingEmails.includes(newEmail)) {
-      //   // Avoid duplicates
-      //   existingEmails.push(newEmail); // Add the new email to the array
-      //   await AsyncStorage.setItem(
-      //     "userEmails",
-      //     JSON.stringify(existingEmails)
-      //   ); // Save the updated array back to AsyncStorage
-      // } else {
-      //   console.log("Email already exists in AsyncStorage.");
-      // }
 
-      try {
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          pin
-        );
-        console.log(
-          "USER LOGGED IN:",
-          JSON.stringify(userCredential.user.uid, null, 2)
-        );
-        if (userCredential.user) {
-          // setIsAuthenticated(true);
-          // *********** GET USER BY UID FROM BACKEND AND SET TO CONTEXT ************
-
-          const userFromBackend = await get_user_by_uid_and_user_data_Request(
-            userCredential.user.uid
-          );
-          console.log(
-            "USER FROM BACKEND AT LOGIN:",
-            JSON.stringify(userFromBackend.data, null, 2)
-          );
-          console.log(
-            "USER IS FIRST TIME AT LOGIN:",
-            JSON.stringify(userFromBackend.data.isFirstTime, null, 2)
-          );
-          // *********************************************************
-          if (userFromBackend.data.isFirstTime) {
-            // let data = userFromBackend.data;
-
-            return {
-              ok: true,
-              next: "Preference_language_View",
-              // user_from_back_end: userFromBackend.data,
-              data: userFromBackend.data,
-            };
-          }
-
-          setUserToDB({
-            first_name: userFromBackend.data.first_name,
-            last_name: userFromBackend.data.last_name,
-            email: userFromBackend.data.email,
-            display_name: userFromBackend.data.display_name,
-            isFirstTime: userFromBackend.data.isFirstTime,
-            role: userFromBackend.data.role,
-            uid: userFromBackend.data.uid,
-            updatedAt: userFromBackend.data.updatedAt,
-            createdAt: userFromBackend.data.createdAt,
-            user_id: userFromBackend.data.user_id,
-          });
-          console.log("USER AUTHENTICATED...");
-          await AsyncStorage.setItem("isAuthenticated", "true");
-
-          const existingEmails = await AsyncStorage.getItem("userEmails");
-          let emailArray = [];
-          const newEmail = userCredential.user.email;
-          if (existingEmails) {
-            emailArray = JSON.parse(existingEmails); // Parse existing emails into an array
-          }
-
-          if (!emailArray.includes(newEmail)) {
-            emailArray.push(newEmail); // Add the new email to the array
-            await AsyncStorage.setItem(
-              "userEmails",
-              JSON.stringify(emailArray)
-            ); // Save the updated array
-            console.log("Email added successfully:", newEmail);
-          } else {
-            console.log("Email already exists in AsyncStorage.");
-          }
-          // await AsyncStorage.setItem("userEmail", userCredential.user.email); // Replace `userEmail` with the actual email value
-          await AsyncStorage.setItem("uid", userCredential.user.uid);
-          setIsAuthenticated(true);
-        } else {
-          setIsAuthenticated(false);
-          await AsyncStorage.setItem("isAuthenticated", "false");
-          console.log("USER NOT AUTHENTICATED...");
-        }
-        // console.log("User logged in:", userCredential.user);
-      } catch (error) {
-        setErrorInAuthentication(
-          error.message === "Firebase: Error (auth/missing-email)."
-            ? "We haven't found an email for this PIN number"
-            : error.message === "Firebase: Error (auth/invalid-credential)."
-            ? "We haven't found a user for this PIN number"
-            : error.message === "Firebase: Error (auth/too-many-requests)."
-            ? "Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your PIN or you can try again later."
-            : null
-        );
-        console.error("Login error:", error.message);
-
-        // setEmailError("Invalid Email or PIN number.");
-      } finally {
+      if (Emails_array_checked.length > 1) {
         setIsLoading(false);
+        return {
+          ok: true,
+          next: "Multiple_Emails_LoginIn_View",
+          data: Emails_array_checked,
+        };
       }
-      return;
     }
   };
 
@@ -365,11 +341,11 @@ export const GlobalContextProvider = ({ children, navigation }) => {
       // await auth.signOut();
       // await AsyncStorage.clear();
       await AsyncStorage.setItem("isAuthenticated", "false");
-      // await AsyncStorage.removeItem("userEmail");
+      // await AsyncStorage.removeItem("userEmails");
       await AsyncStorage.removeItem("uid");
+      // await AsyncStorage.removeItem("preference_language");
       setIsAuthenticated(false);
       setPin("");
-      console.log("User logged out successfully.");
     } catch (error) {
       console.error("Logout error:", error.message);
     }
@@ -381,30 +357,8 @@ export const GlobalContextProvider = ({ children, navigation }) => {
     return Math.floor(100000 + Math.random() * 900000).toString();
   };
 
-  const addEmailToAsyncStorage = async (newEmail) => {
-    try {
-      const existingEmails = await AsyncStorage.getItem("userEmails");
-      let emailArray = [];
-
-      if (existingEmails) {
-        emailArray = JSON.parse(existingEmails); // Parse existing emails into an array
-      }
-
-      if (!emailArray.includes(newEmail)) {
-        emailArray.push(newEmail); // Add the new email to the array
-        await AsyncStorage.setItem("userEmails", JSON.stringify(emailArray)); // Save the updated array
-        console.log("Email added successfully:", newEmail);
-      } else {
-        console.log("Email already exists in AsyncStorage.");
-      }
-    } catch (error) {
-      console.error("Error adding email to AsyncStorage:", error);
-    }
-  };
-
   const registerUser = async () => {
     const pinGenerated = generatePin();
-    console.log("EMAIL BEFORE REGISTERING:", email);
     console.log("PIN BEFORE REGISTERING:", pinGenerated);
     // const password = pinGenerated;
     setIsLoading(true);
@@ -414,44 +368,14 @@ export const GlobalContextProvider = ({ children, navigation }) => {
         email,
         pinGenerated
       );
-      console.log(
-        "USER CREATED AT FIREBASE AUTHENTICATION:",
-        JSON.stringify(userCredential.user, null, 2)
-      );
+
       await AsyncStorage.setItem("isAuthenticated", "false");
       await AsyncStorage.setItem("uid", userCredential.user.uid); // Replace `userEmail` with the actual email value
 
-      // *******************************************************************************
-      const existingEmails = await AsyncStorage.getItem("userEmails");
-      let emailArray = [];
-      const newEmail = userCredential.user.email;
-
-      if (existingEmails) {
-        emailArray = JSON.parse(existingEmails); // Parse existing emails into an array
-      }
-      if (!emailArray.includes(newEmail)) {
-        emailArray.push(newEmail); // Add the new email to the array
-        await AsyncStorage.setItem("userEmails", JSON.stringify(emailArray)); // Save the updated array
-        console.log("Email added successfully:", newEmail);
-      } else {
-        console.log("Email already exists in AsyncStorage.");
-      }
-
-      // *******************************************************************************
-      // const existingEmails =
-      //   JSON.parse(await AsyncStorage.getItem("userEmails")) || []; // Retrieve existing emails or initialize an empty array
-      // const newEmail = userCredential.user.email;
-      // if (!existingEmails.includes(newEmail)) {
-      //   // Avoid duplicates
-      //   existingEmails.push(newEmail); // Add the new email to the array
-      //   await AsyncStorage.setItem(
-      //     "userEmails",
-      //     JSON.stringify(existingEmails)
-      //   ); // Save the updated array back to AsyncStorage
-      // } else {
-      //   console.log("Email already exists in AsyncStorage.");
-      // }
-      // await AsyncStorage.setItem("userEmail", userCredential.user.email); // Replace `userEmail` with the actual email value
+      const Emails_array_updated = await addEmailToAsyncStorage(
+        userCredential.user.email
+      );
+      console.log("UPDATED EMAILS ARRAY:", Emails_array_updated);
 
       setIsAuthenticated(false);
       const userToCreateAtFirebase = {
@@ -468,11 +392,7 @@ export const GlobalContextProvider = ({ children, navigation }) => {
         "USER TO CREATE AT FIREBASE AT CONTEXT:",
         JSON.stringify(userToCreateAtFirebase, null, 2)
       );
-      const response = await post_user_Request(userToCreateAtFirebase);
-      console.log(
-        "RESPONSE FROM POST USER REQUEST:",
-        JSON.stringify(response.data, null, 2)
-      );
+      await post_user_Request(userToCreateAtFirebase);
       console.log("USER REGISTERED BUT NOT AUTHENTICATED...");
     } catch (error) {
       console.error("Error creating user:", error.message);
@@ -484,21 +404,14 @@ export const GlobalContextProvider = ({ children, navigation }) => {
   const settingPreferenceLanguage = async (data_to_change) => {
     const language_chosen = data_to_change.language;
     const user_id = data_to_change.user_id;
-    console.log("LANGUAGE CHOOSEN:", language_chosen);
-    console.log("USER ID TO UPDATE PREFERENCE LANGUAGE:", user_id);
+    // console.log("LANGUAGE CHOOSEN:", language_chosen);
+    // console.log("USER ID TO UPDATE PREFERENCE LANGUAGE:", user_id);
     setIsLoading(true);
     setTimeout(async () => {
       try {
         const set_preference_language_response =
           await put_preference_language_Request(user_id, language_chosen);
-        console.log(
-          "RESPONSE STATUS:",
-          set_preference_language_response.status
-        );
-        console.log(
-          " USER UPDATED:",
-          set_preference_language_response.data.user_updated
-        );
+
         if (set_preference_language_response.status === 200) {
           console.log("PASA POR AQUI...");
           setUserToDB({
@@ -523,10 +436,7 @@ export const GlobalContextProvider = ({ children, navigation }) => {
                 .preference_language,
           });
           await AsyncStorage.setItem("isAuthenticated", "true");
-          await AsyncStorage.setItem(
-            "userEmail",
-            set_preference_language_response.data.user_updated.email
-          ); // Replace `userEmail` with the actual email value
+
           await AsyncStorage.setItem(
             "uid",
             set_preference_language_response.data.user_updated.uid
@@ -536,10 +446,7 @@ export const GlobalContextProvider = ({ children, navigation }) => {
             set_preference_language_response.data.user_updated
               .preference_language
           );
-          setGlobalLanguage(
-            set_preference_language_response.data.user_updated
-              .preference_language
-          );
+          setGlobalLanguage(language_chosen);
           setIsAuthenticated(true);
           return { ok: true, next: "Home_View" };
         } else {
@@ -553,6 +460,16 @@ export const GlobalContextProvider = ({ children, navigation }) => {
         setIsLoading(false);
       }
     }, 500);
+  };
+
+  const renderEmailForLoginTile = ({ item, pin, action }) => {
+    console.log("ITEM AT RENDER EMAIL TILE:", item);
+    console.log("PIN AT RENDER EMAIL TILE:", pin);
+    return (
+      <Spacer position="bottom" size="medium">
+        <Email_For_Login_Tile item={item} action={action} />
+      </Spacer>
+    );
   };
 
   // This context is currently empty, but can be expanded in the future
@@ -587,8 +504,10 @@ export const GlobalContextProvider = ({ children, navigation }) => {
         setIsAuthenticated,
         checkAuthentication,
         logAsyncStorage,
-        temporaryAuthentication,
+        // temporaryAuthentication,
         settingPreferenceLanguage,
+        signingInWithEmailAndPasswordFunction,
+        renderEmailForLoginTile,
       }}
     >
       {/* {isAuthenticated ? children : null} */}
