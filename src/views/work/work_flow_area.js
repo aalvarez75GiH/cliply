@@ -110,14 +110,14 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
             color="black"
             direction="column"
           >
-            <Text variant="dm_sans_bold_14_white">Food delivery</Text>
-            <Text variant="dm_sans_bold_14_white">text clips flow</Text>
+            <Text variant="dm_sans_bold_16_white">Food/Groceries </Text>
+            <Text variant="dm_sans_bold_16_white">deliveries</Text>
           </Container>
         </Container>
 
         <Container
           width="40%"
-          height={"100%"}
+          height={"98%"}
           // color={"purple"}
           color={"#CEE3DA"}
           justify="center"
@@ -132,10 +132,11 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
                 color: "#0A7346",
               }}
             >
-              Tap here if you have a food delivery order
+              Tap here if you have a food or groceries delivery order
             </Text>
           </Container>
         </Container>
+        <Spacer position="bottom" size="large" />
       </Action_Container>
 
       {/* ************************* SPLITTER *************************************** */}
@@ -245,8 +246,8 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
               align="center"
               style={{ overflow: "hidden" }}
             >
-              <Text variant="dm_sans_bold_14_white">Ride share</Text>
-              <Text variant="dm_sans_bold_14_white">text clips flow</Text>
+              <Text variant="dm_sans_bold_16_white">Ride share</Text>
+              {/* <Text variant="dm_sans_bold_14_white">text clips flow</Text> */}
             </Container>
             <Container
               width="15%"
@@ -265,7 +266,7 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
           width="100%"
           height={"40%"}
           // color={"purple"}
-          // color={"#CEE3DA"}
+          // color={"#D4DDEA"}
           color={"transparent"}
           justify="center"
           align="center"
@@ -287,12 +288,13 @@ export const Work_Flow_Area = ({ operation, isLoading }) => {
               justify="center"
               align="center"
             />
+            <Spacer position="left" size="small" />
             <Container
               width="92%"
               height={"100%"}
-              // color={"#D4DDEA"}
+              color={"#D4DDEA"}
               //color={"red"}
-              color={"transparent"}
+              // color={"transparent"}
               justify="center"
               align="center"
             >

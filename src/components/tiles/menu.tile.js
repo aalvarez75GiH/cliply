@@ -15,9 +15,9 @@ export const Menu_Tile = ({
   caption,
   color,
   action,
-  isLoading,
+  isLoading = false,
 }) => {
-  console.log("IS LOADING AT TILE:", isLoading);
+  // console.log("IS LOADING AT TILE:", isLoading);
 
   return (
     <>
@@ -62,7 +62,7 @@ export const Menu_Tile = ({
             color={theme.colors.bg.elements_bg}
             //color={"blue"}
           >
-            <Text variant="menu_tiles_caption">{caption}</Text>
+            <Text variant="dm_sans_bold_18">{caption}</Text>
           </Container>
         </Action_Container>
       )}

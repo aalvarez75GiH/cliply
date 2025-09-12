@@ -49,6 +49,10 @@ try {
 }
 export { app, auth };
 // export const db = app.firestore();
+let IS_AUTHENTICATED_KEY = "isAuthenticated";
+let UID_KEY = "uid";
+let PREFERENCE_LANGUAGE_KEY = "preference_language";
+let USER_EMAIL_KEY = "userEmails";
 
 export const GlobalContextProvider = ({ children, navigation }) => {
   const [globalLanguage, setGlobalLanguage] = useState("EN");
@@ -211,7 +215,7 @@ export const GlobalContextProvider = ({ children, navigation }) => {
     }
     if (!emailArray.includes(newEmail)) {
       emailArray.push(newEmail); // Add the new email to the array
-      await AsyncStorage.setItem("userEmails", JSON.stringify(emailArray)); // Save the updated array
+      await AsyncStorage.setItem(USER_EMAIL_KEY, JSON.stringify(emailArray)); // Save the updated array
     } else {
       console.log("Email already exists in AsyncStorage.");
     }
@@ -237,10 +241,10 @@ export const GlobalContextProvider = ({ children, navigation }) => {
 
   const signingInWithEmailAndPasswordFunction = async (email, pin) => {
     setIsLoading(true);
-    console.log("SIGNING IN WITH EMAIL:", email);
-    console.log("SIGNING IN WITH PIN:", pin);
 
     try {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       const userCredential = await signInWithEmailAndPassword(auth, email, pin);
       console.log("USER LOGGED IN:", userCredential.user);
       if (userCredential.user) {
@@ -270,10 +274,10 @@ export const GlobalContextProvider = ({ children, navigation }) => {
           user_id: userFromBackend.data.user_id,
           preference_language: userFromBackend.data.preference_language,
         });
-        await AsyncStorage.setItem("isAuthenticated", "true");
-        await AsyncStorage.setItem("uid", userCredential.user.uid);
+        await AsyncStorage.setItem(IS_AUTHENTICATED_KEY, "true");
+        await AsyncStorage.setItem(UID_KEY, userCredential.user.uid);
         await AsyncStorage.setItem(
-          "preference_language",
+          PREFERENCE_LANGUAGE_KEY,
           userFromBackend.data.preference_language
         );
         setGlobalLanguage(userFromBackend.data.preference_language);
@@ -336,24 +340,33 @@ export const GlobalContextProvider = ({ children, navigation }) => {
   };
 
   // ****************** LOGOUT USER FUNCTION ************************
+
   const loggingOutUser = async () => {
+    setIsLoading(true);
+
     try {
-      // await auth.signOut();
-      // await AsyncStorage.clear();
-      await AsyncStorage.setItem("isAuthenticated", "false");
-      // await AsyncStorage.removeItem("userEmails");
-      await AsyncStorage.removeItem("uid");
-      // await AsyncStorage.removeItem("preference_language");
+      // Simulate a delay (if needed)
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      // Perform logout operations
+      await AsyncStorage.setItem(IS_AUTHENTICATED_KEY, "false");
+      await AsyncStorage.removeItem(UID_KEY);
+
+      // Update state
       setIsAuthenticated(false);
       setPin("");
     } catch (error) {
       console.error("Logout error:", error.message);
+    } finally {
+      // Ensure loading state is updated
+      setIsLoading(false);
     }
   };
 
   // ****************** REGISTER USER LOGIC *********************
+
+  //We generate a random 6-digit PIN
   const generatePin = () => {
-    // Generate a random number between 100000 and 999999
     return Math.floor(100000 + Math.random() * 900000).toString();
   };
 
@@ -369,8 +382,8 @@ export const GlobalContextProvider = ({ children, navigation }) => {
         pinGenerated
       );
 
-      await AsyncStorage.setItem("isAuthenticated", "false");
-      await AsyncStorage.setItem("uid", userCredential.user.uid); // Replace `userEmail` with the actual email value
+      await AsyncStorage.setItem(IS_AUTHENTICATED_KEY, "false");
+      await AsyncStorage.setItem(UID_KEY, userCredential.user.uid); // Replace `userEmail` with the actual email value
 
       const Emails_array_updated = await addEmailToAsyncStorage(
         userCredential.user.email
@@ -472,7 +485,6 @@ export const GlobalContextProvider = ({ children, navigation }) => {
     );
   };
 
-  // This context is currently empty, but can be expanded in the future
   return (
     <GlobalContext.Provider
       value={{
