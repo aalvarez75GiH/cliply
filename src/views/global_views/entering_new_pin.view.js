@@ -19,6 +19,7 @@ import { Outlined_CTA } from "../../components/calls_to_action/outlined.cta.js";
 import { ExitHeader } from "../../components/headers/exit_header.component.js";
 import { GlobalContext } from "../../infrastructure/services/global/global.context.js";
 import { Loading_Spinner_area } from "../../components/global_components/global_loading_spinner_area.component.js";
+import { Squared_action_CTA_component } from "../../components/calls_to_action/squared_action.cta.js";
 
 export default function Entering_New_PIN_View({ route }) {
   const {
@@ -30,6 +31,7 @@ export default function Entering_New_PIN_View({ route }) {
     setNew_pin,
     errorInUpdatingPIN,
     setErrorInUpdatingPIN,
+    setIsLoading,
   } = useContext(GlobalContext);
   const navigation = useNavigation();
 
@@ -40,8 +42,8 @@ export default function Entering_New_PIN_View({ route }) {
       inputRef.current?.focus();
     }, 100); // slight delay ensures focus sticks
 
-    checkAuthentication();
-    logAsyncStorage();
+    // checkAuthentication();
+    // logAsyncStorage();
 
     return () => clearTimeout(timer);
   }, []);
@@ -89,7 +91,12 @@ export default function Entering_New_PIN_View({ route }) {
             color={theme.colors.bg.elements_bg}
             //   color="red"
           >
-            <ExitHeader action={() => navigation.goBack()} />
+            <ExitHeader
+              action={() => {
+                setIsLoading(false);
+                navigation.goBack();
+              }}
+            />
             <Container
               width="100%"
               height="40%"
@@ -134,6 +141,40 @@ export default function Entering_New_PIN_View({ route }) {
                       setErrorInUpdatingPIN(null); // Clear error when PIN is not empty
                     }
                   }}
+                  //   onFulfill={async (new_pin) => {
+                  //     if (isProcessing) {
+                  //       console.warn(
+                  //         "onFulfill is already processing. Please wait."
+                  //       );
+                  //       return;
+                  //     }
+                  //     isProcessing = true;
+                  //     console.log("NEW PIN AT ON FUL FILL:", new_pin);
+                  //     try {
+                  //       const res = await updatingPINOnDemandAndUpdatingUserAtFB(
+                  //         new_pin
+                  //       );
+                  //       console.log("RES AT FULFILL:", res);
+                  //       if (res?.success) {
+                  //         Keyboard.dismiss();
+                  //         // setTimeout(() => {
+                  //         //   setNew_pin("");
+                  //         navigation.navigate("Successful_View");
+                  //         isProcessing = false; // Reset the flag after processing
+                  //         // }, 500); // Add a slight delay to ensure the keyboard is dismissed
+                  //         // setNew_pin("");
+                  //         // navigation.navigate("Successful_View");
+                  //       } else {
+                  //         isProcessing = false; // Reset the flag if not successful
+                  //       }
+                  //     } catch (error) {
+                  //       console.error(
+                  //         "An error occurred during updating pin:",
+                  //         error
+                  //       );
+                  //       isProcessing = false;
+                  //     }
+                  //   }}
                   onFulfill={async (new_pin) => {
                     if (isProcessing) {
                       console.warn(
@@ -142,7 +183,7 @@ export default function Entering_New_PIN_View({ route }) {
                       return;
                     }
                     isProcessing = true;
-                    console.log("NEW PIN AT ON FUL FILL:", new_pin);
+                    console.log("NEW PIN AT ON FULFILL:", new_pin);
                     try {
                       const res = await updatingPINOnDemandAndUpdatingUserAtFB(
                         new_pin
@@ -150,13 +191,10 @@ export default function Entering_New_PIN_View({ route }) {
                       console.log("RES AT FULFILL:", res);
                       if (res?.success) {
                         Keyboard.dismiss();
-                        setTimeout(() => {
-                          setNew_pin("");
-                          navigation.navigate("Successful_View");
-                          isProcessing = false; // Reset the flag after processing
-                        }, 500); // Add a slight delay to ensure the keyboard is dismissed
-                        // setNew_pin("");
-                        // navigation.navigate("Successful_View");
+                        // setTimeout(() => {
+                        navigation.navigate("Successful_View");
+                        isProcessing = false; // Reset the flag after processing
+                        // }, 300); // Add a slight delay to ensure the keyboard is dismissed
                       } else {
                         isProcessing = false; // Reset the flag if not successful
                       }
@@ -165,7 +203,9 @@ export default function Entering_New_PIN_View({ route }) {
                         "An error occurred during updating pin:",
                         error
                       );
-                      isProcessing = false;
+                      //   isProcessing = false;
+                    } finally {
+                      isProcessing = false; // Ensure the flag is reset in case of an error
                     }
                   }}
                   themeColor={theme.colors.ui.primary} // idle dot color (the gray you showed)
@@ -181,19 +221,6 @@ export default function Entering_New_PIN_View({ route }) {
                 color={theme.colors.bg.elements_bg}
                 //color={"lightblue"}
               >
-                {isLoading && (
-                  <Container
-                    width={"100%"}
-                    height={"100%"}
-                    justify="center"
-                    align="center"
-                    color={"transparent"}
-                    // color={"red"}
-                    direction="row"
-                  >
-                    <ActivityIndicator size="small" color={"#000000"} />
-                  </Container>
-                )}
                 {!isLoading && errorInUpdatingPIN && (
                   <Spacer position="left" size="small">
                     <Text

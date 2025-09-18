@@ -799,16 +799,19 @@ export const GlobalContextProvider = ({ children, navigation }) => {
       console.log("Password updated successfully.");
 
       await savePin(new_pin);
-      setIsLoading(false);
+      // setIsLoading(false);
       return { success: true };
     } catch (error) {
       console.error("Error updating PIN:", error.message);
       setIsLoading(false);
       return { success: false, error: error.message };
+    } finally {
+      setIsLoading(false);
+      setNew_pin("");
     }
   };
 
-  console.log("OLD PIN AT CONTEXT:", old_pin);
+  // console.log("OLD PIN AT CONTEXT:", old_pin);
 
   const logSecureStore = async () => {
     try {
@@ -831,6 +834,7 @@ export const GlobalContextProvider = ({ children, navigation }) => {
         setGlobalLanguage,
         togglingGlobalLanguage,
         isLoading,
+        setIsLoading,
         app,
         userToDB,
         isAuthenticated,

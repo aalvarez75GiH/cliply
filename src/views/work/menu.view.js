@@ -138,9 +138,6 @@ export default function Menu_Screen({ navigation }) {
                 action={async () =>
                   navigation.navigate("Entering_New_PIN_View")
                 }
-                // action={async () =>
-                //   await updatingPINOnDemandAndUpdatingUserAtFB()
-                // }
               />
               <Spacer position="top" size="small" />
               <Menu_Tile
