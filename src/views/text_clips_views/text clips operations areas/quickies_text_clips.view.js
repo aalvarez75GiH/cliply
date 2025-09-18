@@ -7,8 +7,6 @@ import { SafeArea } from "../../../components/global_components/safe-area.compon
 import { theme } from "../../../infrastructure/theme/index.js";
 import { Container } from "../../../components/global_components/containers/general_containers.js";
 import { Spacer } from "../../../components/global_components/optimized.spacer.component.js";
-import { Text_Tile } from "../../../components/tiles/text.tile.js";
-import { Text } from "../../../infrastructure/typography/text.component.js";
 import { quickies_food_delivery } from "../../../infrastructure/local_data/clips_by_operations.data.js";
 import { quickies_ride_share } from "../../../infrastructure/local_data/clips_by_operations.data.js";
 
@@ -16,8 +14,7 @@ import { GlobalContext } from "../../../infrastructure/services/global/global.co
 import { TextClipsContext } from "../../../infrastructure/services/home/text_clips.context.js";
 
 export default function Quickies_Text_Clips_View({ navigation, route }) {
-  const { globalLanguage, togglingGlobalLanguage, isLoading } =
-    useContext(GlobalContext);
+  useContext(GlobalContext);
   const { renderQuickiesTile, setSelectedItemId } =
     useContext(TextClipsContext);
   const { operation, status } = route.params;
@@ -26,7 +23,6 @@ export default function Quickies_Text_Clips_View({ navigation, route }) {
     quickies_food_delivery;
   const { heading_to_passenger, close_to_passenger, at_passenger_location } =
     quickies_ride_share;
-
   useEffect(() => {
     return () => {
       setSelectedItemId(null);
@@ -43,7 +39,7 @@ export default function Quickies_Text_Clips_View({ navigation, route }) {
         // color={theme.colors.bg.elements_bg}
         color={theme.colors.bg.screens_bg}
       >
-        <ExitHeader />
+        <ExitHeader action={() => navigation.goBack()} />
         {/* ******************* FOOD DELIVERY ***************************** */}
         {operation === "food_delivery" &&
           status === "heading_to_pickup_shop" && (

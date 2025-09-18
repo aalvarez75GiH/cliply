@@ -6,18 +6,17 @@ import { SafeArea } from "../../components/global_components/safe-area.component
 import { theme } from "../../infrastructure/theme/index.js";
 import { Container } from "../../components/global_components/containers/general_containers.js";
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
-import AccounIcon from "../../../assets/my-icons/account_icon.svg";
-import CategoriesIcon from "../../../assets/my-icons/categories_icon.svg";
-import EnvelopeIcon from "../../components/transformed icons/email_icon_transformed.js";
+import AccountIcon from "../../../assets/my-icons/account_icon.svg";
 import EmailIcon from "../../../assets/my-icons/email_icon.svg";
 import ArrowSwitchIcon from "../../components/transformed icons/arrow_switch_icon.js";
 import LogOutIcon from "../../../assets/my-icons/logout_exit_out_icon.svg";
 import PasswordIcon from "../../../assets/my-icons/password_icon.svg";
 import { Menu_Sub_title_Tile } from "../../components/tiles/menu_sub_title.tile.js";
 import { Menu_Tile } from "../../components/tiles/menu.tile.js";
-import { GlobalContext } from "../../infrastructure/services/global/global.context.js";
 import { Loading_Spinner_area } from "../../components/global_components/global_loading_spinner_area.component.js";
 import { Text } from "../../infrastructure/typography/text.component.js";
+
+import { GlobalContext } from "../../infrastructure/services/global/global.context.js";
 
 export default function Menu_Screen({ navigation }) {
   const {
@@ -26,8 +25,11 @@ export default function Menu_Screen({ navigation }) {
     isLoading,
     loggingOutUser,
     userToDB,
+    updatingPINOnDemandAndUpdatingUserAtFB,
+    setPin,
+    setNew_pin,
   } = useContext(GlobalContext);
-  const { display_name, first_name, last_name, email } = userToDB;
+  const { first_name, last_name, email } = userToDB;
   return (
     <SafeArea background_color={theme.colors.bg.elements_bg}>
       {isLoading && (
@@ -67,7 +69,13 @@ export default function Menu_Screen({ navigation }) {
           // color={theme.colors.bg.elements_bg}
           color={theme.colors.bg.screens_bg}
         >
-          <ExitHeader />
+          <ExitHeader
+            action={() => {
+              // setPin("");
+              setNew_pin("");
+              navigation.goBack();
+            }}
+          />
           <Menu_Sub_title_Tile
             caption="Account"
             // variant={"menu_sub_title_text"}
@@ -92,7 +100,7 @@ export default function Menu_Screen({ navigation }) {
             >
               <Spacer position="top" size="small" />
               <Menu_Tile
-                Icon={AccounIcon}
+                Icon={AccountIcon}
                 width={"25px"}
                 height={"25px"}
                 caption={first_name + " " + last_name || "User"}
@@ -127,6 +135,12 @@ export default function Menu_Screen({ navigation }) {
                 height={"30px"}
                 caption={"Change your PIN number"}
                 color={theme.colors.ui.primary}
+                action={async () =>
+                  navigation.navigate("Entering_New_PIN_View")
+                }
+                // action={async () =>
+                //   await updatingPINOnDemandAndUpdatingUserAtFB()
+                // }
               />
               <Spacer position="top" size="small" />
               <Menu_Tile

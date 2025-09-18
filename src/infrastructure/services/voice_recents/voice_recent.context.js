@@ -24,7 +24,6 @@ export const VoiceRecentClipsContextProvider = ({ children }) => {
   const { gettingUserData, operation } = useContext(TextClipsContext);
   const { globalLanguage, userToDB } = useContext(GlobalContext);
   const { user_id } = userToDB || {}; // Ensure userToDB is not undefined or null
-
   const [isLoading, setIsLoading] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [response, setResponse] = useState(null);
@@ -32,13 +31,20 @@ export const VoiceRecentClipsContextProvider = ({ children }) => {
   const [recording, setRecording] = useState(null);
   const [deletedStatus, setDeletedStatus] = useState(false);
   const [textClip_data_to_upload, setTextClip_data_to_upload] = useState({
-    user_id: user_id,
+    user_id: "",
     operation_name: operation,
     status_name: "",
     new_message: {},
   });
 
   useEffect(() => {
+    if (user_id) {
+      setTextClip_data_to_upload((prevState) => ({
+        ...prevState,
+        user_id: user_id,
+      }));
+    }
+
     return () => {
       setDeletedStatus(false);
     };
@@ -50,6 +56,11 @@ export const VoiceRecentClipsContextProvider = ({ children }) => {
     status_name: "",
     new_message: {},
   };
+
+  // console.log(
+  //   "TEXT CLIP DATA TO UPLOAD INITIAL STATE AT CONTEXT:",
+  //   textClip_data_to_upload
+  // );
   const resetState = () => {
     setTextClip_data_to_upload(text_clip_data_initialState);
   };
@@ -183,6 +194,7 @@ export const VoiceRecentClipsContextProvider = ({ children }) => {
   };
 
   const posting_new_text_clip_to_upload = async (new_text_clip) => {
+    console.log("NEW TEXT CLIP TO UPLOAD AT CONTEXT:", new_text_clip);
     setIsLoading(true);
     try {
       const response = await posting_new_text_clip_request(new_text_clip);

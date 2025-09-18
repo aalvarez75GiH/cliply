@@ -11,6 +11,9 @@ import Text_Clips_by_Status_View_1 from "../../views/work/status_views/status_1.
 import Text_Clips_by_Status_View_2 from "../../views/work/status_views/status_2.view";
 import Text_Clips_by_Status_View_3 from "../../views/work/status_views/status_3.view";
 import Quick_Voice_Text_Clip from "../../views/work/status_views/quick_voice_text_clip";
+import Multiple_Emails_LoginIn_View from "../../views/global_views/multiple_emails_login.view";
+import Entering_New_PIN_View from "../../views/global_views/entering_new_pin.view";
+import Successful_View from "../../views/global_views/successfull_process.view";
 
 const WorkFlowStack = createNativeStackNavigator();
 
@@ -43,6 +46,19 @@ export const Work_Flow_Navigator = () => {
       <WorkFlowStack.Screen
         name="Quick_Voice_Text_Clip"
         component={Quick_Voice_Text_Clip}
+      />
+
+      <WorkFlowStack.Screen
+        name="Multiple_Emails_LoginIn_View"
+        component={Multiple_Emails_LoginIn_View}
+      />
+      <WorkFlowStack.Screen
+        name="Entering_New_PIN_View"
+        component={Entering_New_PIN_View}
+      />
+      <WorkFlowStack.Screen
+        name="Successful_View"
+        component={Successful_View}
       />
     </WorkFlowStack.Navigator>
   );

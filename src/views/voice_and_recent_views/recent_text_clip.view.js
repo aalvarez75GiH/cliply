@@ -1,11 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 
-import {
-  Container,
-  Action_Container,
-  Flex_Container,
-} from "../../components/global_components/containers/general_containers.js";
+import { Container } from "../../components/global_components/containers/general_containers.js";
 import { Transcripted_Clips_Tile } from "../../components/tiles/transcripted_clip.tile.js";
 import { theme } from "../../infrastructure/theme/index.js";
 import { ExitHeader } from "../../components/headers/exit_header.component.js";
@@ -15,7 +11,6 @@ import { Spacer } from "../../components/global_components/optimized.spacer.comp
 import { Platform } from "react-native";
 
 import { VoiceRecentClipsContext } from "../../infrastructure/services/voice_recents/voice_recent.context.js";
-
 export const Recent_Text_Clip_View = (route) => {
   const { item } = route.route.params;
   //   const { message_en, message_es, language_detected, message_id } = item;
@@ -47,7 +42,7 @@ export const Recent_Text_Clip_View = (route) => {
           justify="center"
           align="center"
         >
-          <ExitHeader />
+          <ExitHeader action={() => navigation.goBack()} />
           <Container
             width={"100%"}
             height={"92%"}

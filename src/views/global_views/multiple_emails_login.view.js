@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, act } from "react";
 import { FlatList } from "react-native";
 
 import { Spacer } from "../../components/global_components/optimized.spacer.component.js";
@@ -15,32 +15,31 @@ import { GlobalContext } from "../../infrastructure/services/global/global.conte
 
 export default function Multiple_Emails_LoginIn_View({ navigation, route }) {
   const [error, setError] = useState(null);
-  const { data } = route.params;
+  const { data, action_type } = route.params;
   const {
     signingInWithEmailAndPasswordFunction,
     pin,
     renderEmailForLoginTile,
     errorInAuthentication,
     isLoading,
+    setFirst_name,
+    setLast_name,
+    login_action_for_multiple_emails,
+    generate_PIN_action_for_multiple_emails,
   } = useContext(GlobalContext);
+  const action =
+    action_type === "login"
+      ? login_action_for_multiple_emails
+      : action_type === "regenerate_pin"
+      ? generate_PIN_action_for_multiple_emails
+      : null;
+  //   : regenerate_PIN_action_for_multiple_emails;
   console.log(
     "DATA PASSED TO MULTIPLE EMAILS VIEW:",
     JSON.stringify(data, null, 2)
   );
 
-  const action = async (item) => {
-    console.log("DATA IN ACTION:", item);
-    console.log("PIN IN ACTION:", pin);
-    const res = await signingInWithEmailAndPasswordFunction(item, pin);
-    if (res?.ok && res?.next) {
-      console.log("AHhhHHHHHHHH:", res.data);
-      navigation.navigate(res.next, {
-        data: res.data, // Ensure 'data' is defined
-      });
-    } else {
-      console.log("Login failed or invalid response");
-    }
-  };
+  console.log("ACTION TYPE:", action_type);
 
   return (
     <SafeArea backgroundColor={theme.colors.bg.elements_bg}>
@@ -115,7 +114,11 @@ export default function Multiple_Emails_LoginIn_View({ navigation, route }) {
                 data={data}
                 //   renderItem={(item) => renderEmailForLoginTile(item, pin)}
                 renderItem={({ item }) =>
-                  renderEmailForLoginTile({ item, pin, action })
+                  renderEmailForLoginTile({
+                    item,
+                    pin,
+                    action,
+                  })
                 }
                 keyExtractor={(item, id) => {
                   return item.toString() + id.toString();

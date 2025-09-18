@@ -9,7 +9,6 @@ import { Login_Register_Navigator } from "./login_register.navigator";
 
 export const Navigation = () => {
   const { isAuthenticated } = useContext(GlobalContext);
-  console.log("IS AUTHENTICATED AT NAVIGATION INDEX:", isAuthenticated);
   return (
     <NavigationContainer>
       {isAuthenticated ? <AppNavigator /> : <Login_Register_Navigator />}

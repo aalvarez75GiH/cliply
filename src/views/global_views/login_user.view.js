@@ -112,13 +112,15 @@ export default function Login_User({ route }) {
                   try {
                     const res = await loginUser(pin);
                     if (res?.ok && res?.next) {
-                      console.log("AHhhHHHHHHHH:", res.data);
+                      console.log("DATA TO PASS TO NEXT VIEW:", res.data);
                       navigation.navigate(res.next, {
-                        data: res.data, // Ensure 'data' is defined
+                        data: res.data,
+                        action_type: res.action_type, // Ensure 'data' is defined
                       });
-                    } else {
-                      console.error("Login failed or invalid response:", res);
                     }
+                    // if (res.success) {
+                    //   navigation.navigate("Home_View");
+                    // }
                   } catch (error) {
                     console.error("An error occurred during login:", error);
                   }
@@ -186,7 +188,9 @@ export default function Login_User({ route }) {
               border_radius="30px"
               border_width="2px"
               label_variant="dm_sans_bold_16"
-              action={() => null}
+              action={() =>
+                navigation.navigate("Generating_New_Automatic_Pin_View")
+              }
             />
             <Not_Registered_Sign_Up_CTA />
           </Container>

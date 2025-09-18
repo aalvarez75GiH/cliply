@@ -8,6 +8,8 @@ import Successful_Process_View from "../../views/global_views/successfull_proces
 import Preference_Language_View from "../../views/global_views/selecting_preference_language.view";
 import Menu_Screen from "../../views/work/menu.view";
 import Multiple_Emails_LoginIn_View from "../../views/global_views/multiple_emails_login.view";
+import Generating_New_Automatic_Pin_View from "../../views/global_views/generating_new_automatic_pin.view";
+
 const LoginRegisterStack = createNativeStackNavigator();
 
 export const Login_Register_Navigator = () => {
@@ -42,6 +44,10 @@ export const Login_Register_Navigator = () => {
         component={Multiple_Emails_LoginIn_View}
       />
       <LoginRegisterStack.Screen name="Menu_View" component={Menu_Screen} />
+      <LoginRegisterStack.Screen
+        name="Generating_New_Automatic_Pin_View"
+        component={Generating_New_Automatic_Pin_View}
+      />
     </LoginRegisterStack.Navigator>
   );
 };

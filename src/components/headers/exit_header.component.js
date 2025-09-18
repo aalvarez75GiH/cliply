@@ -10,7 +10,7 @@ import {
 } from "../global_components/containers/general_containers.js";
 import { theme } from "../../infrastructure/theme/index.js";
 
-export const ExitHeader = ({ label = "" }) => {
+export const ExitHeader = ({ label = "", action }) => {
   const navigation = useNavigation();
   return (
     <Container
@@ -35,7 +35,7 @@ export const ExitHeader = ({ label = "" }) => {
         width="20%"
         height="100%"
         color={theme.colors.bg.elements_bg}
-        onPress={() => navigation.goBack()}
+        onPress={action}
       >
         <ExitIcon width={20} height={20} fill={"#000000"} />
       </Action_Container>

@@ -50,7 +50,7 @@ export default function Uploading_Text_Clip_View({ navigation, route }) {
         {/* <Spacer position="top" size="large" />
         <Spacer position="top" size="large" /> */}
         {/* <Spacer position="top" size="large" /> */}
-        <ExitHeader />
+        <ExitHeader action={() => navigation.goBack()} />
         {isLoading && <Loading_Spinner_area />}
         {!isLoading && (
           <>

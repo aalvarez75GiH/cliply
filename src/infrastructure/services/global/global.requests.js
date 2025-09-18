@@ -1,29 +1,8 @@
 import axios from "axios";
 import { environment } from "../../../util/env";
 
-// export const get_User_Data_Request = async () => {
-//     const { transcriptionEndPoint } = environment;
-//     //const { categoryListEndPoint } = environment;
-//     return await axios
-//       .post(
-//         `${transcriptionEndPoint}/postTranscription_to_whisper`,
-//         audioBuffer,
-//         {
-//           headers: {
-//             "Content-Type": "audio/m4a", // OR "audio/m4a" — both usually work for M4A
-//           },
-//         }
-//       )
-//       .then((response) => {
-//         return response;
-//       })
-//       .catch((error) => {
-//         return error;
-//       });
-//   };
 export const get_user_by_uid_and_user_data_Request = async (uid) => {
   const { usersEndPoint } = environment;
-  console.log("UID AT REQUEST:", uid);
   return await axios
     .get(`${usersEndPoint}/userByUId?uid=${uid}`)
     .then((response) => {
@@ -35,10 +14,7 @@ export const get_user_by_uid_and_user_data_Request = async (uid) => {
 };
 export const post_user_Request = async (user_to_create_at_firebase) => {
   const { usersEndPoint } = environment;
-  console.log(
-    "USER TO CREATE AT FIREBASE AT REQUEST:",
-    JSON.stringify(user_to_create_at_firebase, null, 2)
-  );
+
   return await axios
     .post(`${usersEndPoint}`, user_to_create_at_firebase, {
       headers: {
@@ -57,13 +33,6 @@ export const put_preference_language_Request = async (
   language_chosen
 ) => {
   const { usersEndPoint } = environment;
-  console.log("USER ID FOR LANGUAGE AT REQUEST:", JSON.stringify(user_id));
-
-  console.log(
-    "LANGUAGE CHOSEN FOR LANGUAGE AT REQUEST:",
-    JSON.stringify(language_chosen)
-  );
-
   return await axios
     .put(
       `${usersEndPoint}/updatePreferenceLanguage?user_id=${user_id}&preference_language=${language_chosen}`

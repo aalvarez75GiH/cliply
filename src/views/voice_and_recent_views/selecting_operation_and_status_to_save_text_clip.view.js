@@ -43,7 +43,7 @@ export default function Selecting_Operation_And_Status_View({ navigation }) {
         justify="center"
         align="center"
       >
-        <ExitHeader />
+        <ExitHeader action={() => navigation.goBack()} />
         <Spacer position="top" size="small" />
         <Container
           width="100%"

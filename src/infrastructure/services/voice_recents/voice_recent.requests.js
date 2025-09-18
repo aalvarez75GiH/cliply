@@ -3,7 +3,6 @@ import { environment } from "../../../util/env";
 
 export const post_a_voice_message_Request = async (audioBuffer, user_id) => {
   const { transcriptionEndPoint, usersDataEndPoint } = environment;
-  console.log("USER ID AT REQUEST:", user_id);
 
   //const { categoryListEndPoint } = environment;
   return await axios
@@ -25,8 +24,6 @@ export const post_a_voice_message_Request = async (audioBuffer, user_id) => {
     });
 };
 export const posting_new_text_clip_request = async (new_text_clip_data) => {
-  console.log("NEW TEXT CLIP AT REQUEST:", new_text_clip_data);
-
   const { usersDataEndPoint } = environment;
   return await axios
     .post(`${usersDataEndPoint}/postNewMessageAtUserData`, new_text_clip_data)
@@ -39,25 +36,7 @@ export const posting_new_text_clip_request = async (new_text_clip_data) => {
     });
 };
 
-// return await axios
-//     .post(`${categoryDataEndPoint}`, categoryDataInfoNeededForRequest)
-//     .then((response) => {
-//       return response;
-//     })
-//     .catch((error) => {
-//       console.log(
-//         "CATEGORY DATA ERROR STATUS AT SERVICES:",
-//         error.response.status
-//       );
-//       return error.response.status;
-//     });
-
 export const deleteRecentTextClipRequest = async (requestBody) => {
-  console.log(
-    "DATA TO DELETE AT REQUEST:",
-    JSON.stringify(requestBody, null, 2)
-  );
-
   const { usersDataEndPoint } = environment;
   return await axios
     .delete(`${usersDataEndPoint}/deleteOneRecentMessageByUserID`, {

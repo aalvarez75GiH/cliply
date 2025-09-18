@@ -52,16 +52,16 @@ export const TextClipsContextProvider = ({ children }) => {
 
   const { userToDB, globalLanguage } = useContext(GlobalContext);
   const { user_id } = userToDB || {}; // Ensure userToDB is not undefined or null
-  console.log("USER TO DB AT HOME CONTEXT:", userToDB);
+  // console.log("USER TO DB AT HOME CONTEXT:", userToDB);
   useEffect(() => {
     if (user_id) {
-      console.log("USER ID AT HOME CONTEXT:", user_id);
+      // console.log("USER ID AT HOME CONTEXT:", user_id);
       gettingUserData(user_id);
     }
   }, [user_id]);
 
   const gettingUserData = async (user_id) => {
-    console.log("USER ID AT GETTING USER DATA:", user_id);
+    // console.log("USER ID AT GETTING USER DATA:", user_id);
     try {
       const user_data = await get_User_Data_Request(user_id);
       setUserData(user_data.data);
@@ -75,20 +75,20 @@ export const TextClipsContextProvider = ({ children }) => {
   // console.log("USER DATA AT STATE:", JSON.stringify(userData, null, 2));
 
   const updatingTextClipsUsedCount = async (usedCountDataForUpdate) => {
-    console.log(
-      "UPDATING USED COUNT FUNCTION TRIGGERED:",
-      usedCountDataForUpdate
-    );
+    // console.log(
+    //   "UPDATING USED COUNT FUNCTION TRIGGERED:",
+    //   usedCountDataForUpdate
+    // );
 
     try {
       const response = await update_Text_Clips_Used_Count_Request(
         usedCountDataForUpdate
       );
       if (response.status === 201) {
-        console.log(
-          "Successfully updated text clips used count:",
-          response.data
-        );
+        // console.log(
+        //   "Successfully updated text clips used count:",
+        //   response.data
+        // );
         gettingUserData(user_id);
       } else {
         console.log("Failed to update text clips used count:", response.status);

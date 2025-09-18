@@ -4,7 +4,6 @@ import { environment } from "../../../util/env";
 
 export const post_a_voice_message_Request = async (audioBuffer, user_id) => {
   const { transcriptionEndPoint } = environment;
-  console.log("USER ID AT REQUEST:", user_id);
 
   //const { categoryListEndPoint } = environment;
   return await axios
@@ -18,7 +17,6 @@ export const post_a_voice_message_Request = async (audioBuffer, user_id) => {
       }
     )
     .then((response) => {
-      console.log("RESPONSE AT REQUEST:", response.data);
       return response;
     })
     .catch((error) => {
@@ -41,10 +39,6 @@ export const get_User_Data_Request = async (user_id) => {
 export const update_Text_Clips_Used_Count_Request = async (
   usedCountDataForUpdate
 ) => {
-  console.log(
-    "UPDATING USED COUNT FUNCTION TRIGGERED AT REQUEST:",
-    usedCountDataForUpdate
-  );
   const { usersDataEndPoint } = environment;
   return await axios
     .put(
